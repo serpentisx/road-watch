@@ -1,7 +1,7 @@
 
 # [The Road Watch](https://vegavaktin.herokuapp.com/) - _Vegavaktin_
 
-#### Software project in **Software Development I (HBV501)** at University of Iceland.
+#### Software project in **Software Development I (HBV501G)** at University of Iceland.
 This project is a web application that uses **JVM** platform and **Spring Framework** for server-side scripting.  **PostgresSQL** is used to store data along with, **JavaServer Pages** (JSP), a high performance template engine to render the view.
 
 <br> 
