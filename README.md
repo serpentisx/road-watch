@@ -48,11 +48,16 @@ $ git clone https://github.com/serpentisx/road-watch.git
 
 ```sh
 $ mvn clean install
-[Bunch of output]
+   [Bunch of output]
 ```
 ... run the project
 ```sh
 $ java -jar target/Vegavaktin-0.1.jar
+   [Bunch of output]
+```
+After the output, open your browser and navigate to 
+```sh
+http://localhost:8080/
 ```
 <hr> <br>
 
@@ -61,4 +66,5 @@ $ java -jar target/Vegavaktin-0.1.jar
 \- Either extract or leave it zipped (extract if you want to make changes) <br>
 \- Choose an IDE of your choice, _Eclipse, Netbeans, IntelliJ..._ <br>
 \- Open the IDE and import the archive (.zip) or open a new project (extracted) <br>
+\- Open your browswer and navigate to http://localhost:8080/
 
