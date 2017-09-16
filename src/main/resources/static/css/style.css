@@ -1,0 +1,84 @@
+
+/* 
+    Stylesheet for intro page
+    
+    Author     : Huy Van Nguyen (hvn1@hi.is)
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.layer {
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  margin: 20px 20px;
+  position: absolute;
+  background: rgba(44, 44, 44, 0.6);
+  z-index: 1;
+}
+
+.bg {
+  background-image: url('../img/road-background.jpg');
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-size: 25px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  color: #fffbf9;
+  z-index: 10;
+  position: relative;
+}
+
+.c-title {
+  top: 100px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.c-title span {
+  display: block;
+  text-align: center;
+}
+
+.m-title h1 {
+  letter-spacing: 10px;
+}
+
+.line {
+  width: 175px;
+  height: 3px;
+  background: #fffbf9;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.authors-container ul {
+  list-style: none;
+  text-align: center;
+  font-size: 16px;
+  padding: 0;
+}
+
+.authors-container {
+  bottom: 50px;
+  position: relative;
+}
+
+.authors-container li {
+  margin: 3px 0;
+}
