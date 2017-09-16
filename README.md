@@ -66,5 +66,6 @@ http://localhost:8080/
 \- Either extract or leave it zipped (extract if you want to make changes) <br>
 \- Choose an IDE of your choice, _Eclipse, Netbeans, IntelliJ..._ <br>
 \- Open the IDE and import the archive (.zip) or open a new project (extracted) <br>
+\- Run the project from the IDE (the main class is src/main/java/app/Application.java) <br>
 \- Open your browswer and navigate to http://localhost:8080/
 
