@@ -20,16 +20,12 @@ public class Region {
         return null;
     }
 
-    /**
-     * @return the name
-     */
+    //return the name
     public String getName() {
         return name;
     }
 
-    /**
-     * @return the municipalities
-     */
+    //return the municipalities
     public List<Municipality> getMunicipalities() {
         return municipalities;
     }
