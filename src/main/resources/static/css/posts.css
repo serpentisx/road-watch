@@ -8,6 +8,8 @@ body, html {
   color: #dfdce3;
 }
 
+/* HEADER */
+
 header {
   position: fixed;
   top: 0;
@@ -54,8 +56,11 @@ nav li:hover {
   background-color: rgba(40, 40, 40, 0.05);
 }
 
+/* MAIN */
+
 main {
-  min-height: 100vh;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
   background-color: #4abdac;
 }
 
@@ -71,8 +76,8 @@ h1 {
 
 .create-new-entry > label {
   position: fixed;
-  top: calc(80px + 1em);
-  left: 1em;
+  bottom: 10px;
+  right: 10px;
   border-radius: 5px;
   padding: 1em;
   cursor: pointer;
@@ -87,13 +92,12 @@ h1 {
   z-index: 10;
   background-color: #4abdac;
   display: none;
-  padding-top: 100px;
   width: 100%;
-  height: calc(100vh - 80px);
 }
 
 .new-entry-checkbox:checked ~ .new-entry-container {
-  display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .new-entry-checkbox:checked  ~ label {
@@ -101,22 +105,59 @@ h1 {
 }
 
 .new-entry-container form {
-  margin: 50px 10%;
+  margin-top: 10vh;
+  min-width: 450px;
 }
 
 fieldset {
+  position: relative;
+  border-color: #dfdce3;
+  border-style: solid;
   padding: 1.5em;
 }
 
+fieldset > .description {
+  margin-bottom: 1.5em;
+}
+
+fieldset > .description > #descriptiontext {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input,
+textarea {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0.25em;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+  color: #dfdce3;
+  font-size: 1rem;
+}
+
+button.back {
+  margin-right: 5px;
+  background-color: #fc4a1a;
+}
+
+button.submit {
+  background-color: #5cb85c;
+}
+
 input {
-  height: 25px;
+  height: 2em;
 }
 
-/*
-legend + div {
-  margin-top: 20px;
+.entries {
+  margin-top: 80px;
 }
-
-fieldset div:last-child {
-
-}*/

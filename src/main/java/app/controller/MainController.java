@@ -39,6 +39,12 @@ public class MainController {
         return "login_register_page";
     }
 
+    @RequestMapping("/posts")
+    public String posts_page(){
+        return "posts_page";
+    }
+
+
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
     public String login(
         @RequestParam Map<String,String> params, ModelMap model) {
@@ -69,13 +75,13 @@ public class MainController {
 
 
     @RequestMapping(value = "/new-entry", method = RequestMethod.POST)
-    public String newentry(@RequestParam Map<String,String> params, ModelMap model){
+    public String newEntry(@RequestParam Map<String,String> params, ModelMap model){
         String title = params.get("title");
         String description = params.get("description");
 
         Post post = new Post(title, null, null, description, null);
 
         model.addAttribute("post", post);
-        return "post_page";
+        return "posts_page";
     }
 }
