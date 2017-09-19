@@ -2,6 +2,7 @@ package app.model;
 
 //Class for storing data requred for a submission
 public class Post {
+    private String title;
     private String photo;
     private Location location;
     private String description;
@@ -10,15 +11,21 @@ public class Post {
     private boolean archived;
     private String type;
     
-    public Post (String photo, Location location, String description, int support, boolean archived, String type) {
+    public Post (String title, String photo, Location location, String description, String type) {
+        this.title = title;
         this.photo = photo;
         this.location = location;
         this.description = description;
-        this.support = support;
-        this.archived = archived;
+        this.support = 0;
+        this.archived = false;
         this.type = type;
     }
 
+    // return the photo
+    public String getTitle() {
+        return title;
+    }
+    
     // return the photo
     public String getPhoto() {
         return photo;

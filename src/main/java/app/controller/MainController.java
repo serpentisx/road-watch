@@ -5,6 +5,7 @@
  */
 package app.controller;
 
+import app.model.Post;
 import app.model.User;
 import app.services.UserService;
 import java.util.Map;
@@ -64,5 +65,17 @@ public class MainController {
         userService.addUser(user);
 
         return "login_register_page";
+    }
+    
+    
+    @RequestMapping(value = "/new-entry", method = RequestMethod.POST)
+    public String newentry(@RequestParam Map<String,String> params, ModelMap model){
+        String title = params.get("title");
+        String description = params.get("description");
+        
+        Post post = new Post(title, null, null, description, null);
+        
+        model.addAttribute("post", post);
+        return "post_page";
     }
 }
