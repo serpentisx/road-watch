@@ -99,3 +99,24 @@ h1 {
 .new-entry-checkbox:checked  ~ label {
   display: none;
 }
+
+.new-entry-container form {
+  margin: 50px 10%;
+}
+
+fieldset {
+  padding: 1.5em;
+}
+
+input {
+  height: 25px;
+}
+
+/*
+legend + div {
+  margin-top: 20px;
+}
+
+fieldset div:last-child {
+
+}*/

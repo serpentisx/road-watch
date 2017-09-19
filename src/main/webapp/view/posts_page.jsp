@@ -29,20 +29,23 @@
             <fieldset>
               <legend>Nýtt innlegg</legend>
               <div>
-                <label for="title">Titill:</label>
-                <input type="text" name="title" id="title" maxlength="20" required>
+                <label for="title"></label>
+                <input type="text" name="title" id="title" maxlength="20" required placeholder="Titill">
               </div>
               <div>
-                <label for="description">Lýsing:</label>
-                <textarea aria-describedby="descriptiontext" name="description" id="description" cols="30" rows="5"></textarea>
-                <span id="descriptiontext" aria-hidden="true">Skrifaðu stutta lýsingu</span>
+                <div id="descriptiontext" aria-hidden="true">Skrifaðu stutta lýsingu á annmarkanum</div>
+                <label for="description"></label>
+                <textarea aria-describedby="descriptiontext" name="description" id="description" cols="30" rows="5" maxlength="150" required></textarea>
               </div>
+              <button type="submit"></button>
             </fieldset>
           </form>
         </div>
       </div>
       <div class="entries">
-        <!-- Insert new entries here -->
+        <div class="entry">
+          
+        </div>
       </div>
     </main>
     <footer></footer>
