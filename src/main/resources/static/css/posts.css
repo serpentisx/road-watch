@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body, html {
+  font-size: 16px;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #dfdce3;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #f7b733;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav,
+nav ul,
+nav ul li {
+  height: inherit;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+nav li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+nav a {
+  text-decoration: none;
+  color: #dfdce3;
+}
+
+nav li:hover {
+  background-color: rgba(40, 40, 40, 0.05);
+}
+
+main {
+  min-height: 100vh;
+  background-color: #4abdac;
+}
+
+h1 {
+  text-align: center;
+  margin-right: 1.25rem;
+  letter-spacing: 2px;
+}
+
+.new-entry-checkbox {
+  display: none;
+}
+
+.create-new-entry > label {
+  position: fixed;
+  top: calc(80px + 1em);
+  left: 1em;
+  border-radius: 5px;
+  padding: 1em;
+  cursor: pointer;
+  background-color: #fc4a1a;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.new-entry-container {
+  z-index: 10;
+  background-color: #4abdac;
+  display: none;
+  padding-top: 100px;
+  width: 100%;
+  height: calc(100vh - 80px);
+}
+
+.new-entry-checkbox:checked ~ .new-entry-container {
+  display: block;
+}
+
+.new-entry-checkbox:checked  ~ label {
+  display: none;
+}
