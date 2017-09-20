@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package app.controller;
 
 import app.model.Post;
@@ -17,34 +12,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author Huy Van Nguyen (hvn1@hi.is)
- * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Team 20 HBV501G - Fall 2017
  *
- * MainController defines the routes at the root of the website and the actions
- * to be performed at respectively routes.
- *
+ * MainController listens to requests at defined routes and is responsible for
+ * fetching and processing data as well as rendering pages.
  */
 
+// Request Mapping for the root
+// Every sub-pages in this method will be mounted to the root, i.e. at /
 @Controller
-@RequestMapping("") // Request Mapping for the root
+@RequestMapping("") 
 public class MainController {
 
+    // Creates a connection (autowire)to user's service class
     @Autowired
     UserService userService;
 
-    // Route for home page
-    // @return String filePath.  filePath is supposed to point to a .jsp file.
+    // Default homepage
+    // @return String filename: filename is supposed to point to a .jsp file
     @RequestMapping("/")
     public String main_page(){
         return "login_register_page";
     }
 
+    // Page for all posts
+    // @return String filename: filename is supposed to point to a .jsp file
     @RequestMapping("/posts")
     public String posts_page(){
         return "posts_page";
     }
 
-
+    /**
+    * Fetches user's login information and renders posts page if the user exists
+    * If the user does not exist a login page will be rendered
+    * 
+    * @param Map<String, String> params: the user's login information
+    * @param ModelMap model: an object with attributes which can be used when rendering
+    * @return String filename: posts page or login page (.jsp file to be rendered)
+    */
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
     public String login(
         @RequestParam Map<String,String> params, ModelMap model) {
@@ -60,6 +65,14 @@ public class MainController {
         }
     }
 
+    /**
+    * Fetches user's login information and creates a new user
+    * Redirects the user to login page and renders it
+    * 
+    * @param Map<String, String> params: the user's login information
+    * @param ModelMap model: an object with attributes which can be used when rendering
+    * @return String filename: login page to be rendered
+    */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register (
         @RequestParam Map<String,String> params, ModelMap model) {
@@ -72,8 +85,15 @@ public class MainController {
 
         return "login_register_page";
     }
-
-
+    
+    /**
+    * Fetches user's input and creates a new post
+    * Renders posts page with respectively post
+    * 
+    * @param Map<String, String> params: the user's input
+    * @param ModelMap model: an object with attributes which can be used when rendering
+    * @return String filename: login page to be rendered
+    */
     @RequestMapping(value = "/new-entry", method = RequestMethod.POST)
     public String newEntry(@RequestParam Map<String,String> params, ModelMap model){
         String title = params.get("title");
