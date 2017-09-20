@@ -1,14 +1,31 @@
 package app.model;
 
-//Class for storing data requred for a submission
+/**
+ * @author Team 20 HBV501G - Fall 2017
+ *
+ * Class for storing data (posts/entries) required for a submission
+ */
+
 public class Post {
+    // Post title
     private String title;
+
+    // Post image
     private String photo;
+
+    // Post location
     private Location location;
+
+    // Description for this post
     private String description;
-    //amount of support(likes) on a post
+
+    // Amount of support(likes) on a post
     private int support;
+
+    // Indicates whether this post has been processed or not
     private boolean archived;
+
+    // Post catagory, e.g. roads, bus stops...
     private String type;
 
     public Post (String title, String photo, Location location, String description, String type) {
