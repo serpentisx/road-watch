@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package app.services;
 
 import app.model.User;
@@ -12,17 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
  *
- * @author Huy Van Nguyen
+ * An implementation of a service class for users
+ * 
+ * This class implements the general user service interface
+ * Controller classes should use this class for services and use of repository.
  */
 
 @Service
 public class UserServiceImp implements UserService {
     
-    // Tenging yfir í safn af kennurum 
+    // A connection to user repository class
     @Autowired
     UserRepository user;
 
+    /**
+    * Checks for a user existence in the repository
+    * 
+    * @param String username:  the user's username
+    * @param String password:  the user's password
+    */
     @Override
     public boolean validateUser(String username, String password) {
         for (User u : getAllUsers()) {
@@ -32,12 +37,22 @@ public class UserServiceImp implements UserService {
         }
         return false;
     }
-
+    
+    /**
+    * Adds a user to the repository
+    * 
+    * @param User user:  user to be added to the repository
+    */
     @Override
     public void addUser(User user) {
         this.user.add(user);
     }
 
+    /**
+    * Get all users in the repository
+    * 
+    * @return List<User>:  a list of users.
+    */
     @Override
     public List<User> getAllUsers() {
         return this.user.getAll();
