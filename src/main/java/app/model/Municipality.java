@@ -1,14 +1,21 @@
 package app.model;
 import java.util.List;
-//Class for basic information for Muncipality
+
+/**
+ * @author Team 20 HBV501G - Fall 2017
+ *
+ * Class for basic information for Muncipality
+ */
 
 public class Municipality {
+    // Name of this municipality
     private String name;
+    
+    // Posts that belongs to this municipality
     private List<Post> posts;
     
     public Municipality (String name){
         this.name = name;
-        //Kannski viljum við hafa call by need frekar en pre-load
         this.posts = generatePosts(name);
     }
     
