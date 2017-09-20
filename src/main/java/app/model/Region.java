@@ -1,16 +1,22 @@
 package app.model;
 
-//Class for basic information for Regions and their municipalities
-
 import java.util.List;
 
+/**
+ * @author Team 20 HBV501G - Fall 2017
+ *
+ * Class for basic information for Regions and their municipalities
+ */
+
 public class Region {
+    // Region name
     private String name;
+    
+    // All municipalities that belongs to this region
     private List<Municipality> municipalities;
     
     public Region (String name) {
         this.name = name;
-        //Kannski viljum við hafa call by need frekar en pre-load
         this.municipalities = generateMunicipalities(name);
     }
     
