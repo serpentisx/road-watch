@@ -4,8 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fn"
-   uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="is">
   <head>
@@ -21,12 +20,13 @@
           <li><a href='./posts'>Innlegg</a></li>
         </ul>
       </nav>
-      <h1>Vegavaktin</h1>
+      <h1><a href='./'>Vegavaktin</a></h1>
     </header>
     <main>
       <div class='create-new-entry'>
-        <input id="new-entry" type="checkbox" name="create-new-entry" class="new-entry-checkbox" value="switch">
-        <label for="new-entry"> Nýtt innlegg </label>
+        <!--<input id="new-entry" type="checkbox" name="create-new-entry" class="new-entry-checkbox" value="switch">
+        <label for="new-entry"> Nýtt innlegg </label>-->
+        <button class="fixed new-entry-toggle" type="button">Nýtt innlegg</button>
         <div class="new-entry-container">
           <form action="/new-entry" method="POST">
             <fieldset>
@@ -40,16 +40,18 @@
                 <label for="description"></label>
                 <textarea aria-describedby="descriptiontext" name="description" id="description" cols="42" rows="6" maxlength="150" required></textarea>
               </div>
-              <button class="back" type="button">Til baka</button>
+              <button class="back new-entry-toggle" type="button">Til baka</button>
               <button class="submit" type="submit">Staðfesta</button>
             </fieldset>
           </form>
         </div>
       </div>
-      <div class="entries">
+      <div class="posts">
         <c:if test = "${post != null}">
-          <p><c:out value = "${post.getTitle()}"/></p>
-          <p><c:out value = "${post.getDescription()}"/></p>
+          <div class="post">
+            <h2><c:out value = "${post.getTitle()}"/></h2>
+            <p><c:out value = "${post.getDescription()}"/></p>
+          </div>
         </c:if>
       </div>
     </main>
