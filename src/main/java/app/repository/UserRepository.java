@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
- * @date september 2017
- * HBV501G Software Development 1
- * University of Iceland
- * @author Huy Van Nguyen
+ * @author Team 20 HBV501G - Fall 2017
+ *
+ * A repository for users
  * 
- * Storage for all users
- * 
+ * This is a interface that defines methods that all repository for users 
+ * should meet
  */
 
 public interface UserRepository  {
@@ -22,7 +21,7 @@ public interface UserRepository  {
     List <User> getAll();
     
     /**
-     * Adds user to the storage
+     * Adds user to the repository
      * @param user 
      */
     public void add (User user);
