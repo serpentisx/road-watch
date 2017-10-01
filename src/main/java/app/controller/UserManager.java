@@ -67,7 +67,7 @@ public class UserManager {
             // vantar: halda register-formi opnu
         } else {
             model.addAttribute("success_message", "Tókst að búa til notanda");
-            // vantar: bæta nýjum notanda við
+            // vantar: bæta nýjum notanda við gagnagrunn
         }
 
         return "login";
