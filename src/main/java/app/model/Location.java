@@ -1,64 +1,75 @@
 package app.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 /**
  * @author Team 20 HBV501G - Fall 2017
  *
- * Location stores information about one location, its coordinates, address
- * area code, municipality and region.
+ * An instance of Location stores information about a specific road's location
+ * Note: Some roads might not have any location info
  */
 
+@Embeddable
 public class Location {
     
-    // Coordinates should have two values [0] for x axis and [1] for y axis
-    private double[] coordinates;
+    private final int zip;
+    private final String locality;
+    private final String municipality;
     
-    // Address of this location
-    private String address;
+    @Column(name="region_is")
+    private final String regionIS;
+    @Column(name="region_en")
+    private final String regionEN;
     
-    // Area code of this location
-    private int zip;
-    
-    // The municipality that this location belongs to
-    private String municipality;
-    
-    // The region that this location belongs to
-    private String region;
-
-    public Location(double[] coordinates, String address, int zip, String municipality, String region) {
-        if (coordinates.length == 2) {
-            this.coordinates[0] = coordinates[0];
-            this.coordinates[1] = coordinates[1];
-        } else {
-            throw new IllegalArgumentException("Coordinate array should haver two values");
-        }
-        this.address = address;
-        this.zip = zip;
-        this.municipality = municipality;
-        this.region = region;
+    /**
+     * Constructor
+     * @param zip
+     * @param locality
+     * @param municipality
+     * @param regionIS
+     * @param regionEN 
+     */
+    public Location(int zip, String locality, String municipality, String regionIS, String regionEN) {
+      this.zip = zip;
+      this.locality = locality;
+      this.municipality = municipality;
+      this.regionIS = regionIS;
+      this.regionEN = regionEN;
     }
 
-    //return the coordinates
-    public double[] getCoordinates() {
-        return coordinates;
-    }
-
-    //return the address
-    public String getAddress() {
-        return address;
-    }
-
-    //return the zip
+    /**
+     * @return the zip
+     */
     public int getZip() {
-        return zip;
+      return zip;
     }
 
-    //return the municipality
+    /**
+     * @return the locality
+     */
+    public String getLocality() {
+      return locality;
+    }
+    
+    /**
+     * @return the municipality
+     */
     public String getMunicipality() {
-        return municipality;
+      return municipality;
     }
 
-    //return the region
-    public String getRegion() {
-        return region;
+    /**
+     * @return the regionIS
+     */
+    public String getRegionIS() {
+      return regionIS;
+    }
+
+    /**
+     * @return the regionEN
+     */
+    public String getRegionEN() {
+      return regionEN;
     }
 }

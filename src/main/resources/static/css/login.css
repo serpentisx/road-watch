@@ -157,6 +157,15 @@ body, html {
     cursor: pointer;
 }
 
+form div {
+    display: flex;
+    justify-content: flex-start;
+}
+
+i {
+    padding: 10px;
+}
+
 .form input:active,.form input:focus {
     outline: 1px #97cc99 solid;
 }
@@ -182,6 +191,14 @@ body, html {
 
 .invalid-input {
     color: #b30909;
+    font-size: 12px;
+    font-weight: bold;
+    top: 10px;
+    position: relative;
+}
+
+.success-message {
+    color: #008B00;
     font-size: 12px;
     font-weight: bold;
     top: 10px;
