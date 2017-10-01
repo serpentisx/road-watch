@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function () {
 
     /**************************  Login / Register Form  ***************************/

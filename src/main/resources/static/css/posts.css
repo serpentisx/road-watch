@@ -75,29 +75,7 @@ h1 {
           user-select: none;
 }
 
-/*
-
-.new-entry-checkbox {
-  display: none;
-}
-
-.create-new-entry > label {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  border-radius: 5px;
-  padding: 1em;
-  cursor: pointer;
-  background-color: #fc4a1a;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-*/
-
-.new-entry-container {
+.new-post-container {
   z-index: 10;
   background-color: #4abdac;
   display: none;
@@ -105,19 +83,7 @@ h1 {
   width: 100%;
 }
 
-/*
-
-.new-entry-checkbox:checked ~ .new-entry-container {
-  display: flex;
-}
-
-.new-entry-checkbox:checked  ~ label {
-  display: none;
-}
-
-*/
-
-.new-entry-container form {
+.new-post-container form {
   margin-top: 10vh;
   min-width: 450px;
 }
@@ -172,7 +138,7 @@ button.fixed {
   right: 10px;
 }
 
-button.new-entry-toggle {
+button.new-post-toggle {
   background-color: #fc4a1a;
 }
 

@@ -1,0 +1,4 @@
+búa til nýtt branch:
+git checkout -b update-for-psql
+branch til:
+git checkout update-for-psql
