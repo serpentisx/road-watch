@@ -5,12 +5,25 @@
  */
 package app.service;
 
+import app.repository.AccountRepository;
+import app.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
 /**
  *
  * @author Bjarki
  */
-public class ServiceImplementation implements Service {
+@Service
+public class ServiceImplementation implements MainService {
     
+    
+    @Autowired
+    AccountRepository ar;
+    
+    @Autowired
+    PostRepository pr;
     
     @Override
     public boolean verifyNewUser(String email) {

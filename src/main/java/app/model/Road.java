@@ -23,7 +23,8 @@ import javax.persistence.Table;
 public class Road {
     
     @Id
-    private int id;
+    @Column (name="id")
+    private int roadId;
     
     @Column(name="is_highway")
     private boolean isHighway;    // true if road is a highway
@@ -48,7 +49,7 @@ public class Road {
      * @param location 
      */
     public Road(int id, boolean isHighway, String roadNumber, String name, Location location) {
-      this.id = id;
+      this.roadId = id;
       this.isHighway = isHighway;
       this.roadNumber = roadNumber;
       this.name = name;
@@ -64,7 +65,7 @@ public class Road {
      * @return the id
      */
     public int getId() {
-      return id;
+      return roadId;
     }
 
     /**

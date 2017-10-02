@@ -9,7 +9,7 @@ package app.service;
  *
  * @author Bjarki
  */
-public interface Service {
+public interface MainService {
     
    /**
     * Verifies whether the email address used in an attempt to
