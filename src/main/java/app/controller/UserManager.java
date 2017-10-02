@@ -1,7 +1,6 @@
 
 package app.controller;
 
-import app.model.Account;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +23,7 @@ import app.service.MainService;
 public class UserManager {
     
     @Autowired
-    MainService s;
-   
-
-   
+    MainService service;   
 
    /**
     * Fetches user's login information and creates a new user
@@ -44,7 +40,7 @@ public class UserManager {
         String password = params.get("register_password");
         String email = params.get("register_email");
 
-        boolean verification = s.verifyNewUser(email);
+        boolean verification = service.verifyNewUser(email);
         if (!verification) {
             model.addAttribute("invalid_input", "Notandi er þegar til");
             // vantar: halda register-formi opnu
@@ -70,7 +66,7 @@ public class UserManager {
         String email = params.get("login_email");
         String password = params.get("login_password");
 
-        boolean verification = s.verifyLoginRequest(email, password);
+        boolean verification = service.verifyLoginRequest(email, password);
         if (verification) {
             return "posts";
         } else {

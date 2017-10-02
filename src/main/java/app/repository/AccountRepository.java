@@ -13,9 +13,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Bjarki
  */
-public interface AccountRepository extends JpaRepository<Account, String>{
+public interface AccountRepository extends JpaRepository<Account, String> {
     
     List<Account> findAll();
-    
     
 }

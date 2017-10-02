@@ -13,14 +13,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Location {
     
-    private final int zip;
-    private final String locality;
-    private final String municipality;
+    private int zip;
+    private String locality;
+    private String municipality;
     
     @Column(name="region_is")
-    private final String regionIS;
+    private String regionIS;
     @Column(name="region_en")
-    private final String regionEN;
+    private String regionEN;
     
     /**
      * Constructor
@@ -37,6 +37,8 @@ public class Location {
       this.regionIS = regionIS;
       this.regionEN = regionEN;
     }
+    
+    public Location() {}
 
     /**
      * @return the zip

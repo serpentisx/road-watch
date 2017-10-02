@@ -23,7 +23,7 @@ public class Post {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     
     private LocalDate dating;     // post date
     

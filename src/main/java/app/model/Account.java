@@ -31,6 +31,8 @@ public class Account {
         this.userPassword = user_password;
         this.userEmail = user_email;
     }
+    
+    public Account () {}
 
     public String getUsername() {
         return username;
@@ -42,5 +44,17 @@ public class Account {
 
     public String getUserEmail() {
         return userEmail;
+    }
+    
+    public void setUserEmail(String address) {
+      this.userEmail = address;
+    }
+    
+    public void setUserPassword(String password) {
+      this.userPassword = password;
+    }
+    
+    public void setUsername(String name) {
+      this.username = name;
     }
 }
