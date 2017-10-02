@@ -38,7 +38,7 @@ public class Post {
     private double longitude;   // longitude for location of road system defect
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id")    
+    @JoinColumn(name = "roadId")    
     private Road road;      // road on which road system defect was detected
     
     @ManyToOne(optional = false)
