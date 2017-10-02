@@ -3,11 +3,13 @@ package app.controller;
 
 import app.model.Account;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import app.service.Service;
 
 /**
  *
@@ -20,31 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("")
 public class UserManager {
+    @Autowired
+    Service s;
+   
 
-   /**
-    * Verifies whether the email address used in an attempt to
-    * create a new account already exists in the database or not.
-    *
-    * @param email the email address
-    * @return      true if email address does not already exists
-    */
-    private boolean verifyNewUser(String email) {
-        /* vantar */
-        return true;
-    }
-
-   /**
-    * Verifies whether the email address and password used in
-    * a log-in attempt match an existing account or not.
-    *
-    * @param email      the email address
-    * @param password   the password
-    * @return           true if the email and password match
-    */
-    private boolean verifyLoginRequest(String email, String password){
-        /* vantar */
-        return true;
-    }
+   
 
    /**
     * Fetches user's login information and creates a new user
@@ -61,7 +43,7 @@ public class UserManager {
         String password = params.get("register_password");
         String email = params.get("register_email");
 
-        boolean verification = verifyNewUser(email);
+        boolean verification = s.verifyNewUser(email);
         if (!verification) {
             model.addAttribute("invalid_input", "Notandi er þegar til");
             // vantar: halda register-formi opnu
@@ -87,7 +69,7 @@ public class UserManager {
         String email = params.get("login_email");
         String password = params.get("login_password");
 
-        boolean verification = verifyLoginRequest(email, password);
+        boolean verification = s.verifyLoginRequest(email, password);
         if (verification) {
             return "posts";
         } else {

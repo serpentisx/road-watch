@@ -116,8 +116,8 @@ function handleFileSelect(evt) {
   // Remember to validate file on server side
   // See section "Reading files" at following url or look for other sources
   // https://www.html5rocks.com/en/tutorials/file/dndfiles/
-}
-
+    }
+  
 function addUploadPhotoListener() {
   var fileInput = document.getElementById('file');
   fileInput.addEventListener('change', handleFileSelect, false);

@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.service;
+package app.repository;
+
+import app.model.Post;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Bjarki
  */
-public class AccountServiceImplementation {
-    
+public interface PostRepository extends JpaRepository{
+    List<Post> findAll();
 }
