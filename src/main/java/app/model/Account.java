@@ -46,10 +46,6 @@ public class Account {
         return userEmail;
     }
     
-    public void setUserEmail(String address) {
-      this.userEmail = address;
-    }
-    
     public void setUserPassword(String password) {
       this.userPassword = password;
     }
