@@ -11,6 +11,7 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class PostServiceImp implements PostService {
     @Autowired
     RoadRepository roadRep;
     
+    @Override
     public boolean createNewPost(String title, String description, String latitude, String longitude, String road, String file, String road_number, String zip, String locality){
         try{
             Account a = accountRep.findByUserEmail("a@a.is");
@@ -43,6 +45,11 @@ public class PostServiceImp implements PostService {
             return false;
         }
         
+    }
+    
+    @Override
+    public List<Post> getAllPosts() {
+      return postRep.findAll();
     }
     
 }

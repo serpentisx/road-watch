@@ -14,9 +14,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Bjarki
  */
 public interface PostRepository extends JpaRepository<Post, Integer> {
-  
+    
+    @Override
     public List<Post> findAll();
     
+    @Override
     public Post save(Post post);
     
 }

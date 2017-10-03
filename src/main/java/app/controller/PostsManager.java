@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
  * and is responsible for fetching and processing data as well as rendering pages.
  */
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("")
 public class PostsManager {
   
   @Autowired
   PostService service;
+  
+   @RequestMapping(value = "/new-post")
+   public String renderNewPostPage() {
+     return "new_post";
+   }
      
    /**
     * Fetches user's input and creates a new post.
@@ -51,6 +56,6 @@ public class PostsManager {
                 
         boolean createPost = service.createNewPost(title, description, latitude, longitude, road, file, road_number, zip, locality);
         
-        return "posts";
+        return "index";
     }
 }

@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/java,intellij,eclipse
 
 .env
+/src/main/resoruces/application.properties
 
 ### Java ###
 *.class

@@ -2,7 +2,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
@@ -12,10 +11,12 @@
     <title>Vegavaktin</title>
     <link href="<c:url value="css/font-awesome-4.7.0/css/font-awesome.min.css" />" rel="stylesheet">
     <link href="<c:url value="css/account.css" />" rel="stylesheet">
+    <link href="<c:url value="css/main.css" />" rel="stylesheet">
   </head>
   <body>
-    <jsp:include page="includes/nav.jsp" />
     <main>
+      <jsp:include page="includes/nav.jsp" />
+      <jsp:include page="includes/header.jsp" />
       <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
         <p>Skrifaðu lykilorðið þitt tvisvar til þess að eyða aðganginum</p>
@@ -56,13 +57,14 @@
         <form method="POST" action="/account/username">
           <div>
             <label for="username"></label>
-            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[a-zA-Z0-9]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
+            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
       </c:if>
 
       <span class="message">${message}</span>
+      <jsp:include page="includes/footer.jsp" />
     </main>
   </body>
 </html>
