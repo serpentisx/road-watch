@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +22,6 @@ import javax.persistence.Table;
 public class Road {
     
     @Id
-    @Column (name="id")
     private int roadId;
     
     @Column(name="is_highway")
@@ -37,7 +35,7 @@ public class Road {
     private Location location;    // road's location (may be null)
     
     // Collection of all posts referring to the road
-    @OneToMany(mappedBy="road", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="road", cascade=CascadeType.ALL)
     private Set<Post> posts = new HashSet<Post>();
     
     /**
@@ -56,56 +54,33 @@ public class Road {
       this.location = location;
     }
     
-    /**
-     * Default constructor
-     */
+    
     public Road () {}
 
-    /**
-     * @return the id
-     */
     public int getId() {
       return roadId;
     }
 
-    /**
-     * @return the isHighway
-     */
     public boolean isIsHighway() {
       return isHighway;
     }
 
-    /**
-     * @return the roadNumber
-     */
     public String getRoadNumber() {
       return roadNumber;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
       return name;
     }
 
-    /**
-     * @return the location
-     */
     public Location getLocation() {
       return location;
     }
 
-    /**
-     * @return the posts
-     */
     public Set<Post> getPosts() {
       return posts;
     }
 
-    /**
-     * @param posts the posts to set
-     */
     public void setPosts(Set<Post> posts) {
       this.posts = posts;
     }      

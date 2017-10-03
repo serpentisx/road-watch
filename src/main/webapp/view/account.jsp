@@ -20,7 +20,7 @@
       <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
         <p>Skrifaðu lykilorðið þitt tvisvar til þess að eyða aðganginum</p>
-        <form method="POST" action="/account/delete">
+        <form method="POST" action="/account/modify">
           <div>
             <label for="password1"></label>
             <input id="password1" name="passsword1" type="password" required placeholder="Lykilorð">
@@ -35,7 +35,7 @@
 
       <c:if test = "${form_switch == 'password'}">
         <h2>Breyta lykilorði</h2>
-        <form method="POST" action="/account/password">
+        <form method="POST" action="/account/modify">
           <div>
             <label for="old-password"></label>
             <input id="old-password" name="old_password" type="password" required placeholder="Núverandi lykilorð">
@@ -54,7 +54,7 @@
 
       <c:if test = "${form_switch == 'username'}">
         <h2>Breyta notandanafni</h2>
-        <form method="POST" action="/account/username">
+        <form method="POST" action="/account/modify">
           <div>
             <label for="username"></label>
             <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">

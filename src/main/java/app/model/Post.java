@@ -23,9 +23,9 @@ public class Post {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer postId;
     
-    private LocalDate dating;     // post date
+    private LocalDate dating;   // post date
     
     @Column(name="photo")
     private String photoURL;    // road system defect image url
@@ -39,7 +39,7 @@ public class Post {
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "roadId")    
-    private Road road;      // road on which road system defect was detected
+    private Road road;          // road on which road system defect was detected
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "email")
@@ -61,156 +61,91 @@ public class Post {
     
     public Post () {}
 
-    /**
-     * @return the id
-     */
+    
     public int getId() {
-      return id;
+      return postId;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
-      this.id = id;
+      this.postId = id;
     }
-
-    /**
-     * @return the dating
-     */
+    
     public LocalDate getDating() {
       return dating;
     }
-
-    /**
-     * @param dating the dating to set
-     */
+    
     public void setDating(LocalDate dating) {
       this.dating = dating;
     }
 
-    /**
-     * @return the photoURL
-     */
     public String getPhotoURL() {
       return photoURL;
     }
 
-    /**
-     * @param photoURL the photoURL to set
-     */
     public void setPhotoURL(String photoURL) {
       this.photoURL = photoURL;
     }
 
-    /**
-     * @return the title
-     */
     public String getTitle() {
       return title;
     }
-
-    /**
-     * @param title the title to set
-     */
+    
     public void setTitle(String title) {
       this.title = title;
     }
 
-    /**
-     * @return the description
-     */
     public String getDescription() {
       return description;
     }
 
-    /**
-     * @param description the description to set
-     */
     public void setDescription(String description) {
       this.description = description;
     }
 
-    /**
-     * @return the support
-     */
     public int getSupport() {
       return support;
     }
 
-    /**
-     * @param support the support to set
-     */
     public void setSupport(int support) {
       this.support = support;
     }
 
-    /**
-     * @return the archived
-     */
     public boolean isArchived() {
       return archived;
     }
-
-    /**
-     * @param archived the archived to set
-     */
+    
     public void setArchived(boolean archived) {
       this.archived = archived;
     }
 
-    /**
-     * @return the latitude
-     */
     public double getLatitude() {
       return latitude;
     }
 
-    /**
-     * @param latitude the latitude to set
-     */
     public void setLatitude(double latitude) {
       this.latitude = latitude;
     }
-
-    /**
-     * @return the longitude
-     */
+    
     public double getLongitude() {
       return longitude;
     }
-
-    /**
-     * @param longitude the longitude to set
-     */
+    
     public void setLongitude(double longitude) {
       this.longitude = longitude;
     }
 
-    /**
-     * @return the road
-     */
     public Road getRoad() {
       return road;
     }
 
-    /**
-     * @param road the road to set
-     */
     public void setRoad(Road road) {
       this.road = road;
     }
-
-    /**
-     * @return the account
-     */
+    
     public Account getAccount() {
       return account;
     }
 
-    /**
-     * @param account the account to set
-     */
     public void setAccount(Account account) {
       this.account = account;
     }

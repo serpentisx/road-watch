@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RoadRepository extends JpaRepository <Road, Integer> {
     
+    @Override
     public List<Road> findAll();
     
     public Road findByRoadNumber(String road_number);

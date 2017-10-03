@@ -34,13 +34,13 @@ public class PostServiceImp implements PostService {
     
     @Override
     public boolean createNewPost(String title, String description, String latitude, String longitude, String road, String file, String road_number, String zip, String locality){
-        try{
+        try {
             Account a = accountRep.findByUserEmail("a@a.is");
             Road r = roadRep.findByRoadNumber(road_number);
             Post p = new Post(file, title, description, Double.parseDouble(latitude), Double.parseDouble(longitude), r, a);
             postRep.save(p);
             return true;
-        }catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
             return false;
         }
@@ -49,7 +49,7 @@ public class PostServiceImp implements PostService {
     
     @Override
     public List<Post> getAllPosts() {
-      return postRep.findAll();
+      return (postRep.findAll());
     }
     
 }

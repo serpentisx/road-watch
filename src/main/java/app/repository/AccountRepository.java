@@ -17,22 +17,19 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface AccountRepository extends JpaRepository<Account, String> {
     
+    @Override
     public List<Account> findAll();
     
+    @Override
     public Account save(Account account);
     
-    public Account findByUserEmail(String email);
+    public Account findByEmail(String email);
     
     @Modifying
-    @Query ("UPDATE Account acc SET acc.userPassword = ?2 WHERE acc.userEmail = ?1")
+    @Query (value="UPDATE Account SET password = ?2 WHERE email = ?1")
     public void changePassword(String email, String password);
     
     @Query (value="DELETE FROM Account WHERE email=?1")
     public void deleteByEmail(String email);
     
-    
-    
-    
-    
- 
 }

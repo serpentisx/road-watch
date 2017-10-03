@@ -23,16 +23,19 @@ import app.service.AccountService;
 public class UserManager {
     
     @Autowired
-    AccountService service;   
+    AccountService service;
+    
+    // til bráðabirgða (vantar að sækja email notanda úr session)
+    String provisionalEmail = "notandi@hi.is";
 
-   /**
-    * Fetches user's login information and creates a new user
-    * Redirects the user to login page and renders it
-    *
-    * @param params the user's login information
-    * @param model  an object with attributes which can be used when rendering
-    * @return       string representing page to be rendered
-    */
+    /**
+     * Fetches user's login information and creates a new user
+     * Redirects the user to login page and renders it
+     *
+     * @param params the user's new account information
+     * @param model  an object with attributes which can be used when rendering
+     * @return       string representing page to be rendered
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register (
         @RequestParam Map<String,String> params, ModelMap model) {
@@ -57,19 +60,24 @@ public class UserManager {
         return "login";
     }
     
+    /**
+     * Renders login page
+     *
+     * @return      string representing page to be rendered
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login (ModelMap model) {
+    public String login () {
         return "login";
     }
    
-   /**
-    * Fetches user's login information and renders posts page if the user exists
-    * If the user does not exist a login page will be rendered
-    *
-    * @param params the user's new account information
-    * @param model  an object with attributes which can be used when rendering
-    * @return       string representing page to be rendered
-    **/
+    /**
+     * Fetches user's login information and renders posts page if the user exists
+     * If the user does not exist a login page will be rendered
+     *
+     * @param params the user's log-in information
+     * @param model  an object with attributes which can be used when rendering
+     * @return       string representing page to be rendered
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login (
         @RequestParam Map<String,String> params, ModelMap model) {
@@ -86,38 +94,38 @@ public class UserManager {
         }
     }
 
-   /**
-    * Handles account modification.
-    * Determines which modification user has selected
-    * and renders account modification page accordingly.
-    *
-    * @param param  name of button that user has clicked
-    * @param model  an object with attributes which can be used when rendering
-    * @return       string representing page to be rendered
-    */
-    /*
-    @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public String modifyAccount (
-      @RequestParam String param, ModelMap model) {
-        model.addAttribute("form_switch", param);
-        return "account";
-    }
-    */
-
+    /**
+     * Renders account modification page for deleting an account
+     *
+     * @param model an object with attributes which can be used when rendering
+     * @return      string representing page to be rendered
+     */
     @RequestMapping(value = "/account/delete-account", method = RequestMethod.GET)
     public String renderAccountDeletion (
       ModelMap model) {
         model.addAttribute("form_switch", "delete");
         return "account";
     }
-
+    
+    /**
+     * Renders account modification page for changing an account's password
+     *
+     * @param model an object with attributes which can be used when rendering
+     * @return      string representing page to be rendered
+     */
     @RequestMapping(value = "/account/change-password", method = RequestMethod.GET)
     public String renderPasswordChange (
       ModelMap model) {
         model.addAttribute("form_switch", "password");
         return "account";
     }
-
+    
+     /**
+     * Renders account modification page for changing an account's username
+     *
+     * @param model an object with attributes which can be used when rendering
+     * @return      string representing page to be rendered
+     */
     @RequestMapping(value = "/account/change-username", method = RequestMethod.GET)
     public String renderUsernameChange (
       ModelMap model) {
@@ -125,8 +133,16 @@ public class UserManager {
         return "account";
     }
 
-    
-   @RequestMapping(value = "/account/modify", method = RequestMethod.POST)
+    /**
+     * Handles account modification.
+     * Determines which type of modification user has selected
+     * and renders the proper page depending on form data processing results.
+     *
+     * @param params  name of button that user has clicked
+     * @param model  an object with attributes which can be used when rendering
+     * @return       string representing page to be rendered
+     */
+    @RequestMapping(value = "/account/modify", method = RequestMethod.POST)
     public String modifyAccount (
       @RequestParam Map<String,String> params, ModelMap model) {
         String submitButton = params.get("submit-button");
@@ -146,22 +162,22 @@ public class UserManager {
     private String deleteAccountHandler (Map<String,String> params, ModelMap model) {
         String password = params.get("password");
 
-        if (service.verifyPassword("a@a.is", password)) {
+        if (service.verifyPassword(provisionalEmail, password)) {
           model.addAttribute("message", "Lykilorðið er rangt.");
           model.addAttribute("form_switch", "delete");
           return "account";
         } else {
-          service.deleteAccount("a@a.is"); //email úr sessioni
+          service.deleteAccount(provisionalEmail); // vantar að ná í email úr session
           model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
           return "index";
         }
     }
-
-    private String changePasswordHandler (Map<String,String> params, ModelMap model) {
-        /* Notandi setur inn gamalt lykilorð og nýtt lykilorð,
-           staðfestum hvort upplýsingar séu réttar */
-
-        
+    
+    /* 
+     * Notandi setur inn gamalt lykilorð og nýtt lykilorð,
+     * staðfestum hvort upplýsingar séu réttar 
+     */
+    private String changePasswordHandler (Map<String,String> params, ModelMap model) {        
         String oldPassword = params.get("old_password");
         String newPassword1 = params.get("new_password_1");
         String newPassword2 = params.get("new_password_2");
@@ -171,11 +187,11 @@ public class UserManager {
           model.addAttribute("form_switch", "password");
           return "account";
         } else {
-            //TODO 
-            if (service.verifyPassword("a@a.is", oldPassword)){
+            // vantar að sækja email núverandi notanda 
+            if (service.verifyPassword(provisionalEmail, oldPassword)){
                 System.out.println(oldPassword);
-                service.changePassword("a@a.is", newPassword1);
-                System.out.println(service.verifyPassword("a@a.is",newPassword1));
+                service.changePassword(provisionalEmail, newPassword1);
+                System.out.println(service.verifyPassword(provisionalEmail, newPassword1));
                 System.out.print("password was changed");
                 return "main";
             } else {
@@ -184,12 +200,14 @@ public class UserManager {
                 return "account";
             }
         }
-        
     }
-
+    
+    /* 
+     * Breytir notandanafni notanda.
+     */
     private String changeUsernameHandler (Map<String,String> params, ModelMap model) {
-        /* Notandi setur inn password tvisvar og nýtt username,
-           staðfestum hvort upplýsingar séu réttar */
+        String newUsername = params.get("username");
+        service.changeName(provisionalEmail, newUsername);
         return "index";
     }
 }

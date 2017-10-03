@@ -26,7 +26,7 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public boolean verifyNewUser (String email) {
-        Account account = accountRep.findByUserEmail(email);
+        Account account = accountRep.findByEmail(email);
         if (account == null) {
             return true;
         }
@@ -53,9 +53,9 @@ public class AccountServiceImp implements AccountService {
     public boolean verifyPassword (String email, String password) {
         boolean isCorrect = false;
         
-        Account user = accountRep.findByUserEmail(email);
+        Account user = accountRep.findByEmail(email);
         try {
-            isCorrect = PasswordStorage.verifyPassword(password, user.getUserPassword());
+            isCorrect = PasswordStorage.verifyPassword(password, user.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
         } 
@@ -71,7 +71,7 @@ public class AccountServiceImp implements AccountService {
     public String getLoggedInUser () {
         return "";
     }
-
+    
     @Override
     public void authenticateUser (String email, String password) {
        // UserDetails userDetails = userDetailsService.loadUserByUsername(email);
@@ -110,8 +110,8 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public boolean changeName(String email, String newName){
-         try{
-         Account ac = accountRep.findByUserEmail(email);
+         try {
+         Account ac = accountRep.findByEmail(email);
          ac.setUsername(newName);
          return true;
          } catch(Exception e){
