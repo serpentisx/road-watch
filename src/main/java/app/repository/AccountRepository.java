@@ -22,7 +22,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     
     public Account findByUserEmail(String email);
     
-    @Query (value="DELETE FROM Account WHERE email='?1';")
+    @Query (value="DELETE FROM Account WHERE email='?1'")
     public void deleteByEmail(String email);
     
     
