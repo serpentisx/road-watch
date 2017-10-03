@@ -1,9 +1,8 @@
-<header>
-  <nav>
-    <ul>
-      <li><a href='/'>Skrá út</a></li>
-      <li><a href='./posts'>Innlegg</a></li>
-    </ul>
-  </nav>
-  <h1><a href='./'>Vegavaktin</a></h1>
-</header>
+  <footer class="section-3">
+     <div class="footer-wrapper">
+        <div class="logo">
+           <img src="img/logo.png" alt="Logo">
+        </div>
+        <span>Vegavaktin 2017</span>
+     </div>
+  </footer>
