@@ -14,10 +14,10 @@
     <link href="<c:url value="css/main.css" />" rel="stylesheet">
   </head>
   <body>
-    <jsp:include page="includes/header.jsp" />
     
     <main>
       <jsp:include page="includes/nav.jsp" />
+      <jsp:include page="includes/header.jsp" />
       <div class="create-new-post">
         <button class="fixed new-post-toggle" type="button">Nýtt innlegg</button>
 
@@ -89,10 +89,9 @@
             </fieldset>
           </form>
         </div>
-      </div>  
+      </div>
+      <jsp:include page="includes/footer.jsp" />
     </main>
-    
-    <jsp:include page="includes/footer.jsp" />
     
     <script src="<c:url value="js/new_post.js" />"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA&libraries=places&callback=initAutocompletePlaceSearch" async defer></script>

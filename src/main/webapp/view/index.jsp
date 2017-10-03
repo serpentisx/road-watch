@@ -2,7 +2,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
@@ -14,10 +13,10 @@
     <link href="<c:url value="css/main.css" />" rel="stylesheet">
   </head>
   <body>
-    <jsp:include page="includes/header.jsp" />
     
     <main>
       <jsp:include page="includes/nav.jsp" />
+      <jsp:include page="includes/header.jsp" />
       
       <section class="section-1">
         <div class="btn-container">
@@ -48,9 +47,9 @@
           <div id="map"></div>
         </div>
       </section>
+      
+      <jsp:include page="includes/footer.jsp" />
     </main>
-        
-    <jsp:include page="includes/footer.jsp" />
 
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA" async defer></script>
