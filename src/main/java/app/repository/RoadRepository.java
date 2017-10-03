@@ -5,7 +5,7 @@
  */
 package app.repository;
 
-import app.model.Post;
+import app.model.Road;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,10 +13,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Bjarki
  */
-public interface PostRepository extends JpaRepository<Post, Integer> {
-  
-    List<Post> findAll();
+public interface RoadRepository extends JpaRepository{
     
-    public Post save(Post post);
+    List<Road> findAll();
     
+    public Road findByRoadNumber(String road_number);
 }
