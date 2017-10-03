@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PostRepository extends JpaRepository<Post, Integer> {
   
-    List<Post> findAll();
+    public List<Post> findAll();
     
     public Post save(Post post);
     

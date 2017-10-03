@@ -13,9 +13,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Bjarki
  */
-public interface RoadRepository extends JpaRepository{
+public interface RoadRepository extends JpaRepository <Road, Integer> {
     
-    List<Road> findAll();
+    public List<Road> findAll();
     
     public Road findByRoadNumber(String road_number);
 }

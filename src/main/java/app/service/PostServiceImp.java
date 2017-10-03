@@ -12,12 +12,14 @@ import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Bjarki
  */
-public class PostServiceImp implements PostService{
+@Service
+public class PostServiceImp implements PostService {
     
     
     @Autowired
