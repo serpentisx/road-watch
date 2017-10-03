@@ -2,6 +2,132 @@
 
 /* global google:true */
 
+/* functions for adding info to new post form */
+
+function addPlaceCoordinates(location) {
+  var latitudeInput = document.querySelector('input[name=latitude]');
+  var longitudeInput = document.querySelector('input[name=longitude]');
+  latitudeInput.value = location.lat;
+  longitudeInput.value = location.lng;
+}
+
+function addRoadInfo(components) {
+  for (var i = 0; i < components.length; i++) {
+    var component = components[i];
+    
+    if (component.types[0] === "route") {
+      var roadInput = document.querySelector('input[name=road]');
+      roadInput.value = component.long_name;
+      
+      // athugum hvort leitin skili vegnúmeri (sem er heiltala eða byrjar á "F"):
+      if (parseInt(component.short_name) || parseInt(component.short_name.slice(1))) {
+        var roadNumInput = document.querySelector('input[name=road_number]');
+        roadNumInput.value = component.short_name;
+      }
+      
+    } else if (component.types[0] === "locality") {
+      var localityInput = document.querySelector('input[name=locality]');
+      localityInput.value = component.long_name;
+      
+    } else if (component.types[0] === "postal_code") {
+      var zipInput = document.querySelector('input[name=zip]');
+      zipInput.value = component.long_name;
+      
+    } else {
+      continue;
+    }
+  }
+}
+
+// Determines the road that corresponds to the generated coordinates
+// and if results include road of place searched for, adds it to the new post form.
+// If the road is not found, returns false.
+function addRoadOfSearchResult(components) {
+  for (var i = 0; i < components.length; i++) {
+    for (var j = 0; j < components[i].types; j++) {
+      if (components[i].types[j] === "route") {
+        addRoadInfo(components);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function addAllInfo(location) {
+  var messageError = document.querySelector('.location-error-message');
+  var messageSuccess = document.querySelector('.location-success-message');
+  // If route/road is found for place, add the coordinates, otherwise display error message
+  var roadFound = addRoadOfSearchResult(location.address_components);
+  if (roadFound) {
+    addPlaceCoordinates(location.geometry.location);
+    messageSuccess.innerHTML = "Tókst að finna veg!";
+  } else {
+    messageError.innerHTML = "Enginn vegur finnst fyrir staðsetningu, reyndu aftur";
+  }
+}
+
+
+/* Autocomplete functions */
+
+// Handles event when user selects a place from the autocomplete search box
+function placeChangedHandler(autocomplete, e) {
+  var place = autocomplete.getPlace();
+  if (!place.geometry) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    var messageError = document.querySelector('.location-error-message');
+    messageError.innerHTML = "Staðsetning finnst ekki, reyndu aftur";
+    return;
+  }
+  addAllInfo(place);
+}
+
+// Callback function defined in Google Maps <script> tag.
+// Initializes autocomplete place search in new post form.
+function initAutocompletePlaceSearch() {
+  var input = document.getElementById('autocomplete-place-search');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.addListener('place_changed', placeChangedHandler.bind(null, autocomplete));
+}
+
+
+/* Coordinates generation function */
+
+// Adds the geographical coordinates to the new post form
+// if a corresponding road is found
+function addPosition(position) {
+  var messageError = document.querySelector('.location-error-message');
+  var messageSuccess = document.querySelector('.location-success-message');
+  var geocoder = new google.maps.Geocoder();
+  var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    addAllInfo(results[0]);
+  });
+}
+
+// Event handler for coordinates generation
+function generateCoordinates() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(addPosition);
+    var messageElement = document.querySelector('.geolocation-success-message');
+    messageElement.innerHTML = "Tókst að sækja staðsetningu!";
+  } else {
+    var messageElement = document.querySelector('.geolocation-error-message');
+    messageElement.innerHTML = "Vafrinn styður ekki staðsetningartækni";
+  }
+}
+
+// Adds event listener to button that generates geographical 
+// coordinates of road system defect
+function addCoordinatesGeneratorListener() {
+  var button = document.querySelector('.generate-coordinates');
+  button.addEventListener('click', generateCoordinates, false);
+}
+
+
+/* New post functions */
+
 // Event handler for new post buttons
 function toggleNewPostView() {
   var newPostContainer = document.querySelector('.new-post-container');
@@ -59,57 +185,8 @@ function addLocationListeners() {
   landmarkButton.addEventListener('click', toggleLandmarkView, false);
 }
 
-// Determines the road that corresponds to the generated coordinates
-// and if the road is not found, prompts the user to try again
-function findRoad(position) {
-  var geocoder = new google.maps.Geocoder();
-  // Appropriate implementation missing
-  // Need to: Find the road with Maps Geocoder, and if found,
-  // add its name to form input element with name="road", and other
-  // information to other input elements, such as zip and locality. 
-  // Finally, display success message
-  // (see <span class="location-success message"> ).
-  // If the road is not found, then display error message
-  // (see <span class="location-error-message"> ).
-  // Remember to return true if road was found, and false otherwise.
-  
-  return false;
-}
 
-// Adds the geographical coordinates to the new post form
-// if a corresponding road is found
-function addPosition(position) {
-  var roadFound = findRoad(position);
-  
-  if (roadFound) {
-    var latitudeInput = document.querySelector('input[name=latitude]');
-    var longitudeInput = document.querySelector('input[name=longitude]');
-    latitudeInput.value = position.coords.latitude;
-    longitudeInput.value = position.coords.longitude;
-  }
-  
-  console.log(position.coords);
-  console.log(position.coords.accuracy);
-}
-
-// Event handler for coordinates generation
-function generateCoordinates() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(addPosition);
-    var messageElement = document.querySelector('.geolocation-success-message');
-    messageElement.innerHTML = "Tókst að sækja staðsetningu!";
-  } else {
-    var messageElement = document.querySelector('.geolocation-error-message');
-    messageElement.innerHTML = "Vafrinn styður ekki staðsetningartækni";
-  }
-}
-
-// Adds event listener to button that generates geographical 
-// coordinates of road system defect
-function addCoordinatesGeneratorListener() {
-  var button = document.querySelector('.generate-coordinates');
-  button.addEventListener('click', generateCoordinates, false);
-}
+/* Photo upload functions */
 
 function handleFileSelect(evt) {
   // Appropriate implementation missing

@@ -56,7 +56,7 @@
         <form method="POST" action="/account/username">
           <div>
             <label for="username"></label>
-            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[a-zA-Z0-9]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
+            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
           </div>
           <button type="submit">Staðfesta</button>
         </form>

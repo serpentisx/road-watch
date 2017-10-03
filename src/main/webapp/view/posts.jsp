@@ -112,7 +112,6 @@
       </div>
     </main>
     <script src="<c:url value="js/posts.js" />"></script>
-    <script src="<c:url value="js/autocomplete.js" />"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA&libraries=places&callback=initAutocompletePlaceSearch" async defer></script>
   </body>
 </html>
