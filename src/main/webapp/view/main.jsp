@@ -47,8 +47,8 @@
                         <i class="fa fa-cog" aria-hidden="true"></i>
                         Stillingar
                      </div>
-                     <a href="#">Breyta notandanafn</a>
-                     <a href="#">Breyta lykilorð</a>
+                     <a href="/account/change-username">Breyta notandanafn</a>
+                     <a href="/account/change-password">Breyta lykilorð</a>
                   </div>
                   <div class="btn">
                      Skrá út
