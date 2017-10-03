@@ -18,7 +18,7 @@
               <p class="post-description"><c:out value = "Lýsing: ${post.getDescription()}"/></h3>
               <div class="post-author">
                 <div class="pa-img"></div>
-                <span class="pa-name"><c:out value = "Höfundur: ${post.getAccount().getUser()}"/></span>
+                <span class="pa-name"><c:out value = "Höfundur: ${post.getAccount().getUsername()}"/></span>
               </div>
               <p class="post-date"><c:out value = "${post.getDating()}"/></p>
               <p><c:out value = "(${post.getLatitude()}, ${post.getLongitude()})"/></p>

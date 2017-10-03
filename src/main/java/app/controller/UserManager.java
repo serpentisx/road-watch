@@ -172,10 +172,10 @@ public class UserManager {
           return "account";
         } else {
             //TODO 
-            if (service.verifyLoginRequest("a@a.is", oldPassword)){
+            if (service.verifyPassword("a@a.is", oldPassword)){
                 System.out.println(oldPassword);
                 service.changePassword("a@a.is", newPassword1);
-                System.out.println(service.verifyLoginRequest("a@a.is",newPassword1));
+                System.out.println(service.verifyPassword("a@a.is",newPassword1));
                 System.out.print("password was changed");
                 return "main";
             } else {
