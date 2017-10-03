@@ -99,8 +99,8 @@ public class AccountServiceImp implements AccountService {
     @Override
     public boolean changePassword(String email, String newPassword){
          try{
-         Account ac = accountRep.findByUserEmail(email);
-         ac.setUserPassword(PasswordStorage.createHash(newPassword));
+         System.out.print("email: "+email +" "+ "newPass: "+newPassword);
+         accountRep.changePassword(email, PasswordStorage.createHash(newPassword));
          return true;
          } catch(Exception e){
              e.printStackTrace();

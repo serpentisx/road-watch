@@ -160,7 +160,31 @@ public class UserManager {
     private String changePasswordHandler (Map<String,String> params, ModelMap model) {
         /* Notandi setur inn gamalt lykilorð og nýtt lykilorð,
            staðfestum hvort upplýsingar séu réttar */
-        return "index";
+
+        
+        String oldPassword = params.get("old_password");
+        String newPassword1 = params.get("new_password_1");
+        String newPassword2 = params.get("new_password_2");
+        
+        if (!newPassword1.equals(newPassword2)) {
+          model.addAttribute("message", "Nýja lykilorðið eru ekki eins, reyndu aftur.");
+          model.addAttribute("form_switch", "password");
+          return "account";
+        } else {
+            //TODO 
+            if (service.verifyLoginRequest("a@a.is", oldPassword)){
+                System.out.println(oldPassword);
+                service.changePassword("a@a.is", newPassword1);
+                System.out.println(service.verifyLoginRequest("a@a.is",newPassword1));
+                System.out.print("password was changed");
+                return "main";
+            } else {
+                model.addAttribute("message", "Lykilorð er ekki rétt, reyndu aftur.");
+                model.addAttribute("form_switch", "password");
+                return "account";
+            }
+        }
+        
     }
 
     private String changeUsernameHandler (Map<String,String> params, ModelMap model) {
