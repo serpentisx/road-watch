@@ -76,7 +76,7 @@ public class UserManager {
         String email = params.get("login_email");
         String password = params.get("login_password");
 
-        boolean verification = service.verifyLoginRequest(email, password);
+        boolean verification = service.verifyPassword(email, password);
         if (verification) {
             return "index";
         } 
@@ -125,40 +125,47 @@ public class UserManager {
         return "account";
     }
 
-    @RequestMapping(value = "/account/delete", method = RequestMethod.POST)
-    public String deleteAccountHandler (
+    
+   @RequestMapping(value = "/account/modify", method = RequestMethod.POST)
+    public String modifyAccount (
       @RequestParam Map<String,String> params, ModelMap model) {
-        String password1 = params.get("password1");
-        String password2 = params.get("password2");
-
-        if (!password1.equals(password2)) {
-          model.addAttribute("message", "Lykilorðin eru ekki eins, reyndu aftur.");
-          model.addAttribute("form_switch", "delete");
+        String submitButton = params.get("submit-button");
+        String view;
+        if (submitButton.equals("delete-account")) {
+          view = deleteAccountHandler(params, model);
+        } else if (submitButton.equals("change-password")) {
+          view = changePasswordHandler(params, model);
+        } else if (submitButton.equals("change-username")) {
+          view = changeUsernameHandler(params, model);
         } else {
-          service.deleteAccount("");//email úr sessioni
+          view = "login";
+        }
+        return view;
+    }
+
+    private String deleteAccountHandler (Map<String,String> params, ModelMap model) {
+        String password = params.get("password");
+
+        if (service.verifyPassword("a@a.is", password)) {
+          model.addAttribute("message", "Lykilorðið er rangt.");
+          model.addAttribute("form_switch", "delete");
+          return "account";
+        } else {
+          service.deleteAccount("a@a.is"); //email úr sessioni
           model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
           return "index";
         }
-
-        /* Notandi setur inn lykilorðið tvisvar
-           staðfestum hvort lykilorðin passa og þau séu rétt */
-        model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
-        return "login";
     }
 
-    @RequestMapping(value = "/account/password", method = RequestMethod.POST)
-    public String changePasswordHandler (
-      @RequestParam Map<String,String> params, ModelMap model) {
+    private String changePasswordHandler (Map<String,String> params, ModelMap model) {
         /* Notandi setur inn gamalt lykilorð og nýtt lykilorð,
            staðfestum hvort upplýsingar séu réttar */
-        return "posts";
+        return "index";
     }
 
-    @RequestMapping(value = "/account/username", method = RequestMethod.POST)
-    public String changeUsernameHandler (
-      @RequestParam String param, ModelMap model) {
+    private String changeUsernameHandler (Map<String,String> params, ModelMap model) {
         /* Notandi setur inn password tvisvar og nýtt username,
            staðfestum hvort upplýsingar séu réttar */
-        return "posts";
+        return "index";
     }
 }

@@ -50,7 +50,7 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
-    public boolean verifyLoginRequest (String email, String password) {
+    public boolean verifyPassword (String email, String password) {
         boolean isCorrect = false;
         
         Account user = accountRep.findByUserEmail(email);

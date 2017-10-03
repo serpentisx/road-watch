@@ -28,7 +28,7 @@ public interface AccountService {
     * @param password   the password
     * @return           true if the email and password match
     */
-    public boolean verifyLoginRequest(String email, String password);
+    public boolean verifyPassword(String email, String password);
     
     /**
     * Creates a new user/account
