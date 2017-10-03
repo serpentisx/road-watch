@@ -52,7 +52,7 @@
     </main>
 
     <script src="js/jquery-3.2.0.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA" async defer></script>
+    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />" type="text/javascript"></script>
     <script src="<c:url value="js/map.js" />"></script>
     <script src="<c:url value="js/main.js" />"></script>
   </body>
