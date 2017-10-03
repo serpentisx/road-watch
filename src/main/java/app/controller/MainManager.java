@@ -19,6 +19,6 @@ public class MainManager {
     */
     @RequestMapping("/")
     public String renderHomePage(){
-        return "main";
+        return "index";
     }
 }

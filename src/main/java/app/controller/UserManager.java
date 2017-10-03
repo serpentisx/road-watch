@@ -61,12 +61,6 @@ public class UserManager {
     public String login (ModelMap model) {
         return "login";
     }
-    
-    @RequestMapping(value = "/posts", method = RequestMethod.GET)
-    public String renderPostsPage (ModelMap model) {
-        return "posts";
-    }
-    
    
    /**
     * Fetches user's login information and renders posts page if the user exists
@@ -84,7 +78,7 @@ public class UserManager {
 
         boolean verification = service.verifyLoginRequest(email, password);
         if (verification) {
-            return "main";
+            return "index";
         } 
         else {
             model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");
