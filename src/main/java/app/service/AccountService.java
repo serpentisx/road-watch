@@ -66,9 +66,9 @@ public interface AccountService {
     
     public void authenticateUser(String username, String password);
     
-    public boolean deleteAccount();
+    public boolean deleteAccount(String email);
 
-    public boolean changePassword(String email, String oldPassword);
+    public boolean changePassword(String email, String newPassword);
 
-    public boolean changeName(String email, String oldPassword);
+    public boolean changeName(String email, String newName);
 }
