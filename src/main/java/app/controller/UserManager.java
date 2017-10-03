@@ -141,7 +141,7 @@ public class UserManager {
           model.addAttribute("message", "Lykilorðin eru ekki eins, reyndu aftur.");
           model.addAttribute("form_switch", "delete");
         } else {
-          service.deleteAccount();
+          service.deleteAccount("");//email úr sessioni
           model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
           return "index";
         }

@@ -85,20 +85,38 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
-    public boolean deleteAccount() {
-          /* vantar útfærslu */
-          return true;
+    public boolean deleteAccount(String email) {
+          try{
+            accountRep.deleteByEmail(email);
+            return true;
+          } catch(Exception e){
+              e.printStackTrace();
+              return false;
+          }
+          
     }
 
     @Override
-    public boolean changePassword(String email, String oldPassword){
-         /* vantar útfærslu */
+    public boolean changePassword(String email, String newPassword){
+         try{
+         Account ac = accountRep.findByUserEmail(email);
+         ac.setUserPassword(PasswordStorage.createHash(newPassword));
          return true;
+         } catch(Exception e){
+             e.printStackTrace();
+             return false;
+         }
     }
 
     @Override
-    public boolean changeName(String email, String oldPassword){
-         /* vantar útfærslu */
+    public boolean changeName(String email, String newName){
+         try{
+         Account ac = accountRep.findByUserEmail(email);
+         ac.setUsername(newName);
          return true;
+         } catch(Exception e){
+             e.printStackTrace();
+             return false;
+         }
     }
 }

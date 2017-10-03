@@ -8,6 +8,7 @@ package app.repository;
 import app.model.Account;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -20,4 +21,12 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     public Account save(Account account);
     
     public Account findByUserEmail(String email);
+    
+    @Query (value="DELETE FROM Account WHERE email='?1';")
+    public void deleteByEmail(String email);
+    
+    
+    
+    
+ 
 }
