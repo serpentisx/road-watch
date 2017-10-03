@@ -16,7 +16,7 @@
   <body>
     <jsp:include page="includes/nav.jsp" />
     <main>
-      <c:if test = "${form_switch == "delete"}">
+      <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
         <p>Skrifaðu lykilorðið þitt tvisvar til þess að eyða aðganginum</p>
         <form method="POST" action="/account/delete">
@@ -32,7 +32,7 @@
         </form>
       </c:if>
 
-      <c:if test = "${form_switch == "password"}">
+      <c:if test = "${form_switch == 'password'}">
         <h2>Breyta lykilorði</h2>
         <form method="POST" action="/account/password">
           <div>
@@ -51,7 +51,7 @@
         </form>
       </c:if>
 
-      <c:if test = "${form_switch == "username"}">
+      <c:if test = "${form_switch == 'username'}">
         <h2>Breyta notandanafni</h2>
         <form method="POST" action="/account/username">
           <div>
