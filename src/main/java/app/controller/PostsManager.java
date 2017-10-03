@@ -24,6 +24,11 @@ public class PostsManager {
   
   @Autowired
   PostService service;
+  
+   @RequestMapping(value = "/new-post")
+   public String renderNewPostPage() {
+     return "new_post";
+   }
      
    /**
     * Fetches user's input and creates a new post.

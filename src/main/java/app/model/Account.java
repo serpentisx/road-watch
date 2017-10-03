@@ -23,7 +23,7 @@ public class Account {
     private String userPassword;
     
     @Id
-    @Column (name="email")
+    @Column (name="user_email")
     private String userEmail;
     
     public Account(String user_name, String user_password, String user_email) {
