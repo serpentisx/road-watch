@@ -19,22 +19,4 @@ import org.springframework.stereotype.Service;
 public class ServiceImplementation implements MainService {
     
     
-    @Autowired
-    AccountRepository ar;
-    
-    @Autowired
-    PostRepository pr;
-    
-    @Override
-    public boolean verifyNewUser(String email) {
-        /* vantar */
-        return true;
-    }
-   
-    
-    @Override
-    public boolean verifyLoginRequest(String email, String password){
-        /* vantar */
-        return true;
-    }
 }

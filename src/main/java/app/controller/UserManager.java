@@ -8,7 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import app.service.MainService;
+import app.service.AccountService;
 
 /**
  *
@@ -23,7 +23,7 @@ import app.service.MainService;
 public class UserManager {
     
     @Autowired
-    MainService service;   
+    AccountService service;   
 
    /**
     * Fetches user's login information and creates a new user
@@ -33,7 +33,7 @@ public class UserManager {
     * @param model  an object with attributes which can be used when rendering
     * @return       string representing page to be rendered
     */
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register (
         @RequestParam Map<String,String> params, ModelMap model) {
         String name = params.get("register_name");
@@ -44,14 +44,30 @@ public class UserManager {
         if (!verification) {
             model.addAttribute("invalid_input", "Notandi er þegar til");
             // vantar: halda register-formi opnu
-        } else {
-            model.addAttribute("success_message", "Tókst að búa til notanda");
-            // vantar: bæta nýjum notanda við gagnagrunn
+        } 
+        else {
+            if (service.createNewAccount(name, password, email)) {
+                model.addAttribute("success_message", "Tókst að búa til notanda");
+            }
+            else {
+                model.addAttribute("invalid_input", "Úups! Eitthvað fór úrskeiðis. Vinsamlegast reyndu aftur.");
+            }
         }
 
         return "login";
     }
-
+    
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login (ModelMap model) {
+        return "login";
+    }
+    
+    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+    public String renderPostsPage (ModelMap model) {
+        return "posts";
+    }
+    
+   
    /**
     * Fetches user's login information and renders posts page if the user exists
     * If the user does not exist a login page will be rendered
@@ -59,8 +75,8 @@ public class UserManager {
     * @param params the user's new account information
     * @param model  an object with attributes which can be used when rendering
     * @return       string representing page to be rendered
-    */
-    @RequestMapping(value = "/posts", method = RequestMethod.POST)
+    **/
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login (
         @RequestParam Map<String,String> params, ModelMap model) {
         String email = params.get("login_email");
@@ -68,8 +84,9 @@ public class UserManager {
 
         boolean verification = service.verifyLoginRequest(email, password);
         if (verification) {
-            return "posts";
-        } else {
+            return "main";
+        } 
+        else {
             model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");
             return "login";
         }
@@ -124,7 +141,7 @@ public class UserManager {
           model.addAttribute("message", "Lykilorðin eru ekki eins, reyndu aftur.");
           model.addAttribute("form_switch", "delete");
         } else {
-          deleteAccount();
+          service.deleteAccount();
           model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
           return "index";
         }
@@ -149,20 +166,5 @@ public class UserManager {
         /* Notandi setur inn password tvisvar og nýtt username,
            staðfestum hvort upplýsingar séu réttar */
         return "posts";
-    }
-
-    private boolean deleteAccount() {
-          /* vantar útfærslu */
-          return true;
-    }
-
-    private boolean changePassword(String email, String oldPassword){
-         /* vantar útfærslu */
-         return true;
-    }
-
-    private boolean changeName(String email, String oldPassword){
-         /* vantar útfærslu */
-         return true;
     }
 }

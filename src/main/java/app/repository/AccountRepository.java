@@ -15,6 +15,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface AccountRepository extends JpaRepository<Account, String> {
     
-    List<Account> findAll();
+    public List<Account> findAll();
     
+    public Account save(Account account);
+    
+    public Account findByUserEmail(String email);
 }
