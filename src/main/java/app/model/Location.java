@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Location {
     
-    private int zip;
+    private Integer zip;
     private String locality;
     private String municipality;
     

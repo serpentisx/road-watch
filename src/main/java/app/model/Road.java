@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Road {
     
     @Id
-    private int roadId;
+    private Integer roadId;
     
     @Column(name="is_highway")
     private boolean isHighway;    // true if road is a highway
