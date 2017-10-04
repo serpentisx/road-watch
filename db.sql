@@ -16591,5 +16591,7 @@ INSERT INTO Road (roadId, is_highway, road_number, name, municipality, region_is
 INSERT INTO Road (roadId, is_highway, road_number, name, municipality, region_is, region_en) VALUES (33813, TRUE, '9894', 'Freysnesvegur', 'Sveitarfélagið Hornafjörður', 'Suðurland', 'Southern Region');
 INSERT INTO Road (roadId, is_highway, road_number, name, municipality, region_is, region_en) VALUES (33814, TRUE, '9896', 'Hæðavegur', 'Sveitarfélagið Hornafjörður', 'Suðurland', 'Southern Region');
 
+/* Prófunargögn */ 
+
 INSERT INTO Account VALUES ('notandi@hi.is', 'notandi', 'sha1:64000:18:vzRTLddP3tqqNGuB0q02WirEW9JN32CB:IDdSQQr8wXE4hVi7PVkUnc2I');
 INSERT INTO Post(postId, photo, title, description, roadId, user_email) VALUES (1, '/img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 1, 'notandi@hi.is');

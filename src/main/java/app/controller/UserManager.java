@@ -25,7 +25,7 @@ public class UserManager {
     @Autowired
     AccountService service;
     
-    // til bráðabirgða (vantar að sækja email notanda úr session)
+    // provisional resort while we haven't figured out how to save the user's session
     String provisionalEmail = "notandi@hi.is";
 
     /**

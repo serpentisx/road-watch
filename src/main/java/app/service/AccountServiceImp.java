@@ -17,12 +17,6 @@ public class AccountServiceImp implements AccountService {
     
     @Autowired
     PostRepository postRep;
-    
-  //  @Autowired
-  //  private AuthenticationManager authenticationManager;
-
-  //  @Autowired
-  //  private UserDetailsService userDetailsService;
 
     @Override
     public boolean verifyNewUser (String email) {

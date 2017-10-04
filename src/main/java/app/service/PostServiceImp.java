@@ -11,6 +11,7 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,13 @@ public class PostServiceImp implements PostService {
     @Autowired
     RoadRepository roadRep;
     
+    // provisional resort while we haven't figured out how to save the user's session
+    String provisionalEmail = "notandi@hi.is";
+    
     @Override
     public boolean createNewPost(String title, String description, String latitude, String longitude, String road, String file, String road_number, String zip, String locality){
         try {
-            Account a = accountRep.findByUserEmail("a@a.is");
+            Account a = accountRep.findByEmail(provisionalEmail);
             Road r = roadRep.findByRoadNumber(road_number);
             Post p = new Post(file, title, description, Double.parseDouble(latitude), Double.parseDouble(longitude), r, a);
             postRep.save(p);
@@ -49,7 +53,10 @@ public class PostServiceImp implements PostService {
     
     @Override
     public List<Post> getAllPosts() {
-      return (postRep.findAll());
+      System.out.println("getAllPosts!");
+      ArrayList<Post> posts = (ArrayList<Post>) (postRep.findAll());
+      System.out.println(posts);
+      return posts;
     }
     
 }
