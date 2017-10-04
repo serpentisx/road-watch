@@ -4,6 +4,9 @@ import app.model.Account;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -57,25 +60,29 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
+    public boolean loginUser(String email, String password) {
+        boolean login_success = verifyPassword(email, password);
+        if (login_success) {
+            authenticateUser(email, password);
+        }
+        return login_success;
+    }
+    
+    @Override
     public void logoutUser (String email, String password) {
-        
+        SecurityContextHolder.getContext().setAuthentication(null);
     }
 
     @Override
     public String getLoggedInUser () {
-        return "";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
     
     @Override
-    public void authenticateUser (String email, String password) {
-       // UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-      //  UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-
-       // authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
-       // if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-       //    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-       // }
+    public void authenticateUser (String email, String password) {    
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
+        SecurityContextHolder.getContext().setAuthentication(token);
     }
     
     @Override

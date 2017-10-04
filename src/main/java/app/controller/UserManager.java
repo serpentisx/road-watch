@@ -84,9 +84,11 @@ public class UserManager {
         String email = params.get("login_email");
         String password = params.get("login_password");
 
-        boolean verification = service.verifyPassword(email, password);
+        boolean verification = service.loginUser(email, password);
         if (verification) {
-            return "index";
+            
+            System.out.println("logged  " + service.getLoggedInUser());
+            return "redirect:index";
         } 
         else {
             model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");

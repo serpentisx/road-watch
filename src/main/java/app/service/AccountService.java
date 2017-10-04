@@ -39,6 +39,14 @@ public interface AccountService {
     * @return           true if the email and password match
     */
     public boolean createNewAccount(String username, String password, String email);
+   
+     /**
+    * Log in the user
+    *
+    * @param email      the email address
+    * @param password   the password
+    */
+    public boolean loginUser(String email, String password);
     
     /**
     * Log out the user

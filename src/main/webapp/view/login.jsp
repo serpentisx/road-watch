@@ -10,12 +10,9 @@
         <title>Vegavaktin</title>
         <link href="<c:url value="css/font-awesome-4.7.0/css/font-awesome.min.css" />" rel="stylesheet">
         <link href="<c:url value="css/login.css" />" rel="stylesheet">
-        <link href="<c:url value="css/main.css" />" rel="stylesheet">
     </head>
     <body>
         <main>
-          <jsp:include page="includes/nav.jsp" />
-          <jsp:include page="includes/header.jsp" />
           <div class="layer"></div>
           <div class="bg">
               <div class="container">
@@ -68,7 +65,6 @@
                   </div>
               </div>
           </div>
-          <jsp:include page="includes/footer.jsp" />
         </main>
         <script src="<c:url value="js/jquery-3.2.0.min.js" />" type="text/javascript"></script>
         <script src="<c:url value="js/main.js" />" type="text/javascript"></script>
