@@ -86,14 +86,20 @@ public class UserManager {
 
         boolean verification = service.loginUser(email, password);
         if (verification) {
-            System.out.println("logged  " + service.getLoggedInUser());
-            model.addAttribute("username", service.getLoggedInUser());
-            return "redirect:index";
+            model.addAttribute("username", service.getLoggedInUserName());
+            return "index";
         } 
         else {
             model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");
             return "login";
         }
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout () {
+        service.logoutUser();
+
+        return "index";
     }
 
     /**

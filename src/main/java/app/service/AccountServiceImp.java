@@ -69,14 +69,21 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
-    public void logoutUser (String email, String password) {
+    public void logoutUser () {
         SecurityContextHolder.getContext().setAuthentication(null);
     }
-
+    
     @Override
-    public String getLoggedInUser () {
+    public String getLoggedInUserEmail () {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
+    }
+    
+    @Override
+    public String getLoggedInUserName () {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Account account = accountRep.findByEmail(getLoggedInUserEmail());
+        return account.getUsername();
     }
     
     @Override

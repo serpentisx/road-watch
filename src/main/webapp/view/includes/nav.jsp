@@ -25,14 +25,14 @@
     <div class="mobile-nav">
       <div class="mobile-nav-container">
         <div class="user-panel">
-          <span>Innskráður notandi: ${username}</span>
+          <span>${username}</span>
           <div class="btn"><a href="new-post">Skrá nýja færslu</a></div>
         </div>
         <div class="user-nav">
           <div class="un un-1">
             <div class>
               <i class="fa fa-user-o" aria-hidden="true"></i>
-              Minar síður
+              Mínar síður
             </div>
             <a href="#">Mín innlegg</a>
             <a href="#">Líkað við</a>
@@ -47,7 +47,7 @@
             <a href="/account/delete-account">Eyða aðgangi</a>
           </div>
           <div class="btn">
-            Skrá út
+            <a href="/logout">Skrá út</a>
           </div>
         </div>
       </div>

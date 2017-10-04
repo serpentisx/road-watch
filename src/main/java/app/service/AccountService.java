@@ -51,10 +51,8 @@ public interface AccountService {
     /**
     * Log out the user
     *
-    * @param email      the email address
-    * @param password   the password
     */
-    public void logoutUser(String email, String password);
+    public void logoutUser();
     
     /**
     * Get the current logged in user.
@@ -62,7 +60,9 @@ public interface AccountService {
     * @return           the logged in user's email
     */
     
-    public String getLoggedInUser();
+    public String getLoggedInUserName();
+    
+    public String getLoggedInUserEmail();
     
   
     /**
