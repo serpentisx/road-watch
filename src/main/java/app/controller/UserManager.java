@@ -86,8 +86,8 @@ public class UserManager {
 
         boolean verification = service.loginUser(email, password);
         if (verification) {
-            
             System.out.println("logged  " + service.getLoggedInUser());
+            model.addAttribute("username", service.getLoggedInUser());
             return "redirect:index";
         } 
         else {
