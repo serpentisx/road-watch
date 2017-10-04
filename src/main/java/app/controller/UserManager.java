@@ -86,6 +86,7 @@ public class UserManager {
 
         boolean verification = service.verifyPassword(email, password);
         if (verification) {
+            model.addAttribute("username", "notandi");
             return "index";
         } 
         else {

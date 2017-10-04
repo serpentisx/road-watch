@@ -1,7 +1,6 @@
 package app.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +41,7 @@ public class Post {
     private Road road;          // road on which road system defect was detected
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_email")
+    @JoinColumn(name = "email")
     private Account account;    // user account associated with the post
     
     

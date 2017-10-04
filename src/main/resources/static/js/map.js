@@ -34,7 +34,7 @@ function initMap() {
     center: new google.maps.LatLng(65, -18.8),
   });
 
-  // Construct a window information
+  // Construct a info window
   const infowindow = new google.maps.InfoWindow();
 
   // Construct markers
@@ -46,7 +46,7 @@ function initMap() {
     });
 
     // Event handler for markers
-    // Display repsectively information when the user clickson a marker
+    // Display repsectively information when the user clicks on a marker
     marker.addListener('click', ((marker, i) => {
       return () => {
         infowindow.setContent(locations[i][0]);
