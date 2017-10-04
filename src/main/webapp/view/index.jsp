@@ -50,8 +50,13 @@
       
       <jsp:include page="includes/footer.jsp" />
     </main>
-
+    
     <script src="js/jquery-3.2.0.min.js"></script>
+    <!--
+    <script type="text/javascript">
+      var posts = JSON.parse(${postsJSON});
+    </script>
+    -->
     <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />" type="text/javascript"></script>
     <script src="<c:url value="js/map.js" />"></script>
     <script src="<c:url value="js/main.js" />"></script>

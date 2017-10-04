@@ -47,9 +47,7 @@ CREATE TABLE Post (
 
 
 
-/* Götur í bæjarfélögum (Heimild: Pósturinn) */
 
-INSERT INTO Road (road_id, name) VALUES (0, 'Óskilgreindur vegur');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (1, FALSE, 'Aðalstræti', 101, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (2, FALSE, 'Amtmannsstígur', 101, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (3, FALSE, 'Aragata', 101, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
@@ -746,7 +744,6 @@ INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (633, FALSE, 'Reynisvatnsvegur', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (634, FALSE, 'Réttarháls', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (635, FALSE, 'Rofabær', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
-INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (636, FALSE, 'Seiðakvísl', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (637, FALSE, 'Selásblettur', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (638, FALSE, 'Selásbraut', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (639, FALSE, 'Silungakvísl', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
@@ -12780,7 +12777,6 @@ INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region
 
 /* Þjóðvegir (Heimild: Vegagerðin) */
 
-INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30001, TRUE, '1', 'Hringvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30002, TRUE, '22', 'Dalavegur', 'Vestmannaeyjabær', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30003, TRUE, '25', 'Þykkvabæjarvegur', 'Rangárþing ytra', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30004, TRUE, '26', 'Landvegur', 'Rangárþing ytra', 'Suðurland', 'Southern Region');
@@ -12792,7 +12788,6 @@ INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30009, TRUE, '
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30010, TRUE, '33', 'Gaulverjabæjarvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30011, TRUE, '34', 'Eyrarbakkavegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30012, TRUE, '35', 'Biskupstungnabraut');
-INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30013, TRUE, '35', 'Kjalvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30014, TRUE, '36', 'Þingvallavegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30015, TRUE, '37', 'Laugarvatnsvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30016, TRUE, '38', 'Þorlákshafnarvegur');
@@ -12968,7 +12963,6 @@ INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30185, TRUE, '
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30186, TRUE, '413', 'Breiðholtsbraut', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30187, TRUE, '414', 'Flugvallarvegur Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30188, TRUE, '416', 'Bessastaðavegur', 'Garðabær', 'Höfuðborgarsvæðið', 'Capital Region');
-INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30189, TRUE, '417', 'Bláfjallavegur');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30190, TRUE, '418', 'Bústaðavegur', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30191, TRUE, '420', 'Vatnsleysustrandarvegur', 'Sveitarfélagið Vogar', 'Suðurnes', 'Southern Peninsula Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30192, TRUE, '421', 'Vogavegur', 'Sveitarfélagið Vogar', 'Suðurnes', 'Southern Peninsula Region');
@@ -14175,7 +14169,6 @@ INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_i
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31393, TRUE, '3837', 'Heiðarbæjarvegur 2', 'Bláskógabyggð', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31394, TRUE, '3839', 'Heiðarbæjarvegur', 'Bláskógabyggð', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31395, TRUE, '3841', 'Nesjavegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
-INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31396, TRUE, '3843', 'Nesjavallavegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31397, TRUE, '3849', 'Villingavatnsvegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31398, TRUE, '3851', 'Úlfljótsvatnsvegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31399, TRUE, '3853', 'Torfastaðavegur 2', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
@@ -16597,5 +16590,18 @@ INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_i
 
 /* Prófunargögn */ 
 
+INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (636, FALSE, 'Seiðakvísl', 110, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
+INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30189, TRUE, '417', 'Bláfjallavegur');
+INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31396, TRUE, '3843', 'Nesjavallavegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
+INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30013, TRUE, '35', 'Kjalvegur');
+INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30001, TRUE, '1', 'Þjóðvegur');
+INSERT INTO Road (road_id, name) VALUES (0, 'Óskilgreindur vegur');
+
 INSERT INTO Account(email, name, password) VALUES ('notandi@hi.is', 'notandi', 'sha1:64000:18:vzRTLddP3tqqNGuB0q02WirEW9JN32CB:IDdSQQr8wXE4hVi7PVkUnc2I');
-INSERT INTO Post(post_id, photo, title, description, road_id, email) VALUES (1, '/img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 1, 'notandi@hi.is');
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (1, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 636, 'notandi@hi.is', FALSE, 64.120522, -21.825362, 0);
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (2, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 31396, 'notandi@hi.is', FALSE, 64.109933, -21.560583, 0);
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (3, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30189, 'notandi@hi.is', FALSE, 64.042741, -21.602515, 0);
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (4, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30013, 'notandi@hi.is', FALSE, 65.113066, -19.662914, 0);
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (5, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30052, 'notandi@hi.is', FALSE, 65.682230, -17.015552, 0);
+INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (6, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30001, 'notandi@hi.is', FALSE, 65.273961, -14.412479, 0);
+/* Götur í bæjarfélögum (Heimild: Pósturinn) */

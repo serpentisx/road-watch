@@ -3,7 +3,11 @@ package app.controller;
 
 import app.model.Post;
 import app.service.PostService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +34,11 @@ public class MainManager {
         ArrayList<Post> posts;
         posts = (ArrayList<Post>) service.getAllPosts();   
         
+        //Gson gson = new Gson();
+        //java.lang.reflect.Type listType = new TypeToken<List<Post>>() {}.getType();
+        //String postsJSON = gson.toJson(posts, listType);
+        
+        //model.addAttribute("postsJSON", postsJSON);
         model.addAttribute("posts", posts);
 
         return "index";

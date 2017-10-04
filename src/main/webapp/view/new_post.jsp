@@ -18,77 +18,73 @@
     <main>
       <jsp:include page="includes/nav.jsp" />
       <jsp:include page="includes/header.jsp" />
-      <div class="create-new-post">
-        <button class="fixed new-post-toggle" type="button">Nýtt innlegg</button>
+      <div class="new-post-container">
+        <form action="/new-post" method="POST">
+          <fieldset>
+            <legend>Nýtt innlegg</legend>
 
-        <div class="new-post-container">
-          <form action="/new-post" method="POST">
-            <fieldset>
-              <legend>Nýtt innlegg</legend>
+            <div class="title">
+              <label for="title">Titill</label>
+              <input autofocus type="text" name="title" id="title" maxlength="25" required placeholder="Titill">
+            </div>
 
-              <div class="title">
-                <label for="title">Titill</label>
-                <input autofocus type="text" name="title" id="title" maxlength="25" required placeholder="Titill">
+            <div class="description">
+              <label for="description">Stutt lýsing</label>
+              <textarea name="description" id="description" cols="42" rows="6" maxlength="150" required></textarea>
+            </div>
+
+            <div class="location">
+              <p>Ef þú ert um þessar mundir staddur við annmarkann geturðu notað staðsetningartækni til þess að staðsetja hann. Þú getur líka gert það með því að gefa upp kennileiti, t.d. heimilisfang eða nafn staðar.</p>
+              <button type="button" class="coordinates">Staðsetningartækni</button>
+              <button type="button" class="landmark">Kennileiti</button>
+
+              <div class="enter-coordinates" style="display: none;">
+                <button type="button" class="generate-coordinates">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </button>
               </div>
 
-              <div class="description">
-                <label for="description">Stutt lýsing</label>
-                <textarea name="description" id="description" cols="42" rows="6" maxlength="150" required></textarea>
+              <div class="enter-landmark" style="display: none;">
+                <label for="autocomplete-place-search"></label>
+                <input id="autocomplete-place-search" name="formatted_address" type="text" placeholder="Sláðu inn staðsetningu">
               </div>
 
-              <div class="location">
-                <p>Ef þú ert um þessar mundir staddur við annmarkann geturðu notað staðsetningartækni til þess að staðsetja hann. Þú getur líka gert það með því að gefa upp kennileiti, t.d. heimilisfang eða nafn staðar.</p>
-                <button type="button" class="coordinates">Staðsetningartækni</button>
-                <button type="button" class="landmark">Kennileiti</button>
+              <span class="location-success-message"></span>
+              <span class="location-error-message"></span>
 
-                <div class="enter-coordinates" style="display: none;">
-                  <button type="button" class="generate-coordinates">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                  </button>
-                </div>
-
-                <div class="enter-landmark" style="display: none;">
-                  <label for="autocomplete-place-search"></label>
-                  <input id="autocomplete-place-search" name="formatted_address" type="text" placeholder="Sláðu inn staðsetningu">
-                </div>
-
-                <span class="location-success-message"></span>
-                <span class="location-error-message"></span>
-
-                <div class="position">
-                  <label>
-                    Breiddargráða:
-                    <input name="latitude" type="number" disabled required value="">
-                  </label>
-                  <label>
-                    Lengdargráða:
-                    <input name="longitude" type="number" disabled required value="">
-                  </label>
-                  <label>
-                    Vegur:
-                    <input name="road" type="text" disabled required value="">
-                  </label>
-                </div>
+              <div class="position">
+                <label>
+                  Breiddargráða:
+                  <input name="latitude" type="number" disabled required value="">
+                </label>
+                <label>
+                  Lengdargráða:
+                  <input name="longitude" type="number" disabled required value="">
+                </label>
+                <label>
+                  Vegur:
+                  <input name="road" type="text" disabled required value="">
+                </label>
               </div>
+            </div>
 
-              <div class="file-upload">
-                <label for="file"></label>
-                <!-- <i class="fa fa-upload" aria-hidden="true"></i> -->
-                <input type="file" id="file" name="file" accept="image/*">
-                <!-- should also validate the uploaded file on server side -->
-                <!-- uploading image file is missing implementation in posts.js -->
-              </div>
+            <div class="file-upload">
+              <label for="file"></label>
+              <!-- <i class="fa fa-upload" aria-hidden="true"></i> -->
+              <input type="file" id="file" name="file" accept="image/*">
+              <!-- should also validate the uploaded file on server side -->
+              <!-- uploading image file is missing implementation in posts.js -->
+            </div>
 
-              <!-- Hidden inputs -->
-              <input name="road_number" type="hidden" value="">
-              <input name="zip" type="hidden" value="">
-              <input name="locality" type="hidden" value="">
+            <!-- Hidden inputs -->
+            <input name="road_number" type="hidden" value="">
+            <input name="zip" type="hidden" value="">
+            <input name="locality" type="hidden" value="">
 
-              <button class="back new-post-toggle" type="button">Til baka</button>
-              <button class="submit" type="submit">Staðfesta</button>
-            </fieldset>
-          </form>
-        </div>
+            <button class="back new-post-toggle" type="button">Til baka</button>
+            <button class="submit" type="submit">Staðfesta</button>
+          </fieldset>
+        </form>
       </div>
       <jsp:include page="includes/footer.jsp" />
     </main>

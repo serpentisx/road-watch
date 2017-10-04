@@ -1,5 +1,10 @@
+'use strict';
+
+/* global google:true posts:true */
+
 function initMap() {
   // Location for markers
+  
   const locations = [
     ['Miklabraut', 64.132059, -21.892566],
     ['Smáralind', 64.100894, -21.883619],

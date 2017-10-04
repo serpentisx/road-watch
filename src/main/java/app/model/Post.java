@@ -31,10 +31,10 @@ public class Post {
     
     private String title;       // post title
     private String description; // short post description
-    private int support;        // number of post supports
-    private boolean archived;   // true if post is archived
-    private double latitude;    // latitude for location of road system defect
-    private double longitude;   // longitude for location of road system defect
+    private Integer support;        // number of post supports
+    private Boolean archived;   // true if post is archived
+    private Double latitude;    // latitude for location of road system defect
+    private Double longitude;   // longitude for location of road system defect
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "roadId")    

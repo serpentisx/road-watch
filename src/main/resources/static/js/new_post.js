@@ -44,7 +44,7 @@ function addRoadInfo(components) {
 // If the road is not found, returns false.
 function addRoadOfSearchResult(components) {
   for (var i = 0; i < components.length; i++) {
-    for (var j = 0; j < components[i].types; j++) {
+    for (var j = 0; j < components[i].types.length; j++) {
       if (components[i].types[j] === "route") {
         addRoadInfo(components);
         return true;
@@ -80,6 +80,7 @@ function placeChangedHandler(autocomplete, e) {
     messageError.innerHTML = "Staðsetning finnst ekki, reyndu aftur";
     return;
   }
+  console.log(place.address_components);
   addAllInfo(place);
 }
 
@@ -97,8 +98,6 @@ function initAutocompletePlaceSearch() {
 // Adds the geographical coordinates to the new post form
 // if a corresponding road is found
 function addPosition(position) {
-  var messageError = document.querySelector('.location-error-message');
-  var messageSuccess = document.querySelector('.location-success-message');
   var geocoder = new google.maps.Geocoder();
   var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
   geocoder.geocode({'location': latlng}, function(results, status) {
@@ -108,13 +107,13 @@ function addPosition(position) {
 
 // Event handler for coordinates generation
 function generateCoordinates() {
+  var successMessage = document.querySelector('.location-success-message');
+  var errorMessage = document.querySelector('.location-error-message');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(addPosition);
-    var messageElement = document.querySelector('.geolocation-success-message');
-    messageElement.innerHTML = "Tókst að sækja staðsetningu!";
   } else {
-    var messageElement = document.querySelector('.geolocation-error-message');
-    messageElement.innerHTML = "Vafrinn styður ekki staðsetningartækni";
+    errorMessage.innerHTML = "Vafrinn styður ekki staðsetningartækni";
+    successMessage.innerHTML = "";
   }
 }
 
