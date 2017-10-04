@@ -278,7 +278,6 @@ header {
 /*********** Section 1 ***********/
 
 .section-1 {
-  height: 1000px;
   position: relative;
 }
 
@@ -368,7 +367,7 @@ header {
   color: #313130;
 }
 
-.post-category {
+.post-road {
   color: #525350;
 }
 
@@ -448,7 +447,7 @@ header {
 /*********** Section 2 ***********/
 
 .section-2 {
-  margin-top: 300px;
+  margin-top: 180px;
 }
 
 .map-wrapper {

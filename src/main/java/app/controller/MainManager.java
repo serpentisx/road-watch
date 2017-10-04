@@ -28,13 +28,10 @@ public class MainManager {
     @RequestMapping("/")
     public String renderHomePage(ModelMap model){
         ArrayList<Post> posts;
-        posts = (ArrayList<Post>) service.getAllPosts();
-        
-        System.out.println("posts variable declared");
+        posts = (ArrayList<Post>) service.getAllPosts();   
         
         model.addAttribute("posts", posts);
-        
-        System.out.println("MAIN MANAGER RENDER HOME PAGE");
+
         return "index";
     }
 }

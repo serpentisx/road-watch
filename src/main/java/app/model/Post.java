@@ -42,7 +42,7 @@ public class Post {
     private Road road;          // road on which road system defect was detected
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_email")
     private Account account;    // user account associated with the post
     
     
