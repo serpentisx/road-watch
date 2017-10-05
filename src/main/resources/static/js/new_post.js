@@ -5,13 +5,17 @@
 /* functions for adding info to new post form */
 
 var map;
+var mapMarker;
 
 function addPlaceCoordinates(location) {
   var latitudeInput = document.querySelector('input[name=latitude]');
   var longitudeInput = document.querySelector('input[name=longitude]');
-  console.log(location);
   latitudeInput.value = location.lat();
   longitudeInput.value = location.lng();
+  mapMarker = new google.maps.Marker({
+    position: new google.maps.LatLng(location.lat(), location.lng()),
+    map: map,
+  });
 }
 
 function addRoadInfo(components) {
@@ -83,7 +87,6 @@ function placeChangedHandler(autocomplete, e) {
     messageError.innerHTML = "Staðsetning finnst ekki, reyndu aftur";
     return;
   }
-  console.log(place.address_components);
   addAllInfo(place);
 }
 

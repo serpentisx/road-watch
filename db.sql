@@ -46,7 +46,7 @@ CREATE TABLE Post (
 /* Insert skipanir fyrir Road töflu hér fyrir neðan */
 
 
-
+/* Götur í bæjarfélögum (Heimild: Pósturinn) */
 
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (1, FALSE, 'Aðalstræti', 101, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
 INSERT INTO Road (road_id, is_highway, name, zip, locality, municipality, region_is, region_en) VALUES (2, FALSE, 'Amtmannsstígur', 101, 'Reykjavík', 'Reykjavíkurborg', 'Höfuðborgarsvæðið', 'Capital Region');
@@ -16604,4 +16604,3 @@ INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, l
 INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (4, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30013, 'notandi@hi.is', FALSE, 65.113066, -19.662914, 0);
 INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (5, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30052, 'notandi@hi.is', FALSE, 65.682230, -17.015552, 0);
 INSERT INTO Post(post_id, photo, title, description, road_id, email, archived, latitude, longitude, support) VALUES (6, '../img/road-desert.png', 'Lorem ipmsum dolar', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore', 30001, 'notandi@hi.is', FALSE, 65.273961, -14.412479, 0);
-/* Götur í bæjarfélögum (Heimild: Pósturinn) */
