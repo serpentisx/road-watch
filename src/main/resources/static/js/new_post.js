@@ -127,7 +127,7 @@ function generateCoordinates() {
     navigator.geolocation.getCurrentPosition(
       addPosition, 
       function error(msg){
-        alert('Please enable your GPS position future.');
+        alert('Please enable your GPS.');
       },
       { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true }
     );
