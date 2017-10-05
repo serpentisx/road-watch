@@ -4,11 +4,14 @@
 
 /* functions for adding info to new post form */
 
+var map;
+
 function addPlaceCoordinates(location) {
   var latitudeInput = document.querySelector('input[name=latitude]');
   var longitudeInput = document.querySelector('input[name=longitude]');
-  latitudeInput.value = location.lat;
-  longitudeInput.value = location.lng;
+  console.log(location);
+  latitudeInput.value = location.lat();
+  longitudeInput.value = location.lng();
 }
 
 function addRoadInfo(components) {
@@ -84,12 +87,20 @@ function placeChangedHandler(autocomplete, e) {
   addAllInfo(place);
 }
 
-// Callback function defined in Google Maps <script> tag.
-// Initializes autocomplete place search in new post form.
-function initAutocompletePlaceSearch() {
-  var input = document.getElementById('autocomplete-place-search');
+function initAutoComplete() {
+  var input = document.getElementById('pac-input');
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.addListener('place_changed', placeChangedHandler.bind(null, autocomplete));
+}
+
+// Callback function defined in Google Maps <script> tag.
+// Initializes map and autocomplete place search in new post form.
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 64.5, lng: -18.7},
+    zoom: 6
+  });
+  initAutoComplete();
 }
 
 
@@ -110,7 +121,13 @@ function generateCoordinates() {
   var successMessage = document.querySelector('.location-success-message');
   var errorMessage = document.querySelector('.location-error-message');
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(addPosition);
+    navigator.geolocation.getCurrentPosition(
+      addPosition, 
+      function error(msg){
+        alert('Please enable your GPS position future.');
+      },
+      { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true }
+    );
   } else {
     errorMessage.innerHTML = "Vafrinn styður ekki staðsetningartækni";
     successMessage.innerHTML = "";
@@ -127,39 +144,14 @@ function addCoordinatesGeneratorListener() {
 
 /* New post functions */
 
-// Event handler for new post buttons
-function toggleNewPostView() {
-  var newPostContainer = document.querySelector('.new-post-container');
-  var posts = document.querySelector('.posts');
-  var button = document.querySelector('button.fixed');
-  if (!newPostContainer.style.display || newPostContainer.style.display === 'none') {
-    newPostContainer.style.display = 'flex';
-    posts.style.display = 'none';
-    button.style.display = 'none';
-  } else {
-    newPostContainer.style.display = 'none';
-    posts.style.display = 'flex';
-    button.style.display = 'block';
-  }
-}
-
-// Adds event listeners to two buttons that toggle the new post form
-// One of the buttons opens the form and the other closes it.
-function addNewPostListeners() {
-  var buttons = document.querySelectorAll('.new-post-toggle');
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', toggleNewPostView, false);
-  }
-}
-
 // Event handler deciding course of action when button for requesting
 // to enter GPS location information of new post is clicked by user
 function toggleCoordinatesView() {
   var coordinatesContainer = document.querySelector('.enter-coordinates');
-  var landmarkContainer = document.querySelector('.enter-landmark');
+  var autocompleteContainer = document.querySelector('.autocomplete-container');
   if (coordinatesContainer.style.display === 'none') {
     coordinatesContainer.style.display = 'block';
-    landmarkContainer.style.display = 'none';
+    autocompleteContainer.style.display = 'none';
   }
 }
 
@@ -167,10 +159,10 @@ function toggleCoordinatesView() {
 // to enter landmark location information of new post is clicked by user
 function toggleLandmarkView() {
   var coordinatesContainer = document.querySelector('.enter-coordinates');
-  var landmarkContainer = document.querySelector('.enter-landmark');
-  if (landmarkContainer.style.display === 'none') {
+  var autocompleteContainer = document.querySelector('.autocomplete-container');
+  if (autocompleteContainer.style.display === 'none') {
     coordinatesContainer.style.display = 'none';
-    landmarkContainer.style.display = 'block';
+    autocompleteContainer.style.display = 'block';
   }  
 }
 
@@ -200,7 +192,6 @@ function addUploadPhotoListener() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  addNewPostListeners();
   addLocationListeners();
   addCoordinatesGeneratorListener();
   addUploadPhotoListener();

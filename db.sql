@@ -12826,7 +12826,6 @@ INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_i
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30049, TRUE, '82', 'Ólafsfjarðarvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30050, TRUE, '83', 'Grenivíkurvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30051, TRUE, '85', 'Norðausturvegur');
-INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30052, TRUE, '87', 'Kísilvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30053, TRUE, 'F88', 'Öskjuleið', 'Skútustaðahreppur', 'Norðurland eystra', 'Northeastern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (30054, TRUE, '91', 'Hafnarvegur í Bakkafirði', 'Langanesbyggð', 'Norðurland eystra', 'Northeastern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30055, TRUE, '92', 'Norðfjarðarvegur');
@@ -16595,6 +16594,7 @@ INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30189, TRUE, '
 INSERT INTO Road (road_id, is_highway, road_number, name, municipality, region_is, region_en) VALUES (31396, TRUE, '3843', 'Nesjavallavegur', 'Grímsnes- og Grafningshreppur', 'Suðurland', 'Southern Region');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30013, TRUE, '35', 'Kjalvegur');
 INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30001, TRUE, '1', 'Þjóðvegur');
+INSERT INTO Road (road_id, is_highway, road_number, name) VALUES (30052, TRUE, '87', 'Kísilvegur');
 INSERT INTO Road (road_id, name) VALUES (0, 'Óskilgreindur vegur');
 
 INSERT INTO Account(email, name, password) VALUES ('notandi@hi.is', 'notandi', 'sha1:64000:18:vzRTLddP3tqqNGuB0q02WirEW9JN32CB:IDdSQQr8wXE4hVi7PVkUnc2I');

@@ -29,7 +29,7 @@ public class UserManager {
     String provisionalEmail = "notandi@hi.is";
 
     /**
-     * Fetches user's login information and creates a new user
+     * Fetches user's new account information and creates a new user
      * Redirects the user to login page and renders it
      *
      * @param params the user's new account information
@@ -56,7 +56,7 @@ public class UserManager {
                 model.addAttribute("invalid_input", "Úups! Eitthvað fór úrskeiðis. Vinsamlegast reyndu aftur.");
             }
         }
-
+        
         return "login";
     }
     
@@ -71,8 +71,8 @@ public class UserManager {
     }
    
     /**
-     * Fetches user's login information and renders posts page if the user exists
-     * If the user does not exist a login page will be rendered
+     * Handles user's login requests.
+     * If the user enters wrong information he is redirected to the login page
      *
      * @param params the user's log-in information
      * @param model  an object with attributes which can be used when rendering
@@ -95,10 +95,14 @@ public class UserManager {
         }
     }
     
+    /**
+     * Handles log out requests. Renders home page.
+     *
+     * @return      string representing page to be rendered
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout () {
         service.logoutUser();
-
         return "index";
     }
 
@@ -166,7 +170,10 @@ public class UserManager {
         }
         return view;
     }
-
+    
+    /* 
+     * Staðfestum hvort lykilorð frá notanda sé rétt og eyðum þá aðgangi notanda.
+     */
     private String deleteAccountHandler (Map<String,String> params, ModelMap model) {
         String password = params.get("password");
 
