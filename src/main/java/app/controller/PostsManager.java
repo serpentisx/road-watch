@@ -56,7 +56,8 @@ public class PostsManager {
         String road = params.get("road");
         // String file = params.get("file");
         String file = "../img/road-desert.png";
-        String road_number = params.get("road_number");
+        //String road_number = params.get("road_number");
+        String road_number = "1";
         String zip = params.get("zip");
         String locality = params.get("locality");
         String email = provisionalEmail;

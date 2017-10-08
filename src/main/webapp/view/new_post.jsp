@@ -62,15 +62,15 @@
 
                 <div class="location-info">
                   <label>
-                    <input name="latitude" type="text" disabled required title="" value="">
+                    <input name="latitude" type="text"  required title="" value="">
                     Breiddargráða
                   </label>
                   <label>
-                    <input name="longitude" type="text" disabled required title="" value="">
+                    <input name="longitude" type="text"  required title="" value="">
                     Lengdargráða
                   </label>
                   <label>
-                    <input name="road" type="text" disabled required title="" value="">
+                    <input name="road" type="text"  required title="" value="">
                     Vegheiti
                   </label>
                 </div>
