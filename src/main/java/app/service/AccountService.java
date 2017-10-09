@@ -6,8 +6,13 @@
 package app.service;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Huy Van Nguyen
+ * Manages all process work regarding account
  */
 public interface AccountService {
 
@@ -59,9 +64,13 @@ public interface AccountService {
     *
     * @return           the logged in user's email
     */
-    
     public String getLoggedInUserName();
-    
+
+   /**
+    * Get the current logged in user.
+    *
+    * @return the logged in user's email
+    */
     public String getLoggedInUserEmail();
     
   
@@ -71,12 +80,28 @@ public interface AccountService {
     * @param email      the email address
     * @param password   the password
     */
-    
     public void authenticateUser(String username, String password);
-    
+
+   /**
+    * Delete an account with responding email in the database.
+    *
+    * @param email      the email address
+    */
     public boolean deleteAccount(String email);
 
+   /**
+    * Change account password with responding email in the database.
+    *
+    * @param email      the email address
+    * @param password   the new password
+    */
     public boolean changePassword(String email, String newPassword);
 
+   /**
+    * Change account name with responding email in the database.
+    *
+    * @param email      the email address
+    * @param newName    the new username
+    */
     public boolean changeName(String email, String newName);
 }
