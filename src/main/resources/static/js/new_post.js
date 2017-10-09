@@ -2,22 +2,43 @@
 
 /* global google:true */
 
-/* functions for adding info to new post form */
-
 var map;
 var mapMarker;
 
-function addPlaceCoordinates(location) {
-  var latitudeInput = document.querySelector('input[name=latitude]');
-  var longitudeInput = document.querySelector('input[name=longitude]');
-  latitudeInput.value = location.lat();
-  longitudeInput.value = location.lng();
+/* General functions for adding info to new post form and displaying messages to the user */
+
+// Displays message to the user
+function displayMessage (success, error) {
+  var messageError = document.querySelector('.location-error-message');
+  var messageSuccess = document.querySelector('.location-success-message');
+  messageError.innerHTML = error;
+  messageSuccess.innerHTML = success;
+}
+
+// Sets the marker on the map to the selected location
+function setMarker(location) {
+  if (mapMarker) { mapMarker.setMap(null); }
   mapMarker = new google.maps.Marker({
     position: new google.maps.LatLng(location.lat(), location.lng()),
-    map: map,
+    map: map
   });
 }
 
+// Adds relevant location info to the new post form and displays message
+function addPlaceInfo(location) {
+  var addressInput = document.getElementById('pac-input');
+  var latitudeInput = document.querySelector('input[name=latitude]');
+  var longitudeInput = document.querySelector('input[name=longitude]');
+  var roadInput = document.querySelector('input[name=road]');
+  var lat = location.geometry.location.lat();
+  var lng = location.geometry.location.lng();
+  latitudeInput.value = lat;
+  longitudeInput.value = lng;
+  addressInput.value = location.formatted_address;
+  displayMessage(roadInput.value + " (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")", "");
+}
+
+// Adds available road info to the new post form
 function addRoadInfo(components) {
   for (var i = 0; i < components.length; i++) {
     var component = components[i];
@@ -49,7 +70,7 @@ function addRoadInfo(components) {
 // Determines the road that corresponds to the generated coordinates
 // and if results include road of place searched for, adds it to the new post form.
 // If the road is not found, returns false.
-function addRoadOfSearchResult(components) {
+function findRoadOfSearchResult(components) {
   for (var i = 0; i < components.length; i++) {
     for (var j = 0; j < components[i].types.length; j++) {
       if (components[i].types[j] === "route") {
@@ -61,23 +82,23 @@ function addRoadOfSearchResult(components) {
   return false;
 }
 
+// Adds all the information of a place search result
+// to the new post form and handles potential errors
 function addAllInfo(location) {
-  var messageError = document.querySelector('.location-error-message');
-  var messageSuccess = document.querySelector('.location-success-message');
   // If route/road is found for place, add the coordinates, otherwise display error message
-  var roadFound = addRoadOfSearchResult(location.address_components);
+  var roadFound = findRoadOfSearchResult(location.address_components);
   if (roadFound) {
-    addPlaceCoordinates(location.geometry.location);
-    messageSuccess.innerHTML = "Tókst að finna veg!";
+    addPlaceInfo(location);
+    setMarker(location.geometry.location);
   } else {
-    messageError.innerHTML = "Enginn vegur finnst fyrir staðsetningu, reyndu aftur";
+    displayMessage("", "Enginn vegur finnst fyrir staðsetningu, reyndu aftur");
   }
 }
 
 
 /* Autocomplete functions */
 
-// Handles event when user selects a place from the autocomplete search box
+// Handles event when user selects a place from the autocomplete input
 function placeChangedHandler(autocomplete, e) {
   var place = autocomplete.getPlace();
   if (!place.geometry) {
@@ -90,6 +111,8 @@ function placeChangedHandler(autocomplete, e) {
   addAllInfo(place);
 }
 
+// Initializes Google Autocomplete, ties to input element
+// and adds the appropriate event listener
 function initAutoComplete() {
   var input = document.getElementById('pac-input');
   var autocomplete = new google.maps.places.Autocomplete(input);
@@ -145,58 +168,26 @@ function addCoordinatesGeneratorListener() {
 }
 
 
-/* New post functions */
-
-// Event handler deciding course of action when button for requesting
-// to enter GPS location information of new post is clicked by user
-function toggleCoordinatesView() {
-  var coordinatesContainer = document.querySelector('.enter-coordinates');
-  var autocompleteContainer = document.querySelector('.autocomplete-container');
-  if (coordinatesContainer.style.display === 'none') {
-    coordinatesContainer.style.display = 'block';
-    autocompleteContainer.style.display = 'none';
-  }
-}
-
-// Event handler deciding course of action when button for requesting
-// to enter landmark location information of new post is clicked by user
-function toggleLandmarkView() {
-  var coordinatesContainer = document.querySelector('.enter-coordinates');
-  var autocompleteContainer = document.querySelector('.autocomplete-container');
-  if (autocompleteContainer.style.display === 'none') {
-    coordinatesContainer.style.display = 'none';
-    autocompleteContainer.style.display = 'block';
-  }  
-}
-
-// Adds event listeners to two buttons that allow the user to pick
-// which method he wants to use for determining location of road system defect
-// within the new post form
-function addLocationListeners() {
-  var coordinatesButton = document.querySelector('.coordinates');
-  var landmarkButton = document.querySelector('.landmark');
-  coordinatesButton.addEventListener('click', toggleCoordinatesView, false);
-  landmarkButton.addEventListener('click', toggleLandmarkView, false);
-}
-
-
 /* Photo upload functions */
 
+// Handles user file selection
 function handleFileSelect(evt) {
   // Appropriate implementation missing
   // Remember to validate file on server side
   // See section "Reading files" at following url or look for other sources
   // https://www.html5rocks.com/en/tutorials/file/dndfiles/
-    }
-  
+}
+
+// Adds an event listener to the file upload input
 function addUploadPhotoListener() {
   var fileInput = document.getElementById('file');
   fileInput.addEventListener('change', handleFileSelect, false);
 }
 
+/* Fires when DOM content has been loaded */
 document.addEventListener('DOMContentLoaded', function () {
-  addLocationListeners();
   addCoordinatesGeneratorListener();
   addUploadPhotoListener();
+  // $('[data-toggle="tooltip"]').tooltip()
 });
 
