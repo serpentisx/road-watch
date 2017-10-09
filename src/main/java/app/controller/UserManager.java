@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import app.service.AccountService;
 
 /**
- *
- * @author Bjarki Viðar Kristjánsson, bvk1
- * @author Valentin Oliver Loftsson, vol1
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
  * Listens to requests at defined routes related to user account requests
  * and is responsible for fetching and processing data as well as rendering pages.
@@ -170,9 +172,12 @@ public class UserManager {
         }
         return view;
     }
-    
-    /* 
-     * Staðfestum hvort lykilorð frá notanda sé rétt og eyðum þá aðgangi notanda.
+
+    /**
+     * Verifies whether the password used in this attempt
+     * match an existing account or not and delete the account if so.
+     *
+     * @return front page the attempt is success else the account page is returned.
      */
     private String deleteAccountHandler (Map<String,String> params, ModelMap model) {
         String password = params.get("password");
@@ -187,10 +192,12 @@ public class UserManager {
           return "index";
         }
     }
-    
-    /* 
-     * Notandi setur inn gamalt lykilorð og nýtt lykilorð,
-     * staðfestum hvort upplýsingar séu réttar 
+
+    /**
+     * Verifies whether the password used in this attempt
+     * match an existing account or not and change the password if so.
+     *
+     * @return front page if the attempt is success else the account page is returned.
      */
     private String changePasswordHandler (Map<String,String> params, ModelMap model) {        
         String oldPassword = params.get("old_password");
@@ -216,9 +223,11 @@ public class UserManager {
             }
         }
     }
-    
-    /* 
-     * Breytir notandanafni notanda.
+
+    /**
+     * Change the user's username
+     *
+     * @return front page
      */
     private String changeUsernameHandler (Map<String,String> params, ModelMap model) {
         String newUsername = params.get("username");
