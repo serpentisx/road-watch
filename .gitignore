@@ -108,3 +108,6 @@ local.properties
 # TeXlipse plugin
 .texlipse
 /target/
+
+# .DS_Store files (Mac users)
+*.DS_Store
