@@ -97,34 +97,29 @@ public class AccountServiceImp implements AccountService {
     
     @Override
     public boolean deleteAccount(String email) {
-          try{
-            accountRep.deleteByEmail(email);
-            return true;
-          } catch(Exception e){
-              e.printStackTrace();
-              return false;
-          }
-          
+          Account account = accountRep.findByEmail(email);
+          return accountRep.findAll().remove(account);
     }
 
     @Override
     public boolean changePassword(String email, String newPassword){
-         try{
-         System.out.print("email: "+email +" "+ "newPass: "+newPassword);
-         accountRep.changePassword(email, PasswordStorage.createHash(newPassword));
-         return true;
-         } catch(Exception e){
-             e.printStackTrace();
-             return false;
-         }
+        Account account = accountRep.findByEmail(email);
+        try {
+            account.setPassword(PasswordStorage.createHash(newPassword));
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean changeName(String email, String newName){
          try {
-         Account ac = accountRep.findByEmail(email);
-         ac.setUsername(newName);
-         return true;
+            Account ac = accountRep.findByEmail(email);
+            ac.setUsername(newName);
+             return true;
          } catch(Exception e){
              e.printStackTrace();
              return false;
