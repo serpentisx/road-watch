@@ -6,8 +6,13 @@
 package app.service;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Huy Van Nguyen
+ * Manages all process work regarding account
  */
 public interface AccountService {
 
@@ -55,18 +60,23 @@ public interface AccountService {
      */
     public void logoutUser();
     
+    /**  
+     * Get the current logged in user.
+     *
+     * @return        email of currently logged in user
+     */
+    public String getLoggedInUserName();
+
     /**
      * Get the current logged in user.
      *
-     * @return           the logged in user's email
-     */    
-    public String getLoggedInUserName();
-    
+     * @return        the logged in user's email
+     */
     public String getLoggedInUserEmail();
     
   
     /**
-     * Authenticates the user and store it as current logged in user.
+     * Authenticates the user and stores him or her as the currently logged in user.
      *
      * @param email     the email address of the user to be authenticated
      * @param password  the password
@@ -74,6 +84,7 @@ public interface AccountService {
     public void authenticateUser(String email, String password);
     
     /**
+     * Deletes an account corresponding to the given email
      * 
      * @param email     the user's email address
      * @return          true if successful
@@ -81,6 +92,7 @@ public interface AccountService {
     public boolean deleteAccount(String email);
     
     /**
+     * Changes the password of the account corresponding to the given email
      * 
      * @param email         the user's email address
      * @param newPassword   the new password
@@ -89,6 +101,7 @@ public interface AccountService {
     public boolean changePassword(String email, String newPassword);
 
     /**
+     * Changes the username of the account corresponding to the given email
      * 
      * @param email         the user's email address
      * @param newName       the new name

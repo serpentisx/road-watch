@@ -12,9 +12,11 @@ import app.service.AccountService;
 import app.service.PostService;
 
 /**
- *
- * @author Bjarki Viðar Kristjánsson, bvk1
- * @author Valentin Oliver Loftsson, vol1
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
  * Listens to requests at defined routes related to user account requests
  * and is responsible for fetching and processing data as well as rendering pages.
@@ -159,10 +161,13 @@ public class UserManager {
     
     /**
      * Handles user's request to delete account
+     * Verifies whether the password entered by the user
+     * matches an existing account, and deletes the account if so.
      * 
-     * @param params the user's log-in information
+     * @param params user input parameters
      * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
+     * @return       string representing page to be rendered:
+     *               login-page if the attempt is successful, otherwise the account page
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.POST)
     private String deleteAccountHandler (
@@ -182,13 +187,17 @@ public class UserManager {
           return "login";
         }
     }
+
     
     /**
      * Handles user's request to change password
+     * Verifies whether the password entered by the user
+     * matches an existing account, and changes the account password if so.
      * 
-     * @param params the user's log-in information
+     * @param params user input parameters
      * @param model  an object with attributes which can be used when rendering
      * @return       string representing page to be rendered
+     *               front page if the attempt is successful, otherwise the account page
      */
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.POST)
     private String changePasswordHandler (
@@ -213,13 +222,14 @@ public class UserManager {
             return "account";
         }
     }
+
     
     /**
      * Handles user's request to change username
      * 
-     * @param params the user's log-in information
+     * @param params user input parameters
      * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
+     * @return       string representing page to be rendered, always redirects to front-page
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.POST)
     private String changeUsernameHandler (
