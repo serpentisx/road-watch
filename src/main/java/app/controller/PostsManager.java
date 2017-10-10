@@ -58,7 +58,10 @@ public class PostsManager {
         // String file = params.get("file");
         String file = "../img/road-desert.png";
         
-        String road_number = rep.findByName(road).getRoadNumber();
+        String road_number = "1";
+        //String road_number = rep.findByName(road).getRoadNumber();
+        System.out.println("gata"+ road);
+        //System.out.print(rep.findByName(road).getRoadNumber());
         String zip = params.get("zip");
         String locality = params.get("locality");
         String email = provisionalEmail;
