@@ -1,6 +1,7 @@
 
 package app.controller;
 
+import app.repository.RoadRepository;
 import app.service.AccountService;
 import app.service.PostService;
 import java.util.Map;
@@ -35,6 +36,8 @@ public class PostsManager {
   AccountService accountService;
   
   String provisionalEmail = "notandi@hi.is";
+  
+  RoadRepository rep;
      
    /**
     * Handles new post submissions
@@ -54,8 +57,8 @@ public class PostsManager {
         String road = params.get("road");
         // String file = params.get("file");
         String file = "../img/road-desert.png";
-        // String road_number = params.get("road_number");
-        String road_number = "1";
+        
+        String road_number = rep.findByName(road).getRoadNumber();
         String zip = params.get("zip");
         String locality = params.get("locality");
         String email = provisionalEmail;
