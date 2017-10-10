@@ -20,14 +20,10 @@
       <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
         <p>Skrifaðu lykilorðið þitt tvisvar til þess að eyða aðganginum</p>
-        <form method="POST" action="/account/modify">
+        <form method="POST" action="/reikningur/eyda-reikningi">
           <div>
-            <label for="password1"></label>
-            <input id="password1" name="passsword1" type="password" required placeholder="Lykilorð">
-          </div>
-          <div>
-            <label for="password2"></label>
-            <input id="password2" name="password2" type="password" required placeholder="Lykilorð endurtekið">
+            <label for="password"></label>
+            <input id="password" name="password" type="password" required placeholder="Lykilorð">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
@@ -35,7 +31,7 @@
 
       <c:if test = "${form_switch == 'password'}">
         <h2>Breyta lykilorði</h2>
-        <form method="POST" action="/account/modify">
+        <form method="POST" action="/reikningur/breyta-lykilordi">
           <div>
             <label for="old-password"></label>
             <input id="old-password" name="old_password" type="password" required placeholder="Núverandi lykilorð">
@@ -52,9 +48,9 @@
         </form>
       </c:if>
 
-      <c:if test = "${form_switch == 'username'}">
+      <c:if test = "${form_switch == 'username/breyta-nafni'}">
         <h2>Breyta notandanafni</h2>
-        <form method="POST" action="/account/modify">
+        <form method="POST" action="/reikningur/breyta">
           <div>
             <label for="username"></label>
             <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">

@@ -308,6 +308,10 @@ header {
   cursor: pointer;
 }
 
+label[for='new-post'] {
+  cursor: pointer;
+}
+
 .btn i {
   margin-left: 15px;
 }
