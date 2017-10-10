@@ -13,8 +13,6 @@ $(document).ready(function () {
             $('body').css('overflow', 'inherit');
         } else {
             $('body').css('overflow', 'hidden');
-            console.log("sdfds");
         }
     });
-
 });

@@ -20,14 +20,14 @@ public class AccountServiceImp implements AccountService {
     
     @Autowired
     PostRepository postRep;
+    
+    // provisional resort while we haven't figured out how to save the user's session
+    String provisionalEmail = "notandi@hi.is";
 
     @Override
     public boolean verifyNewUser (String email) {
         Account account = accountRep.findByEmail(email);
-        if (account == null) {
-            return true;
-        }
-        return false;
+        return account == null;
     }
     
     @Override
@@ -35,8 +35,8 @@ public class AccountServiceImp implements AccountService {
         String hashedPassword = null;
         try {
             hashedPassword = PasswordStorage.createHash(password);
-        } catch (PasswordStorage.CannotPerformOperationException ex) {
-            ex.printStackTrace();
+        } catch (PasswordStorage.CannotPerformOperationException e) { 
+            e.printStackTrace(System.out); 
         }
         if (hashedPassword != null) {
             Account account = new Account(username, hashedPassword, email);
@@ -48,15 +48,20 @@ public class AccountServiceImp implements AccountService {
     
     @Override
     public boolean verifyPassword (String email, String password) {
-        boolean isCorrect = false;
-        
-        Account user = accountRep.findByEmail(email);
+        boolean verification = false;
+        Account account = accountRep.findByEmail(email);
+        // The email entered might not match an existing account
+        if (account == null) { 
+          return verification; 
+        }
         try {
-            isCorrect = PasswordStorage.verifyPassword(password, user.getPassword());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
-        return isCorrect;
+            verification = PasswordStorage.verifyPassword(password, account.getPassword());
+        } catch (PasswordStorage.CannotPerformOperationException e) {
+            e.printStackTrace(System.out);
+        } catch (PasswordStorage.InvalidHashException e) {
+            e.printStackTrace(System.out);
+        }
+        return verification;
     }
     
     @Override
@@ -82,7 +87,11 @@ public class AccountServiceImp implements AccountService {
     @Override
     public String getLoggedInUserName () {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Account account = accountRep.findByEmail(getLoggedInUserEmail());
+        
+        // Uncomment when user session issue has been solved
+        // Account account = accountRep.findByEmail(getLoggedInUserEmail());
+        Account account = accountRep.findByEmail(provisionalEmail);
+        
         return account.getUsername();
     }
     
@@ -94,37 +103,33 @@ public class AccountServiceImp implements AccountService {
     
     @Override
     public boolean deleteAccount(String email) {
-          try{
+        try {
             accountRep.deleteByEmail(email);
             return true;
-          } catch(Exception e){
-              e.printStackTrace();
-              return false;
-          }
-          
+        } catch(Exception e){
+            return false;
+        }
     }
 
     @Override
     public boolean changePassword(String email, String newPassword){
-         try{
-         System.out.print("email: "+email +" "+ "newPass: "+newPassword);
-         accountRep.changePassword(email, PasswordStorage.createHash(newPassword));
-         return true;
-         } catch(Exception e){
-             e.printStackTrace();
-             return false;
-         }
+        try {
+            System.out.print("email: "+email +" "+ "newPass: "+newPassword);
+            accountRep.changePassword(email, PasswordStorage.createHash(newPassword));
+            return true;
+        } catch(PasswordStorage.CannotPerformOperationException e){
+            return false;
+        }
     }
 
     @Override
     public boolean changeName(String email, String newName){
-         try {
-         Account ac = accountRep.findByEmail(email);
-         ac.setUsername(newName);
-         return true;
-         } catch(Exception e){
-             e.printStackTrace();
-             return false;
-         }
+        try {
+            Account account = accountRep.findByEmail(email);
+            account.setUsername(newName);
+        return true;
+        } catch(Exception e){
+            return false;
+        }
     }
 }

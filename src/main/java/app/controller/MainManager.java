@@ -1,13 +1,7 @@
 
 package app.controller;
 
-import app.model.Post;
 import app.service.PostService;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,12 +24,9 @@ public class MainManager {
     * @return       string representing page to be rendered
     */
     @RequestMapping("/")
-    public String renderHomePage(ModelMap model){
-        ArrayList<Post> posts;
-        posts = (ArrayList<Post>) service.getAllPosts();   
-        
-        model.addAttribute("posts", posts);
-
+    public String renderHomePage(ModelMap model) {
+        model.addAttribute("username", null); // update when session issue resolved
+        model.addAttribute("posts", service.getAllPosts());
         return "index";
     }
 }

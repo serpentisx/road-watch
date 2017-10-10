@@ -21,21 +21,21 @@
                       <div class="line"></div>
                   </div>
                   <div class="form">
-                      <form class="register-form"  method="POST" action="/register">
+                      <form class="register-form"  method="POST" action="/nyskraning">
                           <div>
                               <!--<i class="fa fa-user-o" aria-hidden="true"></i>-->
                               <label for="register_user"></label>
-                              <input id="register_user" name="register_name" type="text" placeholder="notandanafn" pattern="[a-zA-z]+[a-zA-Z0-9]*$" title="Notandanafnið verður að byrja á bókstaf." />
+                              <input id="register_user" name="register_name" type="text" required placeholder="Nafn" title="Notandanafnið verður að byrja á bókstaf." />
                           </div>
                           <div>
                               <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                               <label for="register_email"></label>
-                              <input id="register_email" name="register_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="netfang"/>
+                              <input id="register_email" name="register_email" type="text" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Netfang"/>
                           </div>
                           <div>
                               <!--<i class="fa fa-lock" aria-hidden="true"></i>-->
                               <label for="register_password"></label>
-                              <input id="register_password" name="register_password" type="password" placeholder="lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að vera a.m.k. 6 stafa langt og innihalda a.m.k. einn tölustaf, einn hástaf og lágstaf."/>
+                              <input id="register_password" name="register_password" type="password" required placeholder="Lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf."/>
                           </div>
                           <div>
                               <label for="register_submit"></label>
@@ -43,16 +43,16 @@
                           </div>
                           <p class="message">Þegar með aðgang? <a href="#">Innskrá</a></p>
                       </form>
-                      <form class="login-form" method="POST" action="/login">
+                      <form class="login-form" method="POST" action="/reikningur">
                           <div>
                               <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                               <label for="login_email"></label>
-                              <input name="login_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="netfang">
+                              <input name="login_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Netfang">
                           </div>
                           <div>
                               <!--<i class="fa fa-key" aria-hidden="true"></i>-->
                               <label for="login_password"></label>
-                              <input id="login_password" name="login_password" type="password" placeholder="lykilorð"/>
+                              <input id="login_password" name="login_password" type="password" required placeholder="Lykilorð"/>
                           </div>
                           <div>
                               <label for="login_submit"></label>

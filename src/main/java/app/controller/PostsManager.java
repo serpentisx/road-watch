@@ -1,7 +1,7 @@
 
 package app.controller;
 
-import app.service.MainService;
+import app.service.AccountService;
 import app.service.PostService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PostsManager {
   
   @Autowired
-  PostService service;
+  PostService postService;
+  
+  @Autowired
+  AccountService accountService;
   
   String provisionalEmail = "notandi@hi.is";
-  
-  /**
-    * Renders new post page
-    *
-    * @return       string representing page to be rendered
-    */
-   @RequestMapping(value = "/new-post")
-   public String renderNewPostPage() {
-     return "new_post";
-   }
      
    /**
     * Handles new post submissions
@@ -46,9 +39,9 @@ public class PostsManager {
     * @param model  an object with attributes which can be delivered to the view
     * @return       string representing page to be rendered
     */
-    @RequestMapping(value = "/new-post", method = RequestMethod.POST)
-    public String newPost(@RequestParam Map<String,String> params, ModelMap model){
-        
+    @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
+    public String newPost(
+        @RequestParam Map<String,String> params, ModelMap model) {
         String title = params.get("title");
         String description = params.get("description");
         String latitude = params.get("latitude");
@@ -56,14 +49,17 @@ public class PostsManager {
         String road = params.get("road");
         // String file = params.get("file");
         String file = "../img/road-desert.png";
-        //String road_number = params.get("road_number");
+        // String road_number = params.get("road_number");
         String road_number = "1";
         String zip = params.get("zip");
         String locality = params.get("locality");
         String email = provisionalEmail;
+        
+        model.addAttribute("username", accountService.getLoggedInUserName());
                 
-        boolean postCreated = service.createNewPost(title, description, latitude, longitude, road, file, road_number, zip, locality);
+        boolean postCreated = postService.createNewPost(title, description, latitude, longitude, road, file, road_number, zip, locality);
         if (postCreated) {
+          model.addAttribute("posts", postService.getAllPosts());
           return "index";
         }
         return "new_post";

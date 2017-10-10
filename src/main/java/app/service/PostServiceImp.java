@@ -37,12 +37,12 @@ public class PostServiceImp implements PostService {
     String provisionalEmail = "notandi@hi.is";
     
     @Override
-    public boolean createNewPost(String title, String description, String latitude, String longitude, String road, String file, String road_number, String zip, String locality){
+    public boolean createNewPost(String title, String description, String latitude, String longitude, String roadName, String file, String road_number, String zip, String locality){
         try {
-            Account a = accountRep.findByEmail(provisionalEmail);
-            Road r = roadRep.findByRoadNumber(road_number);
-            Post p = new Post(file, title, description, Double.parseDouble(latitude), Double.parseDouble(longitude), r, a);
-            postRep.save(p);
+            Account account = accountRep.findByEmail(provisionalEmail);
+            Road road = roadRep.findByRoadNumber(road_number);
+            Post post = new Post(file, title, description, Double.parseDouble(latitude), Double.parseDouble(longitude), road, account);
+            postRep.save(post);
             return true;
         } catch(Exception e){
             e.printStackTrace();

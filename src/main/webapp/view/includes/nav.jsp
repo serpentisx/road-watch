@@ -8,7 +8,7 @@
       <img src="img/logo.png" alt="Logo">
     </div>
     <c:if test = "${username == null}">
-      <a href="/login">Innskrá</a>
+      <a href="/innskraning">Innskrá</a>
     </c:if>
     <c:if test = "${username != null}">
       <label class="mobile-label m-pos" for="mobile-check"></label>
@@ -26,7 +26,12 @@
       <div class="mobile-nav-container">
         <div class="user-panel">
           <span>${username}</span>
-          <div class="btn"><a href="new-post">Skrá nýja færslu</a></div>
+          <div class="btn">
+            <form method="POST" action="/innlegg">
+              <label for="new-post">Skrá nýtt innlegg</label>
+              <button id="new-post" type="submit" style="display: none;">Skrá nýja færslu</button>
+            </form>
+          </div>
         </div>
         <div class="user-nav">
           <div class="un un-1">
@@ -42,12 +47,12 @@
               <i class="fa fa-cog" aria-hidden="true"></i>
               Stillingar
             </div>
-            <a href="/account/change-username">Breyta notandanafni</a>
-            <a href="/account/change-password">Breyta lykilorði</a>
-            <a href="/account/delete-account">Eyða aðgangi</a>
+            <a href="/reikningur/breyta-nafni">Breyta notandanafni</a>
+            <a href="/reikningur/breyta-lykilordi">Breyta lykilorði</a>
+            <a href="/reikningur/eyda-reikningi">Eyða reikningi</a>
           </div>
           <div class="btn">
-            <a href="/logout">Skrá út</a>
+            <a href="/utskra">Skrá út</a>
           </div>
         </div>
       </div>

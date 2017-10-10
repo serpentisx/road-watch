@@ -22,7 +22,7 @@
       <jsp:include page="includes/header.jsp" />
       <section>
         <div class="new-post-container">
-          <form action="/new-post" method="POST">
+          <form action="/innlegg" method="POST">
             <fieldset>
               <legend>Nýtt innlegg</legend>
 
