@@ -44,17 +44,4 @@ public interface AccountRepository extends JpaRepository<Account, String> {
      * @return Account : the account with corresponding email if found. Null else.
      */
     public Account findByEmail(String email);
-
-    /**
-     * Change the password
-     * @param email
-     * @param password
-     */
-    public void changePassword(String email, String password);
-
-    /**
-     * Delete the account with corresponding email
-     * @param email
-     */
-    public void deleteByEmail(String email);
 }

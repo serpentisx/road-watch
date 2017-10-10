@@ -106,21 +106,19 @@ public class AccountServiceImp implements AccountService {
     
     @Override
     public boolean deleteAccount(String email) {
-        try {
-            accountRep.deleteByEmail(email);
-            return true;
-        } catch(Exception e){
-            return false;
-        }
+        Account account = accountRep.findByEmail(email);
+        return accountRep.findAll().remove(account);
     }
 
     @Override
     public boolean changePassword(String email, String newPassword){
+        Account account = accountRep.findByEmail(email);
         try {
-            System.out.print("email: "+email +" "+ "newPass: "+newPassword);
-            accountRep.changePassword(email, PasswordStorage.createHash(newPassword));
+            account.setPassword(PasswordStorage.createHash(newPassword));
             return true;
-        } catch(PasswordStorage.CannotPerformOperationException e){
+        }
+        catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -130,8 +128,9 @@ public class AccountServiceImp implements AccountService {
         try {
             Account account = accountRep.findByEmail(email);
             account.setUsername(newName);
-        return true;
+            return true;
         } catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }
