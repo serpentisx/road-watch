@@ -33,4 +33,12 @@ public interface RoadRepository extends JpaRepository <Road, Integer> {
      * @return Road : the corresponding road with road_number
      */
     public Road findByRoadNumber(String road_number);
+    
+    
+    /**
+     * Find road by road name
+     * @param name : the road name to search for
+     * @return Road : the corresponding road with name
+     */
+    public Road findByName(String name);
 }
