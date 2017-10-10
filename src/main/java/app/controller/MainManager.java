@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author Team 20 HBV501G - Fall 2017
  * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
@@ -28,8 +30,8 @@ public class MainManager {
     * @return       string representing page to be rendered
     */
     @RequestMapping("/")
-    public String renderHomePage(ModelMap model) {
-        model.addAttribute("username", null); // update when session issue resolved
+    public String renderHomePage(HttpSession session, ModelMap model) {
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         model.addAttribute("posts", service.getAllPosts());
         return "index";
     }

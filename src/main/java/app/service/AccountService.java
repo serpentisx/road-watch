@@ -44,53 +44,16 @@ public interface AccountService {
      * @return           true if the email and password match
      */
     public boolean createNewAccount(String username, String password, String email);
-   
-    /**
-     * Log in the user
-     *
-     * @param email      the email address
-     * @param password   the password
-     * @return           true if successful
-     */
-    public boolean loginUser(String email, String password);
-    
-    /**
-     * Log out the user
-     *
-     */
-    public void logoutUser();
-    
-    /**  
-     * Get the current logged in user.
-     *
-     * @return        email of currently logged in user
-     */
-    public String getLoggedInUserName();
 
     /**
-     * Get the current logged in user.
-     *
-     * @return        the logged in user's email
-     */
-    public String getLoggedInUserEmail();
-    
-  
-    /**
-     * Authenticates the user and stores him or her as the currently logged in user.
-     *
-     * @param email     the email address of the user to be authenticated
-     * @param password  the password
-     */
-    public void authenticateUser(String email, String password);
-    
-    /**
      * Deletes an account corresponding to the given email
-     * 
+     *
      * @param email     the user's email address
      * @return          true if successful
+     *
      */
     public boolean deleteAccount(String email);
-    
+
     /**
      * Changes the password of the account corresponding to the given email
      * 
@@ -102,10 +65,18 @@ public interface AccountService {
 
     /**
      * Changes the username of the account corresponding to the given email
-     * 
+     *
      * @param email         the user's email address
      * @param newName       the new name
      * @return              true if successful
      */
     public boolean changeName(String email, String newName);
+
+    /**
+     * Find username by email
+     *
+     * @param email         the user's email address
+     * @return              the username for corresponding email
+     */
+    public String findUsernameByEmail(String email);
 }

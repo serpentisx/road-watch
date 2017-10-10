@@ -66,44 +66,7 @@ public class AccountServiceImp implements AccountService {
         }
         return verification;
     }
-    
-    @Override
-    public boolean loginUser(String email, String password) {
-        boolean login_success = verifyPassword(email, password);
-        if (login_success) {
-            authenticateUser(email, password);
-        }
-        return login_success;
-    }
-    
-    @Override
-    public void logoutUser () {
-        SecurityContextHolder.getContext().setAuthentication(null);
-    }
-    
-    @Override
-    public String getLoggedInUserEmail () {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName();
-    }
-    
-    @Override
-    public String getLoggedInUserName () {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        
-        // Uncomment when user session issue has been solved
-        // Account account = accountRep.findByEmail(getLoggedInUserEmail());
-        Account account = accountRep.findByEmail(provisionalEmail);
-        
-        return account.getUsername();
-    }
-    
-    @Override
-    public void authenticateUser (String email, String password) {    
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
-        SecurityContextHolder.getContext().setAuthentication(token);
-    }
-    
+
     @Override
     public boolean deleteAccount(String email) {
         Account account = accountRep.findByEmail(email);
@@ -133,5 +96,11 @@ public class AccountServiceImp implements AccountService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public String findUsernameByEmail(String email){
+        Account account = accountRep.findByEmail(email);
+        return account.getUsername();
     }
 }

@@ -1,15 +1,17 @@
 
 package app.controller;
 
-import java.util.Map;
+import app.service.AccountService;
+import app.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import app.service.AccountService;
-import app.service.PostService;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -59,9 +61,7 @@ public class UserManager {
             model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
             // vantar: halda register-formi opnu
         }
-        
-        model.addAttribute("username", accountService.getLoggedInUserName());
-        
+
         return "login";
     }
     
@@ -82,9 +82,8 @@ public class UserManager {
      * @return      string representing page to be rendered
      */
     @RequestMapping(value = "/utskra", method = RequestMethod.GET)
-    public String logout (
-        ModelMap model) {
-        accountService.logoutUser();
+    public String logout (HttpSession session, ModelMap model) {
+        session.setAttribute("loggedInUser", null);
         model.addAttribute("username", null);
         return "index";
     }
@@ -99,16 +98,15 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur", method = RequestMethod.POST)
     public String login (
-        @RequestParam Map<String,String> params, ModelMap model) {
+        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String email = params.get("login_email");
         String password = params.get("login_password");
         
-        model.addAttribute("username", accountService.getLoggedInUserName());
-
-        boolean verification = accountService.loginUser(email, password);
-        
-        if (verification) {
+        if (accountService.verifyPassword(email, password)) {
+            session.setAttribute("loggedInUserEmail", email);
+            session.setAttribute("loggedInUsername", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
             return "index";
         } 
         else {
@@ -125,9 +123,9 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.GET)
     public String renderAccountDeletion (
-        ModelMap model) {
+        HttpSession session, ModelMap model) {
         model.addAttribute("form_switch", "delete");
-        model.addAttribute("username", accountService.getLoggedInUserName());
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "account";
     }
     
@@ -139,9 +137,9 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.GET)
     public String renderPasswordChange (
-        ModelMap model) {
+        HttpSession session, ModelMap model) {
         model.addAttribute("form_switch", "password");
-        model.addAttribute("username", accountService.getLoggedInUserName());                
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "account";
     }
     
@@ -153,9 +151,9 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.GET)
     public String renderUsernameChange (
-        ModelMap model) {
+        HttpSession session, ModelMap model) {
         model.addAttribute("form_switch", "username");
-        model.addAttribute("username", accountService.getLoggedInUserName());
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "account";
     }
     
@@ -171,17 +169,17 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.POST)
     private String deleteAccountHandler (
-        @RequestParam Map<String,String> params, ModelMap model) {
+        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String password = params.get("password");
-
-        if (accountService.verifyPassword(provisionalEmail, password)) {
-          model.addAttribute("username", accountService.getLoggedInUserName());
+        String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
+        if (!accountService.verifyPassword(loggedInUserEmail, password)) {
+          model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
           model.addAttribute("message", "Lykilorðið er rangt.");
           model.addAttribute("form_switch", "delete");
           return "account";
         } else {
           // vantar að ná í email núverandi notanda session
-          accountService.deleteAccount(provisionalEmail);
+          accountService.deleteAccount(loggedInUserEmail);
           model.addAttribute("username", null);
           model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
           return "login";
@@ -201,20 +199,22 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.POST)
     private String changePasswordHandler (
-        @RequestParam Map<String,String> params, ModelMap model) {
+        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String oldPassword = params.get("old_password");
         String newPassword1 = params.get("new_password_1");
         String newPassword2 = params.get("new_password_2");
-        model.addAttribute("username", accountService.getLoggedInUserName());
-        
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+
+        String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
         if (!newPassword1.equals(newPassword2)) {
             model.addAttribute("message", "Nýja lykilorðið eru ekki eins, reyndu aftur.");
             model.addAttribute("form_switch", "password");
             return "account";
-        } else if (accountService.verifyPassword(provisionalEmail, oldPassword)) {
+        } else if (accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
             // vantar að sækja email núverandi notanda 
-            accountService.changePassword(provisionalEmail, newPassword1);
+            boolean b  = accountService.changePassword(loggedInUserEmail, newPassword1);
             model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
             return "index";
         } else {
             model.addAttribute("message", "Lykilorð er ekki rétt, reyndu aftur.");
@@ -233,10 +233,10 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.POST)
     private String changeUsernameHandler (
-        @RequestParam Map<String,String> params, ModelMap model) {
-        model.addAttribute("username", accountService.getLoggedInUserName());
+        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
+        model.addAttribute("username", session.getAttribute("loggedInUsername"));
         String newUsername = params.get("username");
-        accountService.changeName(provisionalEmail, newUsername);
+        accountService.changeName((String) session.getAttribute("loggedInUserEmail"), newUsername);
         return "index";
     }
 }

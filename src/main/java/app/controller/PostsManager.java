@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author Team 20 HBV501G - Fall 2017
@@ -44,8 +46,7 @@ public class PostsManager {
     * @return       string representing page to be rendered
     */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
-    public String newPost(
-        @RequestParam Map<String,String> params, ModelMap model) {
+    public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
         String title = params.get("title");
         String description = params.get("description");
         String latitude = params.get("latitude");
@@ -59,7 +60,7 @@ public class PostsManager {
         String locality = params.get("locality");
         String email = provisionalEmail;
         
-        model.addAttribute("username", accountService.getLoggedInUserName());
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
                 
         boolean postCreated = postService.createNewPost(title, description, latitude, longitude, road, file, road_number, zip, locality);
         if (postCreated) {
