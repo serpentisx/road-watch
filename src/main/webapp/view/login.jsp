@@ -25,7 +25,7 @@
                           <div>
                               <!--<i class="fa fa-user-o" aria-hidden="true"></i>-->
                               <label for="register_user"></label>
-                              <input id="register_user" name="register_name" type="text" required placeholder="Nafn" title="Notandanafnið verður að byrja á bókstaf." />
+                              <input id="register_user" name="register_name" type="text" required placeholder="Nafn"/>
                           </div>
                           <div>
                               <!--<i class="fa fa-at" aria-hidden="true"></i>-->

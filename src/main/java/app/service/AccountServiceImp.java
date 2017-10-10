@@ -4,9 +4,6 @@ import app.model.Account;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -80,8 +77,8 @@ public class AccountServiceImp implements AccountService {
             account.setPassword(PasswordStorage.createHash(newPassword));
             return true;
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (PasswordStorage.CannotPerformOperationException e) {
+            e.printStackTrace(System.out);
             return false;
         }
     }
@@ -93,7 +90,7 @@ public class AccountServiceImp implements AccountService {
             account.setUsername(newName);
             return true;
         } catch(Exception e){
-            e.printStackTrace();
+            e.printStackTrace(System.out);
             return false;
         }
     }

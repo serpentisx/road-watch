@@ -38,7 +38,7 @@
           </div>
           <div>
             <label for="new-password1"></label>
-            <input id="new-password1" name="new_password_1" type="password" required placeholder="Nýtt lykilorð">
+            <input id="new-password1" name="new_password_1" type="password" required placeholder="Nýtt lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf.">
           </div>
           <div>
             <label for="new-password2"></label>
@@ -48,12 +48,12 @@
         </form>
       </c:if>
 
-      <c:if test = "${form_switch == 'username/breyta-nafni'}">
+      <c:if test = "${form_switch == 'username'}">
         <h2>Breyta notandanafni</h2>
-        <form method="POST" action="/reikningur/breyta">
+        <form method="POST" action="/reikningur/breyta-nafni">
           <div>
             <label for="username"></label>
-            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
+            <input id="username" name="username" type="text" required placeholder="Nýtt notandanafn">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
