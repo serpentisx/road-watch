@@ -61,5 +61,6 @@
       <span class="message">${message}</span>
       <jsp:include page="includes/footer.jsp" />
     </main>
+    <jsp:include page="includes/scripts.jsp" />
   </body>
 </html>

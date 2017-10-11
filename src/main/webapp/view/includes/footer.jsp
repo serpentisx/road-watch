@@ -1,7 +1,7 @@
-  <footer class="section-3">
+  <footer>
      <div class="footer-wrapper">
         <div class="logo">
-           <img src="img/logo.png" alt="Logo">
+           <img src="/img/logo.png" alt="Logo">
         </div>
         <span>Vegavaktin 2017</span>
      </div>

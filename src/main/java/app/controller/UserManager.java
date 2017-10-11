@@ -214,7 +214,6 @@ public class UserManager {
             model.addAttribute("form_switch", "password");
             return "account";
         } else if (accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
-            // vantar að sækja email núverandi notanda 
             boolean b  = accountService.changePassword(loggedInUserEmail, newPassword1);
             model.addAttribute("posts", postService.getAllPosts());
             model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
@@ -240,6 +239,8 @@ public class UserManager {
         model.addAttribute("username", session.getAttribute("loggedInUsername"));
         String newUsername = params.get("username");
         accountService.changeName((String) session.getAttribute("loggedInUserEmail"), newUsername);
+        model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "index";
     }
 }

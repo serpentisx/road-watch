@@ -66,7 +66,6 @@
         </div>
       </div>
     </main>
-    <script src="<c:url value="js/jquery-3.2.0.min.js" />" type="text/javascript"></script>
-    <script src="<c:url value="js/main.js" />" type="text/javascript"></script>
+    <jsp:include page="includes/scripts.jsp" />
   </body>
 </html>

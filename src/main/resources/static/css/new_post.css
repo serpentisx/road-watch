@@ -68,10 +68,6 @@ button {
   white-space: nowrap;
   cursor: pointer;
   font-size: 1rem;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 button:hover {
@@ -97,4 +93,19 @@ div.location-info {
 
 #pac-input:focus {
   border-color: #4d90fe;
+}
+
+/*********** MAP ***********/
+
+.map {
+  margin-top: 180px;
+}
+
+.map-wrapper {
+  height: 800px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
 }

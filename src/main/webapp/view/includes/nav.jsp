@@ -5,7 +5,7 @@
 
   <nav>
     <div class="logo">
-      <img src="img/logo.png" alt="Logo">
+      <img src="/img/logo.png" alt="Logo">
     </div>
     <c:if test = "${username == null}">
       <a href="/innskraning">Innskrá</a>
