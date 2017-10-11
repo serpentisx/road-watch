@@ -3,15 +3,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="is">
   <head>
     <meta charset="utf-8">
     <title>Vegavaktin</title>
-    <link href="<c:url value="css/font-awesome-4.7.0/css/font-awesome.min.css" />" rel="stylesheet">
-    <link href="<c:url value="css/account.css" />" rel="stylesheet">
-    <link href="<c:url value="css/main.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/font-awesome-4.7.0/css/font-awesome.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/account.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/main.css" />" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -38,7 +37,7 @@
           </div>
           <div>
             <label for="new-password1"></label>
-            <input id="new-password1" name="new_password_1" type="password" required placeholder="Nýtt lykilorð">
+            <input id="new-password1" name="new_password_1" type="password" required placeholder="Nýtt lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf.">
           </div>
           <div>
             <label for="new-password2"></label>
@@ -48,12 +47,12 @@
         </form>
       </c:if>
 
-      <c:if test = "${form_switch == 'username/breyta-nafni'}">
+      <c:if test = "${form_switch == 'username'}">
         <h2>Breyta notandanafni</h2>
-        <form method="POST" action="/reikningur/breyta">
+        <form method="POST" action="/reikningur/breyta-nafni">
           <div>
             <label for="username"></label>
-            <input id="username" name="username" type="text" required pattern="[a-zA-z]+[]*$" title="Notandanafnið verður að byrja á bókstaf." placeholder="Nýtt notandanafn">
+            <input id="username" name="username" type="text" required placeholder="Nýtt notandanafn">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
@@ -62,5 +61,6 @@
       <span class="message">${message}</span>
       <jsp:include page="includes/footer.jsp" />
     </main>
+    <jsp:include page="includes/scripts.jsp" />
   </body>
 </html>

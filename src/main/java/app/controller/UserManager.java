@@ -32,9 +32,6 @@ public class UserManager {
     
     @Autowired
     PostService postService;
-    
-    // provisional resort while we haven't figured out how to save the user's session
-    String provisionalEmail = "notandi@hi.is";
 
     /**
      * Fetches user's new account information and creates a new user
@@ -78,13 +75,15 @@ public class UserManager {
     /**
      * Handles log out requests. Renders home page.
      *
-     * @param model an object with attributes which can be used when rendering
-     * @return      string representing page to be rendered
+     * @param session maintains information regarding the currently logged in user
+     * @param model   an object with attributes which can be used when rendering
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/utskra", method = RequestMethod.GET)
     public String logout (HttpSession session, ModelMap model) {
         session.setAttribute("loggedInUser", null);
         model.addAttribute("username", null);
+        model.addAttribute("posts", postService.getAllPosts());
         return "index";
     }
    
@@ -92,9 +91,10 @@ public class UserManager {
      * Handles user's login requests.
      * If the user enters wrong information he is redirected to the login page
      *
-     * @param params the user's log-in information
-     * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
+     * @param params  the user's log-in information
+     * @param session maintains information regarding the currently logged in user
+     * @param model   an object with attributes which can be used when rendering
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/reikningur", method = RequestMethod.POST)
     public String login (
@@ -118,8 +118,9 @@ public class UserManager {
     /**
      * Renders account modification page for deleting an account
      *
-     * @param model an object with attributes which can be used when rendering
-     * @return      string representing page to be rendered
+     * @param model   an object with attributes which can be used when rendering
+     * @param session maintains information regarding the currently logged in user
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.GET)
     public String renderAccountDeletion (
@@ -132,8 +133,9 @@ public class UserManager {
     /**
      * Renders account modification page for changing an account's password
      *
-     * @param model an object with attributes which can be used when rendering
-     * @return      string representing page to be rendered
+     * @param model   an object with attributes which can be used when rendering
+     * @param session maintains information regarding the currently logged in user
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.GET)
     public String renderPasswordChange (
@@ -146,8 +148,9 @@ public class UserManager {
      /**
      * Renders account modification page for changing an account's username
      *
-     * @param model an object with attributes which can be used when rendering
-     * @return      string representing page to be rendered
+     * @param model   an object with attributes which can be used when rendering
+     * @param session maintains information regarding the currently logged in user
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.GET)
     public String renderUsernameChange (
@@ -211,7 +214,6 @@ public class UserManager {
             model.addAttribute("form_switch", "password");
             return "account";
         } else if (accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
-            // vantar að sækja email núverandi notanda 
             boolean b  = accountService.changePassword(loggedInUserEmail, newPassword1);
             model.addAttribute("posts", postService.getAllPosts());
             model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
@@ -237,6 +239,8 @@ public class UserManager {
         model.addAttribute("username", session.getAttribute("loggedInUsername"));
         String newUsername = params.get("username");
         accountService.changeName((String) session.getAttribute("loggedInUserEmail"), newUsername);
+        model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "index";
     }
 }

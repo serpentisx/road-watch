@@ -3,14 +3,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="is">
   <head>
     <meta charset="utf-8">
     <title>Vegavaktin</title>
-    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="<c:url value="css/main.css" />" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="<c:url value="/css/index.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/main.css" />" rel="stylesheet">
   </head>
   <body>
     
@@ -50,15 +50,13 @@
       
       <jsp:include page="includes/footer.jsp" />
     </main>
-    
-    <script src="js/jquery-3.2.0.min.js"></script>
+    <jsp:include page="includes/scripts.jsp" />
     <!--
     <script type="text/javascript">
       var posts = JSON.parse(${postsJSON});
     </script>
     -->
-    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />" type="text/javascript"></script>
-    <script src="<c:url value="js/map.js" />"></script>
-    <script src="<c:url value="js/main.js" />"></script>
+    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />"></script>
+    <script src="<c:url value="/js/map.js" />"></script>
   </body>
 </html>

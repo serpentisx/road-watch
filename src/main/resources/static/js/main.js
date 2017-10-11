@@ -7,6 +7,8 @@ $(document).ready(function () {
     $('.message a').click(function () {
         $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     });
+    
+    /************************** Hamburger menu toggle *****************************/
 
     $('.mobile-label').click(function () {
         if (document.getElementById('mobile-check').checked) {
