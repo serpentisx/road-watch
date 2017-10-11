@@ -5,6 +5,7 @@ import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -71,6 +72,7 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
+    @Transactional
     public boolean changePassword(String email, String newPassword){
         Account account = accountRep.findByEmail(email);
         try {
@@ -84,6 +86,7 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
+    @Transactional
     public boolean changeName(String email, String newName){
         try {
             Account account = accountRep.findByEmail(email);
