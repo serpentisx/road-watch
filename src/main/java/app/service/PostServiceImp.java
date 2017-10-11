@@ -11,6 +11,7 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,23 @@ public class PostServiceImp implements PostService {
     public boolean createNewPost(String title, String description, String latitude, String longitude, String roadName, String file, String road_number, String zip, String locality){
         try {
             Account account = accountRep.findByEmail(provisionalEmail);
-            Road road = roadRep.findByRoadNumber(road_number);
-            Post post = new Post(file, title, description, Double.parseDouble(latitude), Double.parseDouble(longitude), road, account);
+            Road road;
+            System.out.println("********************************"+roadRep.findByRoadNumber(road_number));
+            if (!roadRep.findByRoadNumber(road_number).getName().equals("")){
+                road = roadRep.findByRoadNumber(road_number);
+            }
+            //!roadRep.findByName(roadName).getName().equals("")
+            else{
+                road = roadRep.findByName(roadName);
+            }
+            
+            System.out.println("latitude: "+ latitude);
+            System.out.println("longitude: "+ longitude);
+            
+            NumberFormat nf = NumberFormat.getInstance();
+            double la = nf.parse(latitude).doubleValue();
+            double lo = nf.parse(longitude).doubleValue();
+            Post post = new Post(file, title, description, la, lo, road, account);
             postRep.save(post);
             return true;
         } catch(Exception e){
