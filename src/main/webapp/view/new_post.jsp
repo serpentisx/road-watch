@@ -72,7 +72,7 @@
               <button class="submit" type="submit">Staðfesta</button>
             </fieldset>
           </form>
-          <p class="message"></p>
+          <p class="post-error-message">${message}</p>
         </div>
       </section>
       

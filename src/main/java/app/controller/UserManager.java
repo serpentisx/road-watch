@@ -3,6 +3,7 @@ package app.controller;
 
 import app.service.AccountService;
 import app.service.PostService;
+import app.service.VerifyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,19 +45,29 @@ public class UserManager {
     @RequestMapping(value = "/nyskraning", method = RequestMethod.POST)
     public String register (
         @RequestParam Map<String,String> params, ModelMap model) {
-        String name = params.get("register_name");
-        String password = params.get("register_password");
-        String email = params.get("register_email");
+      
+        String captchaResponse = params.get("g-recaptcha-response");
+        
+        boolean valid = VerifyUtils.verify(captchaResponse);
+        System.out.println("gRecaptchaResponse=" + captchaResponse);
 
-        boolean verification = accountService.verifyNewUser(email);
-        if (!verification) {
-            model.addAttribute("invalid_input", "Notandi er þegar til");
-            // vantar: halda register-formi opnu
-        } else if (accountService.createNewAccount(name, password, email)) {
-            model.addAttribute("success_message", "Tókst að búa til notanda");
+        if (!valid) {
+          model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
         } else {
-            model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
-            // vantar: halda register-formi opnu
+          String name = params.get("register_name");
+          String password = params.get("register_password");
+          String email = params.get("register_email");
+
+          boolean verification = accountService.verifyNewUser(email);
+          if (!verification) {
+              model.addAttribute("invalid_input", "Notandi er þegar til");
+              // vantar: halda register-formi opnu
+          } else if (accountService.createNewAccount(name, password, email)) {
+              model.addAttribute("success_message", "Tókst að búa til notanda");
+          } else {
+              model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
+              // vantar: halda register-formi opnu
+          }
         }
 
         return "login";
