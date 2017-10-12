@@ -4,6 +4,7 @@
 
 var map;
 var mapMarker;
+var infowindow;
 
 /* General functions for adding info to new post form and displaying messages to the user */
 
@@ -16,12 +17,8 @@ function displayMessage (success, error) {
 }
 
 // Sets the marker on the map to the selected location
-function setMarker(location) {
-  if (mapMarker) { mapMarker.setMap(null); }
-  mapMarker = new google.maps.Marker({
-    position: new google.maps.LatLng(location.lat(), location.lng()),
-    map: map
-  });
+function setMarker(coordinates) {
+  mapMarker.setPosition(coordinates);
 }
 
 // Adds relevant location info to the new post form and displays message
@@ -73,8 +70,9 @@ function addRoadInfo(components) {
 function findRoadOfSearchResult(components) {
   for (var i = 0; i < components.length; i++) {
     for (var j = 0; j < components[i].types.length; j++) {
-      if (components[i].types[j] === "route") {
+      if (components[i].types[j] === "route" && components[i].long_name !== 'Unnamed Road') {
         addRoadInfo(components);
+        infowindow.setContent(components[i].long_name);
         return true;
       }
     }
@@ -89,10 +87,10 @@ function addAllInfo(location) {
   var roadFound = findRoadOfSearchResult(location.address_components);
   if (roadFound) {
     addPlaceInfo(location);
-    setMarker(location.geometry.location);
   } else {
     displayMessage("", "Enginn vegur finnst fyrir staðsetningu, reyndu aftur");
   }
+  return roadFound;
 }
 
 
@@ -120,43 +118,86 @@ function initAutoComplete() {
 }
 
 // Callback function defined in Google Maps <script> tag.
-// Initializes map and autocomplete place search in new post form.
+// Initializes map, adds click event listener,
+// and initializes autocomplete place search in new post form.
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 64.5, lng: -18.7},
     zoom: 6
   });
+  
+  mapMarker = new google.maps.Marker({
+    postion: null,
+    map: map
+  });
+  
+  infowindow = new google.maps.InfoWindow({ content: '' });
+  
+  mapMarker.addListener('click', function() {
+    infowindow.open(map, mapMarker);
+  });
+  
+  map.addListener('click', function(e) {
+    var coords = e.latLng;
+    
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'location': coords}, function(results, status) {
+      if (status === 'OK') {
+        if (addAllInfo(results[0])) setMarker(coords);
+      } else {
+        displayMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
+      }
+    });
+  });
+    
   initAutoComplete();
 }
 
 
 /* Coordinates generation function */
 
-// Adds the geographical coordinates to the new post form
-// if a corresponding road is found
-function addPosition(position) {
+// Uses Google Geocoder to obtain the user's location
+// and adds all the info to the form
+var addPosition = function (position) {
   var geocoder = new google.maps.Geocoder();
   var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
   geocoder.geocode({'location': latlng}, function(results, status) {
-    addAllInfo(results[0]);
+    if (status === 'OK') {
+      addAllInfo(results[0]);
+    } else {
+      displayMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
+    }
   });
-}
+};
+
+// Geolocation error function
+var geoError = function (error) {
+  console.log('Geolocation error occurred. Error code: ' + error.code);
+  switch(error.code) {
+    case 1:
+      displayMessage("", "Aðgangur að staðsetningarþjónustu hindraður, ekki tókst að sækja staðsetningu.");
+      break;
+    case 2:
+      displayMessage("", "Staðsetningarþjónusta skilaði villu, ekki tókst að sækja staðsetningu.");
+      break;
+    case 3:
+      displayMessage("", "Staðsetningarþjónusta rann út á tíma, ekki tókst að sækja staðsetningu.");
+      break;
+    default: // unknown error, code: 0
+      displayMessage("", "Óþekkt villa, ekki tókst að sækja staðsetningu.");
+  }
+};
 
 // Event handler for coordinates generation
 function generateCoordinates() {
-  var successMessage = document.querySelector('.location-success-message');
-  var errorMessage = document.querySelector('.location-error-message');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       addPosition, 
-      function error(msg){
-        alert('Please enable your GPS.');
-      },
-      { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true }
+      geoError,
+      { timeout: 10000, enableHighAccuracy: true }
     );
   } else {
-    errorMessage.innerHTML = "Vafrinn styður ekki staðsetningartækni";
-    successMessage.innerHTML = "";
+    displayMessage("", "Vafrinn styður ekki staðsetningartækni");
   }
 }
 

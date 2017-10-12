@@ -95,6 +95,17 @@ div.location-info {
   border-color: #4d90fe;
 }
 
+.location-error-message,
+.post-error-message {
+  color: #b30909;
+  font-size: 0.85rem;
+}
+
+.location-success-message {
+  color: #008b00;
+  font-size: 0.85rem;  
+}
+
 /*********** MAP ***********/
 
 .map {
