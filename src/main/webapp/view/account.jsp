@@ -18,7 +18,7 @@
       <jsp:include page="includes/header.jsp" />
       <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
-        <p>Skrifaðu lykilorðið þitt tvisvar til þess að eyða aðganginum</p>
+        <p>Skrifaðu lykilorðið þitt til þess að eyða aðganginum</p>
         <form method="POST" action="/reikningur/eyda-reikningi">
           <div>
             <label for="password"></label>

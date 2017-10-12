@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Immutable;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -22,6 +23,7 @@ import javax.persistence.Table;
  */
 
 @Entity
+@Immutable
 @Table (name="Road")
 public class Road {
     
@@ -35,8 +37,20 @@ public class Road {
 
     private String name;          // road name
     
+    /*
     @Embedded
     private Location location;    // road's location (may be null)
+    */
+    
+    private Integer zip;
+    private String locality;
+    private String municipality;
+    
+    @Column(name="region_is")
+    private String regionIS;
+    @Column(name="region_en")
+    private String regionEN;
+    
     
     // Collection of all posts referring to the road
     @OneToMany(mappedBy="road", cascade=CascadeType.ALL)
@@ -44,48 +58,77 @@ public class Road {
     
     /**
      * Constructor
-     * @param id
+     * 
+     * @param roadId
      * @param isHighway
      * @param roadNumber
      * @param name
-     * @param location 
+     * @param zip
+     * @param locality
+     * @param municipality
+     * @param regionIS
+     * @param regionEN 
      */
-    public Road(int id, boolean isHighway, String roadNumber, String name, Location location) {
-      this.roadId = id;
-      this.isHighway = isHighway;
-      this.roadNumber = roadNumber;
-      this.name = name;
-      this.location = location;
+    public Road(Integer roadId, boolean isHighway, String roadNumber, String name, Integer zip, String locality, String municipality, String regionIS, String regionEN) {
+        this.roadId = roadId;
+        this.isHighway = isHighway;
+        this.roadNumber = roadNumber;
+        this.name = name;
+        this.zip = zip;
+        this.locality = locality;
+        this.municipality = municipality;
+        this.regionIS = regionIS;
+        this.regionEN = regionEN;
     }
     
-    
-    public Road () {}
+    public Road() {}
 
-    public int getId() {
+    public Integer getId() {
       return roadId;
     }
-
+    
     public boolean isIsHighway() {
       return isHighway;
     }
-
+    
     public String getRoadNumber() {
       return roadNumber;
     }
-
+    
     public String getName() {
       return name;
     }
+    
+    public Integer getZip() {
+      return zip;
+    }
+    
+    public String getLocality() {
+      return locality;
+    }
+    
+    public String getMunicipality() {
+      return municipality;
+    }
+    
+    public String getRegionIS() {
+      return regionIS;
+    }
 
-    public Location getLocation() {
-      return location;
+    public String getRegionEN() {
+      return regionEN;
     }
 
     public Set<Post> getPosts() {
       return posts;
     }
-
-    public void setPosts(Set<Post> posts) {
-      this.posts = posts;
-    }      
+    
+    @Override
+    public String toString() {
+      String road = name;
+      if (zip != null)          road += (", " + zip);
+      if (locality != null)     road += (" " + locality);
+      if (municipality != null) road += (", " + municipality + ", " + regionIS);
+      return road;
+    }
 }

@@ -29,7 +29,7 @@
           <div class="btn">
             <form method="POST" action="/innlegg">
               <label for="new-post">Skrá nýtt innlegg</label>
-              <button id="new-post" type="submit" style="display: none;">Skrá nýja færslu</button>
+              <button id="new-post" name="btn" value="getPage" type="submit" style="display: none;">Skrá nýja færslu</button>
             </form>
           </div>
         </div>

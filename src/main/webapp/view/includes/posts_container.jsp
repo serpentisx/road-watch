@@ -18,7 +18,8 @@
             </div>
             
             <div class="post-content-wrapper">
-              <span class="post-road">${post.getRoad().getName()}</span>
+              <p>${post.getRoad().toString()}</p>
+              <p>(${post.getLatitude()}, ${post.getLongitude()})</p>
               <h3 class="post-title"><c:out value = "${post.getTitle()}"/></h3>
               <p class="post-description"><c:out value = "Lýsing: ${post.getDescription()}"/></h3>
               <div class="post-author">

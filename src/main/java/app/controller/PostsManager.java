@@ -34,45 +34,47 @@ public class PostsManager {
   
   @Autowired
   AccountService accountService;
-  
-  String provisionalEmail = "notandi@hi.is";
-  
-  RoadRepository rep;
      
-   /**
-    * Handles new post submissions
-    * Fetches user's input and tries to create a new post.
-    * If successful, renders home page, which should then include the new post.
-    *
-    * @param params the user's input from the new-post form
-    * @param model  an object with attributes which can be delivered to the view
-    * @return       string representing page to be rendered
-    */
+    /**
+     * Handles new post submissions
+     * Fetches user's input and tries to create a new post.
+     * If successful, renders home page, which should then include the new post.
+     *
+     * @param session maintains the user's session
+     * @param params  the user's input from the new-post form
+     * @param model   an object with attributes which can be delivered to the view
+     * @return        string representing page to be rendered
+     */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
     public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
+              
+        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+        
+        if (params.get("btn") != null) { return "new_post"; }
+        
         String title = params.get("title");
         String description = params.get("description");
-        String latitude = params.get("latitude");
-        String longitude = params.get("longitude");
-        String road = params.get("road");
+        
+        /* NEED TO CHANGE WHEN FILE UPLOADING HAS BEEN IMPLEMENTED */
         // String file = params.get("file");
         String file = "../img/road-desert.png";
         
-        String road_number = "1";
-        //String road_number = rep.findByName(road).getRoadNumber();
-        System.out.println("gata"+ road);
-        //System.out.print(rep.findByName(road).getRoadNumber());
+        // Hidden inputs
+        String latitude = params.get("latitude");
+        String longitude = params.get("longitude");
+        String roadName = params.get("road");
+        String roadNumber = params.get("road_number");
         String zip = params.get("zip");
         String locality = params.get("locality");
-        String email = provisionalEmail;
         
-        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
-                
-        boolean postCreated = postService.createNewPost(title, description, latitude, longitude, road, file, road_number, zip, locality);
+        String userEmail = (String) session.getAttribute("loggedInUserEmail");
+        
+        boolean postCreated = postService.createNewPost(title, description, file, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
         if (postCreated) {
           model.addAttribute("posts", postService.getAllPosts());
           return "index";
         }
+        model.addAttribute("message", "Ekki tókst að búa til innleggið, reyndu aftur");
         return "new_post";
     }
 }
