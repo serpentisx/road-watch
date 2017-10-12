@@ -54,6 +54,10 @@ hs_err_pid*
 
 # IntelliJ
 /out/
+.idea/
+*.iws
+*.iml
+*.ipr
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
