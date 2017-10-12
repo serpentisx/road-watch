@@ -1,6 +1,7 @@
 
 package app.service;
 
+import java.io.IOException;
 import javax.json.Json;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -66,8 +67,8 @@ public class VerifyUtils {
  
             boolean success = jsonObject.getBoolean("success");
             return success;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
             return false;
         }
     }
