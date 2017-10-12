@@ -7,9 +7,9 @@ package app.repository;
 
 import app.model.Account;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.yaml.snakeyaml.tokens.Token.ID;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -32,16 +32,16 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
     /**
      * Save an account to database
-     * @param account : the account to be saved
-     * @return  Account : if success the saved Account is returned, else null
+     * @param account   the account to be saved
+     * @return          if successful, the saved account is returned, else null
      */
     @Override
     public Account save(Account account);
 
     /**
      * Find an account by email
-     * @param email : the account email
-     * @return Account : the account with corresponding email if found. Null else.
+     * @param email   the account email
+     * @return        the account with corresponding email if found. Null else.
      */
     public Account findByEmail(String email);
 }

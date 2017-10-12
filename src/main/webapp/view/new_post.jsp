@@ -72,6 +72,7 @@
               <button class="submit" type="submit">Staðfesta</button>
             </fieldset>
           </form>
+          <p class="message"></p>
         </div>
       </section>
       

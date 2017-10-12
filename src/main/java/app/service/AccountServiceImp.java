@@ -22,9 +22,6 @@ public class AccountServiceImp implements AccountService {
     @Autowired
     PostRepository postRep;
     
-    // provisional resort while we haven't figured out how to save the user's session
-    String provisionalEmail = "notandi@hi.is";
-
     @Override
     public boolean verifyNewUser (String email) {
         Account account = accountRep.findByEmail(email);
@@ -66,9 +63,14 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
+    @Transactional
     public boolean deleteAccount(String email) {
         Account account = accountRep.findByEmail(email);
-        return accountRep.findAll().remove(account);
+        if (account != null) {
+          accountRep.delete(account);
+          return true;
+        }
+        return false;
     }
 
     @Override

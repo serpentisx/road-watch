@@ -6,6 +6,7 @@
 package app.service;
 
 import app.model.Post;
+import app.model.Road;
 import java.util.List;
 
 /**
@@ -20,23 +21,38 @@ import java.util.List;
 public interface PostService {
 
     /**
-     * Create a new post
-     * @param title
-     * @param description
-     * @param latitude
-     * @param longitude
-     * @param road
-     * @param file
-     * @param road_number
-     * @param zip
-     * @param locality
-     * @return true if success, else false
+     * Creates a new post and associates it with a Road and an Account;
+     * if a unique Road is not found, the post is not created.
+     * 
+     * 
+     * @param title       new post title
+     * @param description new post description
+     * @param file        image file name 
+     * @param latitude    latitude of road defect
+     * @param longitude   longitude of road defect
+     * @param roadName    road name from new post form
+     * @param roadNumber  road number from new post form
+     * @param zip         zip from new post form
+     * @param locality    locality from new post form
+     * @param email       email corresponding to currently logged in user
+     * @return            true if successful, else false
      */
-    public boolean createNewPost(String title, String description, String latitude, String longitude, String road, String file, String road_number, String zip, String locality);
-
+    public boolean createNewPost(String title, String description, String file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email);
+    
+    /**
+     * 
+     * @param roadName    road name from new post form
+     * @param roadNumber  road number from new post form, may be null
+     * @param zip         zip from new post form, may be null
+     * @param locality    locality from new post form, may be null
+     * @return            returns a unique road if determined, otherwise null
+     */
+    public Road determineUniqueRoad(String roadName, String roadNumber, String zip, String locality);
+    
     /**
      * Get all posts in database
-     * @return list of all posts found in database
+     * 
+     * @return            list of all posts found in database
      */
     public List<Post> getAllPosts();
 }

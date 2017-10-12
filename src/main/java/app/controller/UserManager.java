@@ -175,17 +175,24 @@ public class UserManager {
         HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String password = params.get("password");
         String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
+        System.out.println(loggedInUserEmail);
         if (!accountService.verifyPassword(loggedInUserEmail, password)) {
           model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
           model.addAttribute("message", "Lykilorðið er rangt.");
           model.addAttribute("form_switch", "delete");
           return "account";
         } else {
-          // vantar að ná í email núverandi notanda session
-          accountService.deleteAccount(loggedInUserEmail);
-          model.addAttribute("username", null);
-          model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
-          return "login";
+          boolean successful = accountService.deleteAccount(loggedInUserEmail);
+          if (successful) {
+            model.addAttribute("username", null);
+            model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
+            return "login";
+          } else {
+            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+            model.addAttribute("message", "Því miður tókst ekki að eyða reikningnum þínum, reyndu aftur síðar.");
+            model.addAttribute("form_switch", "delete");
+            return "account";
+          }
         }
     }
 

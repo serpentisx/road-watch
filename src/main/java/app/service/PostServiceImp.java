@@ -11,7 +11,6 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,43 +38,68 @@ public class PostServiceImp implements PostService {
     @Autowired
     RoadRepository roadRep;
     
-    // provisional resort while we haven't figured out how to save the user's session
-    String provisionalEmail = "notandi@hi.is";
+    @Override
+    public boolean createNewPost(String title, String description, String file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email) {
+        Road road = determineUniqueRoad(roadName, roadNumber, zip, locality);
+        
+        if (road != null) {
+          System.out.println(road.getName() + " " + road.getId());
+          Account account = accountRep.findByEmail(email);
+          
+          Double lat = (Double) Double.parseDouble(latitude);
+          Double lng = (Double) Double.parseDouble(longitude);
+          
+          Post newPost = new Post(file, title, description, lat, lng, road, account);
+          postRep.save(newPost);
+          return true;
+        }
+        return false;
+    }
     
     @Override
-    public boolean createNewPost(String title, String description, String latitude, String longitude, String roadName, String file, String road_number, String zip, String locality){
-        try {
-            Account account = accountRep.findByEmail(provisionalEmail);
-            Road road;
-            System.out.println("********************************"+roadRep.findByRoadNumber(road_number));
-            if (!roadRep.findByRoadNumber(road_number).getName().equals("")){
-                road = roadRep.findByRoadNumber(road_number);
-            }
-            //!roadRep.findByName(roadName).getName().equals("")
-            else{
-                road = roadRep.findByName(roadName);
-            }
+    public Road determineUniqueRoad(String roadName, String roadNumber, String zip, String locality) {        
+        List<Road> roads = roadRep.findByName(roadName);
+        
+        for(Road road: roads) {
+          System.out.println("Vegauðkenni: " + road.getId());
+        }
+        
+        // 1. Ef einn vegur, skila honum. 
+        // 2. Annars ef enginn, skila null.
+        // 3. Annars (ef fleiri en einn), reyna að fækka í einn.
+        //    a. Ef nákvæmlega einn sem passar, skila honum.
+        //    b. Annars skila null.
+        if (roads.size() == 1) {
+          System.out.println("EXACTLY ONE ROAD FOUND");
+          return roads.get(0);
+          
+        } else if (roads.isEmpty()) {
+          System.out.println("NO ROADS FOUND");
+          return null;
+          
+        } else {
+          System.out.println("MORE THAN ONE ROAD FOUND");
+          Road road = null;
+          if (roadNumber != null && !roadNumber.isEmpty()) {
+            road = roadRep.findByRoadNumberAndName(roadNumber, roadName);
             
-            System.out.println("latitude: "+ latitude);
-            System.out.println("longitude: "+ longitude);
+          } else if (zip != null && !zip.isEmpty()) {
+            road = roadRep.findByZipAndName((Integer) Integer.parseInt(zip), roadName);
             
-            NumberFormat nf = NumberFormat.getInstance();
-            double la = nf.parse(latitude).doubleValue();
-            double lo = nf.parse(longitude).doubleValue();
-            Post post = new Post(file, title, description, la, lo, road, account);
-            postRep.save(post);
-            return true;
-        } catch(Exception e){
-            e.printStackTrace();
-            return false;
+          } else if (locality != null && !locality.isEmpty()) {
+            roads = roadRep.findByLocalityAndName(locality, roadName);
+            
+            if (roads.size() == 1) {
+              return roads.get(0);
+            }
+          }
+          return road;
         }
     }
     
     @Override
     public List<Post> getAllPosts() {
-      System.out.println("getAllPosts!");
       ArrayList<Post> posts = (ArrayList<Post>) (postRep.findAll());
-      System.out.println(posts);
       return posts;
     }
     
