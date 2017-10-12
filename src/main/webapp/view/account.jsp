@@ -22,7 +22,7 @@
         <form method="POST" action="/reikningur/eyda-reikningi">
           <div>
             <label for="password"></label>
-            <input id="password" name="password" type="password" required placeholder="Lykilorð">
+            <input autofocus id="password" name="password" type="password" required placeholder="Lykilorð">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
@@ -32,7 +32,7 @@
         <h2>Breyta lykilorði</h2>
         <form method="POST" action="/reikningur/breyta-lykilordi">
           <div>
-            <label for="old-password"></label>
+            <label autofocus for="old-password"></label>
             <input id="old-password" name="old_password" type="password" required placeholder="Núverandi lykilorð">
           </div>
           <div>
@@ -52,7 +52,7 @@
         <form method="POST" action="/reikningur/breyta-nafni">
           <div>
             <label for="username"></label>
-            <input id="username" name="username" type="text" required placeholder="Nýtt notandanafn">
+            <input autofocus id="username" name="username" type="text" required placeholder="Nýtt notandanafn">
           </div>
           <button type="submit">Staðfesta</button>
         </form>
