@@ -26,7 +26,7 @@
               <div>
                 <!--<i class="fa fa-user-o" aria-hidden="true"></i>-->
                 <label for="register_user"></label>
-                <input id="register_user" name="register_name" type="text" required placeholder="Nafn"/>
+                <input autofocus id="register_user" name="register_name" type="text" required placeholder="Nafn"/>
               </div>
               <div>
                 <!--<i class="fa fa-at" aria-hidden="true"></i>-->
@@ -38,7 +38,7 @@
                 <label for="register_password"></label>
                 <input id="register_password" name="register_password" type="password" required placeholder="Lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf."/>
               </div>
-              <div class="g-recaptcha" data-sitekey="6LcMPjQUAAAAAFdXpqjP3JUSZj7V3ffp7IfKvG-r"></div>
+              <div class="g-recaptcha" data-theme="dark" data-sitekey="6LcMPjQUAAAAAFdXpqjP3JUSZj7V3ffp7IfKvG-r"></div>
               <div>
                 <label for="register_submit"></label>
                 <input id="register_submit" class="submit-btn" type="submit" name="create" value="Nýskrá">
@@ -49,7 +49,7 @@
               <div>
                 <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                 <label for="login_email"></label>
-                <input name="login_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Netfang">
+                <input autofocus name="login_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Netfang">
               </div>
               <div>
                 <!--<i class="fa fa-key" aria-hidden="true"></i>-->
