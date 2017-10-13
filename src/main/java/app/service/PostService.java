@@ -55,4 +55,6 @@ public interface PostService {
      * @return            list of all posts found in database
      */
     public List<Post> getAllPosts();
+    
+    public String postsToJSON(List<Post> posts);
 }

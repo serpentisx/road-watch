@@ -1,7 +1,9 @@
 
 package app.controller;
 
+import app.model.Post;
 import app.service.PostService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * MainManager handles home page get-requests 
+ * MainManager handles home-page get-requests 
  */
 @Controller
 @RequestMapping("") 
@@ -24,15 +26,21 @@ public class MainManager {
 
     @Autowired
     PostService service;
-   /**
-    * 
-    * @param model  an object with attributes which can be used when rendering
-    * @return       string representing page to be rendered
-    */
+    /**
+     * 
+     * @param session  session maintaining logged in user
+     * @param model    an object with attributes which can be used when rendering
+     * @return         string representing page to be rendered
+     */
     @RequestMapping("/")
     public String renderHomePage(HttpSession session, ModelMap model) {
         model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
-        model.addAttribute("posts", service.getAllPosts());
+        
+        List<Post> posts = service.getAllPosts();
+        String postsJSON = service.postsToJSON(posts);
+        
+        model.addAttribute("posts", posts);
+        model.addAttribute("postsJSON", postsJSON);
         return "index";
     }
 }

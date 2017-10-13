@@ -8,7 +8,7 @@
               <div class="line"></div>
            </div>
            <div class="undertitle">
-              Lorem ipsum dolar
+              með augun á veginum ...
            </div>
         </div>
      </div>

@@ -54,7 +54,7 @@ public class Road {
     
     // Collection of all posts referring to the road
     @OneToMany(mappedBy="road", cascade=CascadeType.ALL)
-    private Set<Post> posts = new HashSet<Post>();
+    private transient Set<Post> posts = new HashSet<Post>();
     
     /**
      * Constructor

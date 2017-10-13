@@ -11,6 +11,7 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,11 @@ public class PostServiceImp implements PostService {
     public List<Post> getAllPosts() {
       ArrayList<Post> posts = (ArrayList<Post>) (postRep.findAll());
       return posts;
+    }
+    
+    @Override
+    public String postsToJSON(List<Post> posts) {
+      return new Gson().toJson(posts);
     }
     
 }
