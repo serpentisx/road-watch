@@ -29,6 +29,7 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
+    @Transactional
     public boolean createNewAccount(String username, String password, String email) {
         String hashedPassword = null;
         try {
