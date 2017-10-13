@@ -182,8 +182,7 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.POST)
     private String deleteAccountHandler (
-        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
-        String password = params.get("password");
+        HttpSession session, @RequestParam(value="password") String password, ModelMap model) {
         String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
         System.out.println(loggedInUserEmail);
         if (!accountService.verifyPassword(loggedInUserEmail, password)) {
@@ -252,10 +251,9 @@ public class UserManager {
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.POST)
     private String changeUsernameHandler (
-        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
+        HttpSession session, @RequestParam(value="username") String username, ModelMap model) {
         model.addAttribute("username", session.getAttribute("loggedInUsername"));
-        String newUsername = params.get("username");
-        accountService.changeName((String) session.getAttribute("loggedInUserEmail"), newUsername);
+        accountService.changeName((String) session.getAttribute("loggedInUserEmail"), username);
         model.addAttribute("posts", postService.getAllPosts());
         model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         return "index";
