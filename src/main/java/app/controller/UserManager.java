@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * @author Team 20 HBV501G - Fall 2017
  * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
- * @author Hinrik Snær Guðmundsson (hsg30.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
@@ -49,7 +49,6 @@ public class UserManager {
         String captchaResponse = params.get("g-recaptcha-response");
         
         boolean valid = VerifyUtils.verify(captchaResponse);
-        System.out.println("gRecaptchaResponse=" + captchaResponse);
 
         if (!valid) {
           model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
