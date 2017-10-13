@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
- * @author Bjarki ViÃ°ar KristjÃ¡nsson (bvk1@hi.is)
- * @author Hinrik SnÃ¦r GuÃ°mundsson (hsg30.is)
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
  */
@@ -29,7 +29,6 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
-    @Transactional
     public boolean createNewAccount(String username, String password, String email) {
         String hashedPassword = null;
         try {

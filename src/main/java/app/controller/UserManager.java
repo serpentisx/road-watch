@@ -49,7 +49,6 @@ public class UserManager {
         String captchaResponse = params.get("g-recaptcha-response");
         
         boolean valid = VerifyUtils.verify(captchaResponse);
-        System.out.println("gRecaptchaResponse=" + captchaResponse);
 
         if (!valid) {
           model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
