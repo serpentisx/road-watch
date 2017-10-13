@@ -38,7 +38,7 @@
                 <label for="register_password"></label>
                 <input id="register_password" name="register_password" type="password" required placeholder="Lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf."/>
               </div>
-              <div class="g-recaptcha" data-theme="dark" data-sitekey="6LcMPjQUAAAAAFdXpqjP3JUSZj7V3ffp7IfKvG-r"></div>
+              <div class="g-recaptcha" data-sitekey="6LcMPjQUAAAAAFdXpqjP3JUSZj7V3ffp7IfKvG-r"></div>
               <div>
                 <label for="register_submit"></label>
                 <input id="register_submit" class="submit-btn" type="submit" name="create" value="Nýskrá">

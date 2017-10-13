@@ -51,11 +51,11 @@
       <jsp:include page="includes/footer.jsp" />
     </main>
     <jsp:include page="includes/scripts.jsp" />
-    <!--
+    
     <script type="text/javascript">
-      var posts = JSON.parse(${postsJSON});
+      var posts = ${postsJSON};
     </script>
-    -->
+    
     <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />"></script>
     <script src="<c:url value="/js/map.js" />"></script>
   </body>
