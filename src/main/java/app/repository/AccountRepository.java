@@ -7,9 +7,7 @@ package app.repository;
 
 import app.model.Account;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.yaml.snakeyaml.tokens.Token.ID;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
