@@ -41,7 +41,7 @@ public interface AccountService {
      * @param email      the email address
      * @param password   the password
      * @param username   the display name
-     * @return           true if the email and password match
+     * @return           true if an attempt to create a new account is success
      */
     public boolean createNewAccount(String username, String password, String email);
 
