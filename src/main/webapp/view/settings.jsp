@@ -21,54 +21,58 @@
         <jsp:include page="includes/nav.jsp" />
         <h1>Mínar síður</h1>
     </header>
-    <div class='container'>
-        <div class='sidebar'>
-            <div class='sidebar__header'>
-                <img alt='' class='sidebar__avatar' src='img/profile.png'>
-                <p>Notandi</p>
+        
+    <main>
+        <div class='container'>
+            <div class='sidebar'>
+                <div class='sidebar__header'>
+                    <img alt='' class='sidebar__avatar' src='img/profile.png'>
+                    <p>Notandi</p>
+                </div>
+                <div class='sidebar__menu-item sidebar__menu-item--active'>
+                    <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
+                </div>
+                <div class='sidebar__menu-item'>
+                    <i class="fa fa-sticky-note" aria-hidden="true"></i> Mínar innleggir
+                </div>
+                <div class='sidebar__menu-item'>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Líkað við
+                </div>
             </div>
-            <div class='sidebar__menu-item sidebar__menu-item--active'>
-                <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
-            </div>
-            <div class='sidebar__menu-item'>
-                <i class="fa fa-sticky-note" aria-hidden="true"></i> Mínar innleggir
-            </div>
-            <div class='sidebar__menu-item'>
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Líkað við
+            <div class='main'>
+                <div class='main__header'>
+                    <div class="account-settings-header">
+                       <div class="as-label username-settings">Breyta notandanafn</div>
+                       <div class="as-label password-settings">Breyta lykilorð</div>
+                    </div>
+                </div>
+                <div class='main__content'>
+                    <div class='main__settings-form username-settings'>
+                        <form action='#' method='post'>
+                            <label class='main__input-label'>Þitt notandanafn</label>
+                            <input name="new-username" class='main__input' type='text'>
+                        </form>
+                        <button class='btn main__save-button' type="submit">Vista</button>
+                    </div>
+                    <div class='main__settings-form password-settings'>
+                        <form action='#' method='post'>
+                            <label class='main__input-label'>Gamalt lykilorð</label>
+                            <input name="old-password" class='main__input' type='password'>
+                            <label class='main__input-label'>Nýtt lykilorð</label>
+                            <input name="new-password1" class='main__input' type='password'>
+                            <label class='main__input-label'>Nýtt lykilroð - endurtekið</label>
+                            <input name="new-password2" class='main__input' type='password'>
+                        </form>
+                        <button class='btn main__save-button' type="submit">Staðfesta</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class='main'>
-            <div class='main__header'>
-                <div class="account-settings-header">
-                   <div class="as-label username-settings">Breyta notandanafn</div>
-                   <div class="as-label password-settings">Breyta lykilorð</div>
-                </div>
-            </div>
-            <div class='main__content'>
-                <div class='main__settings-form username-settings'>
-                    <form action='#' method='post'>
-                        <label class='main__input-label'>Þitt notandanafn</label>
-                        <input name="new-username" class='main__input' type='text'>
-                    </form>
-                    <button class='btn main__save-button' type="submit">Vista</button>
-                </div>
-                <div class='main__settings-form password-settings'>
-                    <form action='#' method='post'>
-                        <label class='main__input-label'>Gamalt lykilorð</label>
-                        <input name="old-password" class='main__input' type='password'>
-                        <label class='main__input-label'>Nýtt lykilorð</label>
-                        <input name="new-password1" class='main__input' type='password'>
-                        <label class='main__input-label'>Nýtt lykilroð - endurtekið</label>
-                        <input name="new-password2" class='main__input' type='password'>
-                    </form>
-                    <button class='btn main__save-button' type="submit">Staðfesta</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
     <jsp:include page="includes/footer.jsp" />
     
     <jsp:include page="includes/scripts.jsp" />
+    <script src="<c:url value="/js/settings.js" />"></script>
     
   </body>
   

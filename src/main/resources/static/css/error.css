@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(../img/road-background.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: 'Sigmar One', cursive;
+  height: 100vh;
+}
+
+.message-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #aed0c3;
+  top: 20%;
+  z-index: 10;
+}
+
+.message-box h1 {
+  font-size: 60px;
+  letter-spacing: 8px;
+}
+
+.message-box p {
+  font-family: "Tw Cen MT";
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.home-btn {
+  width: 180px;
+  height: 40px;
+  position: relative;
+  background: #62af90;
+  margin-top: 40px;
+  transition: all 200ms ease-in-out;
+  overflow: hidden;
+  font-family: "Tw Cen MT";
+  border-radius: 4px;
+}
+
+.home-btn:hover {
+  background: rgb(150, 146, 124);
+}
+
+.home-btn a {
+  text-decoration: none;
+  color: #31302f;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-variant: small-caps;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(44, 44, 44, 0.55);
+  z-index: 1;
+}
+
+.lg {
+    background: linear-gradient(17deg, rgb(144, 64, 35) -100%, rgba(71, 111, 151, 0.19) 100%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
