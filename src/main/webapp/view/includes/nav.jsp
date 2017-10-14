@@ -3,7 +3,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %> 
 
-<nav class="main-navigation header-bar" class="header-bar">
+<nav class="main-navigation header-bar">
   <div class="logo">
     <img class="logo-img" src="../img/logo.png" alt="">
   </div>

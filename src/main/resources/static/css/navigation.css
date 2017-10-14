@@ -19,3 +19,28 @@
   width: 100%;
   z-index: 3;
 }
+
+
+.account-wrapper {
+  display: flex;
+  right: 40px;
+  top: 25px;
+  z-index: 2;
+  margin-right: 45px;
+  font-size: 0.8em;
+}
+
+.s-account {
+  margin: 0 15px;
+  cursor: pointer;
+  color: #f2f2f2;
+}
+
+.s-account a {
+  color: inherit;
+  margin: 0 4px;
+}
+
+.s-account i {
+  font-size: 0.8em;
+}

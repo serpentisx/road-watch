@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('../fonts/tw-cen-mt/tcm.ttf');
 
 body, html {
   margin: 0;
@@ -10,233 +12,25 @@ a {
   text-decoration: none;
 }
 
+/*********** SECTION HEADER - main ***********/
 
-/*********** Navigation ***********/
-
-nav {
-  height: 64px;
-  width: 100%;
-  background: #222;
-  display: flex;
-  align-items: center;
+main {
+  background-color: #f7f7f7;
+  padding-top: 60px;
+  margin-bottom: 620px;
   position: relative;
+  z-index: 2;
 }
-
-nav a {
-  position: absolute;
-  right: 100px;
-  color: #f2f2f2;
-  font-size: 20px;
-}
-
-nav .logo {
-  position: absolute;
-  width: 32px;
-  left: 32px;
-  cursor: pointer;
-}
-
-.logo img {
-  width: 100%;
-  height: 100%;
-}
-
-
-/************************************/
-
-.mobile-nav {
-  height: calc(100vh - 65px);
-  width: 400px;
-  background: rgb(38, 49, 57);
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  right: 0;
-  z-index: 10;
-  transform: translateX(100%);
-  transition: all 0.2s cubic-bezier(0.51, 0.07, 0, 1.01);
-}
-
-.mobile-nav a:hover {
-  color: rgb(212, 137, 87);
-}
-
-.mobile-nav a {
-  color: white;
-}
-
-.m-nav-container {
-  height: 60px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: linear-gradient(to right, #607d8b 0%, rgb(116, 140, 150) 36%, #75858c 65%, #6f7d83 100%);
-  z-index: 11;
-  display: none;
-}
-
-.mobile-label {
-  z-index: 20;
-  display: block;
-  cursor: pointer;
-}
-
-.m-pos {
-  width: 30px;
-  height: 23px;
-  top: 20px;
-  right: 45px;
-  position: absolute;
-}
-
-.mobile-nav-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.mobile-nav-icon .line {
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-  margin: 3px 0;
-}
-
-#mobile-check {
-  display: none;
-}
-
-.line-2 {
-  transition: all 0.1s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-}
-
-#mobile-check:checked~.mobile-nav-icon .line-1 {
-  transform: translateY(8px) rotate(45deg);
-}
-
-#mobile-check:checked~.mobile-nav-icon .line-2 {
-  transform: translateX(-20px);
-  opacity: 0;
-}
-
-#mobile-check:checked~.mobile-nav-icon .line-3 {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-#mobile-check:checked~.mobile-nav {
-  transform: translateX(0);
-}
-
-#mobile-check:checked~.mobile-lg {
-  transform: translateX(0%);
-}
-
-#mobile-check:checked~header .header-bg .header-container {
-  z-index: 0;
-}
-
-.mobile-nav-container {
-  padding-top: 40px;
-}
-
-.mobile-lg {
-  width: 100vw;
-  height: 100%;
-  position: absolute;
-  z-index: 1;
-  background: rgba(8, 27, 41, 0.82);
-  transform: translateX(-100%);
-  transition: all 0.2s cubic-bezier(0.51, 0.07, 0, 1.01);
-}
-
-.user-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 40px;
-  border-bottom: 7px #445d70 solid;
-}
-
-.user-panel a {
-  color: white;
-}
-
-.user-panel span {
-  font-size: 30px;
-}
-
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.un {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 30px 0;
-}
-
-.un a {
-  display: block;
-  margin: 3px 0;
-  color: white;
-}
-
-.un-1 {}
-
-.un div {
-  margin-bottom: 12px;
-}
-
-.un i {
-  margin-right: 5px;
-}
-
-.user-nav hr {
-  width: 100%;
-  height: 5px;
-  background: #0a3d63;
-  border: none;
-  margin: 38px 0;
-}
-
-.mobile-nav .btn {
-  background: #445d70;
-  height: 33px;
-  width: 200px;
-  border-radius: 2px;
-  margin-top: 15px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-label[for='new-post'] {
-  cursor: pointer;
-}
-
-
-/*********** Header ***********/
 
 header {
-  height: 80vh;
   position: relative;
+  z-index: 2;
 }
 
 .header-bg {
   background-image: url('../img/road-background.jpg');
   height: 100%;
   background-position: center;
-  background-size: cover;
   position: relative;
   color: white;
   font-size: 25px;
@@ -251,58 +45,343 @@ header {
 }
 
 .header-container {
+  width: 100%;
+  height: 530px;
+  position: relative;
+}
+
+.h-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   color: #fffbf9;
   z-index: 10;
   position: relative;
+  top: 11%;
 }
 
 .m-title h1 {
   letter-spacing: 10px;
-  font-family: 'hacked';
   font-size: 60px;
+  margin: 18px 0;
 }
 
 .undertitle {
-  margin-top: 30px;
+  color: #c4ccce;
 }
 
-.line {
-  width: 175px;
-  height: 3px;
-  background: #fffbf9;
-  margin: 0 auto;
-  border-radius: 2px;
+.header-btn {
+  margin-top: 4em;
 }
 
 
-/*********** Footer ***********/
+/*********** SECTION HEADER - navigation ***********/
 
-footer {
-  background: #222;
-  height: 200px;
-  display: flex;
-  justify-content: center;
+.index-navigation {
+  height: 70px;
+  background: #fff;
 }
 
-.footer-wrapper {
+.index-navigation a {
+  color: #5d5d5d;
+  font-size: 20px;
+}
+
+.index-navigation ul {
+  list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-footer .logo {
-  width: 90px;
-  height: 90px;
+.index-navigation li {
+  margin: 0 30px;
 }
 
-footer span {
-  margin-left: 34px;
-  color: white;
-  font-size: 33px;
+/*********** Section 1 ***********/
+
+.section-1 {
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.section-head h2 {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 100;
   letter-spacing: 1px;
 }
+
+.section-head .line {
+  width: 270px;
+  margin: 0 auto;
+  height: 1px;
+  background: #dadada;
+  border-radius: 2px;
+  margin-top: 20px;
+}
+
+.btn {
+  width: 165px;
+  height: 40px;
+  border-radius: 3px;
+  background: #4f976d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+/*********** Section 1 Posts Container ***********/
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  max-width: 1400px;
+  margin: 50px auto;
+}
+
+.post-item-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 22%;
+  min-width: 348px;
+  max-height: 480px;
+  margin: 12px 12px 40px 12px;
+}
+
+.post-item-wrapper:before {
+  content: "";
+  display: block;
+  padding-top: 114%;
+}
+
+.post-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0px 25px 55px -60px rgba(207, 220, 220, 0.68), 0px 5px 20px rgba(68, 64, 64, 0.1);
+}
+
+.post-img {
+  background-image: url('../img/road-desert.png');
+  height: 44%;
+  background-size: cover;
+  position: relative;
+}
+
+.post-date {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  display: inline-block;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 6px;
+  border-radius: 2px;
+  background-color: #4f976d;
+  color: #fff;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 400;
+}
+
+.par-wrapper {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #efefef;
+  background-color: #f1f1f1;
+  width: calc(100% + 44px);
+  left: -22px;
+  top: 20px;
+  position: relative;
+}
+
+.post-content-wrapper {
+  position: relative;
+  padding: 20px 22px;
+}
+
+.post-name {
+  color: #525350;
+}
+
+.post-title {}
+
+.post-description {
+  color: #525350;
+  font-size: 16px;
+  display: -webkit-box;
+  height: 49px;
+  margin: 0 auto;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.pa-img {
+  background-image: url('../img/profile.png');
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+}
+
+.pa-name {
+  margin-left: 10px;
+}
+
+.post-item .line {
+  width: 100%;
+  height: 3px;
+  background: #b88a58;
+  border-radius: 2px;
+  margin-top: 20px;
+}
+
+.reaction-container {
+  display: flex;
+}
+
+.rc-img {
+  width: 30px;
+  height: 30px;
+  background: #5e91ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 15px 50px 15px 0;
+}
+
+.rc-img i {
+  color: white;
+}
+
+.rc-img span {
+  position: absolute;
+  left: 40px;
+}
+
+/*********** Section 2 - Contact ***********/
+
+.section-2-contact {
+  height: 550px;
+  background-image: url(../img/road-background.jpg);
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.contact-container {
+  z-index: 2;
+}
+
+.contact-container input {
+  height: 40px;
+}
+
+.contact-container h2 {
+  text-align: center;
+  color: #f2f2f2;
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+}
+
+.contact-container form {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.f-wrapper {
+  display: flex;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.btn-form {
+  width: 44% !important;
+  color: #f2f2f2;
+  border-radius: 3px;
+  background: #4f976d !important;
+  letter-spacing: 1px;
+  margin: 8px auto !important;
+}
+
+.mf-wrapper {
+  flex-direction: column;
+}
+
+.mf-wrapper textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.contact-form input, textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.contact-form input:active, .contact-form input:focus, .contact-form textarea:active, .contact-form textarea:focus {
+  outline: 2px #4f976d solid;
+}
+
+.contact-form .submit-btn:hover, .contact-form .submit-btn:active, .contact-form .submit-btn:focus {
+  background: #43A047;
+}
+
+
+/*********** Section MAP - ON HOLD ***********
+
+.section-2 {
+  margin-top: 300px;
+}
+
+.map-wrapper {
+  height: 800px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+*/
