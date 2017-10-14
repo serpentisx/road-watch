@@ -49,20 +49,26 @@ public class MainManager {
         return "index";
     }
     
+    // Testing purpose
+    @RequestMapping("/settings")
+    public String settings(HttpSession session, ModelMap model) {
+        return "settings";
+    }
+    
     @RequestMapping("/mail")
     public String renderPage(HttpSession session, ModelMap model) throws GeneralSecurityException {
         model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
-        ApplicationContext context =
-             new ClassPathXmlApplicationContext("Spring-Mail.xml");
+        ApplicationContext context
+                = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 
-        MailSSLSocketFactory socketFactory= new MailSSLSocketFactory();
-socketFactory.setTrustAllHosts(true);
+        MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
+        socketFactory.setTrustAllHosts(true);
 
-    	Mail mm = (Mail) context.getBean("mailMail");
+        Mail mm = (Mail) context.getBean("mailMail");
         mm.sendMail("vegavaktin@gmail.com",
-    		   "hvn1@hi.is",
-    		   "vegavaktin test",
-    		   "Testing only \n\n Hello Spring Email Sender");
+                "hvn1@hi.is",
+                "vegavaktin test",
+                "Testing only \n\n Hello Spring Email Sender");
         return "index";
     }
 }
