@@ -125,18 +125,6 @@ header {
   padding: 20px;
 }
 
-.main__avatar {
-  background: url("https://unsplash.it/150/?image=209");
-  background-size: cover;
-  width: 150px;
-  height: 150px;
-  display: block;
-  vertical-align: middle;
-  margin: 20px auto;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
 .main__avatar:hover .main__avatar--overlay {
   opacity: 1;
   border-radius: 50%;
@@ -216,6 +204,14 @@ header {
   cursor: pointer;
 }
 
+.danger-btn {
+    background-color: #a94633;
+}
+
+.danger-btn:hover {
+    background-color: #df4325;;
+}
+
 .account-settings-header {
   height: 100%;
   display: flex;
@@ -234,7 +230,7 @@ header {
   font-size: 15px;
 }
 
-.main__content .password-settings {
+.main__content .password-settings, .main__content .delete-account {
   display: none;
 }
 

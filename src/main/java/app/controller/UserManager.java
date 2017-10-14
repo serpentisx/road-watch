@@ -35,51 +35,6 @@ public class UserManager {
     PostService postService;
 
     /**
-     * Renders account modification page for deleting an account
-     *
-     * @param model   an object with attributes which can be used when rendering
-     * @param session maintains information regarding the currently logged in user
-     * @return        string representing page to be rendered
-     */
-    @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.GET)
-    public String renderAccountDeletion (
-        HttpSession session, ModelMap model) {
-        model.addAttribute("form_switch", "delete");
-        model.addAttribute("username", (String) session.getAttribute("username"));
-        return "account";
-    }
-    
-    /**
-     * Renders account modification page for changing an account's password
-     *
-     * @param model   an object with attributes which can be used when rendering
-     * @param session maintains information regarding the currently logged in user
-     * @return        string representing page to be rendered
-     */
-    @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.GET)
-    public String renderPasswordChange (
-        HttpSession session, ModelMap model) {
-        model.addAttribute("form_switch", "password");
-        model.addAttribute("username", (String) session.getAttribute("username"));
-        return "account";
-    }
-    
-     /**
-     * Renders account modification page for changing an account's username
-     *
-     * @param model   an object with attributes which can be used when rendering
-     * @param session maintains information regarding the currently logged in user
-     * @return        string representing page to be rendered
-     */
-    @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.GET)
-    public String renderUsernameChange (
-        HttpSession session, ModelMap model) {
-        model.addAttribute("form_switch", "username");
-        model.addAttribute("username", (String) session.getAttribute("username"));
-        return "account";
-    }
-    
-    /**
      * Handles user's request to delete account
      * Verifies whether the password entered by the user
      * matches an existing account, and deletes the account if so.
@@ -113,7 +68,6 @@ public class UserManager {
           }
         }
     }
-
     
     /**
      * Handles user's request to change password
@@ -149,8 +103,7 @@ public class UserManager {
             return "account";
         }
     }
-
-    
+ 
     /**
      * Handles user's request to change username
      * 

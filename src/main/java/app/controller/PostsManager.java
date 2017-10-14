@@ -35,6 +35,12 @@ public class PostsManager {
   @Autowired
   AccountService accountService;
      
+  @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
+    public String renderPostPage(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
+        
+        return "new_post";
+    }
+    
     /**
      * Handles new post submissions
      * Fetches user's input and tries to create a new post.

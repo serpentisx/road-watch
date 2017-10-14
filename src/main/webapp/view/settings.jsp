@@ -39,8 +39,9 @@
             <div class='main'>
                 <div class='main__header'>
                     <div class="account-settings-header">
-                       <div class="as-label username-settings">Breyta notandanafn</div>
-                       <div class="as-label password-settings">Breyta lykilorð</div>
+                       <div class="as-label username-settings">Breyta notandanafni</div>
+                       <div class="as-label password-settings">Breyta lykilorði</div>
+                       <div class="as-label delete-account">Eyða reikningi</div>
                     </div>
                 </div>
                 <div class='main__content'>
@@ -62,6 +63,14 @@
                         </form>
                         <button class='btn main__save-button' type="submit">Staðfesta</button>
                     </div>
+                    <div class='main__settings-form delete-account'>
+                        <form action='#' method='post'>
+                            <h3>Þú ert að fara að eyða reikningi. Þessi aðgerð er endanleg.</h3>
+                            <label class='main__input-label'>Lykilorð þitt</label>
+                            <input name="password" class='main__input' type='password'>
+                        </form>
+                        <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>
+                    </div>    
                 </div>
             </div>
         </div>
