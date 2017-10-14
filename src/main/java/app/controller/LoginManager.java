@@ -100,7 +100,7 @@ public class LoginManager {
         
         boolean valid = VerifyUtils.verify(captchaResponse);
 
-        if (false) {
+        if (!valid) {
           model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
         } else {
           String name = params.get("register_name");
