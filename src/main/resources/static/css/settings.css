@@ -238,6 +238,12 @@ header {
   background: #8ed081;
 }
 
+.message {
+    margin-left: 22px;
+    color: #394c69;
+    font-weight: bold;
+}
+
 @media (max-width: 764px) {
   .sidebar {
     width: 100%;

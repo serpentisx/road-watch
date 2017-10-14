@@ -48,24 +48,20 @@ public class UserManager {
     private String deleteAccountHandler (
         HttpSession session, @RequestParam(value="password") String password, ModelMap model) {
         String loggedInUserEmail = (String) session.getAttribute("user");
-        System.out.println(loggedInUserEmail);
+        
         if (!accountService.verifyPassword(loggedInUserEmail, password)) {
-          model.addAttribute("username", (String) session.getAttribute("username"));
-          model.addAttribute("message", "Lykilorðið er rangt.");
-          model.addAttribute("form_switch", "delete");
-          return "account";
-        } else {
-          boolean successful = accountService.deleteAccount(loggedInUserEmail);
-          if (successful) {
-            model.addAttribute("username", null);
+            model.addAttribute("message", "Rangt lykilroð");
+            return "settings";
+        }
+        
+        if (accountService.deleteAccount(loggedInUserEmail)) {
+            session.setAttribute("user", null);
             model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt");
             return "login";
-          } else {
-            model.addAttribute("username", (String) session.getAttribute("username"));
+        }
+        else {
             model.addAttribute("message", "Því miður tókst ekki að eyða reikningnum þínum, reyndu aftur síðar.");
-            model.addAttribute("form_switch", "delete");
-            return "account";
-          }
+            return "settings";
         }
     }
     
@@ -82,25 +78,27 @@ public class UserManager {
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.POST)
     private String changePasswordHandler (
         HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
-        String oldPassword = params.get("old_password");
-        String newPassword1 = params.get("new_password_1");
-        String newPassword2 = params.get("new_password_2");
-        model.addAttribute("username", (String) session.getAttribute("username"));
+        String oldPassword = params.get("old-password");
+        String newPassword1 = params.get("new-password1");
+        String newPassword2 = params.get("new-password2");
 
         String loggedInUserEmail = (String) session.getAttribute("user");
+        
         if (!newPassword1.equals(newPassword2)) {
             model.addAttribute("message", "Nýja lykilorðið eru ekki eins, reyndu aftur.");
-            model.addAttribute("form_switch", "password");
-            return "account";
-        } else if (accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
-            boolean b  = accountService.changePassword(loggedInUserEmail, newPassword1);
-            model.addAttribute("posts", postService.getAllPosts());
-            model.addAttribute("username", (String) session.getAttribute("username"));
-            return "index";
-        } else {
+            return "settings";
+        }
+        if (!accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
             model.addAttribute("message", "Lykilorð er ekki rétt, reyndu aftur.");
-            model.addAttribute("form_switch", "password");
-            return "account";
+            return "settings";
+        }
+        if (accountService.changePassword(loggedInUserEmail, newPassword1)) {
+            model.addAttribute("message", "Lykilorðið þitt hefur verið breytt");
+            return "settings";
+        }
+        else {
+            model.addAttribute("message", "Úúps! Eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+            return "settings";
         }
     }
  
@@ -114,10 +112,11 @@ public class UserManager {
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.POST)
     private String changeUsernameHandler (
         HttpSession session, @RequestParam(value="username") String username, ModelMap model) {
-        model.addAttribute("username", session.getAttribute("username"));
-        accountService.changeName((String) session.getAttribute("username"), username);
-        model.addAttribute("posts", postService.getAllPosts());
-        model.addAttribute("username", (String) session.getAttribute("username"));
-        return "index";
+     
+        String email = (String) session.getAttribute("user");
+        accountService.changeName(email, username);
+        session.setAttribute("username", accountService.findUsernameByEmail(email));
+        model.addAttribute("message", "Nafni þínu hefur verið breytt!");
+        return "settings";
     }
 }

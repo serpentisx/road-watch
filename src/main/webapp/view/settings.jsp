@@ -23,7 +23,7 @@
         <div class='container'>
             <div class='sidebar'>
                 <div class='sidebar__header'>
-                    <img alt='' class='sidebar__avatar' src='img/profile.png'>
+                    <img alt='' class='sidebar__avatar' src='/img/profile.png'>
                     <p>${username}</p>
                 </div>
                 <div class='sidebar__menu-item sidebar__menu-item--active'>
@@ -46,32 +46,33 @@
                 </div>
                 <div class='main__content'>
                     <div class='main__settings-form username-settings'>
-                        <form action='#' method='post'>
+                        <form action='/reikningur/breyta-nafni' method='post'>
                             <label class='main__input-label'>Þitt notandanafn</label>
-                            <input name="new-username" class='main__input' type='text' value=${username}>
+                            <input name="username" class='main__input' type='text' value="${username}">
+                            <button class='btn main__save-button' type="submit">Vista</button>
                         </form>
-                        <button class='btn main__save-button' type="submit">Vista</button>
                     </div>
                     <div class='main__settings-form password-settings'>
-                        <form action='#' method='post'>
+                        <form action='/reikningur/breyta-lykilordi' method='post'>
                             <label class='main__input-label'>Gamalt lykilorð</label>
                             <input name="old-password" class='main__input' type='password'>
                             <label class='main__input-label'>Nýtt lykilorð</label>
                             <input name="new-password1" class='main__input' type='password'>
                             <label class='main__input-label'>Nýtt lykilroð - endurtekið</label>
                             <input name="new-password2" class='main__input' type='password'>
+                            <button class='btn main__save-button' type="submit">Staðfesta</button>
                         </form>
-                        <button class='btn main__save-button' type="submit">Staðfesta</button>
                     </div>
                     <div class='main__settings-form delete-account'>
-                        <form action='#' method='post'>
+                        <form action='/reikningur/eyda-reikningi' method='post'>
                             <h3>Þú ert að fara að eyða reikningi. Þessi aðgerð er endanleg.</h3>
                             <label class='main__input-label'>Lykilorð þitt</label>
                             <input name="password" class='main__input' type='password'>
+                            <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>                      
                         </form>
-                        <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>
                     </div>    
                 </div>
+                <p class="message">${message}</p>        
             </div>
         </div>
     </main>

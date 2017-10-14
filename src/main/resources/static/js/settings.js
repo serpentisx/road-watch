@@ -4,9 +4,11 @@ $('.as-label').click(function() {
   $(`.${classname}`).css('display', 'block');
   $('.as-label').css('background', '#fafbfb');
   $(this).css('background', '#8ed081');
+  $('.message').text("");
 });
 
 $('.sidebar__menu-item').click(function() {
   $('.sidebar__menu-item').removeClass('sidebar__menu-item--active');
   $(this).addClass('sidebar__menu-item--active');
+  $('.message').text("");
 });
