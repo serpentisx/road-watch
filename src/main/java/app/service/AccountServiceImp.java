@@ -48,6 +48,7 @@ public class AccountServiceImp implements AccountService {
     public boolean verifyPassword (String email, String password) {
         boolean verification = false;
         Account account = accountRep.findByEmail(email);
+
         // The email entered might not match an existing account
         if (account == null) { 
           return verification; 

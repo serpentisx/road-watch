@@ -22,7 +22,14 @@
             <div class="line"></div>
           </div>
           <div class="form">
-            <form class="register-form"  method="POST" action="/nyskraning">
+            <c:choose>
+                <c:when test="${formType == 'login'}">
+                  <form class="register-form"  method="POST" action="/nyskraning" style="display: none;">
+                </c:when>    
+                <c:otherwise>
+                  <form class="register-form"  method="POST" action="/nyskraning" style="display: block;">
+                </c:otherwise>
+            </c:choose>
               <div>
                 <!--<i class="fa fa-user-o" aria-hidden="true"></i>-->
                 <label for="register_user"></label>
@@ -45,7 +52,14 @@
               </div>
               <p class="message">Þegar með aðgang? <a href="#">Innskrá</a></p>
             </form>
-            <form class="login-form" method="POST" action="/reikningur">
+            <c:choose>
+                <c:when test="${formType == 'login'}">
+                  <form class="login-form" method="POST" action="/innskraning" style="display: block;">
+                </c:when>    
+                <c:otherwise>
+                  <form class="login-form" method="POST" action="/innskraning" style="display: none;">
+                </c:otherwise>
+            </c:choose>
               <div>
                 <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                 <label for="login_email"></label>
@@ -69,5 +83,6 @@
       </div>
     </main>
     <jsp:include page="includes/scripts.jsp" />
+    <script src="<c:url value="/js/login.js" />"></script>
   </body>
 </html>

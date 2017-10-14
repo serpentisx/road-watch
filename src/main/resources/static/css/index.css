@@ -1,33 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('../fonts/tw-cen-mt/tcm.ttf');
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: 'Tw Cen MT', 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*********** SECTION HEADER - main ***********/
+
+main {
+  background-color: #f7f7f7;
+  padding-top: 60px;
+  margin-bottom: 620px;
+  position: relative;
+  z-index: 2;
+}
+
+header {
+  position: relative;
+  z-index: 2;
+}
+
+.header-bg {
+  background-image: url('../img/road-background.jpg');
+  height: 100%;
+  background-position: center;
+  position: relative;
+  color: white;
+  font-size: 25px;
+}
+
+.layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(44, 44, 44, 0.6);
+  z-index: 1;
+}
+
+.header-container {
+  width: 100%;
+  height: 530px;
+  position: relative;
+}
+
+.h-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fffbf9;
+  z-index: 10;
+  position: relative;
+  top: 11%;
+}
+
+.m-title h1 {
+  letter-spacing: 10px;
+  font-size: 60px;
+  margin: 18px 0;
+}
+
+.undertitle {
+  color: #c4ccce;
+}
+
+.header-btn {
+  margin-top: 4em;
+}
+
+
+/*********** SECTION HEADER - navigation ***********/
+
+.main-navigation {
+    background: none !important;
+}
+
+.index-navigation {
+  height: 70px;
+  background: #fff;
+}
+
+.index-navigation a {
+  color: #5d5d5d;
+  font-size: 20px;
+}
+
+.index-navigation a:hover {
+    color: #4f976d;
+}
+
+.index-navigation ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.index-navigation li {
+  margin: 0 30px;
+}
 
 /*********** Section 1 ***********/
 
 .section-1 {
   position: relative;
+  padding-bottom: 80px;
 }
 
-.btn-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 100px 0;
+.section-head h2 {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.section-head .line {
+  width: 270px;
+  margin: 0 auto;
+  height: 1px;
+  background: #dadada;
+  border-radius: 2px;
+  margin-top: 20px;
 }
 
 .btn {
-  margin: 0 30px;
-  width: 150px;
+  width: 165px;
   height: 40px;
-  border-radius: 5px;
-  background: #d3ca82;
+  border-radius: 3px;
+  background: #4f976d;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 17px;
+  letter-spacing: 1px;
 }
-
-.btn i {
-  margin-left: 15px;
-}
-
 
 /*********** Section 1 Posts Container ***********/
 
@@ -37,7 +155,7 @@
   justify-content: center;
   width: 90%;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 
 .post-item-wrapper {
@@ -52,7 +170,7 @@
 .post-item-wrapper:before {
   content: "";
   display: block;
-  padding-top: 138%;
+  padding-top: 114%;
 }
 
 .post-item {
@@ -68,30 +186,44 @@
 
 .post-img {
   background-image: url('../img/road-desert.png');
-  height: 40%;
+  height: 44%;
   background-size: cover;
+  position: relative;
+}
+
+.post-date {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  display: inline-block;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 6px;
+  border-radius: 2px;
+  background-color: #4f976d;
+  color: #fff;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 400;
+}
+
+.par-wrapper {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #efefef;
+  background-color: #f1f1f1;
+  width: calc(100% + 44px);
+  left: -22px;
+  top: 20px;
   position: relative;
 }
 
 .post-content-wrapper {
   position: relative;
-  margin: 20px 22px;
-  /* height: 100%; */
+  padding: 20px 22px;
 }
 
-.heart-img {
-  position: absolute;
-  bottom: 0;
-  right: 24px;
-  transform: translateY(50%);
-}
-
-.heart-img i {
-  font-size: 41px;
-  color: #313130;
-}
-
-.post-road {
+.post-name {
   color: #525350;
 }
 
@@ -101,10 +233,10 @@
   color: #525350;
   font-size: 16px;
   display: -webkit-box;
-  height: 60.2px;
+  height: 49px;
   margin: 0 auto;
   line-height: 1.4;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -113,8 +245,8 @@
 .post-author {
   display: flex;
   align-items: center;
-  margin-top: 20px;
   font-size: 16px;
+  margin-left: 20px;
 }
 
 .pa-img {
@@ -161,17 +293,101 @@
   left: 40px;
 }
 
-.post-item .likes {}
+/*********** Section 2 - Contact ***********/
 
-.post-item .dislikes {}
+.section-2-contact {
+  height: 550px;
+  background-image: url(../img/road-background.jpg);
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-.post-item .comments {}
+.contact-container {
+  z-index: 2;
+}
+
+.contact-container input {
+  height: 40px;
+}
+
+.contact-container h2 {
+  text-align: center;
+  color: #f2f2f2;
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+}
+
+.contact-container form {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.f-wrapper {
+  display: flex;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.btn-form {
+  width: 44% !important;
+  color: #f2f2f2;
+  border-radius: 3px;
+  background: #4f976d !important;
+  letter-spacing: 1px;
+  margin: 8px auto !important;
+  transition: background 0.2s ease;
+}
+
+.btn-form:hover {
+   background: #6daf78 !important;
+}
+
+.mf-wrapper {
+  flex-direction: column;
+}
+
+.mf-wrapper textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.contact-form input, textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.contact-form input:active, .contact-form input:focus, .contact-form textarea:active, .contact-form textarea:focus {
+  outline: 2px #4f976d solid;
+}
+
+.contact-form .submit-btn:hover, .contact-form .submit-btn:active, .contact-form .submit-btn:focus {
+  background: #43A047;
+}
 
 
-/*********** Section 2 ***********/
+/*********** Section MAP - ON HOLD ***********
 
 .section-2 {
-  margin-top: 180px;
+  margin-top: 300px;
 }
 
 .map-wrapper {
@@ -181,4 +397,11 @@
 #map {
   width: 100%;
   height: 100%;
+}
+*/
+
+/*********** Section 3 - footer ***********/
+
+footer {
+    position: fixed !important;
 }
