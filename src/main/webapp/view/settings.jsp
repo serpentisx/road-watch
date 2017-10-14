@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %> 
 
 <html lang="is">
   <head>
@@ -27,7 +24,7 @@
             <div class='sidebar'>
                 <div class='sidebar__header'>
                     <img alt='' class='sidebar__avatar' src='img/profile.png'>
-                    <p>Notandi</p>
+                    <p>${username}</p>
                 </div>
                 <div class='sidebar__menu-item sidebar__menu-item--active'>
                     <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
@@ -50,7 +47,7 @@
                     <div class='main__settings-form username-settings'>
                         <form action='#' method='post'>
                             <label class='main__input-label'>Þitt notandanafn</label>
-                            <input name="new-username" class='main__input' type='text'>
+                            <input name="new-username" class='main__input' type='text' value=${username}>
                         </form>
                         <button class='btn main__save-button' type="submit">Vista</button>
                     </div>

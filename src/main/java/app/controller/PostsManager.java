@@ -48,7 +48,7 @@ public class PostsManager {
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
     public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
               
-        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+        model.addAttribute("username", (String) session.getAttribute("username"));
         
         if (params.get("btn") != null) { return "new_post"; }
         
@@ -67,7 +67,7 @@ public class PostsManager {
         String zip = params.get("zip");
         String locality = params.get("locality");
         
-        String userEmail = (String) session.getAttribute("loggedInUserEmail");
+        String userEmail = (String) session.getAttribute("user");
         
         boolean postCreated = postService.createNewPost(title, description, file, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
         if (postCreated) {

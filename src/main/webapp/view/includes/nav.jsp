@@ -9,12 +9,28 @@
   </div>
   <div class="account-wrapper">
     <div class="s-account sign-in">
-      <i class="fa fa-sign-in" aria-hidden="true"></i>
-      <a href="/innskraning">Innskrá</a>
+      <c:choose>
+        <c:when test="${user == null}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <a href="/innskraning">Innskrá</a>
+        </c:when>    
+        <c:otherwise>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <a href="/minar-sidur">Mínar síður</a>
+        </c:otherwise>
+      </c:choose>
     </div>
     <div class="s-account sign-out">
-      <i class="fa fa-user-plus" aria-hidden="true"></i>
-      <a href="/nyskraning">Nýskrá</a>
+      <c:choose>
+        <c:when test="${user == null}">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <a href="/nyskraning">Nýskrá</a>
+        </c:when>    
+        <c:otherwise>
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <a href="/utskra">Útskrá</a>
+        </c:otherwise>
+      </c:choose>   
     </div>
   </div>
 </nav>

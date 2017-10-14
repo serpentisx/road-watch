@@ -68,13 +68,14 @@ public class LoginManager {
         HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String email = params.get("login_email");
         String password = params.get("login_password");
-        System.out.println(email);
-        System.out.println(password);
+
         if (accountService.verifyPassword(email, password)) {
-            session.setAttribute("loggedInUserEmail", email);
-            session.setAttribute("loggedInUsername", accountService.findUsernameByEmail(email));
+            session.setAttribute("user", email);
+            session.setAttribute("username", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
-            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+            model.addAttribute("user", (String) session.getAttribute("user"));
+            model.addAttribute("username", (String) session.getAttribute("username"));
+            System.out.println((String) session.getAttribute("username"));
             return "index";
         } 
         else {
@@ -82,7 +83,7 @@ public class LoginManager {
             return "login";
         }
     }
-
+    
     /**
      * Fetches user's new account information and creates a new user
      * Redirects the user to login page and renders it
@@ -130,7 +131,7 @@ public class LoginManager {
      */
     @RequestMapping(value = "/utskra", method = RequestMethod.GET)
     public String logout (HttpSession session, ModelMap model) {
-        session.setAttribute("loggedInUser", null);
+        session.setAttribute("user", null);
         model.addAttribute("username", null);
         model.addAttribute("posts", postService.getAllPosts());
         return "index";

@@ -42,7 +42,7 @@ public class MainManager {
      */
     @RequestMapping("/")
     public String renderHomePage(HttpSession session, ModelMap model) {
-        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+        model.addAttribute("username", (String) session.getAttribute("username"));
         
         List<Post> posts = service.getAllPosts();
         String postsJSON = service.postsToJSON(posts);
@@ -50,17 +50,18 @@ public class MainManager {
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
         return "index";
-    }
-    
-    // Testing purpose
-    @RequestMapping("/settings")
-    public String settings(HttpSession session, ModelMap model) {
+    } 
+        
+    @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
+    public String settings (HttpSession session, ModelMap model) {
+        model.addAttribute("user", (String) session.getAttribute("user"));
+        model.addAttribute("username", (String) session.getAttribute("username"));
+        System.out.println("Ssssssssssssssss"  + (String) session.getAttribute("user") + (String) session.getAttribute("username")) ;
         return "settings";
     }
     
     @RequestMapping(value = "/senda-post", method = RequestMethod.POST)
     public String sendEmail(HttpSession session, @RequestParam Map<String, String> params, ModelMap model) throws GeneralSecurityException {
-        model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 
         MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
