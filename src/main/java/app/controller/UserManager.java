@@ -35,35 +35,6 @@ public class UserManager {
     PostService postService;
 
     /**
-     * Handles user's login requests.
-     * If the user enters wrong information he is redirected to the login page
-     *
-     * @param params  the user's log-in information
-     * @param session maintains information regarding the currently logged in user
-     * @param model   an object with attributes which can be used when rendering
-     * @return        string representing page to be rendered
-     */
-    @RequestMapping(value = "/reikningur", method = RequestMethod.POST)
-    public String login (
-        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
-        String email = params.get("login_email");
-        String password = params.get("login_password");
-        System.out.println(email);
-        System.out.println(password);
-        if (accountService.verifyPassword(email, password)) {
-            session.setAttribute("loggedInUserEmail", email);
-            session.setAttribute("loggedInUsername", accountService.findUsernameByEmail(email));
-            model.addAttribute("posts", postService.getAllPosts());
-            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
-            return "index";
-        } 
-        else {
-            model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");
-            return "login";
-        }
-    }
-
-    /**
      * Renders account modification page for deleting an account
      *
      * @param model   an object with attributes which can be used when rendering

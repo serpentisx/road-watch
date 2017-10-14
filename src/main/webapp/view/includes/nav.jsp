@@ -14,7 +14,7 @@
     </div>
     <div class="s-account sign-out">
       <i class="fa fa-user-plus" aria-hidden="true"></i>
-      <a href="/nyskranning">Nýskrá</a>
+      <a href="/nyskraning">Nýskrá</a>
     </div>
   </div>
 </nav>

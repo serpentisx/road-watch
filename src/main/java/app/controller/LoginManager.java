@@ -30,6 +30,58 @@ public class LoginManager {
     
     @Autowired
     PostService postService;
+    
+       
+    /**
+     * Renders login page
+     *
+     * @return  login page with login form
+     */
+    @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
+    public String login (ModelMap model) {
+        model.addAttribute("formType", "login");
+        return "login";
+    }
+    
+    /**
+     * Renders login page
+     *
+     * @return  login page with register form
+     */
+    @RequestMapping(value = "/nyskraning", method = RequestMethod.GET)
+    public String renderRegisterPage (ModelMap model) {
+        model.addAttribute("formType", "register");
+        return "login";
+    }
+    
+     /**
+     * Handles user's login requests.
+     * If the user enters wrong information he is redirected to the login page
+     *
+     * @param params  the user's log-in information
+     * @param session maintains information regarding the currently logged in user
+     * @param model   an object with attributes which can be used when rendering
+     * @return        string representing page to be rendered
+     */
+    @RequestMapping(value = "/innskraning", method = RequestMethod.POST)
+    public String login (
+        HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
+        String email = params.get("login_email");
+        String password = params.get("login_password");
+        System.out.println(email);
+        System.out.println(password);
+        if (accountService.verifyPassword(email, password)) {
+            session.setAttribute("loggedInUserEmail", email);
+            session.setAttribute("loggedInUsername", accountService.findUsernameByEmail(email));
+            model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("username", (String) session.getAttribute("loggedInUsername"));
+            return "index";
+        } 
+        else {
+            model.addAttribute("invalid_input", "Rangt netfang eða lykilorð");
+            return "login";
+        }
+    }
 
     /**
      * Fetches user's new account information and creates a new user
@@ -66,16 +118,6 @@ public class LoginManager {
           }
         }
 
-        return "login";
-    }
-    
-    /**
-     * Renders login page
-     *
-     * @return      string representing page to be rendered
-     */
-    @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
-    public String login () {
         return "login";
     }
 
