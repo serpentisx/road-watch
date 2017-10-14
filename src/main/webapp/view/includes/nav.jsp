@@ -5,6 +5,7 @@
 
 <nav class="main-navigation header-bar">
   <div class="logo">
+    <a href="/"></a>
     <img class="logo-img" src="../img/logo.png" alt="">
   </div>
   <div class="account-wrapper">
