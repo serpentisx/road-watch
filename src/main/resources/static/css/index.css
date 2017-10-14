@@ -10,6 +10,7 @@ body, html {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 /*********** SECTION HEADER - main ***********/
@@ -77,6 +78,10 @@ header {
 
 
 /*********** SECTION HEADER - navigation ***********/
+
+.main-navigation {
+    background: none !important;
+}
 
 .index-navigation {
   height: 70px;
@@ -388,3 +393,6 @@ header {
 
 /*********** Section 3 - footer ***********/
 
+footer {
+    position: fixed !important;
+}

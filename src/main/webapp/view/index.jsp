@@ -30,7 +30,7 @@
               Með augun á veginum
             </div>
             <div class="btn header-btn">
-              Skrá annmark
+              <a href="/innlegg">Skrá annmark</a>
             </div>
           </div>
         </div>
@@ -55,6 +55,7 @@
       </section>
     </main>
     
+    <!-- Do not include footer here -->
     <footer class="section-3">
       <div class="section-2-contact">
         <div class="layer"></div>

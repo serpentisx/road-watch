@@ -17,6 +17,7 @@
   height: 70px;
   width: 100%;
   z-index: 3;
+  background: #222;
 }
 
 
@@ -38,6 +39,7 @@
 .s-account a {
   color: inherit;
   margin: 0 4px;
+  text-decoration: none;
 }
 
 .s-account i {

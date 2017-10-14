@@ -244,6 +244,14 @@ header {
     font-weight: bold;
 }
 
+.main-navigation {
+    background: none !important;
+}
+
+footer {
+    position: fixed !important;
+}
+
 @media (max-width: 764px) {
   .sidebar {
     width: 100%;
