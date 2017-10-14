@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <title>Vegavaktin</title>
     <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="<c:url value="/css/main.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/index.css" />" rel="stylesheet">
     <link href="<c:url value="/css/navigation.css" />" rel="stylesheet">
     <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
   </head>
