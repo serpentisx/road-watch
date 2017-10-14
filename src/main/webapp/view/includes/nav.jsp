@@ -10,11 +10,11 @@
   <div class="account-wrapper">
     <div class="s-account sign-in">
       <i class="fa fa-sign-in" aria-hidden="true"></i>
-      <a href="#">Innskrá</a>
+      <a href="/innskraning">Innskrá</a>
     </div>
     <div class="s-account sign-out">
       <i class="fa fa-user-plus" aria-hidden="true"></i>
-      <a href="#">Nýskrá</a>
+      <a href="/nyskranning">Nýskrá</a>
     </div>
   </div>
 </nav>

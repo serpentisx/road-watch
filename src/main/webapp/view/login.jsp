@@ -69,5 +69,6 @@
       </div>
     </main>
     <jsp:include page="includes/scripts.jsp" />
+    <script src="<c:url value="/js/login.js" />"></script>
   </body>
 </html>

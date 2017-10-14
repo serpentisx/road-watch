@@ -35,69 +35,6 @@ public class UserManager {
     PostService postService;
 
     /**
-     * Fetches user's new account information and creates a new user
-     * Redirects the user to login page and renders it
-     *
-     * @param params the user's new account information
-     * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
-     */
-    @RequestMapping(value = "/nyskraning", method = RequestMethod.POST)
-    public String register (
-        @RequestParam Map<String,String> params, ModelMap model) {
-      
-        String captchaResponse = params.get("g-recaptcha-response");
-        
-        boolean valid = VerifyUtils.verify(captchaResponse);
-
-        if (!valid) {
-          model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
-        } else {
-          String name = params.get("register_name");
-          String password = params.get("register_password");
-          String email = params.get("register_email");
-
-          boolean verification = accountService.verifyNewUser(email);
-          if (!verification) {
-              model.addAttribute("invalid_input", "Notandi er þegar til");
-              // vantar: halda register-formi opnu
-          } else if (accountService.createNewAccount(name, password, email)) {
-              model.addAttribute("success_message", "Tókst að búa til notanda");
-          } else {
-              model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
-              // vantar: halda register-formi opnu
-          }
-        }
-
-        return "login";
-    }
-    
-    /**
-     * Renders login page
-     *
-     * @return      string representing page to be rendered
-     */
-    @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
-    public String login () {
-        return "login";
-    }
-
-    /**
-     * Handles log out requests. Renders home page.
-     *
-     * @param session maintains information regarding the currently logged in user
-     * @param model   an object with attributes which can be used when rendering
-     * @return        string representing page to be rendered
-     */
-    @RequestMapping(value = "/utskra", method = RequestMethod.GET)
-    public String logout (HttpSession session, ModelMap model) {
-        session.setAttribute("loggedInUser", null);
-        model.addAttribute("username", null);
-        model.addAttribute("posts", postService.getAllPosts());
-        return "index";
-    }
-   
-    /**
      * Handles user's login requests.
      * If the user enters wrong information he is redirected to the login page
      *
@@ -111,7 +48,8 @@ public class UserManager {
         HttpSession session, @RequestParam Map<String,String> params, ModelMap model) {
         String email = params.get("login_email");
         String password = params.get("login_password");
-        
+        System.out.println(email);
+        System.out.println(password);
         if (accountService.verifyPassword(email, password)) {
             session.setAttribute("loggedInUserEmail", email);
             session.setAttribute("loggedInUsername", accountService.findUsernameByEmail(email));
