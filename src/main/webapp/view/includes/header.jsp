@@ -8,7 +8,7 @@
               <div class="line"></div>
            </div>
            <div class="undertitle">
-              meğ augun á veginum ...
+              ...meğ augun á veginum
            </div>
         </div>
      </div>
