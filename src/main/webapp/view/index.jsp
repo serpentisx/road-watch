@@ -60,13 +60,13 @@
         <div class="layer"></div>
         <div class="contact-container">
           <h2>Hafa samband</h2>
-          <form class="contact-form" action="index.html" method="post">
+          <form class="contact-form" action="/senda-post" method="post">
             <div class="f-wrapper">
               <input type="text" name="contact-email" placeholder="Netfang">
             </div>
             <div class="mf-wrapper">
               <input type="text" name="contact-name" placeholder="Nafn">
-              <textarea name="name" rows="8" cols="80" placeholder="Skilaboð"></textarea>
+              <textarea name="contact-message" rows="8" cols="80" placeholder="Skilaboð"></textarea>
             </div>
             <input class="btn btn-form" type="submit" value="Senda">
           </form>
