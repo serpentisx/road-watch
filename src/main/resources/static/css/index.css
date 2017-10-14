@@ -93,6 +93,10 @@ header {
   font-size: 20px;
 }
 
+.index-navigation a:hover {
+    color: #4f976d;
+}
+
 .index-navigation ul {
   list-style: none;
   display: flex;
@@ -336,6 +340,11 @@ header {
   background: #4f976d !important;
   letter-spacing: 1px;
   margin: 8px auto !important;
+  transition: background 0.2s ease;
+}
+
+.btn-form:hover {
+   background: #6daf78 !important;
 }
 
 .mf-wrapper {

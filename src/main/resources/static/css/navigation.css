@@ -49,6 +49,10 @@
   text-decoration: none;
 }
 
+.s-account a:hover {
+    color: #dcb25e;
+}
+
 .s-account i {
   font-size: 0.8em;
 }
