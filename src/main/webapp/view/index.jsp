@@ -17,7 +17,7 @@
   
   <body>
     
-    <header>
+    <header id="s0">
       <div class="header-container">
         <div class="lg"></div>
         <div class="layer"></div>
@@ -38,16 +38,16 @@
       </div>
       <nav class="index-navigation">
         <ul>
-          <li><a href="#">Heim</a></li>
-          <li><a href="#">Annmarkir</a></li>
+          <li><a href="#s0">Heim</a></li>
+          <li><a href="#s1">Annmarkir</a></li>
           <li><a class="map-label" href="#">Kort</a></li>
-          <li><a href="#">Hafa samband</a></li>
+          <li><a href="#s2">Hafa samband</a></li>
         </ul>
       </nav>
     </header>
           
     <main>
-      <section is="s1" class="section-1">
+      <section id="s1" class="section-1">
         <div class="section-head">
           <h2>Annmarkir</h2>
           <div class="line"></div>
@@ -74,6 +74,7 @@
         </div>
       </div>
       <jsp:include page="includes/footer.jsp" />
+      <div id="s2"></div>
     </div>
     <jsp:include page="includes/map.jsp" />
         
@@ -85,5 +86,6 @@
     
     <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />"></script>
     <script src="<c:url value="/js/map.js" />"></script>
+    <script src="<c:url value="/js/index.js" />"></script>
   </body>
 </html>

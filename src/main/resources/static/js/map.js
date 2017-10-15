@@ -9,11 +9,10 @@ $('.mobile-label').click(function () {
 });
 
 $('.map-label').click(function () {
-   $('.map-container').toggleClass('hide');
- 
-   setTimeout(function () {
-              $('#mobile-check').prop('checked', true);
-        }, 10);
+    $('.map-container').toggleClass('hide');
+    setTimeout(function () {
+        $('#mobile-check').prop('checked', true);
+    }, 10);
 });
 
 /* global posts, google  */
