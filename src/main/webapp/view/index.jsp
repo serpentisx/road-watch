@@ -12,6 +12,7 @@
     <link href="<c:url value="/css/index.css" />" rel="stylesheet">
     <link href="<c:url value="/css/navigation.css" />" rel="stylesheet">
     <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/map.css" />" rel="stylesheet">
   </head>
   
   <body>
@@ -39,7 +40,7 @@
         <ul>
           <li><a href="#">Heim</a></li>
           <li><a href="#">Annmarkir</a></li>
-          <li><a href="#">Kort</a></li>
+          <li><a class="map-label" href="#">Kort</a></li>
           <li><a href="#">Hafa samband</a></li>
         </ul>
       </nav>
@@ -74,6 +75,7 @@
       </div>
       <jsp:include page="includes/footer.jsp" />
     </div>
+    <jsp:include page="includes/map.jsp" />
         
     <jsp:include page="includes/scripts.jsp" />
     

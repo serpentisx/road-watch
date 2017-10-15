@@ -109,6 +109,7 @@ header {
 
 .index-navigation li {
   margin: 0 30px;
+  position: relative;
 }
 
 /*********** Section 1 ***********/
@@ -382,25 +383,6 @@ header {
 .contact-form .submit-btn:hover, .contact-form .submit-btn:active, .contact-form .submit-btn:focus {
   background: #43A047;
 }
-
-
-/*********** Section MAP - ON HOLD ***********
-
-.section-2 {
-  margin-top: 300px;
-}
-
-.map-wrapper {
-  height: 800px;
-}
-
-#map {
-  width: 100%;
-  height: 100%;
-}
-*/
-
-/*********** Section 3 - footer ***********/
 
 .section-2 {
     position: fixed !important;
