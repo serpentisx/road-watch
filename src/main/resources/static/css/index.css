@@ -146,6 +146,11 @@ header {
   cursor: pointer;
   font-size: 17px;
   letter-spacing: 1px;
+  transition: all 0.1s ease;
+}
+
+.btn:hover {
+   background: #6daf78 !important;
 }
 
 /*********** Section 1 Posts Container ***********/
@@ -342,10 +347,6 @@ header {
   letter-spacing: 1px;
   margin: 8px auto !important;
   transition: background 0.2s ease;
-}
-
-.btn-form:hover {
-   background: #6daf78 !important;
 }
 
 .mf-wrapper {

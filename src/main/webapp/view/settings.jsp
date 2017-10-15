@@ -58,7 +58,7 @@
                             <input name="old-password" class='main__input' type='password'>
                             <label class='main__input-label'>Nýtt lykilorð</label>
                             <input name="new-password1" class='main__input' type='password'>
-                            <label class='main__input-label'>Nýtt lykilroð - endurtekið</label>
+                            <label class='main__input-label'>Nýtt lykilorð - endurtekið</label>
                             <input name="new-password2" class='main__input' type='password'>
                             <button class='btn main__save-button' type="submit">Staðfesta</button>
                         </form>
