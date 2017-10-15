@@ -46,7 +46,7 @@
     </header>
           
     <main>
-      <section class="section-1">
+      <section is="s1" class="section-1">
         <div class="section-head">
           <h2>Annmarkir</h2>
           <div class="line"></div>
@@ -55,12 +55,11 @@
       </section>
     </main>
     
-    <!-- Do not include footer here -->
-    <footer class="section-3">
-      <div class="section-2-contact">
+    <div class="section-2 footer">
+      <div class="section-contact">
         <div class="layer"></div>
         <div class="contact-container">
-          <h2>Hafa samband</h2>
+          <h2>hafa samband</h2>
           <form class="contact-form" action="/senda-post" method="post">
             <div class="f-wrapper">
               <input type="text" name="contact-email" placeholder="Netfang">
@@ -73,14 +72,8 @@
           </form>
         </div>
       </div>
-      <div class="footer-wrapper">
-        <div class="logo">
-          <a href="/"></a>
-          <img src="img/logo.png" alt="Logo">
-        </div>
-        <span>Vegavaktin 2017</span>
-      </div>
-    </footer>
+      <jsp:include page="includes/footer.jsp" />
+    </div>
         
     <jsp:include page="includes/scripts.jsp" />
     

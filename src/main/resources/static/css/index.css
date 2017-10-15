@@ -295,7 +295,7 @@ header {
 
 /*********** Section 2 - Contact ***********/
 
-.section-2-contact {
+.section-contact {
   height: 550px;
   background-image: url(../img/road-background.jpg);
   background-position: center;
@@ -402,6 +402,6 @@ header {
 
 /*********** Section 3 - footer ***********/
 
-footer {
+.section-2 {
     position: fixed !important;
 }

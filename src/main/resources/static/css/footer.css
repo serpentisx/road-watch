@@ -1,4 +1,4 @@
-footer {
+.footer {
   background: #222;
   z-index: 1;
   bottom: 0;
@@ -13,7 +13,7 @@ footer {
   height: 100px;
 }
 
-footer .logo {
+.footer .logo {
   width: 40px;
   position: relative;
 }
@@ -24,8 +24,7 @@ footer .logo {
     height: 100%;
 }
 
-
-footer span {
+.footer span {
   margin-left: 34px;
   color: white;
   font-size: 26px;

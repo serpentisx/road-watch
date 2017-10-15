@@ -1,4 +1,4 @@
-  <footer>
+  <footer class="footer">
      <div class="footer-wrapper">
         <div class="logo">
            <a href="/"></a>
