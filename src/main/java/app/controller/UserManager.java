@@ -226,7 +226,7 @@ public class UserManager {
 
         String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
         if (!newPassword1.equals(newPassword2)) {
-            model.addAttribute("message", "Nýja lykilorðið eru ekki eins, reyndu aftur.");
+            model.addAttribute("message", "Endurtekið lykilorð ekki eins, reyndu aftur.");
             model.addAttribute("form_switch", "password");
             return "account";
         } else if (accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
