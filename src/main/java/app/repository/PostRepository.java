@@ -35,4 +35,12 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Override
     public Post save(Post post);
     
+    /**
+     * Finds post by postId
+     * 
+     * @param postId        the postId to search by
+     * @return            the matching post instance
+     */
+    public Post findByPostId(int postId);
+    
 }

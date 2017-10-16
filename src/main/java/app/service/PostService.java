@@ -57,4 +57,11 @@ public interface PostService {
     public List<Post> getAllPosts();
     
     public String postsToJSON(List<Post> posts);
+    
+    /**
+     * 
+     * @param id        id from a post
+     * @return          returns a unique post if determined, otherwise null
+     */
+    public Post getPostById(int id);
 }
