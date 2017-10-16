@@ -109,4 +109,11 @@ public class PostServiceImp implements PostService {
       return new Gson().toJson(posts);
     }
     
+    @Override
+    public Post getPostById(int id){
+        Post post = postRep.findByPostId(id);
+        return post;
+    }
+    
+    
 }

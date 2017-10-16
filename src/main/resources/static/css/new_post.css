@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('../fonts/tw-cen-mt/tcm.ttf');
 
 
 html, body {
   overflow-x: visible;
+  margin: 0;
+  height: 100%;
+  font-family: 'Tw Cen MT', 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 main > section.map {

@@ -1,5 +1,20 @@
 'use strict';
 
+$('.mobile-label').click(function () {
+    if ($('#mobile-check').prop('checked')) {
+        setTimeout(function () {
+            $('.map-container').toggleClass('hide');
+        }, 400);
+    } 
+});
+
+$('.map-label').click(function () {
+    $('.map-container').toggleClass('hide');
+    setTimeout(function () {
+        $('#mobile-check').prop('checked', true);
+    }, 10);
+});
+
 /* global posts, google  */
 
 function initMap() {

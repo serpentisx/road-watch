@@ -53,7 +53,7 @@ public class VerifyUtils {
  
             // Response code return from Server.
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode=" + responseCode);
+            // System.out.println("responseCode= " + responseCode);
  
             // Get the Input Stream of Connection to read data sent from the Server.
             InputStream is = conn.getInputStream();

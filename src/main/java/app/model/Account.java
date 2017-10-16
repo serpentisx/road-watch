@@ -30,7 +30,7 @@ public class Account {
     @Column (name="name")
     private String username;
     
-    private transient String password;
+    private String password;
     
     // Collection of all posts referring to the user's account
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)

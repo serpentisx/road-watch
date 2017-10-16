@@ -1,0 +1,57 @@
+.header-bar .logo {
+  width: 35px;
+  left: 40px;
+  cursor: pointer;
+  margin-left: 45px;
+  position: relative;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.logo a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.header-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  width: 100%;
+  z-index: 3;
+  background: #222;
+}
+
+.account-wrapper {
+  display: flex;
+  right: 40px;
+  top: 25px;
+  z-index: 2;
+  margin-right: 45px;
+  font-size: 18px;
+}
+
+.s-account {
+  margin: 0 15px;
+  cursor: pointer;
+  color: #f2f2f2;
+}
+
+.s-account a {
+  color: inherit;
+  margin: 0 4px;
+  text-decoration: none;
+}
+
+.s-account a:hover {
+    color: #dcb25e;
+}
+
+.s-account i {
+  font-size: 0.8em;
+}

@@ -1,0 +1,273 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #F0F1F2;
+  margin: 0;
+  font-family: Tw Cen MT;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+  color: #091d39;
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  bottom: 18px;
+  left: 50px;
+}
+
+header {
+  width: 100%;
+  height: 200px;
+  background: url("../img/fo-background.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.container {
+  max-width: 90%;
+  margin: 50px auto;
+  width: 90%;
+  max-width: 1500px;
+}
+
+.sidebar {
+  display: inline-block;
+  width: 25%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.sidebar i {
+  margin-right: 15px;
+}
+
+.sidebar__header {
+  vertical-align: top;
+  background: #FAFBFB;
+  padding: 20px;
+  border-bottom: 1px solid #F0F1F2;
+}
+
+.sidebar__header img.sidebar__avatar {
+  float: left;
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 40px;
+}
+
+.sidebar__header p {
+  line-height: 2em;
+  margin: 0;
+}
+
+.sidebar__menu-item {
+  background: #FFF;
+  padding: 20px;
+  color: #999;
+  border-bottom: 1px solid #F0F1F2;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sidebar__menu-item--active {
+  color: #000;
+  border-left: 3px solid #348AA7;
+}
+
+.sidebar__menu-item:hover {
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.sidebar__label {
+  float: right;
+  font-size: 80%;
+  line-height: 1.6em;
+  color: #FDE756;
+}
+
+.sidebar__badge {
+  text-align: center;
+  float: right;
+  font-size: 70%;
+  line-height: 1.8em;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #FFF;
+  background: #8ED081;
+}
+
+.main {
+  width: 70%;
+  vertical-align: top;
+  display: inline-block;
+  background: #FFF;
+  margin-left: 3%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.main__header {
+  border-bottom: 1px solid #F0F1F2;
+  height: 60px;
+}
+
+.main__content {
+  padding: 20px;
+}
+
+.main__avatar:hover .main__avatar--overlay {
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.main__avatar--overlay {
+  opacity: 0;
+  background: rgba(52, 138, 167, 0.6);
+  color: #FFF;
+  text-align: center;
+  line-height: 150px;
+  border-radius: 50%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.main__settings-form {
+  max-width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.main__input-label {
+  font-size: 80%;
+  color: #595e5f;
+  display: block;
+  margin: 5px 5px 5px 5px;
+}
+
+.main__input {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #c7ccd0;
+  margin-bottom: 20px;
+  outline: none;
+  padding: 15px;
+  border-radius: 3px;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+}
+
+.main__input:focus {
+  border: 1px solid #348AA7;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  outline: none;
+  padding: 15px 25px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.main__save-button {
+  color: #FFF;
+  background-color: #8ED081;
+}
+
+.main__save-button:hover {
+  background-color: #6dc25c;
+  cursor: pointer;
+}
+
+.main__cancel-button {
+  color: #FFF;
+  background: #CCC;
+}
+
+.main__cancel-button:hover {
+  background-color: #b3b3b3;
+  cursor: pointer;
+}
+
+.danger-btn {
+    background-color: #a94633;
+}
+
+.danger-btn:hover {
+    background-color: #df4325;;
+}
+
+.account-settings-header {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  outline: 1px solid #efe0e0;
+}
+
+.as-label {
+  display: inline-block;
+  background: #fafafa;
+  height: 100%;
+  line-height: 60px;
+  padding: 0px 15px;
+  outline: 1px solid #d0d0d0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.main__content .password-settings, .main__content .delete-account {
+  display: none;
+}
+
+.main__header .username-settings {
+  background: #8ed081;
+}
+
+.message {
+    margin-left: 22px;
+    color: #394c69;
+    font-weight: bold;
+}
+
+.main-navigation {
+    background: none !important;
+}
+
+footer {
+    position: fixed !important;
+}
+
+@media (max-width: 764px) {
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sidebar__menu-item {
+    padding: 15px;
+  }
+  .main {
+    width: 100%;
+    margin: 0;
+  }
+  h1 {
+    font-size: 44px;
+  }
+  footer {
+    text-align: center;
+  }
+}

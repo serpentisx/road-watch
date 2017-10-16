@@ -40,7 +40,6 @@ main {
     color: #fffbf9;
     z-index: 10;
     position: relative;
-    max-width: 300px;
     margin: 0 auto;
 }
 
