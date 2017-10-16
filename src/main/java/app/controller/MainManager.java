@@ -54,9 +54,13 @@ public class MainManager {
         
     @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
     public String settings (HttpSession session, ModelMap model) {
+        if (session.getAttribute("user") == null) {
+            return "login";
+        }
+        
         model.addAttribute("user", (String) session.getAttribute("user"));
         model.addAttribute("username", (String) session.getAttribute("username"));
-        System.out.println("Ssssssssssssssss"  + (String) session.getAttribute("user") + (String) session.getAttribute("username")) ;
+        
         return "settings";
     }
     

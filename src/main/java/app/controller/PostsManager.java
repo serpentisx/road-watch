@@ -37,7 +37,9 @@ public class PostsManager {
      
   @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
     public String renderPostPage(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
-        
+        if (session.getAttribute("user") == null) {
+            return "login";
+        }
         return "new_post";
     }
     
