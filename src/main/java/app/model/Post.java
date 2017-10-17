@@ -1,6 +1,10 @@
 package app.model;
 
 import java.time.LocalDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +52,7 @@ public class Post {
     @JoinColumn(name = "email")
     private Account account;    // user account associated with the post
     
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
         this.dating = LocalDate.now();
@@ -63,7 +68,6 @@ public class Post {
     }
     
     public Post () {}
-
     
     public int getId() {
       return postId;
@@ -73,8 +77,13 @@ public class Post {
       this.postId = id;
     }
     
-    public LocalDate getDating() {
-      return dating;
+    public String getDating() {
+      if (dating != null) {
+        String text = this.dating.format(FORMATTER);
+        System.out.println(text);
+        return text;
+      }
+      return null;
     }
     
     public void setDating(LocalDate dating) {
