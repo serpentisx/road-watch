@@ -31,7 +31,7 @@
               Með augun á veginum
             </div>
             <div class="btn header-btn">
-              <a href="/innlegg">Skrá annmark</a>
+              <a href="/innlegg">Nýtt inlegg</a>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
       <nav class="index-navigation">
         <ul>
           <li><a href="#s0">Heim</a></li>
-          <li><a href="#s1">Annmarkir</a></li>
+          <li><a href="#s1">Innlegg</a></li>
           <li><a class="map-label" href="#">Kort</a></li>
           <li><a href="#s2">Hafa samband</a></li>
         </ul>
@@ -49,7 +49,7 @@
     <main>
       <section id="s1" class="section-1">
         <div class="section-head">
-          <h2>Annmarkir</h2>
+          <h2>Innlegg</h2>
           <div class="line"></div>
         </div>
         <jsp:include page="includes/posts_container.jsp" />

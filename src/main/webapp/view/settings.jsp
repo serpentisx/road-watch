@@ -30,7 +30,7 @@
                     <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
                 </div>
                 <div class='sidebar__menu-item'>
-                    <i class="fa fa-sticky-note" aria-hidden="true"></i> Mínar innleggir
+                    <i class="fa fa-sticky-note" aria-hidden="true"></i> Mín innlegg
                 </div>
                 <div class='sidebar__menu-item'>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i> Líkað við
@@ -65,7 +65,7 @@
                     </div>
                     <div class='main__settings-form delete-account'>
                         <form action='/reikningur/eyda-reikningi' method='post'>
-                            <h3>Þú ert að fara að eyða reikningi. Þessi aðgerð er endanleg.</h3>
+                            <h3>Þú ert að fara að eyða reikningi. Þessi aðgerð er óafturkallanleg.</h3>
                             <label class='main__input-label'>Lykilorð þitt</label>
                             <input name="password" class='main__input' type='password'>
                             <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>                      
