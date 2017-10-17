@@ -34,8 +34,7 @@ function initMap() {
   let infowindow = new google.maps.InfoWindow;
   for (var i = 0; i < posts.length; i++) {
     post = posts[i];
-    console.log(post);
-     marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
       position: new google.maps.LatLng(post.latitude, post.longitude),
       map
     });

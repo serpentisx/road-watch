@@ -85,7 +85,7 @@ public class UserManager {
         String loggedInUserEmail = (String) session.getAttribute("user");
         
         if (!newPassword1.equals(newPassword2)) {
-            model.addAttribute("message", "Nýja lykilorðið eru ekki eins, reyndu aftur.");
+            model.addAttribute("message", "Ný lykilorð eru ekki eins, reyndu aftur.");
             return "settings";
         }
         if (!accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
@@ -96,10 +96,10 @@ public class UserManager {
             model.addAttribute("message", "Lykilorðið þitt hefur verið breytt");
             return "settings";
         }
-        else {
-            model.addAttribute("message", "Úúps! Eitthvað fór úrskeiðis. Reyndu aftur síðar.");
-            return "settings";
-        }
+        
+        model.addAttribute("message", "Úúúps! Eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+        return "settings";
+        
     }
  
     /**

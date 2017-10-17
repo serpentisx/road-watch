@@ -28,28 +28,22 @@ import org.hibernate.annotations.Immutable;
 public class Road {
     
     @Id
-    private Integer roadId;
+    private Integer roadId;       // Road's id
     
     @Column(name="is_highway")
     private boolean isHighway;    // true if road is a highway
     @Column(name="road_number")
     private String roadNumber;    // road number (may be null)
-
-    private String name;          // road name
     
-    /*
-    @Embedded
-    private Location location;    // road's location (may be null)
-    */
-    
-    private Integer zip;
-    private String locality;
-    private String municipality;
+    private String name;          // road name    
+    private Integer zip;          // location's zip-code (may be null)
+    private String locality;      // location's locality (may be null)
+    private String municipality;  // location's municipality (may be null)
     
     @Column(name="region_is")
-    private String regionIS;
+    private String regionIS;      // location's region (Icelandic)
     @Column(name="region_en")
-    private String regionEN;
+    private String regionEN;      // location's region (English)
     
     
     // Collection of all posts referring to the road
