@@ -4,6 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      <property name="location">
+        <value>classpath:application.properties</value>
+      </property>
+    </bean>
+
+
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${cf.host}" />
         <property name="port" value="${cf.port}" />
