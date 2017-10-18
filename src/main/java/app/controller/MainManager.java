@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * MainManager handles home-page get-requests 
+ * MainManager handles home-page get-requests
  */
 @Controller
 @RequestMapping("") 
@@ -35,10 +35,11 @@ public class MainManager {
     @Autowired
     PostService service;
     /**
-     * 
-     * @param session  session maintaining logged in user
-     * @param model    an object with attributes which can be used when rendering
-     * @return         string representing page to be rendered
+     * Renders home page with posts.
+     *
+     * @param session  : the user's current session
+     * @param model    : the object data used when rendering the view
+     * @return         : home page
      */
     @RequestMapping("/")
     public String renderHomePage(HttpSession session, ModelMap model) {
@@ -50,8 +51,16 @@ public class MainManager {
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
         return "index";
-    } 
-        
+    }
+
+    /**
+     * Renders My page where logged in users can edit and view his account and posts.
+     * Login page is rendered instead if the user is not logged in.
+     *
+     * @param session : the users's current session
+     * @param model   : the object data used when rendering the view
+     * @return My page if logged in, else returns login page
+     */
     @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
     public String settings (HttpSession session, ModelMap model) {
         if (session.getAttribute("user") == null) {
@@ -62,29 +71,5 @@ public class MainManager {
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         return "settings";
-    }
-    
-    @RequestMapping(value = "/senda-post", method = RequestMethod.POST)
-    public String sendEmail(HttpSession session, @RequestParam Map<String, String> params, ModelMap model) throws GeneralSecurityException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-
-        MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
-        socketFactory.setTrustAllHosts(true);
-        
-        String name = params.get("contact-name");
-        String email = params.get("contact-email");
-        String message = params.get("contact-message");
-   
-        try {
-            Mail mm = (Mail) context.getBean("mailMail");
-            mm.sendMail("vegavaktin@gmail.com", "vegavaktin@gmail.com", name + " (" + email + ")", message);
-            model.addAttribute("message", "Skilaboð þitt hefur verið móttekið. Við munum hafa samband eins fljótt og auðið er.");
-            
-            return "message";
-        }
-        catch (Exception e) {
-            model.addAttribute("message", "Úúps, eitthvað fór úrskeiðis. Vinsamlega reyndu aftur síðar.");
-            return "message";
-        }
     }
 }
