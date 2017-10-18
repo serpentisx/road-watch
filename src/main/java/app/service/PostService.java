@@ -7,6 +7,7 @@ package app.service;
 
 import app.model.Post;
 import app.model.Road;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,6 +58,8 @@ public interface PostService {
     public List<Post> getAllPosts();
     
     public String postsToJSON(List<?> posts);
+    
+    public String generateDisplayPostsJSON(List<Post> posts);
     
     /**
      * 

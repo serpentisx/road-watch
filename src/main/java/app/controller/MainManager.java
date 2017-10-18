@@ -41,7 +41,7 @@ public class MainManager {
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         List<Post> posts = service.getAllPosts();
-        String postsJSON = service.postsToJSON(generateDisplayPosts(posts));
+        String postsJSON = service.generateDisplayPostsJSON(posts);
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
@@ -61,30 +61,9 @@ public class MainManager {
         if (session.getAttribute("user") == null) {
             return "login";
         }
-        
         model.addAttribute("user", (String) session.getAttribute("user"));
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         return "settings";
-    }
-    
-    public List<HashMap<String, String>> generateDisplayPosts(List<Post> posts) {
-        List<HashMap<String, String>> displayPosts = new ArrayList();
-        for (int i = 0; i < posts.size(); i++) {
-            Post p = posts.get(i);
-            HashMap<String, String> post = new HashMap();
-            
-            post.put("title", p.getTitle());
-            post.put("description", p.getDescription());
-            post.put("photo", p.getPhotoURL());
-            post.put("author", p.getAccount().getUsername());
-            post.put("date", p.getDating());
-            post.put("support", Integer.toString(p.getSupport()));
-            post.put("road", p.getRoad().toString());
-            
-            displayPosts.add(post);
-        }
-        
-        return displayPosts;
     }
 }

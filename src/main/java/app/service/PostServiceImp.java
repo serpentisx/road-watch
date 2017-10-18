@@ -13,6 +13,7 @@ import app.repository.PostRepository;
 import app.repository.RoadRepository;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,6 +103,26 @@ public class PostServiceImp implements PostService {
     public List<Post> getAllPosts() {
       ArrayList<Post> posts = (ArrayList<Post>) (postRep.findAll());
       return posts;
+    }
+    
+    @Override
+    public String generateDisplayPostsJSON(List<Post> posts) {
+        List<HashMap<String, String>> displayPosts = new ArrayList();
+        for (int i = 0; i < posts.size(); i++) {
+            Post p = posts.get(i);
+            HashMap<String, String> post = new HashMap();
+            
+            post.put("title", p.getTitle());
+            post.put("description", p.getDescription());
+            post.put("photo", p.getPhotoURL());
+            post.put("author", p.getAccount().getUsername());
+            post.put("date", p.getDating());
+            post.put("support", Integer.toString(p.getSupport()));
+            post.put("road", p.getRoad().toString());
+            
+            displayPosts.add(post);
+        }
+        return postsToJSON(displayPosts);
     }
     
     @Override

@@ -78,9 +78,9 @@ public class LoginManager {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
-            System.out.println((String) session.getAttribute("username"));
             return "index";
         } 
         else {
@@ -139,6 +139,7 @@ public class LoginManager {
         session.setAttribute("user", null);
         model.addAttribute("username", null);
         model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
         return "index";
     }
 }
