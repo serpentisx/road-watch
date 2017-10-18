@@ -53,6 +53,9 @@
           <div class="line"></div>
         </div>
         <jsp:include page="includes/posts_container.jsp" />
+        <c:if test = "${posts.size() > 6}">
+          <div class="btn p-see-more-btn">Sjá meira</div>
+        </c:if>
       </section>
     </main>
     

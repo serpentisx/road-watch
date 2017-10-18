@@ -80,7 +80,6 @@ public class Post {
     public String getDating() {
       if (dating != null) {
         String text = this.dating.format(FORMATTER);
-        System.out.println(text);
         return text;
       }
       return null;

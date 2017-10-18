@@ -299,6 +299,10 @@ header {
   left: 40px;
 }
 
+.p-see-more-btn {
+  margin:0 auto 14px auto;
+}
+
 /*********** Section 2 - Contact ***********/
 
 .section-contact {

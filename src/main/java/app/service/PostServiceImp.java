@@ -105,7 +105,7 @@ public class PostServiceImp implements PostService {
     }
     
     @Override
-    public String postsToJSON(List<Post> posts) {
+    public String postsToJSON(List<?> posts) {
       return new Gson().toJson(posts);
     }
     

@@ -56,7 +56,7 @@ public interface PostService {
      */
     public List<Post> getAllPosts();
     
-    public String postsToJSON(List<Post> posts);
+    public String postsToJSON(List<?> posts);
     
     /**
      * 

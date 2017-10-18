@@ -2,22 +2,17 @@
 package app.controller;
 
 import app.model.Post;
-import app.service.Mail;
 import app.service.PostService;
-import com.sun.mail.util.MailSSLSocketFactory;
-import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -46,7 +41,7 @@ public class MainManager {
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         List<Post> posts = service.getAllPosts();
-        String postsJSON = service.postsToJSON(posts);
+        String postsJSON = service.postsToJSON(generateDisplayPosts(posts));
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
@@ -71,5 +66,25 @@ public class MainManager {
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         return "settings";
+    }
+    
+    public List<HashMap<String, String>> generateDisplayPosts(List<Post> posts) {
+        List<HashMap<String, String>> displayPosts = new ArrayList();
+        for (int i = 0; i < posts.size(); i++) {
+            Post p = posts.get(i);
+            HashMap<String, String> post = new HashMap();
+            
+            post.put("title", p.getTitle());
+            post.put("description", p.getDescription());
+            post.put("photo", p.getPhotoURL());
+            post.put("author", p.getAccount().getUsername());
+            post.put("date", p.getDating());
+            post.put("support", Integer.toString(p.getSupport()));
+            post.put("road", p.getRoad().toString());
+            
+            displayPosts.add(post);
+        }
+        
+        return displayPosts;
     }
 }
