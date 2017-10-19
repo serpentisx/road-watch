@@ -1,9 +1,13 @@
 
 package app.controller;
 
-import app.repository.RoadRepository;
 import app.service.AccountService;
 import app.service.PostService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import static org.springframework.data.jpa.domain.JpaSort.path;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
- *
  * @author Team 20 HBV501G - Fall 2017
  * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
@@ -54,7 +59,7 @@ public class PostsManager {
      * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
-    public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
+    public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model, @RequestParam("file") MultipartFile file) throws IOException {
               
         model.addAttribute("username", (String) session.getAttribute("username"));
         
@@ -65,7 +70,6 @@ public class PostsManager {
         
         /* NEED TO CHANGE WHEN FILE UPLOADING HAS BEEN IMPLEMENTED */
         // String file = params.get("file");
-        String file = "../img/road-desert.png";
         
         // Hidden inputs
         String latitude = params.get("latitude");
@@ -77,7 +81,12 @@ public class PostsManager {
         
         String userEmail = (String) session.getAttribute("user");
         
-        boolean postCreated = postService.createNewPost(title, description, file, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
+        byte[] bytes = null;
+        if (!file.isEmpty()) {
+            bytes = file.getBytes(); 
+        }
+        
+        boolean postCreated = postService.createNewPost(title, description, bytes, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
         if (postCreated) {
           model.addAttribute("posts", postService.getAllPosts());
           return "index";

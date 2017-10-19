@@ -7,7 +7,9 @@ package app.service;
 
 import app.model.Post;
 import app.model.Road;
+import java.util.HashMap;
 import java.util.List;
+import static sun.security.krb5.Confounder.bytes;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -37,7 +39,7 @@ public interface PostService {
      * @param email       email corresponding to currently logged in user
      * @return            true if successful, else false
      */
-    public boolean createNewPost(String title, String description, String file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email);
+    public boolean createNewPost(String title, String description, byte[] file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email);
     
     /**
      * 
@@ -56,7 +58,9 @@ public interface PostService {
      */
     public List<Post> getAllPosts();
     
-    public String postsToJSON(List<Post> posts);
+    public String postsToJSON(List<?> posts);
+    
+    public String generateDisplayPostsJSON(List<Post> posts);
     
     /**
      * 

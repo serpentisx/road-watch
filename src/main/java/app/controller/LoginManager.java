@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Huy Van Nguyen
+ * Handles login, logout and registering
  */
 @Controller
 @RequestMapping("")
@@ -73,9 +78,9 @@ public class LoginManager {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
-            System.out.println((String) session.getAttribute("username"));
             return "index";
         } 
         else {
@@ -134,6 +139,7 @@ public class LoginManager {
         session.setAttribute("user", null);
         model.addAttribute("username", null);
         model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
         return "index";
     }
 }

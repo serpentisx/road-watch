@@ -12,13 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Huy Van Nguyen
+ * Error controller handles and renders custom error pages.
  */
 @Controller
 public class ErrorController {
- 
-    @RequestMapping(value = "etest", method = RequestMethod.GET)
+
+    // Request mapping for /error. Handles error pages and replaces the default error page with
+    // customized error page
+    @RequestMapping(value = "error", method = RequestMethod.GET)
     public String renderErrorPage(HttpServletRequest httpRequest, ModelMap model) {
          
         String errorMsg = "Úúps! Eitthvað fór úrskeiðis";
@@ -44,9 +51,15 @@ public class ErrorController {
         }
         model.addAttribute("errorMsg", errorMsg);
         model.addAttribute("errorCode", httpErrorCode);
-        return "error2";
+        return "error";
     }
-     
+
+    /**
+     * Get error code if any occurs during http request
+     *
+     * @param httpRequest
+     * @return error code
+     */
     private int getErrorCode(HttpServletRequest httpRequest) {
         return (Integer) httpRequest
           .getAttribute("javax.servlet.error.status_code");

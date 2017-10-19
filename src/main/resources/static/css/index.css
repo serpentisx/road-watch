@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-@import url('../fonts/tw-cen-mt/tcm.ttf');
+@import url('../fonts/tw-cen-mt/tcm.TTF');
 
 body, html {
   margin: 0;
@@ -297,6 +297,10 @@ header {
 .rc-img span {
   position: absolute;
   left: 40px;
+}
+
+.p-see-more-btn {
+  margin:0 auto 14px auto;
 }
 
 /*********** Section 2 - Contact ***********/

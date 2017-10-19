@@ -5,7 +5,7 @@
 
 <div class="posts-container">
   <c:if test = "${posts != null}">
-    <c:forEach items="${posts}" var="post">
+    <c:forEach begin="1" end="6" items="${posts}" var="post">
       <c:if test = "${!post.isArchived()}">
         <div class="post-item-wrapper">
           <div class="post-item">
