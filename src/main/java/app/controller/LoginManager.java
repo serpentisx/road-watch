@@ -6,6 +6,7 @@
 package app.controller;
 
 import app.service.AccountService;
+import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
 import java.util.Map;
@@ -35,6 +36,9 @@ public class LoginManager {
     
     @Autowired
     PostService postService;
+    
+    @Autowired
+    LoginEventService loginEventService;
     
        
     /**
@@ -81,6 +85,7 @@ public class LoginManager {
             model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
+            loginEventService.createNewLoginEvent(email);
             return "index";
         } 
         else {
