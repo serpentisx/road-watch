@@ -22,7 +22,7 @@
       <jsp:include page="includes/nav.jsp" />
       <section>
         <div class="new-post-container">
-          <form action="/innlegg" method="POST">
+          <form action="/innlegg" method="POST" enctype="multipart/form-data">
             <fieldset>
               <legend>Nýtt innlegg</legend>
 
@@ -58,7 +58,7 @@
 
               <div class="file-upload">
                 <label for="file"></label>
-                <input type="file" id="file" name="file" accept="image/*">
+                <input type="file" name="file" />
               </div>
 
               <!-- Hidden inputs -->

@@ -45,19 +45,19 @@ public class PostServiceImp implements PostService {
     RoadRepository roadRep;
     
     @Override
-    public boolean createNewPost(String title, String description, String file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email) {
+    public boolean createNewPost(String title, String description, byte[] file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email) {
         Road road = determineUniqueRoad(roadName, roadNumber, zip, locality);
 
         // Connect to the image cloud
         Cloudinary cloudinary = new Cloudinary("cloudinary://881482785141911:XQOJQQ11mhNgiQVMC1W5LDEwOlc@vegavaktin");
 
-        File toUpload = new File("sloth.jpg");
+        Map imageResultMap = null;
 
         // upload image to cloud
         try {
             System.out.println("Trying to upload image");
-            Map x = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
-            System.out.println(x);
+            imageResultMap = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            System.out.println(imageResultMap);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class PostServiceImp implements PostService {
           Double lat = (Double) Double.parseDouble(latitude);
           Double lng = (Double) Double.parseDouble(longitude);
           
-          Post newPost = new Post(file, title, description, lat, lng, road, account);
+          Post newPost = new Post(imageResultMap.get("secure_url").toString(), title, description, lat, lng, road, account);
           postRep.save(newPost);
           return true;
         }
