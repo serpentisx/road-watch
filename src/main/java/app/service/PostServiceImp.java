@@ -11,12 +11,17 @@ import app.model.Road;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
 import app.repository.RoadRepository;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.cloudinary.*;
+import java.util.Map;
+import java.io.IOException;
+import java.io.File;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -41,9 +46,23 @@ public class PostServiceImp implements PostService {
     RoadRepository roadRep;
     
     @Override
-    public boolean createNewPost(String title, String description, String file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email) {
+    public boolean createNewPost(String title, String description, byte[] file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email) {
         Road road = determineUniqueRoad(roadName, roadNumber, zip, locality);
-        
+
+        // Connect to the image cloud
+        Cloudinary cloudinary = new Cloudinary("cloudinary://881482785141911:XQOJQQ11mhNgiQVMC1W5LDEwOlc@vegavaktin");
+
+        Map imageResultMap = null;
+
+        // upload image to cloud
+        try {
+            System.out.println("Trying to upload image");
+            imageResultMap = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            System.out.println(imageResultMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (road != null) {
           System.out.println(road.getName() + " " + road.getId());
           Account account = accountRep.findByEmail(email);
@@ -51,7 +70,7 @@ public class PostServiceImp implements PostService {
           Double lat = (Double) Double.parseDouble(latitude);
           Double lng = (Double) Double.parseDouble(longitude);
           
-          Post newPost = new Post(file, title, description, lat, lng, road, account);
+          Post newPost = new Post(imageResultMap.get("secure_url").toString(), title, description, lat, lng, road, account);
           postRep.save(newPost);
           return true;
         }
