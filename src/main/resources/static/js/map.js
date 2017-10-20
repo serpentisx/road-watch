@@ -12,6 +12,7 @@ $('.map-label').click(function () {
     $('.map-container').toggleClass('hide');
     setTimeout(function () {
         $('#mobile-check').prop('checked', true);
+        google.maps.event.trigger(map, "resize");
     }, 10);
 });
 
