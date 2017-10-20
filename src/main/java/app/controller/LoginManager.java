@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.controller;
 
 import app.service.AccountService;
@@ -40,11 +36,11 @@ public class LoginManager {
     @Autowired
     LoginEventService loginEventService;
     
-       
     /**
      * Renders login page
      *
-     * @return  login page with login form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with login form
      */
     @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
     public String login (ModelMap model) {
@@ -55,7 +51,8 @@ public class LoginManager {
     /**
      * Renders login page
      *
-     * @return  login page with register form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with register form
      */
     @RequestMapping(value = "/nyskraning", method = RequestMethod.GET)
     public String renderRegisterPage (ModelMap model) {

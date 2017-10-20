@@ -21,7 +21,6 @@ public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>
     @Override
     public List<LoginEvent> findAll();
     
-    
     @Override
     public LoginEvent save(LoginEvent loginEvent);
 }
