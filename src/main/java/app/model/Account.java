@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,7 +36,9 @@ public class Account {
     // Collection of all posts referring to the user's account
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
     private transient Set<Post> posts = new HashSet<Post>();
-
+    
+    @ManyToMany(mappedBy = "supporters")
+    private Set<Post> supported = new HashSet<Post>();
     
     public Account(String username, String password, String email) {
         this.username = username;
@@ -71,5 +74,9 @@ public class Account {
     
     public void setPosts(Set<Post> posts) {
       this.posts = posts;
-    }      
+    }
+    
+    public Set<Post> getSupported() {
+      return supported;
+    }
 }
