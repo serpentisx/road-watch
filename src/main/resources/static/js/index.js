@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function(){
             scrollTop: target
         }, 500);
     });
-
+    
+    posts.splice(0, 6);
     $('.p-see-more-btn').click(function () {
         var next = posts.splice(0, 6);
         for (var i = 0; i < next.length; i++) {
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function(){
                           <div class="post-img" style="background-image: url(${post.photo})"></div>
                           <div class="post-date">${date}</div>
                           <div class="post-content-wrapper">
-                            <span class="post-road">${post.road}</span>
+                            <span class="post-road">${post.roadName}</span>
                             <h3 class="post-title">${post.title}</h3>
                             <p class="post-description">${post.description}</p>
                             <div class="par-wrapper">
