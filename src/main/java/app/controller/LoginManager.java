@@ -6,11 +6,16 @@
 package app.controller;
 
 import app.service.AccountService;
+import app.service.Mail;
 import app.service.PostService;
 import app.service.VerifyUtils;
+import com.sun.mail.util.MailSSLSocketFactory;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,6 +130,41 @@ public class LoginManager {
         }
 
         return "login";
+    }
+    
+    /**
+     * Send email input to server side and send a new recovery password
+     * to corresponding email
+     *
+     * @return  login page with message to indicate success or not.
+     */
+    @RequestMapping(value = "/gleymt-lykilord", method = RequestMethod.POST)
+    public String passwordRecovery (@RequestParam Map<String, String> params, ModelMap model) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+
+        String email = params.get("submit_email");
+        model.addAttribute("formType", "login");
+        
+        try {
+            MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
+            socketFactory.setTrustAllHosts(true);
+            Mail mm = (Mail) context.getBean("mailMail");
+            String pw = UUID.randomUUID().toString().replace("-", "");
+            accountService.changePassword(email, pw);
+            mm.sendMail("vegavaktin@gmail.com", 
+                        email, 
+                        "Endurstillt lykilorð " + " (" + email + ")", 
+                        "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nKær kveðja, \nVegavaktin");
+            
+            model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent á netfangið þitt");
+
+            return "login";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("invalid_input", "Úúps, eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+            return "login";
+        }
     }
 
     /**
