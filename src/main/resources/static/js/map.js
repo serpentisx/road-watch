@@ -1,20 +1,6 @@
 'use strict';
 
-$('.mobile-label').click(function () {
-    if ($('#mobile-check').prop('checked')) {
-        setTimeout(function () {
-            $('.map-container').toggleClass('hide');
-        }, 400);
-    } 
-});
-
-$('.map-label').click(function () {
-    $('.map-container').toggleClass('hide');
-    setTimeout(function () {
-        $('#mobile-check').prop('checked', true);
-        google.maps.event.trigger(map, "resize");
-    }, 10);
-});
+let map;
 
 /* global posts, google  */
 
@@ -22,7 +8,7 @@ function initMap() {
   // Location for markers
 
   // Construct a new map with a center position
-  const map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     zoom: 6,
     center: new google.maps.LatLng(65, -18.8)
   });
@@ -62,3 +48,19 @@ function initMap() {
 }
 
 initMap();
+
+$('.mobile-label').click(function () {
+    if ($('#mobile-check').prop('checked')) {
+        setTimeout(function () {
+            $('.map-container').toggleClass('hide');
+        }, 400);
+    } 
+});
+
+$('.map-label').click(function () {
+    $('.map-container').toggleClass('hide');
+    setTimeout(function () {
+        $('#mobile-check').prop('checked', true);
+        google.maps.event.trigger(map, "resize");
+    }, 10);
+});

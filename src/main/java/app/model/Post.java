@@ -1,16 +1,20 @@
 package app.model;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,7 +43,7 @@ public class Post {
     
     private String title;       // post title
     private String description; // short post description
-    private Integer support;        // number of post supports
+    private Integer support;    // number of post supports
     private Boolean archived;   // true if post is archived
     private Double latitude;    // latitude for location of road system defect
     private Double longitude;   // longitude for location of road system defect
@@ -52,22 +56,32 @@ public class Post {
     @JoinColumn(name = "email")
     private Account account;    // user account associated with the post
     
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(
+        name = "PostSupport", 
+        joinColumns = { @JoinColumn(name = "postId") }, 
+        inverseJoinColumns = { @JoinColumn(name = "email") }
+    )
+    Set<Account> supporters = null;   // list of all supporting users
+    
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
+        this.supporters = new HashSet<Account>();
         this.dating = LocalDate.now();
         this.photoURL = photo;
         this.title = title;
         this.description = description;
         this.support = 0;
-        this.archived = false;  
+        this.archived = false;
         this.latitude = latitude;
         this.longitude = longitude;
         this.road = road;
         this.account = account;
     }
     
-    public Post () {}
+    public Post () {this.supporters = new HashSet<Account>();
+}
     
     public int getId() {
       return postId;
@@ -159,5 +173,9 @@ public class Post {
 
     public void setAccount(Account account) {
       this.account = account;
+    }
+    
+    public Set<Account> getSupporters() {
+      return supporters;
     }
 }

@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.controller;
 
 import app.service.AccountService;
 import app.service.Mail;
 import app.service.MailService;
+import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -44,12 +41,15 @@ public class LoginManager {
     
     @Autowired
     MailService mailService;
-    
        
+    @Autowired
+    LoginEventService loginEventService;
+
     /**
      * Renders login page
      *
-     * @return  login page with login form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with login form
      */
     @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
     public String login (ModelMap model) {
@@ -60,7 +60,8 @@ public class LoginManager {
     /**
      * Renders login page
      *
-     * @return  login page with register form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with register form
      */
     @RequestMapping(value = "/nyskraning", method = RequestMethod.GET)
     public String renderRegisterPage (ModelMap model) {
@@ -90,6 +91,7 @@ public class LoginManager {
             model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
+            loginEventService.createNewLoginEvent(email);
             return "index";
         } 
         else {
