@@ -7,6 +7,7 @@ package app.controller;
 
 import app.service.AccountService;
 import app.service.Mail;
+import app.service.MailService;
 import app.service.PostService;
 import app.service.VerifyUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -40,6 +41,9 @@ public class LoginManager {
     
     @Autowired
     PostService postService;
+    
+    @Autowired
+    MailService mailService;
     
        
     /**
@@ -140,21 +144,17 @@ public class LoginManager {
      */
     @RequestMapping(value = "/gleymt-lykilord", method = RequestMethod.POST)
     public String passwordRecovery (@RequestParam Map<String, String> params, ModelMap model) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-
+ 
         String email = params.get("submit_email");
         model.addAttribute("formType", "login");
         
         try {
-            MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
-            socketFactory.setTrustAllHosts(true);
-            Mail mm = (Mail) context.getBean("mailMail");
             String pw = UUID.randomUUID().toString().replace("-", "");
             accountService.changePassword(email, pw);
-            mm.sendMail("vegavaktin@gmail.com", 
-                        email, 
-                        "Endurstillt lykilorð " + " (" + email + ")", 
-                        "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nKær kveðja, \nVegavaktin");
+            mailService.sendMail("vegavaktin@gmail.com", 
+                                 email, 
+                                 "Endurstillt lykilorð " + " (" + email + ")", 
+                                 "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nKær kveðja, \nVegavaktin");
             
             model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent á netfangið þitt");
 
