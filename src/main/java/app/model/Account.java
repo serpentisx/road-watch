@@ -42,7 +42,7 @@ public class Account {
     private transient Set<LoginEvent> logins = new HashSet<LoginEvent>();
     
     // Collection of all posts user has supported
-    @ManyToMany(mappedBy = "supporters")
+    @ManyToMany(mappedBy = "supporters", cascade=CascadeType.ALL)
     private Set<Post> supported = new HashSet<Post>();
     
     public Account(String username, String password, String email) {

@@ -45,6 +45,7 @@ public class MainManager {
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
+        
         return "index";
     }
 
