@@ -58,9 +58,9 @@ public class Post {
     
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
-        name = "PostSupport", 
-        joinColumns = { @JoinColumn(name = "postId") }, 
-        inverseJoinColumns = { @JoinColumn(name = "email") }
+      name = "PostSupport", 
+      joinColumns = { @JoinColumn(name = "postId") }, 
+      inverseJoinColumns = { @JoinColumn(name = "email") }
     )
     Set<Account> supporters = null;   // list of all supporting users
     
@@ -84,7 +84,7 @@ public class Post {
 }
     
     public int getId() {
-      return postId;
+        return postId;
     }
 
     public void setId(int id) {
@@ -92,90 +92,90 @@ public class Post {
     }
     
     public String getDating() {
-      if (dating != null) {
-        String text = this.dating.format(FORMATTER);
-        return text;
-      }
-      return null;
+        if (dating != null) {
+            String text = this.dating.format(FORMATTER);
+            return text;
+        }
+        return null;
     }
     
     public void setDating(LocalDate dating) {
-      this.dating = dating;
+        this.dating = dating;
     }
 
     public String getPhotoURL() {
-      return photoURL;
+        return photoURL;
     }
 
     public void setPhotoURL(String photoURL) {
-      this.photoURL = photoURL;
+        this.photoURL = photoURL;
     }
 
     public String getTitle() {
-      return title;
+        return title;
     }
     
     public void setTitle(String title) {
-      this.title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-      return description;
+        return description;
     }
 
     public void setDescription(String description) {
-      this.description = description;
+        this.description = description;
     }
 
     public int getSupport() {
-      return support;
+        return support;
     }
 
     public void setSupport(int support) {
-      this.support = support;
+        this.support = support;
     }
 
     public boolean isArchived() {
-      return archived;
+        return archived;
     }
     
     public void setArchived(boolean archived) {
-      this.archived = archived;
+        this.archived = archived;
     }
 
     public double getLatitude() {
-      return latitude;
+        return latitude;
     }
 
     public void setLatitude(double latitude) {
-      this.latitude = latitude;
+        this.latitude = latitude;
     }
     
     public double getLongitude() {
-      return longitude;
+        return longitude;
     }
     
     public void setLongitude(double longitude) {
-      this.longitude = longitude;
+        this.longitude = longitude;
     }
 
     public Road getRoad() {
-      return road;
+        return road;
     }
 
     public void setRoad(Road road) {
-      this.road = road;
+        this.road = road;
     }
     
     public Account getAccount() {
-      return account;
+        return account;
     }
 
     public void setAccount(Account account) {
-      this.account = account;
+        this.account = account;
     }
     
     public Set<Account> getSupporters() {
-      return supporters;
+        return supporters;
     }
 }

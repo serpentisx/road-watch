@@ -26,17 +26,22 @@ import javax.persistence.Table;
 public class Account {
  
     @Id
-    private String email;
+    private String email;     // User's email address
     
     @Column (name="name")
-    private String username;
+    private String username;  // User's username
     
-    private String password;
+    private String password;  // User's password
     
     // Collection of all posts referring to the user's account
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
     private transient Set<Post> posts = new HashSet<Post>();
     
+    // Collection of all login events
+    @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
+    private transient Set<LoginEvent> logins = new HashSet<LoginEvent>();
+    
+    // Collection of all posts user has supported
     @ManyToMany(mappedBy = "supporters")
     private Set<Post> supported = new HashSet<Post>();
     
@@ -61,22 +66,26 @@ public class Account {
     }
     
     public void setPassword(String password) {
-      this.password = password;
+        this.password = password;
     }
     
     public void setUsername(String name) {
-      this.username = name;
+        this.username = name;
     }
 
     public Set<Post> getPosts() {
-      return posts;
-    }
-    
-    public void setPosts(Set<Post> posts) {
-      this.posts = posts;
+        return posts;
     }
     
     public Set<Post> getSupported() {
-      return supported;
+        return supported;
+    }
+    
+    public void addPostSupport(Post post) {
+        supported.add(post);
+    }
+    
+    public Set<LoginEvent> getLogins() {
+        return logins;
     }
 }

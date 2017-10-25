@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Bjarki Viðar Kristjánsson
  */
 public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>{
+    
     /**
      * Find all LoginEvents in database
      * @return list of all post found in database

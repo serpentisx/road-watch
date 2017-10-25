@@ -26,7 +26,7 @@ public class LoginEvent {
     private Long loginEventId;
     
     @Column (name="stamp")
-    private Instant timestamp;
+    private Instant timestamp;  // login event timestamp
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "email")
