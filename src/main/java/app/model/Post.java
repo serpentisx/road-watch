@@ -62,7 +62,7 @@ public class Post {
         joinColumns = { @JoinColumn(name = "postId") }, 
         inverseJoinColumns = { @JoinColumn(name = "email") }
     )
-    Set<Account> supporters = null;   // list of all supporting users
+    private Set<Account> supporters;   // list of all supporting users
     
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
@@ -80,8 +80,9 @@ public class Post {
         this.account = account;
     }
     
-    public Post () {this.supporters = new HashSet<Account>();
-}
+    public Post () {
+        this.supporters = new HashSet<Account>();
+    }
     
     public int getId() {
       return postId;

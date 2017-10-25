@@ -37,7 +37,7 @@ public class Account {
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
     private transient Set<Post> posts = new HashSet<Post>();
     
-    @ManyToMany(mappedBy = "supporters")
+    @ManyToMany(mappedBy = "supporters", cascade=CascadeType.ALL)
     private Set<Post> supported = new HashSet<Post>();
     
     public Account(String username, String password, String email) {
