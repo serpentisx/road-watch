@@ -17,9 +17,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.hamcrest.Matchers.containsString;
 /**
  *
- * @author Ebba Þóra Hvannberg
- * @date október 2017 
- * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
+ * @author Bjarki Viðar
+ * @date október 2017
  * 
  * Prófunarklasi sem framkvæmir prófanir án þess að þurfa að kalla á þjóninn 
 */
