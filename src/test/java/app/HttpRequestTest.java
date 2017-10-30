@@ -1,4 +1,6 @@
-package test;
+package app;
+
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
@@ -36,10 +38,12 @@ public class HttpRequestTest {
         
          * @throws java.lang.Exception
          */
+        
 	@Test
         public void heimaSkilarKlukkan() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Klukkan");
     }
+
 
 }

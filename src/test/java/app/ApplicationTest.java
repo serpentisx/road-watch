@@ -1,5 +1,4 @@
-package test;
-
+package app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,11 +35,13 @@ public class ApplicationTest {
          * Aðferð til að athuga hvort virkar að senda HttpRequest á /nyrKennari
          * og fá til baka nyrKennari.html síðuna sem inniheldur strenginn Karl
          */
+        
 	@Test 
         public void nyrKennariSkilarKarl() throws Exception {
         this.mockMvc.perform(get("/nyrKennari"))                
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Karl")));
     }
+    
 
 }

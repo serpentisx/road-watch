@@ -1,4 +1,6 @@
-package test;
+package app;
+
+
 
 
 import app.controller.UserManager;
@@ -33,7 +35,7 @@ import org.springframework.context.annotation.Bean;
  *  Getum beðið um að keyra bara upp KennariController klasann 
  */
 @WebMvcTest (UserManager.class)       
-                                            
+
 public class WebLayerTest {
     
         // Þjónninn ekki keyrður upp 
@@ -46,11 +48,13 @@ public class WebLayerTest {
          * Aðferð til að athuga hvort virkar að senda HttpRequest á listiKennari
          * og fá til baka listiKennara.html síðuna 
          */
+        /*
 	@Test 
         public void nyrKennariSkilarKarl() throws Exception {
         this.mockMvc.perform(get("/listiKennarar"))                
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Listi")));
     }
+        */
 
 }

@@ -1,4 +1,6 @@
-package test;
+package app;
+
+
 
 
 import app.controller.UserManager;
@@ -64,13 +66,13 @@ public class WebMockTest {
         // http://site.mockito.org/   
         
         // Prófið ætti að takast - prófum sönnu leiðina í if-setningunni
-        /*when(daginnService.erALifi()).thenReturn(true);
+        when(daginnService.erALifi()).thenReturn(true);
         this.mockMvc.perform(get("/lifir"))
                 .andDo(print())
                 .andExpect(status()
                 .isOk())
                 .andExpect(content()
-                .string(containsString("Nýr kennari")));  */
+                .string(containsString("Nýr kennari")));  
       
     }
     /**
@@ -81,11 +83,11 @@ public class WebMockTest {
     public void testaLifirFalse() throws Exception {
         
         // Prófið ætti að takast - prófum ósönnu leiðina í if-setningunni 
-        /*when(daginnService.erALifi()).thenReturn(false);
+        when(daginnService.erALifi()).thenReturn(false);
         this.mockMvc.perform(get("/lifir")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content()
-                        .string(containsString("Listi yfir kennara")));*/
+                        .string(containsString("Listi yfir kennara")));
     }
     
     /**
@@ -97,12 +99,12 @@ public class WebMockTest {
     public void testaLifirFalseMedRongumStreng() throws Exception {
         
         // Prófið ætti að ekki takast - prófum ósönnu leiðina í if-setningunni 
-        /*when(daginnService.erALifi()).thenReturn(false);
+        when(daginnService.erALifi()).thenReturn(false);
         
       
         this.mockMvc.perform(get("/lifir")).andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Nýr kennari"))); */
+                .andExpect(content().string(containsString("Nýr kennari"))); 
         }
        
     }

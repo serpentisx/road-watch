@@ -1,4 +1,6 @@
-package test;
+package app;
+
+
 
 import app.controller.UserManager;
 import static org.assertj.core.api.Assertions.assertThat;
