@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.service.Mail;
+import app.service.MailService;
 import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
-import java.security.GeneralSecurityException;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -24,6 +25,9 @@ import java.util.Map;
  */
 @Controller
 public class MailManager {
+    
+    @Autowired
+    MailService mailService;
 
     /**
      * Sends mail
@@ -42,10 +46,7 @@ public class MailManager {
         String message = params.get("contact-message");
 
         try {
-            MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
-            socketFactory.setTrustAllHosts(true);
-            Mail mm = (Mail) context.getBean("mailMail");
-            mm.sendMail("vegavaktin@gmail.com", "vegavaktin@gmail.com", name + " (" + email + ")", message);
+            mailService.sendMail("vegavaktin@gmail.com", "vegavaktin@gmail.com", name + " (" + email + ")", message);
             model.addAttribute("message", "Skilaboð þitt hefur verið móttekið. Við munum hafa samband eins fljótt og auðið er.");
 
             return "message";

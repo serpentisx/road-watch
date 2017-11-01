@@ -1,17 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.controller;
 
 import app.service.AccountService;
+import app.service.Mail;
+import app.service.MailService;
 import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
+import com.sun.mail.util.MailSSLSocketFactory;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,13 +40,16 @@ public class LoginManager {
     PostService postService;
     
     @Autowired
-    LoginEventService loginEventService;
-    
+    MailService mailService;
        
+    @Autowired
+    LoginEventService loginEventService;
+
     /**
      * Renders login page
      *
-     * @return  login page with login form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with login form
      */
     @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
     public String login (ModelMap model) {
@@ -55,7 +60,8 @@ public class LoginManager {
     /**
      * Renders login page
      *
-     * @return  login page with register form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with register form
      */
     @RequestMapping(value = "/nyskraning", method = RequestMethod.GET)
     public String renderRegisterPage (ModelMap model) {
@@ -130,6 +136,37 @@ public class LoginManager {
         }
 
         return "login";
+    }
+    
+    /**
+     * Send email input to server side and send a new recovery password
+     * to corresponding email
+     *
+     * @return  login page with message to indicate success or not.
+     */
+    @RequestMapping(value = "/gleymt-lykilord", method = RequestMethod.POST)
+    public String passwordRecovery (@RequestParam Map<String, String> params, ModelMap model) {
+ 
+        String email = params.get("submit_email");
+        model.addAttribute("formType", "login");
+        
+        try {
+            String pw = UUID.randomUUID().toString().replace("-", "");
+            accountService.changePassword(email, pw);
+            mailService.sendMail("vegavaktin@gmail.com", 
+                                 email, 
+                                 "Endurstillt lykilorð " + " (" + email + ")", 
+                                 "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nKær kveðja, \nVegavaktin");
+            
+            model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent á netfangið þitt");
+
+            return "login";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("invalid_input", "Úúps, eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+            return "login";
+        }
     }
 
     /**

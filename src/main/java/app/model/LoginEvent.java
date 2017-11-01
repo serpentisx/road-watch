@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.model;
 
-import java.time.LocalTime;
+import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,39 +23,31 @@ public class LoginEvent {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int LoginEventId;
+    private Long loginEventId;
     
-    @Column (name="timestamp")
-    private LocalTime time;
-    
+    @Column (name="stamp")
+    private Instant timestamp;  // login event timestamp
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "email")
     private Account account;    // user account associated with the LoginEvent
     
-    
-    
-    
     public LoginEvent(Account account){
         this.account = account;
-        time = LocalTime.now();
+        this.timestamp = Instant.now();
     }
     
     public LoginEvent () {}
 
-    public int getLoginEventId() {
-        return LoginEventId;
+    public Long getLoginEventId() {
+        return loginEventId;
     }
 
     public Account getAccount() {
         return account;
     }
 
-
-    public LocalTime getTime() {
-        return time;
-    }
-    
-    
-    
+    public Instant getTime() {
+        return timestamp;
+    }    
 }

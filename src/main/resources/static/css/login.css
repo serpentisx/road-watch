@@ -178,7 +178,7 @@ i {
 }
 
 .form .message {
-    margin: 15px 0 0;
+    margin: 10px 0 0;
     color: #b3b3b3;
     font-size: 12px;
 }
@@ -186,6 +186,7 @@ i {
 .form .message a {
     color: #4CAF50;
     text-decoration: none;
+    display: inline-block;
 }
 
 .form .register-form {

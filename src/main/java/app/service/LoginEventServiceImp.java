@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.service;
 
 import app.model.Account;
@@ -17,21 +13,18 @@ import org.springframework.stereotype.Service;
  * @author Bjarki
  */
 @Service
-public class LoginEventServiceImp implements LoginEventService{
-    
+public class LoginEventServiceImp implements LoginEventService {
     
     @Autowired
     LoginEventRepository loginEventRep;
     
-    
     @Autowired
     AccountRepository accountRep;
     
+    @Override
     public void createNewLoginEvent(String user){
         Account account = accountRep.findByEmail(user);
         LoginEvent loginEvent = new LoginEvent(account);
         loginEventRep.save(loginEvent);
     }
-    
-    
 }

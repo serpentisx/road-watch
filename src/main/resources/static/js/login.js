@@ -1,3 +1,5 @@
 $('.message a').click(function () {
-    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    var c = "." + $(this).attr("class").split(' ')[0];
+    $('form').animate({height: "hide", opacity: "hide"}, "slow");
+    $(c).animate({height: "show", opacity: "show"}, "slow");
 });

@@ -126,10 +126,10 @@ public class PostServiceImp implements PostService {
     
     @Override
     public String generateDisplayPostsJSON(List<Post> posts) {
-        List<HashMap<String, String>> displayPosts = new ArrayList();
+        List<HashMap<String, Object>> displayPosts = new ArrayList();
         for (int i = 0; i < posts.size(); i++) {
             Post p = posts.get(i);
-            HashMap<String, String> post = new HashMap();
+            HashMap<String, Object> post = new HashMap();
             
             post.put("title", p.getTitle());
             post.put("description", p.getDescription());
@@ -137,7 +137,10 @@ public class PostServiceImp implements PostService {
             post.put("author", p.getAccount().getUsername());
             post.put("date", p.getDating());
             post.put("support", Integer.toString(p.getSupport()));
-            post.put("road", p.getRoad().toString());
+            post.put("road", p.getRoad());
+            post.put("roadName", p.getRoad().toString());
+            post.put("longitude", p.getLongitude());
+            post.put("latitude", p.getLatitude());
             
             displayPosts.add(post);
         }

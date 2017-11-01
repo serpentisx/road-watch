@@ -43,8 +43,13 @@ public class MainManager {
         List<Post> posts = service.getAllPosts();
         String postsJSON = service.generateDisplayPostsJSON(posts);
         
+        String er = service.generateDisplayPostsJSON(new ArrayList<Post>());
+        
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + er);
+        
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
+        
         return "index";
     }
 

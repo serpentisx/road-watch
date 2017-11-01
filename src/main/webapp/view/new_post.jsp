@@ -58,7 +58,7 @@
 
               <div class="file-upload">
                 <label for="file"></label>
-                <input type="file" name="file" />
+                <input id="file" type="file" name="file" accept="image/*">
               </div>
 
               <!-- Hidden inputs -->
