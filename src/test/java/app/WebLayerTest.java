@@ -1,11 +1,15 @@
 package app;
 
+import app.controller.MainManager;
+import app.controller.PostsManager;
+import app.service.AccountService;
+import app.service.PostService;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 // Athugið vel að þessi import séu rétt 
@@ -26,20 +30,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Prófunarklasi sem framkvæmir prófanir án þess að þurfa að kalla á þjóninn
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc       // Spring MockMvc - allt "context"-ið keyrt upp 
+@WebMvcTest(MainManager.class)  // Spring MockMvc - allt "context"-ið keyrt upp 
 public class WebLayerTest {
 
     // Þjónninn (Tomcat) ekki keyrður upp 
     @Autowired
     private MockMvc mockMvc;
+    
+    @MockBean
+    PostService postService;
+    
 
     /**
      * Aðferð til að athuga hvort módelhluturinn "posts" hlaðast ekki örugglega
      * á forsíðu
      */
     @Test
-    public void nyrKennariSkilarKarl() throws Exception {
+    public void postModelIsLoaded() throws Exception {
         this.mockMvc.perform(get("/"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(model().attribute("posts", notNullValue()));
