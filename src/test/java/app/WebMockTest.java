@@ -1,10 +1,13 @@
 package app;
 
 import app.controller.MainManager;
+import app.controller.UserManager;
 import app.model.Post;
+import app.service.AccountService;
 import app.service.PostService;
 import java.util.ArrayList;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import java.util.HashMap;
+import static org.hamcrest.Matchers.hasSize;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * í "context-inn" sem Mock (prófanahlut)
  */
 
-@WebMvcTest(MainManager.class)
+@WebMvcTest(controllers={MainManager.class, UserManager.class})
 public class WebMockTest {
 
     // Þjónninn (Tomcat) ekki keyrður upp 
@@ -49,33 +52,64 @@ public class WebMockTest {
     // sérstaklega gert fyrir Mockito safnið 
     @MockBean
     PostService postService;
+    
+    @MockBean
+    AccountService accountService;
 
     /**
-     * Aðferð sem athugar hvort createNewPost() aðgerðin skilar ekki örugglega false þegar
-     * sett eru inn tóm gildi
-     * 
-     * Einnig athugar hún hvort posts módelhluturinn er örugglega ekki tómur
-     * þegar farið er á forsíðu
+     * Aðferð sem athugar hvort model hluturinn sem er sendur
+     * yfir í view layerinn sé ekki örugglega af lengd 0 þegar getAllPosts() 
+     * aðferðin skilar tómum lista
      */
     @Test
-    public void testNewPosts() throws Exception {
-        when(postService.createNewPost("", "", null, "", "", "", "", "", "", "")).thenReturn(false);
+    public void testGetAllPosts() throws Exception {
+        when(postService.getAllPosts()).thenReturn(new ArrayList<Post>());
         this.mockMvc.perform(get("/"))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(model().attribute("posts", notNullValue()));
+                .andExpect(model().attribute("posts", hasSize(0)));
 
     }
+    
+    
+    
+    
+    /*@Test
+    public void testLogout() throws Exception {
+        when(postService.).thenReturn(St);
+        this.mockMvc.perform(get("/utskra"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(model().attribute("posts", hasSize(0)));
 
+    }*/
+
+    /*@Test
+    public void testChangeUserName() throws Exception {
+        when(accountService.changeName("bvk1@hi.is", "fdsa")).thenReturn(true);
+        this.mockMvc.perform((RequestBuilder) post("/reikningur/breyta-nafni"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(model().attribute("message", "Nafni þínu hefur verið breytt!"));
+
+    }*/
     /**
      * Athugar hvort createNewPost skilar true (þ.e. það tókst að búa til nýtt innlegg) 
      * þegar sett eru inn lögleg viðföng
      */
     @Test
     public void testSuccessNewPost() throws Exception {
-        when(postService.createNewPost("Vegur", "numer", new byte[10], "gata", "44", "22", "11", "Smara", "Lind", "Island")).thenReturn(true);
-
+        HashMap<String, String> ss = new HashMap();
+        ss.put("", "[]");
+        when(postService.generateDisplayPostsJSON(new ArrayList<Post>())).thenReturn("{=[]}");
+        this.mockMvc.perform(get("/"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(model().attribute("postsJSON", ss));
     }
 
+    
+    
+    
+    
+    
+    
     /**
      * Athugar hvort getAllPosts skilar ekki örugglega lista af innleggum
      */

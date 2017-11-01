@@ -1,8 +1,10 @@
 package app;
 
+import app.controller.LoginManager;
 import app.controller.MainManager;
-import app.controller.PostsManager;
 import app.service.AccountService;
+import app.service.LoginEventService;
+import app.service.MailService;
 import app.service.PostService;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -30,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Prófunarklasi sem framkvæmir prófanir án þess að þurfa að kalla á þjóninn
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(MainManager.class)  // Spring MockMvc - allt "context"-ið keyrt upp 
+@WebMvcTest(controllers={MainManager.class, LoginManager.class})  // Spring MockMvc - allt "context"-ið keyrt upp 
 public class WebLayerTest {
 
     // Þjónninn (Tomcat) ekki keyrður upp 
@@ -39,6 +42,15 @@ public class WebLayerTest {
     
     @MockBean
     PostService postService;
+    
+    @MockBean
+    AccountService accountService;
+    
+    @MockBean
+    MailService mailService;
+       
+    @MockBean
+    LoginEventService loginEventService;
     
 
     /**
@@ -50,5 +62,12 @@ public class WebLayerTest {
         this.mockMvc.perform(get("/"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(model().attribute("posts", notNullValue()));
+    }
+    
+    @Test
+    public void checkLogin() throws Exception {
+        this.mockMvc.perform(get("/innskraning"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("login"));
     }
 }
