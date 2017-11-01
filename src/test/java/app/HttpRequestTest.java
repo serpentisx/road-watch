@@ -38,7 +38,7 @@ public class HttpRequestTest {
      * @throws java.lang.Exception
      */
     @Test
-    public void demoProf() throws Exception {
+    public void mainPageContainsVegavaktin() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Vegavaktin");
     }

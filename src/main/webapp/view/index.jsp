@@ -87,8 +87,8 @@
       var posts = ${postsJSON};
     </script>
     
-    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />"></script>
     <script src="<c:url value="/js/map.js" />"></script>
     <script src="<c:url value="/js/index.js" />"></script>
+    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4&callback=initMap" />"></script>
   </body>
 </html>

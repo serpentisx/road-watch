@@ -44,5 +44,4 @@ public class ApplicationTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
-
 }
