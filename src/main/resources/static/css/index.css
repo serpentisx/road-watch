@@ -292,6 +292,10 @@ header {
   cursor: pointer;
 }
 
+.rc-img-active {
+    background: #5e91ff;
+}
+
 .rc-img i {
   color: white;
 }
@@ -299,10 +303,6 @@ header {
 .rc-img span {
   position: absolute;
   left: 40px;
-}
-
-.rc-img:hover {
-  background : #5e91ff;
 }
 
 .p-see-more-btn {

@@ -1,5 +1,33 @@
 document.addEventListener("DOMContentLoaded", function(){
     var $root = $('html, body');
+    
+    $('.rc-img').click(function() {
+        var id = parseInt($(this).attr('id'));
+        $.ajax({
+            type: "POST",
+            context: this,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: "/",
+            data: JSON.stringify(id),
+            success: function (result) {
+                var support = parseInt($('span', this).text());
+
+                if (result == 0) {
+                    window.location.href = "/innskraning";
+                    return;
+                } else if (result == 1) {
+                    $('span', this).text(support + 1);
+                } else {
+                    $('span', this).text(support - 1);
+                }
+                $(this).toggleClass('rc-img-active');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
 
     $('.index-navigation a').click(function(event) {
         event.preventDefault();

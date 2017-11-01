@@ -106,4 +106,10 @@ public class AccountServiceImp implements AccountService {
         Account account = accountRep.findByEmail(email);
         return account.getUsername();
     }
+    
+    @Override
+    @Transactional
+    public Account findAccountByEmail(String email) {
+        return accountRep.findByEmail(email);
+    }
 }

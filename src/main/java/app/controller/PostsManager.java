@@ -1,14 +1,14 @@
 
 package app.controller;
 
+import app.model.Account;
+import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import static org.springframework.data.jpa.domain.JpaSort.path;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -93,5 +94,30 @@ public class PostsManager {
         }
         model.addAttribute("message", "Ekki tókst að búa til innleggið, reyndu aftur");
         return "new_post";
+    }
+    
+        
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public @ResponseBody
+    int support(@RequestBody int id, HttpServletRequest request, HttpSession session) {
+        int NOT_LOGGED_IN = 0;
+        int LOGGED_IN_LIKE = 1;
+        int LOGGED_IN_DISLIKE = 2;
+        
+        boolean loggedIn = session.getAttribute("user") != null;
+        if (loggedIn) {
+            Post post = postService.getPostById(id);
+            Set<Account> supporters = post.getSupporters();
+            String userEmail = (String) session.getAttribute("user");
+            for (Account account : supporters) {
+                if (account.getEmail().equals(userEmail)) {
+                    postService.unsupportPost(id, userEmail);
+                    return LOGGED_IN_DISLIKE;
+                }
+            }
+            postService.supportPost(id, userEmail);
+            return LOGGED_IN_LIKE;
+        }
+        return NOT_LOGGED_IN;
     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -132,6 +133,7 @@ public class Post {
         return support;
     }
 
+    @Transactional
     public void setSupport(int support) {
         this.support = support;
     }
@@ -163,7 +165,7 @@ public class Post {
     public Road getRoad() {
         return road;
     }
-
+    
     public void setRoad(Road road) {
         this.road = road;
     }
@@ -175,7 +177,7 @@ public class Post {
     public void setAccount(Account account) {
         this.account = account;
     }
-    
+
     public Set<Account> getSupporters() {
         return supporters;
     }

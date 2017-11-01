@@ -3,16 +3,17 @@ package app.controller;
 
 import app.model.Post;
 import app.service.PostService;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Team 20 HBV501G - Fall 2017

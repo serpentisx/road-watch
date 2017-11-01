@@ -19,6 +19,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cloudinary.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 import java.io.IOException;
 import java.io.File;
@@ -151,11 +153,26 @@ public class PostServiceImp implements PostService {
     public String postsToJSON(List<?> posts) {
       return new Gson().toJson(posts);
     }
+
+    @Override
+    @Transactional
+    public void supportPost(int postId, String userEmail) {
+        Post p = postRep.findByPostId(postId);
+        p.setSupport(p.getSupport() + 1);
+        p.getSupporters().add(accountRep.findByEmail(userEmail));
+    }
+
+    @Override
+    @Transactional
+    public void unsupportPost(int postId, String userEmail) {
+        Post p = postRep.findByPostId(postId);
+        p.setSupport(p.getSupport() - 1);
+        p.getSupporters().remove(accountRep.findByEmail(userEmail));
+    }
     
     @Override
     public Post getPostById(int id){
         Post post = postRep.findByPostId(id);
         return post;
     }
-    
 }
