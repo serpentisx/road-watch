@@ -11,8 +11,8 @@
     <div class="lg"></div>
     <div class="layer"></div>
     <div class="message-box">
-      <h1>405</h1>
-      <p>Lorem ipsum dolar sit amet</p>
+      <h1>${errorCode}</h1>
+      <p>${errorMsg}</p>
       <div class="home-btn"><a href="/">Tilbaka</a></div>
     </div>
   </body>

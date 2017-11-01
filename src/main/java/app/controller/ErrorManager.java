@@ -6,10 +6,11 @@
 package app.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -21,15 +22,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Error controller handles and renders custom error pages.
  */
 @Controller
-public class ErrorController {
+public class ErrorManager implements ErrorController {
+    
+    private static final String PATH = "/error";
 
     // Request mapping for /error. Handles error pages and replaces the default error page with
     // customized error page
-    @RequestMapping(value = "error", method = RequestMethod.GET)
-    public String renderErrorPage(HttpServletRequest httpRequest, ModelMap model) {
+    @RequestMapping(value = PATH)
+    public ModelAndView renderErrorPage(HttpServletRequest httpRequest, ModelMap model) {
          
+        ModelAndView errorPage = new ModelAndView("errorPage");
         String errorMsg = "Úúps! Eitthvað fór úrskeiðis";
-        int httpErrorCode = 55;
+        int httpErrorCode = getErrorCode(httpRequest);
  
         switch (httpErrorCode) {
             case 400: {
@@ -49,9 +53,10 @@ public class ErrorController {
                 break;
             }
         }
-        model.addAttribute("errorMsg", errorMsg);
-        model.addAttribute("errorCode", httpErrorCode);
-        return "error";
+        errorPage.addObject("errorMsg", errorMsg);
+        errorPage.addObject("errorCode", httpErrorCode);
+        
+        return errorPage;
     }
 
     /**
@@ -63,5 +68,10 @@ public class ErrorController {
     private int getErrorCode(HttpServletRequest httpRequest) {
         return (Integer) httpRequest
           .getAttribute("javax.servlet.error.status_code");
+    }
+
+    @Override
+    public String getErrorPath() {
+        return PATH;
     }
 }

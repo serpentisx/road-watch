@@ -281,13 +281,15 @@ header {
 .rc-img {
   width: 30px;
   height: 30px;
-  background: #5e91ff;
+  background: #99a0a7;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin: 15px 50px 15px 0;
+  transition: all 100ms ease;
+  cursor: pointer;
 }
 
 .rc-img i {
@@ -297,6 +299,10 @@ header {
 .rc-img span {
   position: absolute;
   left: 40px;
+}
+
+.rc-img:hover {
+  background : #5e91ff;
 }
 
 .p-see-more-btn {
