@@ -24,7 +24,7 @@
                   <span class="pa-name">${post.getAccount().getUsername()}</span>
                 </div>
                 <c:choose>
-                  <c:when test='${post.getSupporters().contains("hvn1@hi.is")}'>
+                  <c:when test='${post.getSupporters().contains(user)}'>
                      <div id="${post.getId()}" class="rc-img rc-img-active likes">
                   </c:when>
                   <c:otherwise>

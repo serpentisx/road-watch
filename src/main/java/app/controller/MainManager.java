@@ -42,7 +42,7 @@ public class MainManager {
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         List<Post> posts = service.getAllPosts();
-        String postsJSON = service.generateDisplayPostsJSON(posts);
+        String postsJSON = service.generateDisplayPostsJSON(posts, (String) session.getAttribute("user"));
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);

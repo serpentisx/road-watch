@@ -97,27 +97,15 @@ public class PostsManager {
     }
     
         
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/supportPost", method = RequestMethod.POST)
     public @ResponseBody
-    int support(@RequestBody int id, HttpServletRequest request, HttpSession session) {
-        int NOT_LOGGED_IN = 0;
-        int LOGGED_IN_LIKE = 1;
-        int LOGGED_IN_DISLIKE = 2;
-        
-        boolean loggedIn = session.getAttribute("user") != null;
-        if (loggedIn) {
-            Post post = postService.getPostById(id);
-            Set<Account> supporters = post.getSupporters();
-            String userEmail = (String) session.getAttribute("user");
-            for (Account account : supporters) {
-                if (account.getEmail().equals(userEmail)) {
-                    postService.unsupportPost(id, userEmail);
-                    return LOGGED_IN_DISLIKE;
-                }
-            }
+    void support(@RequestBody int id, HttpServletRequest request, HttpSession session) {
+        Post post = postService.getPostById(id);
+        String userEmail = (String) session.getAttribute("user");
+        if (post.getSupporters().contains(userEmail)) {
+            postService.unsupportPost(id, userEmail);
+        } else {
             postService.supportPost(id, userEmail);
-            return LOGGED_IN_LIKE;
         }
-        return NOT_LOGGED_IN;
     }
 }

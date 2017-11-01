@@ -58,7 +58,7 @@ public interface PostService {
     
     public String postsToJSON(List<?> posts);
     
-    public String generateDisplayPostsJSON(List<Post> posts);
+    public String generateDisplayPostsJSON(List<Post> posts, String user);
     
     /**
      * 
