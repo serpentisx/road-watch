@@ -96,10 +96,15 @@ public class PostsManager {
         return "new_post";
     }
     
-        
+    /**
+     * Calls a method for supporting/unsupporting a post for currently logged in user
+     * 
+     * @param id : the post's ID to support
+     * @param session : the current session
+     */    
     @RequestMapping(value = "/supportPost", method = RequestMethod.POST)
     public @ResponseBody
-    void support(@RequestBody int id, HttpServletRequest request, HttpSession session) {
+    void support(@RequestBody int id, HttpSession session) {
         Post post = postService.getPostById(id);
         String userEmail = (String) session.getAttribute("user");
         if (post.getSupporters().contains(userEmail)) {

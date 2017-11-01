@@ -189,6 +189,12 @@ public class LoginManager {
         return "index";
     }
     
+    /**
+     * Checks if a user is logged in
+     * 
+     * @param session
+     * @return true if a user is logged in
+     */
     @RequestMapping(value = "/isLoggedIn", method = RequestMethod.POST)
     public @ResponseBody
     boolean support(HttpSession session) {

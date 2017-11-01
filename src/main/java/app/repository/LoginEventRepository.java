@@ -10,8 +10,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Bjarki Viðar Kristjánsson
+ * Stores all login events by users
  */
 public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>{
     
@@ -22,6 +27,11 @@ public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>
     @Override
     public List<LoginEvent> findAll();
     
+    /**
+     * Save a login event in the database
+     * @param loginEvent : the login event to save
+     * @return : the LoginEvent saved
+     */
     @Override
     public LoginEvent save(LoginEvent loginEvent);
 }
