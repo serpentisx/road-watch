@@ -3,7 +3,6 @@ package app.controller;
 
 import app.service.AccountService;
 import app.service.PostService;
-import app.service.VerifyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

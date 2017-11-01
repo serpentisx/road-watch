@@ -2,14 +2,22 @@
 
 /* global google:true */
 
+/* Fires when DOM content has been loaded */
+document.addEventListener('DOMContentLoaded', function () {
+  geolocation.init();
+  autocomplete.init();
+  map.init();
+  
+});
+
 var map;
 var mapMarker;
 var infowindow;
 
-/* General functions for adding info to new post form and displaying messages to the user */
+/* General purpose functions for adding info to new post form and displaying messages to the user */
 
 // Displays message to the user
-function displayMessage (success, error) {
+function showMessage (success, error) {
   var messageError = document.querySelector('.location-error-message');
   var messageSuccess = document.querySelector('.location-success-message');
   messageError.innerHTML = error;
@@ -32,7 +40,7 @@ function addPlaceInfo(location) {
   latitudeInput.value = lat;
   longitudeInput.value = lng;
   addressInput.value = location.formatted_address;
-  displayMessage(roadInput.value + " (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")", "");
+  showMessage(roadInput.value + " (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")", "");
 }
 
 // Adds available road info to the new post form
@@ -88,13 +96,14 @@ function addAllInfo(location) {
   if (roadFound) {
     addPlaceInfo(location);
   } else {
-    displayMessage("", "Enginn vegur finnst fyrir staðsetningu, reyndu aftur");
+    showMessage("", "Enginn vegur finnst fyrir staðsetningu, reyndu aftur");
   }
   return roadFound;
 }
 
 
-/* Autocomplete functions */
+
+/* Autocomplete Module */
 
 // Handles event when user selects a place from the autocomplete input
 function placeChangedHandler(autocomplete, e) {
@@ -117,7 +126,7 @@ function initAutoComplete() {
   autocomplete.addListener('place_changed', placeChangedHandler.bind(null, autocomplete));
 }
 
-// Callback function defined in Google Maps <script> tag.
+
 // Initializes map, adds click event listener,
 // and initializes autocomplete place search in new post form.
 function initMap() {
@@ -145,90 +154,71 @@ function initMap() {
       if (status === 'OK') {
         if (addAllInfo(results[0])) setMarker(coords);
       } else {
-        displayMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
+        showMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
       }
     });
   });
-    
-  initAutoComplete();
 }
 
 
-/* Coordinates generation function */
 
-// Uses Google Geocoder to obtain the user's location
-// and adds all the info to the form
-var addPosition = function (position) {
-  var geocoder = new google.maps.Geocoder();
-  var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
-  geocoder.geocode({'location': latlng}, function(results, status) {
-    if (status === 'OK') {
-      addAllInfo(results[0]);
-    } else {
-      displayMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
+/* Geolocation Module */
+
+var geolocation = (function() {
+  var geocoder;
+  
+  var addPosition = function (position) {
+    var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+    geocoder.geocode({'location': latlng}, function(results, status) {
+      if (status === 'OK') {
+        addAllInfo(results[0]);
+      } else {
+        showMessage("", "Óþekkt villa. Ekki tókst að sækja staðsetninguna");
+      }
+    });
+  };
+  
+  // Geolocation error function
+  var geoError = function (error) {
+    console.log('Geolocation error occurred. Error code: ' + error.code);
+    switch(error.code) {
+      case 1:
+        showMessage("", "Aðgangur að staðsetningarþjónustu hindraður, ekki tókst að sækja staðsetningu.");
+        break;
+      case 2:
+        showMessage("", "Staðsetningarþjónusta skilaði villu, ekki tókst að sækja staðsetningu.");
+        break;
+      case 3:
+        showMessage("", "Staðsetningarþjónusta rann út á tíma, ekki tókst að sækja staðsetningu.");
+        break;
+      default: // unknown error, code: 0
+        showMessage("", "Óþekkt villa, ekki tókst að sækja staðsetningu.");
     }
-  });
-};
-
-// Geolocation error function
-var geoError = function (error) {
-  console.log('Geolocation error occurred. Error code: ' + error.code);
-  switch(error.code) {
-    case 1:
-      displayMessage("", "Aðgangur að staðsetningarþjónustu hindraður, ekki tókst að sækja staðsetningu.");
-      break;
-    case 2:
-      displayMessage("", "Staðsetningarþjónusta skilaði villu, ekki tókst að sækja staðsetningu.");
-      break;
-    case 3:
-      displayMessage("", "Staðsetningarþjónusta rann út á tíma, ekki tókst að sækja staðsetningu.");
-      break;
-    default: // unknown error, code: 0
-      displayMessage("", "Óþekkt villa, ekki tókst að sækja staðsetningu.");
+  };
+  
+  // Event handler for coordinates generation
+  function generateCoordinates() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        addPosition, 
+        geoError,
+        { timeout: 10000, enableHighAccuracy: true }
+      );
+    } else {
+      showMessage("", "Vafrinn styður ekki staðsetningartækni");
+    }
   }
-};
-
-// Event handler for coordinates generation
-function generateCoordinates() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      addPosition, 
-      geoError,
-      { timeout: 10000, enableHighAccuracy: true }
-    );
-  } else {
-    displayMessage("", "Vafrinn styður ekki staðsetningartækni");
+  
+  // Adds event listener to button that generates geographical 
+  // coordinates of road system defect
+  function init() {
+    geocoder = new google.maps.Geocoder();
+    
+    var button = document.querySelector('.generate-coordinates');
+    button.addEventListener('click', generateCoordinates, false);
   }
-}
-
-// Adds event listener to button that generates geographical 
-// coordinates of road system defect
-function addCoordinatesGeneratorListener() {
-  var button = document.querySelector('.generate-coordinates');
-  button.addEventListener('click', generateCoordinates, false);
-}
-
-
-/* Photo upload functions */
-
-// Handles user file selection
-function handleFileSelect(evt) {
-  // Appropriate implementation missing
-  // Remember to validate file on server side
-  // See section "Reading files" at following url or look for other sources
-  // https://www.html5rocks.com/en/tutorials/file/dndfiles/
-}
-
-// Adds an event listener to the file upload input
-function addUploadPhotoListener() {
-  var fileInput = document.getElementById('file');
-  fileInput.addEventListener('change', handleFileSelect, false);
-}
-
-/* Fires when DOM content has been loaded */
-document.addEventListener('DOMContentLoaded', function () {
-  addCoordinatesGeneratorListener();
-  addUploadPhotoListener();
-  // $('[data-toggle="tooltip"]').tooltip()
-});
-
+  
+  return {
+    init: init
+  };
+})();

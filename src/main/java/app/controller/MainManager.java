@@ -3,8 +3,6 @@ package app.controller;
 
 import app.model.Post;
 import app.service.PostService;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
