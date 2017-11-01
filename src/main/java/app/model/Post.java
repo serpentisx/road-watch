@@ -6,15 +6,14 @@ import java.time.format.FormatStyle;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,18 +56,13 @@ public class Post {
     @JoinColumn(name = "email")
     private Account account;    // user account associated with the post
     
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-      name = "PostSupport", 
-      joinColumns = { @JoinColumn(name = "postId") }, 
-      inverseJoinColumns = { @JoinColumn(name = "email") }
-    )
-    private Set<Account> supporters;   // list of all supporting users
+    @ElementCollection
+    private Set<String> supporters;   // list of all supporting users
     
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
-        this.supporters = new HashSet<Account>();
+        this.supporters = new HashSet<String>();
         this.dating = LocalDate.now();
         this.photoURL = photo;
         this.title = title;
@@ -82,7 +76,7 @@ public class Post {
     }
     
     public Post () {
-        this.supporters = new HashSet<Account>();
+        this.supporters = new HashSet<String>();
     }
     
     public int getId() {
@@ -178,7 +172,7 @@ public class Post {
         this.account = account;
     }
 
-    public Set<Account> getSupporters() {
+    public Set<String> getSupporters() {
         return supporters;
     }
 }

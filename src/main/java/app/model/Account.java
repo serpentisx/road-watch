@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -77,14 +79,14 @@ public class Account {
         return posts;
     }
     
-    public Set<Post> getSupported() {
+  /*  public Set<Post> getSupported() {
         return supported;
     }
     
     public void addPostSupport(Post post) {
         supported.add(post);
     }
-    
+  */
     public Set<LoginEvent> getLogins() {
         return logins;
     }
