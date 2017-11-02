@@ -58,7 +58,7 @@ public interface PostService {
     
     public String postsToJSON(List<?> posts);
     
-    public String generateDisplayPostsJSON(List<Post> posts);
+    public String generateDisplayPostsJSON(List<Post> posts, String user);
     
     /**
      * 
@@ -66,4 +66,8 @@ public interface PostService {
      * @return          returns a unique post if determined, otherwise null
      */
     public Post getPostById(int id);
+
+    public void supportPost(int postId, String userEmail);
+
+    public void unsupportPost(int postId, String userEmail);
 }

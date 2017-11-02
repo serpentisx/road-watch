@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     var $root = $('html, body');
+    
+    initSupportPostListener();
 
     $('.index-navigation a').click(function(event) {
         event.preventDefault();
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
             scrollTop: target
         }, 500);
     });
-    
+
     posts.splice(0, 6);
     $('.p-see-more-btn').click(function () {
         var next = posts.splice(0, 6);
@@ -25,10 +27,57 @@ document.addEventListener("DOMContentLoaded", function(){
         if (posts.length === 0) {
             $('.p-see-more-btn').remove();
         }
-    })
+        initSupportPostListener();
+    });
+    
+    function initSupportPostListener() {
+        $('.rc-img').off();
+        $('.rc-img').click(function () {
+            var that = this;
+
+            isLoggedIn().then(function (data) {
+                if (!data) {
+                    window.location.href = "/innskraning";
+                    return;
+                }
+                var id = parseInt($(that).attr('id'));             
+                toggleSupport(that);
+                $.ajax({
+                    type: "POST",
+                    context: that,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    url: "/supportPost",
+                    data: JSON.stringify(id),
+                });
+            });
+        });
+    }
+    
+    function toggleSupport(post) {
+        var support = parseInt($('span', post).text());
+        if ($(post).hasClass('rc-img-active')) {
+            $('span', post).text(support - 1);
+        }
+        else {
+            $('span', post).text(support + 1);
+        }
+        $(post).toggleClass('rc-img-active');
+    }
+    
+    function isLoggedIn() {
+        return Promise.resolve($.ajax({
+            type: "POST",
+            context: this,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: "/isLoggedIn",
+        }))
+    }
 
     function generatePostElement(post) {
         var date = post.date ? post.date : "";
+        var supportClass = post.isSupporting ? "rc-img-active" : "rc-img likes";
         var post =  `<div class="post-item-wrapper">
                         <div class="post-item">
                           <div class="post-img" style="background-image: url(${post.photo})"></div>
@@ -42,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(){
                                 <div class="pa-img"></div>
                                 <span class="pa-name">${post.author}</span>
                               </div>
-                              <div class="rc-img likes">
+                              <div id="${post.id}" class="rc-img ${supportClass} likes">
                                 <span>${post.support}</span>
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                               </div>

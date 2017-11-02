@@ -5,6 +5,8 @@
  */
 package app.service;
 
+import app.model.Account;
+
 /**
  * @author Team 20 HBV501G - Fall 2017
  * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
@@ -79,4 +81,6 @@ public interface AccountService {
      * @return              the username for corresponding email
      */
     public String findUsernameByEmail(String email);
+    
+    public Account findAccountByEmail(String email);
 }

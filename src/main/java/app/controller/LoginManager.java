@@ -2,23 +2,20 @@
 package app.controller;
 
 import app.service.AccountService;
-import app.service.Mail;
 import app.service.MailService;
 import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
-import com.sun.mail.util.MailSSLSocketFactory;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -88,7 +85,7 @@ public class LoginManager {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
-            model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
+            model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts(), email));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
             loginEventService.createNewLoginEvent(email);
@@ -180,7 +177,13 @@ public class LoginManager {
         session.setAttribute("user", null);
         model.addAttribute("username", null);
         model.addAttribute("posts", postService.getAllPosts());
-        model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts()));
+        model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts(), null));
         return "index";
+    }
+    
+    @RequestMapping(value = "/isLoggedIn", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean support(HttpSession session) {
+        return session.getAttribute("user") != null;
     }
 }

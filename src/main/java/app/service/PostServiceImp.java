@@ -19,6 +19,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cloudinary.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 import java.io.IOException;
 
@@ -117,18 +119,20 @@ public class PostServiceImp implements PostService {
     }
     
     @Override
-    public String generateDisplayPostsJSON(List<Post> posts) {
+    public String generateDisplayPostsJSON(List<Post> posts, String user) {
         List<HashMap<String, Object>> displayPosts = new ArrayList();
         for (int i = 0; i < posts.size(); i++) {
             Post p = posts.get(i);
             HashMap<String, Object> post = new HashMap();
             
+            post.put("id", p.getId());
             post.put("title", p.getTitle());
             post.put("description", p.getDescription());
             post.put("photo", p.getPhotoURL());
             post.put("author", p.getAccount().getUsername());
             post.put("date", p.getDating());
             post.put("support", Integer.toString(p.getSupport()));
+            post.put("isSupporting", p.getSupporters().contains(user));
             post.put("road", p.getRoad());
             post.put("roadName", p.getRoad().toString());
             post.put("longitude", p.getLongitude());
@@ -143,11 +147,26 @@ public class PostServiceImp implements PostService {
     public String postsToJSON(List<?> posts) {
       return new Gson().toJson(posts);
     }
+
+    @Override
+    @Transactional
+    public void supportPost(int postId, String userEmail) {
+        Post p = postRep.findByPostId(postId);
+        p.setSupport(p.getSupport() + 1);
+        p.getSupporters().add(userEmail);
+    }
+
+    @Override
+    @Transactional
+    public void unsupportPost(int postId, String userEmail) {
+        Post p = postRep.findByPostId(postId);
+        p.setSupport(p.getSupport() - 1);
+        p.getSupporters().remove(userEmail);
+    }
     
     @Override
     public Post getPostById(int id){
         Post post = postRep.findByPostId(id);
         return post;
     }
-    
 }

@@ -1,10 +1,12 @@
 
 package app.controller;
 
+import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
 import java.io.IOException;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -95,5 +99,18 @@ public class PostsManager {
         }
         model.addAttribute("message", "Ekki tókst að búa til innleggið, reyndu aftur");
         return "new_post";
+    }
+    
+        
+    @RequestMapping(value = "/supportPost", method = RequestMethod.POST)
+    public @ResponseBody
+    void support(@RequestBody int id, HttpServletRequest request, HttpSession session) {
+        Post post = postService.getPostById(id);
+        String userEmail = (String) session.getAttribute("user");
+        if (post.getSupporters().contains(userEmail)) {
+            postService.unsupportPost(id, userEmail);
+        } else {
+            postService.supportPost(id, userEmail);
+        }
     }
 }

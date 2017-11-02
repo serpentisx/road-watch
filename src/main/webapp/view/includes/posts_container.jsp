@@ -1,3 +1,6 @@
+<%@ page import="app.model.Post" %>
+<%@ page import="app.model.Account" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -20,7 +23,14 @@
                   <div class="pa-img"></div>
                   <span class="pa-name">${post.getAccount().getUsername()}</span>
                 </div>
-                <div class="rc-img likes">
+                <c:choose>
+                  <c:when test='${post.getSupporters().contains(user)}'>
+                     <div id="${post.getId()}" class="rc-img rc-img-active likes">
+                  </c:when>
+                  <c:otherwise>
+                    <div id="${post.getId()}" class="rc-img likes">
+                  </c:otherwise>
+                </c:choose>
                   <span>${post.getSupport()}</span>
                   <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                 </div>
