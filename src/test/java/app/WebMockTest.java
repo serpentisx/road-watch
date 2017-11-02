@@ -98,17 +98,11 @@ public class WebMockTest {
     public void testSuccessNewPost() throws Exception {
         HashMap<String, String> ss = new HashMap();
         ss.put("", "[]");
-        when(postService.generateDisplayPostsJSON(new ArrayList<Post>())).thenReturn("{=[]}");
+        when(postService.generateDisplayPostsJSON(new ArrayList<Post>(), "")).thenReturn("{=[]}");
         this.mockMvc.perform(get("/"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(model().attribute("postsJSON", ss));
     }
-
-    
-    
-    
-    
-    
     
     /**
      * Athugar hvort getAllPosts skilar ekki örugglega lista af innleggum
