@@ -2,18 +2,11 @@
 
 /* global google:true */
 
-/* Fires when DOM content has been loaded */
-document.addEventListener('DOMContentLoaded', function () {
-  program.init();
-  geolocation.init();
-  autocomplete.init();
-  map.init();
-});
-
-
+/*****************/
 /* Shared Module */
-/* Functions for adding info to new post form and displaying messages to the user */
+/*****************/
 
+/* Functions for adding info to new post form and displaying messages to the user */
 var program = (function() {
   var error;
   var success;
@@ -97,7 +90,7 @@ var program = (function() {
     success.removeChild(success.firstChild);
   }
   
-  function showMessage (successMessage, errorMessage) {
+  function showMessage(successMessage, errorMessage) {
     clearMessage();
     error.appendChild(document.createTextNode(errorMessage));
     success.appendChild(document.createTextNode(successMessage));
@@ -106,6 +99,9 @@ var program = (function() {
   function init() {
     error = document.querySelector('.location-error-message');
     success = document.querySelector('.location-success-message');
+    error.appendChild(document.createTextNode(''));
+    success.appendChild(document.createTextNode(''));
+    
     address = document.getElementById('pac-input');
     latitude = document.querySelector('input[name=latitude]');
     longitude = document.querySelector('input[name=longitude]');
@@ -113,6 +109,7 @@ var program = (function() {
     roadNumber = document.querySelector('input[name=road_number]');
     locality = document.querySelector('input[name=locality]');
     zip = document.querySelector('input[name=zip]');
+    
   }
   
   return {
@@ -123,8 +120,9 @@ var program = (function() {
 })();
 
 
-
+/***********************/
 /* Autocomplete Module */
+/***********************/
 
 var autocomplete = (function() {
   var autocomplete;
@@ -156,8 +154,9 @@ var autocomplete = (function() {
 })();
 
 
-
+/**************/
 /* Map Module */
+/**************/
 
 var map = (function() {
   var map;
@@ -186,7 +185,9 @@ var map = (function() {
   }
   
   function init() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    var mapElement = document.getElementById('map');
+    
+    map = new google.maps.Map(mapElement, {
       center: {lat: 64.5, lng: -18.7},
       zoom: 6
     });
@@ -214,8 +215,9 @@ var map = (function() {
 })();
 
 
-
+/**********************/
 /* Geolocation Module */
+/**********************/
 
 var geolocation = (function() {
   var geocoder;
@@ -275,3 +277,11 @@ var geolocation = (function() {
     init: init
   };
 })();
+
+function initProgram() {
+  console.log("program");
+  program.init();
+  map.init();
+  geolocation.init();
+  autocomplete.init();
+}

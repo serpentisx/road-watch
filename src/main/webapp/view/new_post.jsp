@@ -82,8 +82,7 @@
       </section>
       <jsp:include page="includes/footer.jsp" />
     </main>
-    <jsp:include page="includes/scripts.jsp" />
     <script src="<c:url value="/js/new_post.js" />"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA&libraries=places" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA&libraries=places&callback=initProgram" async defer></script>
   </body>
 </html>
