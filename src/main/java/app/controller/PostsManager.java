@@ -1,13 +1,11 @@
 
 package app.controller;
 
-import app.model.Account;
 import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +33,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("")
 public class PostsManager {
   
-  @Autowired
-  PostService postService;
-  
-  @Autowired
-  AccountService accountService;
-     
-  @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
-    public String renderPostPage(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    AccountService accountService;
+    
+    /**
+     * 
+     * @param session maintains the user's session
+     * @return        string representing page to be rendered
+     */
+    @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
+    public String renderPostPage(HttpSession session) {
         if (session.getAttribute("user") == null) {
             return "login";
         }
@@ -57,20 +60,21 @@ public class PostsManager {
      * @param session maintains the user's session
      * @param params  the user's input from the new-post form
      * @param model   an object with attributes which can be delivered to the view
+     * @param file    the image file the user uploaded
      * @return        string representing page to be rendered
+     * @throws java.io.IOException
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
-    public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model, @RequestParam("file") MultipartFile file) throws IOException {
-              
+    public String newPost(
+      HttpSession session, @RequestParam  Map<String, String> params, 
+      ModelMap model, @RequestParam("file") MultipartFile file
+    ) throws IOException {              
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         if (params.get("btn") != null) { return "new_post"; }
         
         String title = params.get("title");
         String description = params.get("description");
-        
-        /* NEED TO CHANGE WHEN FILE UPLOADING HAS BEEN IMPLEMENTED */
-        // String file = params.get("file");
         
         // Hidden inputs
         String latitude = params.get("latitude");
@@ -87,7 +91,8 @@ public class PostsManager {
             bytes = file.getBytes(); 
         }
         
-        boolean postCreated = postService.createNewPost(title, description, bytes, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
+        boolean postCreated = postService.createNewPost(title, description, bytes, 
+                latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
         if (postCreated) {
           model.addAttribute("posts", postService.getAllPosts());
           return "index";

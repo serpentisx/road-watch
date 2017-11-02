@@ -1,8 +1,6 @@
 package app.controller;
 
-import app.service.Mail;
 import app.service.MailService;
-import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;

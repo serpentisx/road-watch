@@ -70,12 +70,12 @@ var program = (function() {
   }
   
   return {
-    initMap: init
+    init: init
   };
 })();
 
 function initMap() {
-  program.initMap();
+  program.init();
 }
 
 

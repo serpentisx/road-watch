@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.io.IOException;
-import java.io.File;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -36,7 +35,6 @@ import java.io.File;
  */
 @Service
 public class PostServiceImp implements PostService {
-    
     
     @Autowired
     PostRepository postRep;
@@ -58,21 +56,19 @@ public class PostServiceImp implements PostService {
 
         // upload image to cloud
         try {
-            System.out.println("Trying to upload image");
             imageResultMap = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-            System.out.println(imageResultMap);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
 
         if (road != null) {
-          System.out.println(road.getName() + " " + road.getId());
           Account account = accountRep.findByEmail(email);
           
           Double lat = (Double) Double.parseDouble(latitude);
           Double lng = (Double) Double.parseDouble(longitude);
+          String img = imageResultMap.get("secure_url").toString();
           
-          Post newPost = new Post(imageResultMap.get("secure_url").toString(), title, description, lat, lng, road, account);
+          Post newPost = new Post(img, title, description, lat, lng, road, account);
           postRep.save(newPost);
           return true;
         }
@@ -83,25 +79,21 @@ public class PostServiceImp implements PostService {
     public Road determineUniqueRoad(String roadName, String roadNumber, String zip, String locality) {        
         List<Road> roads = roadRep.findByName(roadName);
         
-        for(Road road: roads) {
-          System.out.println("Vegauðkenni: " + road.getId());
-        }
-        
         // 1. Ef einn vegur, skila honum. 
         // 2. Annars ef enginn, skila null.
         // 3. Annars (ef fleiri en einn), reyna að fækka í einn.
         //    a. Ef nákvæmlega einn sem passar, skila honum.
         //    b. Annars skila null.
         if (roads.size() == 1) {
-          System.out.println("EXACTLY ONE ROAD FOUND");
+          // EXACTLY ONE ROAD FOUND
           return roads.get(0);
           
         } else if (roads.isEmpty()) {
-          System.out.println("NO ROADS FOUND");
+          // NO ROADS FOUND
           return null;
           
         } else {
-          System.out.println("MORE THAN ONE ROAD FOUND");
+          // MORE THAN ONE ROAD FOUND
           Road road = null;
           if (roadNumber != null && !roadNumber.isEmpty()) {
             road = roadRep.findByRoadNumberAndName(roadNumber, roadName);

@@ -1,3 +1,5 @@
+/* global posts, Promise */
+
 document.addEventListener("DOMContentLoaded", function(){
     var $root = $('html, body');
     
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     url: "/supportPost",
-                    data: JSON.stringify(id),
+                    data: JSON.stringify(id)
                 });
             });
         });
@@ -71,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function(){
             context: this,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            url: "/isLoggedIn",
-        }))
+            url: "/isLoggedIn"
+        }));
     }
 
     function generatePostElement(post) {
@@ -98,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
                             </div>
                           </div>
                         </div>
-                      </div>`
+                      </div>`;
         return post;
     }
 });

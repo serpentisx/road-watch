@@ -1,24 +1,17 @@
 
 package app.controller;
 
-import app.model.Post;
 import app.service.AccountService;
-import app.service.Mail;
 import app.service.MailService;
 import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
-import com.sun.mail.util.MailSSLSocketFactory;
 import java.util.Map;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -121,24 +114,21 @@ public class LoginManager {
         boolean valid = VerifyUtils.verify(captchaResponse);
 
         if (!valid) {
-          model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
+            model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
         } else {
-          String name = params.get("register_name");
-          String password = params.get("register_password");
-          String email = params.get("register_email");
- 
-          boolean verification = accountService.verifyNewUser(email);
-          if (!verification) {
-              model.addAttribute("invalid_input", "Notandi er þegar til");
-              // vantar: halda register-formi opnu
-          } else if (accountService.createNewAccount(name, password, email)) {
-              model.addAttribute("success_message", "Tókst að búa til notanda");
-          } else {
-              model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
-              // vantar: halda register-formi opnu
-          }
-        }
+            String name = params.get("register_name");
+            String password = params.get("register_password");
+            String email = params.get("register_email");
 
+            boolean verification = accountService.verifyNewUser(email);
+            if (!verification) {
+                model.addAttribute("invalid_input", "Notandi er þegar til");
+            } else if (accountService.createNewAccount(name, password, email)) {
+                model.addAttribute("success_message", "Tókst að búa til notanda");
+            } else {
+                model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
+            }
+        }
         return "login";
     }
     
@@ -146,12 +136,14 @@ public class LoginManager {
      * Send email input to server side and send a new recovery password
      * to corresponding email
      *
-     * @return  login page with message to indicate success or not.
+     * @param email   email of account that user wants to recover
+     * @param model
+     * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/gleymt-lykilord", method = RequestMethod.POST)
-    public String passwordRecovery (@RequestParam Map<String, String> params, ModelMap model) {
- 
-        String email = params.get("submit_email");
+    public String passwordRecovery (
+      @RequestParam(value="submit_email") String email, ModelMap model
+    ) {
         model.addAttribute("formType", "login");
         
         try {
@@ -159,16 +151,16 @@ public class LoginManager {
             accountService.changePassword(email, pw);
             mailService.sendMail("vegavaktin@gmail.com", 
                                  email, 
-                                 "Endurstillt lykilorð " + " (" + email + ")", 
-                                 "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nKær kveðja, \nVegavaktin");
+                                 "Nýtt lykilorð " + " (" + email + ")", 
+                                 "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nBestu kveðjur, \nVegavaktin");
             
-            model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent á netfangið þitt");
+            model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent þér í tölvupósti");
 
             return "login";
         }
         catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("invalid_input", "Úúps, eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+            e.printStackTrace(System.out);
+            model.addAttribute("invalid_input", "Úúúps, eitthvað fór úrskeiðis. Reyndu aftur síðar.");
             return "login";
         }
     }
