@@ -1,18 +1,22 @@
 package app.model;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -39,7 +43,7 @@ public class Post {
     
     private String title;       // post title
     private String description; // short post description
-    private Integer support;        // number of post supports
+    private Integer support;    // number of post supports
     private Boolean archived;   // true if post is archived
     private Double latitude;    // latitude for location of road system defect
     private Double longitude;   // longitude for location of road system defect
@@ -52,25 +56,31 @@ public class Post {
     @JoinColumn(name = "email")
     private Account account;    // user account associated with the post
     
+    @ElementCollection
+    private Set<String> supporters;   // list of all supporting users
+    
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
+        this.supporters = new HashSet<String>();
         this.dating = LocalDate.now();
         this.photoURL = photo;
         this.title = title;
         this.description = description;
         this.support = 0;
-        this.archived = false;  
+        this.archived = false;
         this.latitude = latitude;
         this.longitude = longitude;
         this.road = road;
         this.account = account;
     }
     
-    public Post () {}
+    public Post () {
+        this.supporters = new HashSet<String>();
+    }
     
     public int getId() {
-      return postId;
+        return postId;
     }
 
     public void setId(int id) {
@@ -78,87 +88,91 @@ public class Post {
     }
     
     public String getDating() {
-      if (dating != null) {
-        String text = this.dating.format(FORMATTER);
-        System.out.println(text);
-        return text;
-      }
-      return null;
+        if (dating != null) {
+            String text = this.dating.format(FORMATTER);
+            return text;
+        }
+        return null;
     }
     
     public void setDating(LocalDate dating) {
-      this.dating = dating;
+        this.dating = dating;
     }
 
     public String getPhotoURL() {
-      return photoURL;
+        return photoURL;
     }
 
     public void setPhotoURL(String photoURL) {
-      this.photoURL = photoURL;
+        this.photoURL = photoURL;
     }
 
     public String getTitle() {
-      return title;
+        return title;
     }
     
     public void setTitle(String title) {
-      this.title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-      return description;
+        return description;
     }
 
     public void setDescription(String description) {
-      this.description = description;
+        this.description = description;
     }
 
     public int getSupport() {
-      return support;
+        return support;
     }
 
+    @Transactional
     public void setSupport(int support) {
-      this.support = support;
+        this.support = support;
     }
 
     public boolean isArchived() {
-      return archived;
+        return archived;
     }
     
     public void setArchived(boolean archived) {
-      this.archived = archived;
+        this.archived = archived;
     }
 
     public double getLatitude() {
-      return latitude;
+        return latitude;
     }
 
     public void setLatitude(double latitude) {
-      this.latitude = latitude;
+        this.latitude = latitude;
     }
     
     public double getLongitude() {
-      return longitude;
+        return longitude;
     }
     
     public void setLongitude(double longitude) {
-      this.longitude = longitude;
+        this.longitude = longitude;
     }
 
     public Road getRoad() {
-      return road;
+        return road;
     }
-
+    
     public void setRoad(Road road) {
-      this.road = road;
+        this.road = road;
     }
     
     public Account getAccount() {
-      return account;
+        return account;
     }
 
     public void setAccount(Account account) {
-      this.account = account;
+        this.account = account;
+    }
+
+    public Set<String> getSupporters() {
+        return supporters;
     }
 }

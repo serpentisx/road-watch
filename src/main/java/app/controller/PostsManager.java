@@ -1,14 +1,12 @@
 
 package app.controller;
 
+import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import static org.springframework.data.jpa.domain.JpaSort.path;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- *
  * @author Team 20 HBV501G - Fall 2017
  * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
@@ -35,14 +33,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("")
 public class PostsManager {
   
-  @Autowired
-  PostService postService;
-  
-  @Autowired
-  AccountService accountService;
-     
-  @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
-    public String renderPostPage(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model) {
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    AccountService accountService;
+    
+    /**
+     * 
+     * @param session maintains the user's session
+     * @return        string representing page to be rendered
+     */
+    @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
+    public String renderPostPage(HttpSession session) {
         if (session.getAttribute("user") == null) {
             return "login";
         }
@@ -57,20 +60,21 @@ public class PostsManager {
      * @param session maintains the user's session
      * @param params  the user's input from the new-post form
      * @param model   an object with attributes which can be delivered to the view
+     * @param file    the image file the user uploaded
      * @return        string representing page to be rendered
+     * @throws java.io.IOException
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
-    public String newPost(HttpSession session, @RequestParam  Map<String, String> params, ModelMap model, @RequestParam("file") MultipartFile file) throws IOException {
-              
+    public String newPost(
+      HttpSession session, @RequestParam  Map<String, String> params, 
+      ModelMap model, @RequestParam("file") MultipartFile file
+    ) throws IOException {              
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         if (params.get("btn") != null) { return "new_post"; }
         
         String title = params.get("title");
         String description = params.get("description");
-        
-        /* NEED TO CHANGE WHEN FILE UPLOADING HAS BEEN IMPLEMENTED */
-        // String file = params.get("file");
         
         // Hidden inputs
         String latitude = params.get("latitude");
@@ -87,12 +91,31 @@ public class PostsManager {
             bytes = file.getBytes(); 
         }
         
-        boolean postCreated = postService.createNewPost(title, description, bytes, latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
+        boolean postCreated = postService.createNewPost(title, description, bytes, 
+                latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
         if (postCreated) {
           model.addAttribute("posts", postService.getAllPosts());
           return "index";
         }
         model.addAttribute("message", "Ekki tókst að búa til innleggið, reyndu aftur");
         return "new_post";
+    }
+    
+    /**
+     * Calls a method for supporting/unsupporting a post for currently logged in user
+     * 
+     * @param id : the post's ID to support
+     * @param session : the current session
+     */    
+    @RequestMapping(value = "/supportPost", method = RequestMethod.POST)
+    public @ResponseBody
+    void support(@RequestBody int id, HttpSession session) {
+        Post post = postService.getPostById(id);
+        String userEmail = (String) session.getAttribute("user");
+        if (post.getSupporters().contains(userEmail)) {
+            postService.unsupportPost(id, userEmail);
+        } else {
+            postService.supportPost(id, userEmail);
+        }
     }
 }

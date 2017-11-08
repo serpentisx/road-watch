@@ -8,7 +8,6 @@ package app.service;
 import app.model.Post;
 import app.model.Road;
 import java.util.List;
-import static sun.security.krb5.Confounder.bytes;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -57,12 +56,43 @@ public interface PostService {
      */
     public List<Post> getAllPosts();
     
-    public String postsToJSON(List<Post> posts);
+    /**
+     * Generates a JSON object from a list
+     * @param posts : the list containing objects to be converted to JSON
+     * @return JSON object
+     */
+    public String postsToJSON(List<?> posts);
     
     /**
+     * Generates a JSON object that is used for rendering 
+     * @param posts : list of posts to convert
+     * @param user  : User's email. Tells if a particular post is supported by this user
+     *                
+     * @return 
+     */
+    public String generateDisplayPostsJSON(List<Post> posts, String user);
+    
+    /**
+     * Get post by id
      * 
      * @param id        id from a post
      * @return          returns a unique post if determined, otherwise null
      */
     public Post getPostById(int id);
+
+    /**
+     * Support a post
+     * 
+     * @param postId : the post's id to support
+     * @param userEmail : the user's email who is supporting
+     */
+    public void supportPost(int postId, String userEmail);
+
+    
+    /**
+     * Unsupport a post
+     * @param postId : the post's id to unsupport
+     * @param userEmail : the user's email who is unsupporting
+     */
+    public void unsupportPost(int postId, String userEmail);
 }

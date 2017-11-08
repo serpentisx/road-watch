@@ -31,7 +31,7 @@
               Með augun á veginum
             </div>
             <div class="btn header-btn">
-              <a href="/innlegg">Nýtt inlegg</a>
+              <a href="/innlegg">Nýtt innlegg</a>
             </div>
           </div>
         </div>
@@ -53,6 +53,9 @@
           <div class="line"></div>
         </div>
         <jsp:include page="includes/posts_container.jsp" />
+        <c:if test = "${posts.size() > 6}">
+          <div class="btn p-see-more-btn">Sjá meira</div>
+        </c:if>
       </section>
     </main>
     
@@ -84,8 +87,8 @@
       var posts = ${postsJSON};
     </script>
     
-    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4" />"></script>
     <script src="<c:url value="/js/map.js" />"></script>
     <script src="<c:url value="/js/index.js" />"></script>
+    <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4&callback=initMap" />"></script>
   </body>
 </html>

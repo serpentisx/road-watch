@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.controller;
 
 import app.service.AccountService;
+import app.service.MailService;
+import app.service.LoginEventService;
 import app.service.PostService;
 import app.service.VerifyUtils;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author Huy Van Nguyen
+ * Handles login, logout and registering
  */
 @Controller
 @RequestMapping("")
@@ -31,11 +36,17 @@ public class LoginManager {
     @Autowired
     PostService postService;
     
+    @Autowired
+    MailService mailService;
        
+    @Autowired
+    LoginEventService loginEventService;
+
     /**
      * Renders login page
      *
-     * @return  login page with login form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with login form
      */
     @RequestMapping(value = "/innskraning", method = RequestMethod.GET)
     public String login (ModelMap model) {
@@ -46,7 +57,8 @@ public class LoginManager {
     /**
      * Renders login page
      *
-     * @return  login page with register form
+     * @param model an object with attributes which can be used when rendering
+     * @return      login page with register form
      */
     @RequestMapping(value = "/nyskraning", method = RequestMethod.GET)
     public String renderRegisterPage (ModelMap model) {
@@ -73,9 +85,10 @@ public class LoginManager {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
             model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts(), email));
             model.addAttribute("user", (String) session.getAttribute("user"));
             model.addAttribute("username", (String) session.getAttribute("username"));
-            System.out.println((String) session.getAttribute("username"));
+            loginEventService.createNewLoginEvent(email);
             return "index";
         } 
         else {
@@ -101,25 +114,55 @@ public class LoginManager {
         boolean valid = VerifyUtils.verify(captchaResponse);
 
         if (!valid) {
-          model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
+            model.addAttribute("invalid_input", "Auðkenning tókst ekki.");
         } else {
-          String name = params.get("register_name");
-          String password = params.get("register_password");
-          String email = params.get("register_email");
- 
-          boolean verification = accountService.verifyNewUser(email);
-          if (!verification) {
-              model.addAttribute("invalid_input", "Notandi er þegar til");
-              // vantar: halda register-formi opnu
-          } else if (accountService.createNewAccount(name, password, email)) {
-              model.addAttribute("success_message", "Tókst að búa til notanda");
-          } else {
-              model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
-              // vantar: halda register-formi opnu
-          }
-        }
+            String name = params.get("register_name");
+            String password = params.get("register_password");
+            String email = params.get("register_email");
 
+            boolean verification = accountService.verifyNewUser(email);
+            if (!verification) {
+                model.addAttribute("invalid_input", "Notandi er þegar til");
+            } else if (accountService.createNewAccount(name, password, email)) {
+                model.addAttribute("success_message", "Tókst að búa til notanda");
+            } else {
+                model.addAttribute("invalid_input", "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur.");
+            }
+        }
         return "login";
+    }
+    
+    /**
+     * Send email input to server side and send a new recovery password
+     * to corresponding email
+     *
+     * @param email   email of account that user wants to recover
+     * @param model
+     * @return        string representing page to be rendered
+     */
+    @RequestMapping(value = "/gleymt-lykilord", method = RequestMethod.POST)
+    public String passwordRecovery (
+      @RequestParam(value="submit_email") String email, ModelMap model
+    ) {
+        model.addAttribute("formType", "login");
+        
+        try {
+            String pw = UUID.randomUUID().toString().replace("-", "");
+            accountService.changePassword(email, pw);
+            mailService.sendMail("vegavaktin@gmail.com", 
+                                 email, 
+                                 "Nýtt lykilorð " + " (" + email + ")", 
+                                 "Nýja lykilorðið þitt er: " + pw + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nBestu kveðjur, \nVegavaktin");
+            
+            model.addAttribute("success_message", "Nýtt lykilorð hefur verið sent þér í tölvupósti");
+
+            return "login";
+        }
+        catch (Exception e) {
+            e.printStackTrace(System.out);
+            model.addAttribute("invalid_input", "Úúúps, eitthvað fór úrskeiðis. Reyndu aftur síðar.");
+            return "login";
+        }
     }
 
     /**
@@ -134,6 +177,19 @@ public class LoginManager {
         session.setAttribute("user", null);
         model.addAttribute("username", null);
         model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("postsJSON", postService.generateDisplayPostsJSON(postService.getAllPosts(), null));
         return "index";
+    }
+    
+    /**
+     * Checks if a user is logged in
+     * 
+     * @param session
+     * @return true if a user is logged in
+     */
+    @RequestMapping(value = "/isLoggedIn", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean support(HttpSession session) {
+        return session.getAttribute("user") != null;
     }
 }

@@ -12,14 +12,25 @@ import javax.json.JsonReader;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
+ * @author Team 20 HBV501G - Fall 2017
+ * @author Bjarki Viðar Kristjánsson (bvk1@hi.is)
+ * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
+ * @author Huy Van Nguyen (hvn1@hi.is)
+ * @author Valentin Oliver Loftsson (vol1@hi.is)
  *
- * @author ValentinOliver
- */ 
+ * Does all kind of verification to protect against spam and automated abuse
+ */
 public class VerifyUtils {
  
     public static final String SITE_VERIFY_URL = //
             "https://www.google.com/recaptcha/api/siteverify";
- 
+
+    /**
+     * Verifies if the response from reCaptcha is actually from human or not
+     *
+     * @param gRecaptchaResponse : response from reCaptcha
+     * @return  : true if the response indicates a human, false else.
+     */
     public static boolean verify(String gRecaptchaResponse) {
         if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
             return false;

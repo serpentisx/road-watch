@@ -51,7 +51,7 @@ public class AccountServiceImp implements AccountService {
 
         // The email entered might not match an existing account
         if (account == null) { 
-          return verification; 
+            return verification; 
         }
         try {
             verification = PasswordStorage.verifyPassword(password, account.getPassword());
@@ -68,8 +68,8 @@ public class AccountServiceImp implements AccountService {
     public boolean deleteAccount(String email) {
         Account account = accountRep.findByEmail(email);
         if (account != null) {
-          accountRep.delete(account);
-          return true;
+            accountRep.delete(account);
+            return true;
         }
         return false;
     }
@@ -105,5 +105,11 @@ public class AccountServiceImp implements AccountService {
     public String findUsernameByEmail(String email){
         Account account = accountRep.findByEmail(email);
         return account.getUsername();
+    }
+    
+    @Override
+    @Transactional
+    public Account findAccountByEmail(String email) {
+        return accountRep.findByEmail(email);
     }
 }

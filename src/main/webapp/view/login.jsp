@@ -50,7 +50,7 @@
                 <label for="register_submit"></label>
                 <input id="register_submit" class="submit-btn" type="submit" name="create" value="Nýskrá">
               </div>
-              <p class="message">Þegar með aðgang? <a href="#">Innskrá</a></p>
+              <p class="message login-form">Þegar með aðgang? <a class="login-form" href="#">Innskrá</a></p>
             </form>
             <c:choose>
                 <c:when test="${formType == 'login'}">
@@ -74,7 +74,17 @@
                 <label for="login_submit"></label>
                 <input id="login_submit" name="login_submit" class="submit-btn" type="submit" name="login" value="Innskrá">
               </div>
-              <p class="message">Ekki með aðgang? <a href="#">Skráðu þig hér</a></p>
+              <p class="message">Ekki með aðgang? <a class="register-form" href="#">Skráðu þig hér</a></p>
+              <p class="message">Gleymt lykilorð? <a class="fpw-form" href="#">Endurstilla lykilorð</a></p>
+            </form>
+            <form class="fpw-form" method="POST" action="/gleymt-lykilord" style="display: none;">
+              <div>
+                <input id="submit_email" name="submit_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Þitt netfang">
+              </div>
+              <div>
+                <input id="submit-email-btn" name="submit-email-btn" class="submit-btn" type="submit" value="Áfram">
+              </div>
+              <p class="message">Þegar með aðgang? <a class="login-form" href="#">Innskrá</a></p>
             </form>
             <span class="invalid-input">${invalid_input}</span>
             <span class="success-message">${success_message}</span>
