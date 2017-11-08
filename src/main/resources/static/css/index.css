@@ -76,6 +76,13 @@ header {
   margin-top: 4em;
 }
 
+.header-btn a {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+}
+
 
 /*********** SECTION HEADER - navigation ***********/
 
