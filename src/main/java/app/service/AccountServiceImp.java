@@ -1,5 +1,8 @@
+
 package app.service;
 
+import app.exceptions.HashException;
+import app.exceptions.PasswordVerificationException;
 import app.model.Account;
 import app.repository.AccountRepository;
 import app.repository.PostRepository;
@@ -13,14 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
+ * 
  */
 @Service
 public class AccountServiceImp implements AccountService {
+    
     @Autowired
     AccountRepository accountRep;
     
     @Autowired
     PostRepository postRep;
+    
+    @Autowired 
+    PasswordService passwordService;
     
     @Override
     public boolean verifyNewUser (String email) {
@@ -29,44 +38,33 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
-    public boolean createNewAccount(String username, String password, String email) {
-        String hashedPassword = null;
-        try {
-            hashedPassword = PasswordStorage.createHash(password);
-        } catch (PasswordStorage.CannotPerformOperationException e) { 
-            e.printStackTrace(System.out); 
-        }
-        if (hashedPassword != null) {
-            Account account = new Account(username, hashedPassword, email);
-            accountRep.save(account);
-            return true;
-        }
-        return false;
+    public void createNewAccount(String username, String password, String email)
+      throws HashException {
+        String hashedPassword = passwordService.createHash(password);
+        Account account = new Account(username, hashedPassword, email);
+        accountRep.save(account);
     }
     
     @Override
-    public boolean verifyPassword (String email, String password) {
-        boolean verification = false;
+    public boolean verifyPassword (String email, String password) throws PasswordVerificationException {
         Account account = accountRep.findByEmail(email);
-
+        
         // The email entered might not match an existing account
-        if (account == null) { 
-            return verification; 
+        if (account != null) { 
+            try {
+                return passwordService.verifyPassword(password, account.getPassword()); 
+            } catch (HashException e) {
+                throw new PasswordVerificationException(e);
+            }
         }
-        try {
-            verification = PasswordStorage.verifyPassword(password, account.getPassword());
-        } catch (PasswordStorage.CannotPerformOperationException e) {
-            e.printStackTrace(System.out);
-        } catch (PasswordStorage.InvalidHashException e) {
-            e.printStackTrace(System.out);
-        }
-        return verification;
+        return false;
     }
 
     @Override
     @Transactional
     public boolean deleteAccount(String email) {
         Account account = accountRep.findByEmail(email);
+        
         if (account != null) {
             accountRep.delete(account);
             return true;
@@ -76,40 +74,32 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     @Transactional
-    public boolean changePassword(String email, String newPassword){
+    public boolean changePassword(String email, String newPassword) throws HashException {
         Account account = accountRep.findByEmail(email);
-        try {
-            account.setPassword(PasswordStorage.createHash(newPassword));
-            return true;
+        
+        if (account != null) {
+          account.setPassword(passwordService.createHash(newPassword));
+          return true;
         }
-        catch (PasswordStorage.CannotPerformOperationException e) {
-            e.printStackTrace(System.out);
-            return false;
-        }
+        return false;
     }
 
     @Override
     @Transactional
-    public boolean changeName(String email, String newName){
-        try {
-            Account account = accountRep.findByEmail(email);
+    public boolean changeName(String email, String newName) {
+        Account account = accountRep.findByEmail(email);
+        
+        if (account != null) {
             account.setUsername(newName);
             return true;
-        } catch(Exception e){
-            e.printStackTrace(System.out);
-            return false;
         }
+        return false;
     }
 
     @Override
-    public String findUsernameByEmail(String email){
+    public String findUsernameByEmail(String email) {
         Account account = accountRep.findByEmail(email);
-        return account.getUsername();
-    }
-    
-    @Override
-    @Transactional
-    public Account findAccountByEmail(String email) {
-        return accountRep.findByEmail(email);
+        if (account != null) return account.getUsername();
+        return null;
     }
 }

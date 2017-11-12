@@ -8,6 +8,7 @@
     <a href="/"></a>
     <img class="logo-img" src="../img/logo.png" alt="">
   </div>
+  <a href="/">Heim</a>
   <div class="account-wrapper">
     <div class="s-account sign-in">
       <c:choose>

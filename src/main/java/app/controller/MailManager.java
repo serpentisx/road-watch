@@ -1,8 +1,6 @@
 package app.controller;
 
 import app.service.MailService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -18,40 +17,42 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date   Last updated on 12 November 2017
  *
- * MailManager handles all mail interactions on the website
+ * MailManager handles all e-mail interactions
  */
 @Controller
 public class MailManager {
     
     @Autowired
     MailService mailService;
-
+    
+    private static final String BUSINESS_EMAIL = "vegavaktin@gmail.com";
+    private static final String SUCCESS_MESSAGE = //
+            "Skilaboð þín hafa verið móttekin. Við munum hafa samband við þig eins fljótt og auðið er.";
+    
     /**
-     * Sends mail
+     * Handles message-requests
      *
      * @param session : the user's current session
      * @param params  : the object data from post request
      * @param model   : the object data used when rendering the view
-     * @return        : message page with message indicating if the mail was successfully sent or not
+     * @return        : message-page to be rendered, displaying message indicating 
+     *                  if the message was successfully dispatched or not
      */
     @RequestMapping(value = "/senda-post", method = RequestMethod.POST)
-    public String sendEmail(HttpSession session, @RequestParam Map<String, String> params, ModelMap model) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-
+    public String sendEmail(HttpSession session, @RequestParam Map<String, 
+      String> params, ModelMap model) {
+        
         String name = params.get("contact-name");
         String email = params.get("contact-email");
-        String message = params.get("contact-message");
 
-        try {
-            mailService.sendMail("vegavaktin@gmail.com", "vegavaktin@gmail.com", name + " (" + email + ")", message);
-            model.addAttribute("message", "Skilaboð þitt hefur verið móttekið. Við munum hafa samband eins fljótt og auðið er.");
+        String subject = name + " (" + email + ")";
+        String content = params.get("contact-message");
 
-            return "message";
-        }
-        catch (Exception e) {
-            model.addAttribute("message", "Úúps, eitthvað fór úrskeiðis. Vinsamlega reyndu aftur síðar.");
-            return "message";
-        }
+        mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
+        model.addAttribute("message", SUCCESS_MESSAGE);
+        
+        return "message";
     }
 }

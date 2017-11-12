@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.repository;
 
 import app.model.Account;
@@ -15,31 +11,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
- * Repository class for Account. Responsible for fetching and saving data in the database
+ * Repository class for Account. Responsible for fetching and saving data.
  */
 public interface AccountRepository extends JpaRepository<Account, String> {
 
-    /**
-     * Find all account in database
-     * @return list of all accounts in database
-     */
     @Override
     public List<Account> findAll();
 
-
-    /**
-     * Save an account to database
-     * @param account   the account to be saved
-     * @return          if successful, the saved account is returned, else null
-     */
     @Override
     public Account save(Account account);
 
     /**
      * Find an account by email
-     * @param email   the account email
-     * @return        the account with corresponding email if found. Null else.
+     * @param email     the account email
+     * @return          the account having the corresponding email, null if not found
      */
     public Account findByEmail(String email);
 }

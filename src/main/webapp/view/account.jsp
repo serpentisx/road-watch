@@ -15,7 +15,6 @@
   <body>
     <main>
       <jsp:include page="includes/nav.jsp" />
-      <jsp:include page="includes/header.jsp" />
       <c:if test = "${form_switch == 'delete'}">
         <h2>Eyða aðgangi</h2>
         <p>Skrifaðu lykilorðið þitt til þess að eyða aðganginum</p>
@@ -61,6 +60,6 @@
       <span class="message">${message}</span>
       <jsp:include page="includes/footer.jsp" />
     </main>
-    <jsp:include page="includes/scripts.jsp" />
+    <script src="<c:url value="/js/jquery-3.2.0.min.js" />"></script>
   </body>
 </html>

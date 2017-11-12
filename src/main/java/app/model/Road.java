@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -18,10 +17,10 @@ import org.hibernate.annotations.Immutable;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 17 October 2017
  *
  * An instance of Road stores diverse information about a specific road
  */
-
 @Entity
 @Immutable
 @Table (name="Road")

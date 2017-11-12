@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * MainManager handles home-page get-requests
  */
@@ -27,6 +28,7 @@ public class MainManager {
 
     @Autowired
     PostService service;
+    
     /**
      * Renders home page with posts.
      *
@@ -36,10 +38,11 @@ public class MainManager {
      */
     @RequestMapping("/")
     public String renderHomePage(HttpSession session, ModelMap model) {
-        model.addAttribute("username", (String) session.getAttribute("username"));
+        String userEmail = (String) session.getAttribute("user");
+        model.addAttribute("user", userEmail);
         
         List<Post> posts = service.getAllPosts();
-        String postsJSON = service.generateDisplayPostsJSON(posts, (String) session.getAttribute("user"));
+        String postsJSON = service.getAllPostsJSON(userEmail);
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
@@ -51,16 +54,17 @@ public class MainManager {
      * Renders My page where logged in users can edit and view his account and posts.
      * Login page is rendered instead if the user is not logged in.
      *
-     * @param session : the users's current session
+     * @param session : the user's current session
      * @param model   : the object data used when rendering the view
-     * @return My page if logged in, else returns login page
+     * @return        : "my pages" (settings) if logged in, else returns login page
      */
     @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
     public String settings (HttpSession session, ModelMap model) {
-        if (session.getAttribute("user") == null) {
+        Object user = session.getAttribute("user");
+        if (user == null) {
             return "login";
         }
-        model.addAttribute("user", (String) session.getAttribute("user"));
+        model.addAttribute("user", (String) user);
         model.addAttribute("username", (String) session.getAttribute("username"));
         
         return "settings";

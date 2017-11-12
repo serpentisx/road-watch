@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.repository;
 
 import app.model.LoginEvent;
@@ -15,23 +11,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
- * Stores all login events by users
+ * Stores all user login events. Responsible for fetching and saving data.
  */
 public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>{
     
-    /**
-     * Find all LoginEvents in database
-     * @return list of all post found in database
-     */
     @Override
     public List<LoginEvent> findAll();
     
-    /**
-     * Save a login event in the database
-     * @param loginEvent : the login event to save
-     * @return : the LoginEvent saved
-     */
     @Override
     public LoginEvent save(LoginEvent loginEvent);
 }

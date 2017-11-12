@@ -14,8 +14,9 @@ import javax.persistence.Table;
 /**
  *
  * @author Bjarki Viðar Kristjánsson
+ * @date Last updated on 25 October 2017
  * 
- * Model for the  LoginEvent
+ * Model for the LoginEvent
  */
 @Entity
 @Table (name="LoginEvent")
@@ -39,7 +40,7 @@ public class LoginEvent {
     
     public LoginEvent () {}
 
-    public Long getLoginEventId() {
+    public Long getId() {
         return loginEventId;
     }
 

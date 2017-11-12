@@ -7,6 +7,7 @@ package app.service;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 20 October 2017
  *
  * Records all login attempts by users
  */
