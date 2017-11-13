@@ -114,11 +114,12 @@ public class GenericExceptionHandler {
         }
 
         LOGGER.error("Unknown error: " + req.getRequestURL());
+        LOGGER.error("Exception: " + exception.toString());
         
         // Annars birtum við sjálfgefna villusíðu
         ModelAndView mav = new ModelAndView();
-        mav.addObject("errorCode", "");
-        mav.addObject("errorMessage", "Óþekkt villa");
+        
+        mav.addObject("errorMsg", "Óþekkt villa");
 
         mav.setViewName(DEFAULT_ERROR_VIEW);
         return mav;

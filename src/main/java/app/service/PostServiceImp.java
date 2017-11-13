@@ -20,6 +20,7 @@ import com.cloudinary.*;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 import java.io.IOException;
+import java.util.Set;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -28,13 +29,14 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date Last updated on 12 November 2017
+ * @date Last updated on 13 November 2017
  * 
  */
 @Service
 public class PostServiceImp implements PostService {
   
-    public static final String CLOUDINARY_KEY = "cloudinary://881482785141911:XQOJQQ11mhNgiQVMC1W5LDEwOlc@vegavaktin";
+    public static final String CLOUDINARY_KEY = // 
+            "cloudinary://881482785141911:XQOJQQ11mhNgiQVMC1W5LDEwOlc@vegavaktin";
     
     @Autowired
     PostRepository postRep;
@@ -63,7 +65,7 @@ public class PostServiceImp implements PostService {
 
         Account account = accountRep.findByEmail(userEmail);
 
-        String imgURL = uploadImage(imgFile); 
+        String imgURL = this.uploadImage(imgFile); 
         Post newPost = new Post(imgURL, title, description, lat, lng, road, account);
         postRep.save(newPost);
     }
@@ -152,6 +154,16 @@ public class PostServiceImp implements PostService {
     }
     
     @Override
+    public Set<Post> getAllSupportedPosts(String email) {
+        return accountRep.findByEmail(email).getSupported();
+    }
+    
+    @Override
+    public Set<Post> getAllUserPosts(String email) {
+        return accountRep.findByEmail(email).getPosts();
+    }
+    
+    @Override
     public String getAllPostsJSON(String user) {
         List<Post> posts = postRep.findAll();
         List<HashMap<String, Object>> displayPosts = new ArrayList();
@@ -204,7 +216,18 @@ public class PostServiceImp implements PostService {
     }
     
     @Override
-    public Post getPostById(int id){
+    public Post getPostById(int id) {
         return postRep.findByPostId(id);
+    }
+    
+    @Override
+    @Transactional
+    public boolean deletePost(int postId) {
+        Post post = postRep.findByPostId(postId);
+        if(post != null) {
+          postRep.delete(post);
+          return true;
+        }
+        return false;
     }
 }

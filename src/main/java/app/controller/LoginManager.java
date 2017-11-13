@@ -99,15 +99,15 @@ public class LoginManager {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
             
-            // model.addAttribute("posts", postService.getAllPosts());
-            // model.addAttribute("postsJSON", postService.getAllPostsJSON(email));
-            // model.addAttribute("user", (String) session.getAttribute("user"));
-            // model.addAttribute("username", (String) session.getAttribute("username"));
+            model.addAttribute("posts", postService.getAllPosts());
+            model.addAttribute("postsJSON", postService.getAllPostsJSON(email));
+            model.addAttribute("user", (String) session.getAttribute("user"));
             
             loginEventService.createNewLoginEvent(email);
             return "index";
             
         } else {
+            model.addAttribute("formType", "login");
             model.addAttribute("error_message", "Rangt netfang eða lykilorð.");
             return "login";
         }
@@ -174,12 +174,13 @@ public class LoginManager {
         model.addAttribute("formType", "login");
         
         String newPassword = UUID.randomUUID().toString().replace("-", "");
-        
+        System.out.println(email);
         accountService.changePassword(email, newPassword);
-        mailService.sendMail(BUSINESS_EMAIL, 
-                             email, 
-                             "Nýtt lykilorð " + " (" + email + ")", 
-                             "Nýja lykilorðið þitt er: " + newPassword + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nBestu kveðjur, \nVegavaktin");
+        
+        String subject = "Nýtt lykilorð " + " (" + email + ")";
+        String content = "Nýja lykilorðið þitt er: " + newPassword + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nBestu kveðjur, \nVegavaktin";
+        
+        mailService.sendMail(BUSINESS_EMAIL, email, subject, content);
 
         model.addAttribute("success_message", "Þér hefur verið sent nýtt lykilorð í tölvupósti.");
         
@@ -198,9 +199,21 @@ public class LoginManager {
         session.setAttribute("user", null);
         model.addAttribute("username", null);
         
-        // model.addAttribute("posts", postService.getAllPosts());
-        // model.addAttribute("postsJSON", postService.getAllPostsJSON(null));
+        model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("postsJSON", postService.getAllPostsJSON(null));
         return "index";
+    }
+    
+    /**
+     * Used to find out whether the user is logged in.
+     * 
+     * @param session maintains information regarding the currently logged in user
+     * @return        boolean <-- is the user logged in?
+     */ 
+    @RequestMapping(value = "/isLoggedIn", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean support(HttpSession session) {
+        return session.getAttribute("user") != null;
     }
     
     /**
@@ -209,7 +222,7 @@ public class LoginManager {
      * @param req   http-request
      * @param e     the exception
      * @param model model used for rendering
-     * @return 
+     * @return      login page to be rendered
      */
     @ExceptionHandler ({HashException.class, PasswordVerificationException.class})
     public String handleError(HttpServletRequest req,

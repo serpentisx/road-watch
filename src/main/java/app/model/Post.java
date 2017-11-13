@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,12 +59,11 @@ public class Post {
     private Account account;    // user account associated with the post
     
     @ElementCollection
-    private Set<String> supporters;   // list of all supporting users
+    private Set<String> supporters = new HashSet<String>();   // list of all supporting users
     
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
-        this.supporters = new HashSet<String>();
         this.dating = LocalDate.now();
         this.photoURL = photo;
         this.title = title;
@@ -75,9 +76,7 @@ public class Post {
         this.account = account;
     }
     
-    public Post () {
-        this.supporters = new HashSet<String>();
-    }
+    public Post () { }
     
     public int getId() {
         return postId;

@@ -45,11 +45,11 @@ public class Account {
     
     // Collection of all posts referring to the user's account
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
-    private transient Set<Post> posts = new HashSet<Post>();
+    private Set<Post> posts = new HashSet<Post>();
     
     // Collection of all login events
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
-    private transient Set<LoginEvent> logins = new HashSet<LoginEvent>();
+    private Set<LoginEvent> logins = new HashSet<LoginEvent>();
     
     // Collection of all posts user has supported
     @ManyToMany(mappedBy = "supporters", cascade=CascadeType.ALL)

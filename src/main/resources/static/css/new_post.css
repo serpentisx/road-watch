@@ -60,6 +60,7 @@ input {
 
 textarea {
   resize: vertical;
+  overflow: hidden;
   width: 400px;
 }
 

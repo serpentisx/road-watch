@@ -6,6 +6,7 @@ import app.exceptions.RoadNotFoundException;
 import app.model.Post;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date Last updated on 12 November 2017
+ * @date Last updated on 13 November 2017
  *
  * Manages all process work regarding posts.
  */
@@ -40,6 +41,22 @@ public interface PostService {
      */
     public List<Post> getAllPosts();
     
+    /**
+     * Returns a set of posts supported by a particular user
+     * 
+     * @param email     user's email
+     * @return          set of all posts supported by the user
+     */
+    public Set<Post> getAllSupportedPosts(String email);
+    
+    /**
+     * Returns a set of posts created by a particular user
+     * 
+     * @param email     user's email
+     * @return          set of all posts created by the user
+     */
+    public Set<Post> getAllUserPosts(String email);
+            
     /**
      * Returns all posts as a JSON string, for front-end processing purposes
      * 
@@ -73,4 +90,12 @@ public interface PostService {
      * @param userEmail the user's email who is unsupporting
      */
     public void unsupportPost(Post post, String userEmail);
+    
+    /**
+     * Deletes a post
+     * 
+     * @param postId    the post id of the post to be deleted
+     * @return          true if postId matches some post
+     */
+    public boolean deletePost(int postId);
 }

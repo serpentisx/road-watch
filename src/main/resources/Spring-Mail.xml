@@ -26,7 +26,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     </bean>
 
     <bean id="mailer" class="app.service.Mailer">
-        <property name="mailSender" ref="mailSender" />
+        <property name="dispatcher" ref="mailSender" />
     </bean>
 
 </beans>

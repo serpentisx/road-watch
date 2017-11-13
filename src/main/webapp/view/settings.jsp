@@ -26,18 +26,18 @@
                     <img alt='' class='sidebar__avatar' src='/img/profile.png'>
                     <p>${username}</p>
                 </div>
-                <div class='sidebar__menu-item sidebar__menu-item--active account-info'>
+                <div class='sidebar__menu-item main__account sidebar__menu-item--active'>
                     <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
                 </div>
-                <div class='sidebar__menu-item my-posts'>
+                <div class='sidebar__menu-item main__posts'>
                     <i class="fa fa-sticky-note" aria-hidden="true"></i> Innleggin mín
                 </div>
-                <div class='sidebar__menu-item'>
+                <div class='sidebar__menu-item main__supported'>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i> Líkað við
                 </div>
             </div>
             <div class='main'>
-                <div class="account-info">
+                <div class="main__account__tab">
                     <div class='main__header'>
                         <div class="account-settings-header">
                            <div class="as-label username-settings">Breyta notandanafni</div>
@@ -66,21 +66,31 @@
                         </div>
                         <div class='main__settings-form delete-account'>
                             <form action='/reikningur/eyda-reikningi' method='post'>
-                                <h3>Þú ert að fara að eyða reikningi. Þessi aðgerð er óafturkallanleg.</h3>
+                                <h3>Þú ert að fara að eyða reikningnum þínum. Aðgerðin er óafturkallanleg.</h3>
                                 <label class='main__input-label'>Lykilorð þitt</label>
                                 <input name="password" class='main__input' type='password'>
                                 <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>                      
                             </form>
-                        </div>    
+                        </div>
                     </div>
                 </div>
                 
-                <div class="my-posts">
-                
+                <div class="main__hidden main__posts__tab">
+                    <div class='main__header'>
+                        <div class="as-label-single">Innleggin mín</div>
+                    </div>
+                    <div class='main__content'>
+                        <jsp:include page="includes/my_posts.jsp" />
+                    </div>
                 </div>
                 
-                <div class="supported-posts">
-
+                <div class="main__hidden main__supported__tab">
+                    <div class='main__header'>
+                        <div class="as-label-single">Líkað við</div>
+                    </div>
+                    <div class='main__content'>
+                        <jsp:include page="includes/supported_posts.jsp" />
+                    </div>
                 </div>
                 
                 <p class="message">${message}</p>        

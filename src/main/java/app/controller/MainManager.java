@@ -60,12 +60,16 @@ public class MainManager {
      */
     @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
     public String settings (HttpSession session, ModelMap model) {
-        Object user = session.getAttribute("user");
-        if (user == null) {
+        String user = (String) session.getAttribute("user");
+        if (user == null || user.equals("")) {
+            model.addAttribute("formType", "login");
             return "login";
         }
         model.addAttribute("user", (String) user);
         model.addAttribute("username", (String) session.getAttribute("username"));
+        
+        model.addAttribute("supportedPosts", service.getAllSupportedPosts(user));
+        model.addAttribute("userPosts", service.getAllUserPosts(user));
         
         return "settings";
     }

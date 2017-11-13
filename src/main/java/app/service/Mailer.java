@@ -19,7 +19,7 @@ public class Mailer {
     // The mail-sender, dispatches e-mails
     private MailSender dispatcher;
     
-    public void setMailSender(MailSender dispatcher) {
+    public void setDispatcher(MailSender dispatcher) {
         this.dispatcher = dispatcher;
     }
 
@@ -30,7 +30,6 @@ public class Mailer {
      * @param to      receiver
      * @param subject e-mail message subject
      * @param msg     e-mail message content
-     * @throws org.springframework.mail.MailException
      */
     public void sendMail(String from, String to, String subject, String msg) {
         SimpleMailMessage message = new SimpleMailMessage();

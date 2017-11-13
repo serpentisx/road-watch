@@ -35,15 +35,15 @@
           </div>
         </div>
       </div>
-      <nav class="index-navigation">
-        <ul>
-          <li><a href="#s0">Heim</a></li>
-          <li><a href="#s1">Innlegg</a></li>
-          <li><a class="map-label" href="#">Kort</a></li>
-          <li><a href="#s2">Hafa samband</a></li>
-        </ul>
-      </nav>
     </header>
+    <nav class="index-navigation">
+      <ul>
+        <li><a href="#s0">Heim</a></li>
+        <li><a href="#s1">Innlegg</a></li>
+        <li><a class="map-label" href="#">Kort</a></li>
+        <li><a href="#s2">Hafa samband</a></li>
+      </ul>
+    </nav>
           
     <main>
       <section id="s1" class="section-1">
@@ -81,7 +81,7 @@
       
     <jsp:include page="includes/map.jsp" />
         
-    <script src="<c:url value="/js/jquery-3.2.0.min.js" />"></script>
+    <script src="<c:url value="/js/jquery-3.2.0.min.js"/>" type="text/javascript"></script>
     <script type="text/javascript">
       var posts = ${postsJSON};
     </script>    

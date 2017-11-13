@@ -3,6 +3,7 @@ package app.controller;
 
 import app.exceptions.HashException;
 import app.exceptions.PasswordVerificationException;
+import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date Last updated on 12 November 2017
+ * @date Last updated on 13 November 2017
  *
  * Listens to requests at defined routes related to user account requests
  * and is responsible for fetching and processing data as well as rendering pages.
@@ -46,10 +49,12 @@ public class UserManager {
      * Verifies whether the password entered by the user
      * matches an existing account, and deletes the account if so.
      * 
-     * @param params user input parameters
-     * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered:
-     *               login-page if the attempt is successful, otherwise the account page
+     * @param session   maintains the user's session
+     * @param password  the password of the account to be deleted
+     * @param model     an object with attributes which can be used when rendering
+     * @return          string representing page to be rendered:
+     *                    login-page if the attempt is successful, otherwise the account page
+     * @throws          PasswordVerificationException 
      */
     @RequestMapping(value = "/reikningur/eyda-reikningi", method = RequestMethod.POST)
     private String deleteAccountHandler (
@@ -76,11 +81,12 @@ public class UserManager {
      * Handles user's request to change password
      * Verifies whether the password entered by the user
      * matches an existing account, and changes the account password if so.
-     * 
-     * @param params user input parameters
-     * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
-     *               front page if the attempt is successful, otherwise the account page
+     *
+     * @param session maintains the user's session
+     * @param params  user input parameters
+     * @param model   an object with attributes which can be used when rendering
+     * @return        string representing page to be rendered
+     *                front page if the attempt is successful, otherwise the account page
      */
     @RequestMapping(value = "/reikningur/breyta-lykilordi", method = RequestMethod.POST)
     private String changePasswordHandler (
@@ -100,18 +106,21 @@ public class UserManager {
         }
         if (accountService.changePassword(loggedInUserEmail, newPassword1)) {
             model.addAttribute("message", "Lykilorði þínu hefur verið breytt.");
+            
+        } else {
+            model.addAttribute("message", "Úúúps! Eitthvað fór úrskeiðis. Reyndu aftur síðar.");
         }
         
-        model.addAttribute("message", "Úúúps! Eitthvað fór úrskeiðis. Reyndu aftur síðar.");
         return "settings";
     }
     
     /**
      * Handles user's request to change username
      * 
-     * @param params user input parameters
-     * @param model  an object with attributes which can be used when rendering
-     * @return       string representing page to be rendered
+     * @param session   maintains the user's session
+     * @param username  new username
+     * @param model     an object with attributes which can be used when rendering
+     * @return          string representing page to be rendered
      */
     @RequestMapping(value = "/reikningur/breyta-nafni", method = RequestMethod.POST)
     private String changeUsernameHandler (
@@ -119,18 +128,31 @@ public class UserManager {
      
         String email = (String) session.getAttribute("user");
         accountService.changeName(email, username);
-        session.setAttribute("username", accountService.findUsernameByEmail(email));
+        session.setAttribute("username", username);
         model.addAttribute("message", "Nafni þínu hefur verið breytt!");
         return "settings";
     }
     
     /**
+     * Responds to post deletion user requests
+     * 
+     * @param postId    the id of the post to be deleted
+     * @param session   maintains the user's session
+     * @return          true if postId matches some post
+     */
+    @RequestMapping(value = "/delete-post", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean deletePostHandler(@RequestBody int postId, HttpSession session) {
+        return postService.deletePost(postId);
+    }
+    
+    /**
      * Password-processing exception handler
      * 
-     * @param req   http-request
-     * @param e     the exception
-     * @param model model used for rendering
-     * @return      page to be rendered
+     * @param req     http-request
+     * @param e       the exception
+     * @param model   model used for rendering
+     * @return        page to be rendered
      */
     @ExceptionHandler ({HashException.class, PasswordVerificationException.class})
     public String handleError(HttpServletRequest req,

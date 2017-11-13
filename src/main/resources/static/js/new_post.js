@@ -141,10 +141,13 @@ var autocomplete = (function() {
   }
   
   // Initializes Google Autocomplete, ties to input element,
-  // and adds the appropriate event listener
+  // and adds the appropriate event listener. Restricts suggestions to Iceland.
   function init() {
     var input = document.getElementById('pac-input');
-    autocomplete = new google.maps.places.Autocomplete(input);
+    var options = {
+      componentRestrictions: {country: 'is'}
+    };
+    autocomplete = new google.maps.places.Autocomplete(input, options);
     autocomplete.addListener('place_changed', placeChangedHandler);
   }
   
@@ -279,7 +282,6 @@ var geolocation = (function() {
 })();
 
 function initProgram() {
-  console.log("program");
   program.init();
   map.init();
   geolocation.init();

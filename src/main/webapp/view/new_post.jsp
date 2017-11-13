@@ -56,6 +56,7 @@
               </div>
 
               <div class="file-upload">
+                <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 <label for="file"></label>
                 <input id="file" type="file" name="file" accept="image/*">
               </div>

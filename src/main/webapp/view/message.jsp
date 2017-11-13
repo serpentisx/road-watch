@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <title>Vegavaktin</title>
     <link href="<c:url value="/css/navigation.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
   </head>
   <body>
     <main>

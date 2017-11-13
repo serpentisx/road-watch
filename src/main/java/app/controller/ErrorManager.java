@@ -40,7 +40,7 @@ public class ErrorManager implements ErrorController {
          
         ModelAndView errorPage = new ModelAndView("errorPage");
         String errorMsg;
-        int httpErrorCode = getErrorCode(httpRequest);
+        int httpErrorCode = this.getErrorCode(httpRequest);
  
         switch (httpErrorCode) {
             case 401: {

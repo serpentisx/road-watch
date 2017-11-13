@@ -6,6 +6,7 @@ import app.exceptions.RoadNotFoundException;
 import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +43,13 @@ public class PostsManager {
     /**
      * 
      * @param session maintains the user's session
+     * @param model   an object with attributes which can be delivered to the view
      * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
-    public String renderPostPage(HttpSession session) {
+    public String renderPostPage(HttpSession session, ModelMap model) {
         if (session.getAttribute("user") == null) {
+            model.addAttribute("formType", "login");
             return "login";
         }
         return "new_post";
@@ -69,11 +72,19 @@ public class PostsManager {
     public String newPost(
       HttpSession session, @RequestParam  Map<String, String> params, 
       ModelMap model, @RequestParam("file") MultipartFile file
-    ) throws RoadNotFoundException, FileUploadException {              
-        model.addAttribute("username", (String) session.getAttribute("username"));
+    ) throws RoadNotFoundException, FileUploadException {
+      
+        String email = (String) session.getAttribute("user");
+        postService.createNewPost(params, file, email);
         
-        String email = (String) session.getAttribute("user");        
-        postService.createNewPost(params, file, email);        
+        model.addAttribute("user", email);
+        
+        List<Post> posts = postService.getAllPosts();
+        String postsJSON = postService.getAllPostsJSON(email);
+        
+        model.addAttribute("posts", posts);
+        model.addAttribute("postsJSON", postsJSON);
+        
         return "index";
     }
     
