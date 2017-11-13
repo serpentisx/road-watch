@@ -1,3 +1,4 @@
+
 package app.model;
 
 import java.util.HashSet;
@@ -6,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,11 +20,11 @@ import javax.validation.constraints.Size;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * Model for the user account. 
  * Stores login information and user's username
  */
-
 @Entity
 @Table (name="Account")
 public class Account {
@@ -46,11 +45,11 @@ public class Account {
     
     // Collection of all posts referring to the user's account
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
-    private transient Set<Post> posts = new HashSet<Post>();
+    private Set<Post> posts = new HashSet<Post>();
     
     // Collection of all login events
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
-    private transient Set<LoginEvent> logins = new HashSet<LoginEvent>();
+    private Set<LoginEvent> logins = new HashSet<LoginEvent>();
     
     // Collection of all posts user has supported
     @ManyToMany(mappedBy = "supporters", cascade=CascadeType.ALL)
@@ -88,14 +87,10 @@ public class Account {
         return posts;
     }
     
-  /*  public Set<Post> getSupported() {
+    public Set<Post> getSupported() {
         return supported;
     }
-    
-    public void addPostSupport(Post post) {
-        supported.add(post);
-    }
-  */
+
     public Set<LoginEvent> getLogins() {
         return logins;
     }

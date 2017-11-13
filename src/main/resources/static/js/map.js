@@ -7,8 +7,8 @@ var program = (function() {
   var infoWindow;
   
   function addMarkerListener(marker, info) {
-    marker.addListener('click', ((marker, info) => {
-      return () => {
+    marker.addListener('click', (function (marker, info) {
+      return function() {
         infoWindow.setContent(info);
         infoWindow.open(map, marker);
       };

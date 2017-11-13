@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var $root = $('html, body');
     
     initSupportPostListener();
+    initScrollWatching();
 
     $('.index-navigation a').click(function(event) {
         event.preventDefault();
@@ -103,4 +104,21 @@ document.addEventListener("DOMContentLoaded", function(){
                       </div>`;
         return post;
     }
+    
+    function initScrollWatching() {
+      var mn = $("nav.index-navigation");
+      var mns = "index-navigation-scrolled";
+      var headerHeight = document.querySelector('header').clientHeight;
+      
+      window.addEventListener("scroll", (function(mn, mns, headerHeight) {
+        return function() {
+          if( $(this).scrollTop() > headerHeight ) {
+            mn.addClass(mns);
+          } else {
+            mn.removeClass(mns);
+          }
+        };
+      })(mn, mns, headerHeight));
+    }
 });
+

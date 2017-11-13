@@ -9,29 +9,39 @@
     <img class="logo-img" src="../img/logo.png" alt="">
   </div>
   <div class="account-wrapper">
-    <div class="s-account sign-in">
+    <div class="s-account">
+      <i class="fa fa-home" aria-hidden="true"></i>
+      <a href="/">Heim</a>
+    </div>
+    <c:choose>
+      <c:when test="${user == null}">
+        <div class="s-account">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          <a href="/innskraning">Innskrá</a>
+        </div>
+      </c:when>    
+      <c:otherwise>
+        <div class="s-account">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <a href="/innlegg">Nýtt innlegg</a>
+        </div>
+        <div class="s-account">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <a href="/minar-sidur">Mínar síður</a>
+        </div>
+      </c:otherwise>
+    </c:choose>
+    <div class="s-account">
       <c:choose>
         <c:when test="${user == null}">
-            <i class="fa fa-sign-in" aria-hidden="true"></i>
-            <a href="/innskraning">Innskrá</a>
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          <a href="/nyskraning">Nýskrá</a>
         </c:when>    
         <c:otherwise>
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <a href="/minar-sidur">Mínar síður</a>
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+          <a href="/utskra">Útskrá</a>
         </c:otherwise>
       </c:choose>
-    </div>
-    <div class="s-account sign-out">
-      <c:choose>
-        <c:when test="${user == null}">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-            <a href="/nyskraning">Nýskrá</a>
-        </c:when>    
-        <c:otherwise>
-            <i class="fa fa-sign-out" aria-hidden="true"></i>
-            <a href="/utskra">Útskrá</a>
-        </c:otherwise>
-      </c:choose>   
     </div>
   </div>
 </nav>

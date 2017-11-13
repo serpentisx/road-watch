@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * Error controller handles and renders custom error pages.
  */
@@ -26,31 +27,36 @@ public class ErrorManager implements ErrorController {
     
     private static final String PATH = "/error";
 
-    // Request mapping for /error. Handles error pages and replaces the default error page with
-    // customized error page
+    /**
+     * Request mapping for /error, handles error pages and replaces the default 
+     * error page with a customized error page.
+     * 
+     * @param httpRequest the http-request
+     * @param model       model used for rendering the view
+     * @return 
+     */
     @RequestMapping(value = PATH)
     public ModelAndView renderErrorPage(HttpServletRequest httpRequest, ModelMap model) {
          
         ModelAndView errorPage = new ModelAndView("errorPage");
-        String errorMsg = "Úúps! Eitthvað fór úrskeiðis";
-        int httpErrorCode = getErrorCode(httpRequest);
+        String errorMsg;
+        int httpErrorCode = this.getErrorCode(httpRequest);
  
         switch (httpErrorCode) {
-            case 400: {
-                errorMsg = "Úúps! Eitthvað fór úrskeiðis";
-                break;
-            }
             case 401: {
                 errorMsg = "Óheimill aðgangur";
                 break;
             }
             case 404: {
-                errorMsg = "Úúps! Þú ert týndur á veginum";
+                errorMsg = "Úúúps! Þú hefur farið vegavillt";
                 break;
             }
             case 500: {
-                errorMsg = "Úúps! Það er vegaframkvæmd í gangi á þessari síðu";
+                errorMsg = "Úúúps! Það eru vegaframkvæmdir í gangi á þessari síðu";
                 break;
+            }
+            default: {
+                errorMsg = "Úúúps! Eitthvað fór úrskeiðis";
             }
         }
         errorPage.addObject("errorMsg", errorMsg);

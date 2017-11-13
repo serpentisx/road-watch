@@ -15,10 +15,10 @@
     <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
     <link href="<c:url value="/css/new_post.css" />" rel="stylesheet">
   </head>
-  <body>
-    
+  <body>    
     <main>
       <jsp:include page="includes/nav.jsp" />
+      
       <section>
         <div class="new-post-container">
           <form action="/innlegg" method="POST" enctype="multipart/form-data">
@@ -56,6 +56,7 @@
               </div>
 
               <div class="file-upload">
+                <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 <label for="file"></label>
                 <input id="file" type="file" name="file" accept="image/*">
               </div>
@@ -80,6 +81,7 @@
           <div id="map"></div>
         </div>
       </section>
+        
       <jsp:include page="includes/footer.jsp" />
     </main>
     <script src="<c:url value="/js/new_post.js" />"></script>

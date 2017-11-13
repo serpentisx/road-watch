@@ -25,7 +25,7 @@
                 </div>
                 <c:choose>
                   <c:when test='${post.getSupporters().contains(user)}'>
-                     <div id="${post.getId()}" class="rc-img rc-img-active likes">
+                    <div id="${post.getId()}" class="rc-img rc-img-active likes">
                   </c:when>
                   <c:otherwise>
                     <div id="${post.getId()}" class="rc-img likes">

@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.service;
 
+import app.exceptions.FileUploadException;
+import app.exceptions.RoadNotFoundException;
 import app.model.Post;
-import app.model.Road;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -15,6 +15,7 @@ import java.util.List;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 13 November 2017
  *
  * Manages all process work regarding posts.
  */
@@ -24,53 +25,45 @@ public interface PostService {
      * Creates a new post and associates it with a Road and an Account;
      * if a unique Road is not found, the post is not created.
      * 
-     * 
-     * @param title       new post title
-     * @param description new post description
-     * @param file        image file name 
-     * @param latitude    latitude of road defect
-     * @param longitude   longitude of road defect
-     * @param roadName    road name from new post form
-     * @param roadNumber  road number from new post form
-     * @param zip         zip from new post form
-     * @param locality    locality from new post form
-     * @param email       email corresponding to currently logged in user
-     * @return            true if successful, else false
+     * @param postInfo    parameters from user input
+     * @param imgFile     uploaded image file
+     * @param userEmail   user's email
+     * @throws app.exceptions.RoadNotFoundException
+     * @throws app.exceptions.FileUploadException
      */
-    public boolean createNewPost(String title, String description, byte[] file, String latitude, String longitude, String roadName, String roadNumber, String zip, String locality, String email);
+    public void createNewPost(Map<String, String> postInfo, MultipartFile imgFile, 
+            String userEmail) throws RoadNotFoundException, FileUploadException;
     
     /**
+     * Returns all posts as a java List
      * 
-     * @param roadName    road name from new post form
-     * @param roadNumber  road number from new post form, may be null
-     * @param zip         zip from new post form, may be null
-     * @param locality    locality from new post form, may be null
-     * @return            returns a unique road if determined, otherwise null
-     */
-    public Road determineUniqueRoad(String roadName, String roadNumber, String zip, String locality);
-    
-    /**
-     * Get all posts in database
-     * 
-     * @return            list of all posts found in database
+     * @return          list of all posts found in database
      */
     public List<Post> getAllPosts();
     
     /**
-     * Generates a JSON object from a list
-     * @param posts : the list containing objects to be converted to JSON
-     * @return JSON object
+     * Returns a set of posts supported by a particular user
+     * 
+     * @param email     user's email
+     * @return          set of all posts supported by the user
      */
-    public String postsToJSON(List<?> posts);
+    public Set<Post> getAllSupportedPosts(String email);
     
     /**
-     * Generates a JSON object that is used for rendering 
-     * @param posts : list of posts to convert
-     * @param user  : User's email. Tells if a particular post is supported by this user
-     *                
-     * @return 
+     * Returns a set of posts created by a particular user
+     * 
+     * @param email     user's email
+     * @return          set of all posts created by the user
      */
-    public String generateDisplayPostsJSON(List<Post> posts, String user);
+    public Set<Post> getAllUserPosts(String email);
+            
+    /**
+     * Returns all posts as a JSON string, for front-end processing purposes
+     * 
+     * @param user      user's email, helps to tell if a particular post is supported by user
+     * @return          JSON string representing posts
+     */
+    public String getAllPostsJSON(String user);
     
     /**
      * Get post by id
@@ -82,17 +75,27 @@ public interface PostService {
 
     /**
      * Support a post
+     * Precondition: post and userEmail are not null
      * 
-     * @param postId : the post's id to support
-     * @param userEmail : the user's email who is supporting
+     * @param post      the post to support
+     * @param userEmail the user's email who is supporting
      */
-    public void supportPost(int postId, String userEmail);
+    public void supportPost(Post post, String userEmail);
 
-    
     /**
      * Unsupport a post
-     * @param postId : the post's id to unsupport
-     * @param userEmail : the user's email who is unsupporting
+     * Precondition: post and userEmail are not null
+     * 
+     * @param post      the post to unsupport
+     * @param userEmail the user's email who is unsupporting
      */
-    public void unsupportPost(int postId, String userEmail);
+    public void unsupportPost(Post post, String userEmail);
+    
+    /**
+     * Deletes a post
+     * 
+     * @param postId    the post id of the post to be deleted
+     * @return          true if postId matches some post
+     */
+    public boolean deletePost(int postId);
 }

@@ -1,3 +1,4 @@
+
 package app.model;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * An instance of Post stores information about a road system defect entry
  */
-
 @Entity
 @Table (name="Post")
 public class Post {
@@ -57,12 +59,11 @@ public class Post {
     private Account account;    // user account associated with the post
     
     @ElementCollection
-    private Set<String> supporters;   // list of all supporting users
+    private Set<String> supporters = new HashSet<String>();   // list of all supporting users
     
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(new Locale("is"));
     
     public Post (String photo, String title, String description, double latitude, double longitude, Road road, Account account) {
-        this.supporters = new HashSet<String>();
         this.dating = LocalDate.now();
         this.photoURL = photo;
         this.title = title;
@@ -75,52 +76,30 @@ public class Post {
         this.account = account;
     }
     
-    public Post () {
-        this.supporters = new HashSet<String>();
-    }
+    public Post () { }
     
     public int getId() {
         return postId;
     }
-
-    public void setId(int id) {
-      this.postId = id;
-    }
     
     public String getDating() {
-        if (dating != null) {
+        if (this.dating != null) {
             String text = this.dating.format(FORMATTER);
             return text;
         }
         return null;
-    }
-    
-    public void setDating(LocalDate dating) {
-        this.dating = dating;
     }
 
     public String getPhotoURL() {
         return photoURL;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
-    }
-
     public String getTitle() {
         return title;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getSupport() {
@@ -128,8 +107,13 @@ public class Post {
     }
 
     @Transactional
-    public void setSupport(int support) {
-        this.support = support;
+    public void increaseSupport() {
+        this.support += 1;
+    }
+    
+    @Transactional
+    public void decreaseSupport() {
+        this.support -= 1;
     }
 
     public boolean isArchived() {
@@ -143,33 +127,17 @@ public class Post {
     public double getLatitude() {
         return latitude;
     }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
     
     public double getLongitude() {
         return longitude;
-    }
-    
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
     }
 
     public Road getRoad() {
         return road;
     }
     
-    public void setRoad(Road road) {
-        this.road = road;
-    }
-    
     public Account getAccount() {
         return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     public Set<String> getSupporters() {

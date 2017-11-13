@@ -13,7 +13,7 @@
     <div class="message-box">
       <h1>${errorCode}</h1>
       <p>${errorMsg}</p>
-      <div class="home-btn"><a href="/">Tilbaka</a></div>
+      <div class="home-btn"><a href="/">Til baka</a></div>
     </div>
   </body>
 </html>

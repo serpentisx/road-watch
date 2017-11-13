@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package app.repository;
 
 import app.model.Road;
@@ -15,16 +11,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * Repository class for Road. Responsible for fetching data from the database.
  */
 public interface RoadRepository extends JpaRepository <Road, Integer> {
 
-    /**
-     * Finds all roads in database
-     * 
-     * @return list of all roads found in database
-     */
     @Override
     public List<Road> findAll();
 
@@ -47,6 +39,7 @@ public interface RoadRepository extends JpaRepository <Road, Integer> {
     public Road findByZipAndName(Integer zip, String name);
     
     /**
+     * Finds road by locality and road name
      * 
      * @param locality    the locality to search by
      * @param name        the road name to search by

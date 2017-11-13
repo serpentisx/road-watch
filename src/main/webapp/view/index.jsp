@@ -15,8 +15,7 @@
     <link href="<c:url value="/css/map.css" />" rel="stylesheet">
   </head>
   
-  <body>
-    
+  <body>    
     <header id="s0">
       <div class="header-container">
         <div class="lg"></div>
@@ -36,15 +35,15 @@
           </div>
         </div>
       </div>
-      <nav class="index-navigation">
-        <ul>
-          <li><a href="#s0">Heim</a></li>
-          <li><a href="#s1">Innlegg</a></li>
-          <li><a class="map-label" href="#">Kort</a></li>
-          <li><a href="#s2">Hafa samband</a></li>
-        </ul>
-      </nav>
     </header>
+    <nav class="index-navigation">
+      <ul>
+        <li><a href="#s0">Heim</a></li>
+        <li><a href="#s1">Innlegg</a></li>
+        <li><a class="map-label" href="#">Kort</a></li>
+        <li><a href="#s2">Hafa samband</a></li>
+      </ul>
+    </nav>
           
     <main>
       <section id="s1" class="section-1">
@@ -66,11 +65,11 @@
           <h2>hafa samband</h2>
           <form class="contact-form" action="/senda-post" method="post">
             <div class="f-wrapper">
-              <input type="text" name="contact-email" placeholder="Netfang">
+              <input type="email" name="contact-email" placeholder="Netfang" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
             </div>
             <div class="mf-wrapper">
-              <input type="text" name="contact-name" placeholder="Nafn">
-              <textarea name="contact-message" rows="8" cols="80" placeholder="Skilaboð"></textarea>
+              <input type="text" name="contact-name" placeholder="Nafn" required>
+              <textarea name="contact-message" rows="8" cols="80" placeholder="Skilaboð" required></textarea>
             </div>
             <input class="btn btn-form" type="submit" value="Senda">
           </form>
@@ -79,14 +78,13 @@
       <jsp:include page="includes/footer.jsp" />
       <div id="s2"></div>
     </div>
+      
     <jsp:include page="includes/map.jsp" />
         
-    <jsp:include page="includes/scripts.jsp" />
-    
+    <script src="<c:url value="/js/jquery-3.2.0.min.js"/>" type="text/javascript"></script>
     <script type="text/javascript">
       var posts = ${postsJSON};
-    </script>
-    
+    </script>    
     <script src="<c:url value="/js/map.js" />"></script>
     <script src="<c:url value="/js/index.js" />"></script>
     <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4&callback=initMap" />"></script>

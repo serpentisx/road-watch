@@ -1,19 +1,19 @@
 
 package app.controller;
 
+import app.exceptions.FileUploadException;
+import app.exceptions.RoadNotFoundException;
 import app.model.Post;
 import app.service.AccountService;
 import app.service.PostService;
-import java.io.IOException;
+import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
+ * @date Last updated on 12 November 2017
  *
  * Listens to requests at defined routes related to handling posts
  * and is responsible for fetching and processing data as well as rendering pages.
@@ -42,11 +43,13 @@ public class PostsManager {
     /**
      * 
      * @param session maintains the user's session
+     * @param model   an object with attributes which can be delivered to the view
      * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.GET)
-    public String renderPostPage(HttpSession session) {
+    public String renderPostPage(HttpSession session, ModelMap model) {
         if (session.getAttribute("user") == null) {
+            model.addAttribute("formType", "login");
             return "login";
         }
         return "new_post";
@@ -62,60 +65,46 @@ public class PostsManager {
      * @param model   an object with attributes which can be delivered to the view
      * @param file    the image file the user uploaded
      * @return        string representing page to be rendered
-     * @throws java.io.IOException
+     * @throws app.exceptions.RoadNotFoundException
+     * @throws app.exceptions.FileUploadException
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
     public String newPost(
       HttpSession session, @RequestParam  Map<String, String> params, 
       ModelMap model, @RequestParam("file") MultipartFile file
-    ) throws IOException {              
-        model.addAttribute("username", (String) session.getAttribute("username"));
+    ) throws RoadNotFoundException, FileUploadException {
+      
+        String email = (String) session.getAttribute("user");
+        postService.createNewPost(params, file, email);
         
-        if (params.get("btn") != null) { return "new_post"; }
+        model.addAttribute("user", email);
         
-        String title = params.get("title");
-        String description = params.get("description");
+        List<Post> posts = postService.getAllPosts();
+        String postsJSON = postService.getAllPostsJSON(email);
         
-        // Hidden inputs
-        String latitude = params.get("latitude");
-        String longitude = params.get("longitude");
-        String roadName = params.get("road");
-        String roadNumber = params.get("road_number");
-        String zip = params.get("zip");
-        String locality = params.get("locality");
+        model.addAttribute("posts", posts);
+        model.addAttribute("postsJSON", postsJSON);
         
-        String userEmail = (String) session.getAttribute("user");
-        
-        byte[] bytes = null;
-        if (!file.isEmpty()) {
-            bytes = file.getBytes(); 
-        }
-        
-        boolean postCreated = postService.createNewPost(title, description, bytes, 
-                latitude, longitude, roadName, roadNumber, zip, locality, userEmail);
-        if (postCreated) {
-          model.addAttribute("posts", postService.getAllPosts());
-          return "index";
-        }
-        model.addAttribute("message", "Ekki tókst að búa til innleggið, reyndu aftur");
-        return "new_post";
+        return "index";
     }
     
     /**
      * Calls a method for supporting/unsupporting a post for currently logged in user
      * 
-     * @param id : the post's ID to support
-     * @param session : the current session
-     */    
+     * @param id      the post id to support
+     * @param session the current session
+     */
     @RequestMapping(value = "/supportPost", method = RequestMethod.POST)
     public @ResponseBody
     void support(@RequestBody int id, HttpSession session) {
         Post post = postService.getPostById(id);
         String userEmail = (String) session.getAttribute("user");
-        if (post.getSupporters().contains(userEmail)) {
-            postService.unsupportPost(id, userEmail);
-        } else {
-            postService.supportPost(id, userEmail);
+        if (post != null) {
+            if (post.getSupporters().contains(userEmail)) {
+                postService.unsupportPost(post, userEmail);
+            } else {
+                postService.supportPost(post, userEmail);
+            }
         }
     }
 }

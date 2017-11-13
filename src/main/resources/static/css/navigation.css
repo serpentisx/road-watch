@@ -42,13 +42,15 @@
   color: #f2f2f2;
 }
 
-.s-account a {
+.s-account a,
+.header-container > a {
   color: inherit;
   margin: 0 4px;
   text-decoration: none;
 }
 
-.s-account a:hover {
+.s-account a:hover,
+.header-container > a:hover {
     color: #dcb25e;
 }
 

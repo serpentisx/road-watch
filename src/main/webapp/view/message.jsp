@@ -8,8 +8,14 @@
   <head>
     <meta charset="utf-8">
     <title>Vegavaktin</title>
+    <link href="<c:url value="/css/navigation.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
   </head>
   <body>
-    <h3>${message}</h3>
+    <main>
+      <jsp:include page="includes/nav.jsp" />
+      <h3>${message}</h3>
+    </main>
+    <jsp:include page="includes/footer.jsp" />
   </body>
 </html>

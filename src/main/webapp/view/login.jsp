@@ -31,17 +31,14 @@
                 </c:otherwise>
             </c:choose>
               <div>
-                <!--<i class="fa fa-user-o" aria-hidden="true"></i>-->
                 <label for="register_user"></label>
                 <input autofocus id="register_user" name="register_name" type="text" required placeholder="Nafn"/>
               </div>
               <div>
-                <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                 <label for="register_email"></label>
                 <input id="register_email" name="register_email" type="text" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Netfang"/>
               </div>
               <div>
-                <!--<i class="fa fa-lock" aria-hidden="true"></i>-->
                 <label for="register_password"></label>
                 <input id="register_password" name="register_password" type="password" required placeholder="Lykilorð" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Verður að innihalda að lágmarki 6 stafi, a.m.k. einn tölustaf, einn hástaf og einn lágstaf."/>
               </div>
@@ -61,12 +58,10 @@
                 </c:otherwise>
             </c:choose>
               <div>
-                <!--<i class="fa fa-at" aria-hidden="true"></i>-->
                 <label for="login_email"></label>
                 <input autofocus name="login_email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Netfang">
               </div>
               <div>
-                <!--<i class="fa fa-key" aria-hidden="true"></i>-->
                 <label for="login_password"></label>
                 <input id="login_password" name="login_password" type="password" required placeholder="Lykilorð"/>
               </div>
@@ -86,13 +81,13 @@
               </div>
               <p class="message">Þegar með aðgang? <a class="login-form" href="#">Innskrá</a></p>
             </form>
-            <span class="invalid-input">${invalid_input}</span>
+            <span class="invalid-input">${error_message}</span>
             <span class="success-message">${success_message}</span>
           </div>
         </div>
       </div>
     </main>
-    <jsp:include page="includes/scripts.jsp" />
+    <script src="<c:url value="/js/jquery-3.2.0.min.js" />"></script>
     <script src="<c:url value="/js/login.js" />"></script>
   </body>
 </html>

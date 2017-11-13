@@ -9,7 +9,7 @@ body {
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 h1 {
@@ -116,6 +116,10 @@ header {
   overflow: hidden;
 }
 
+.main__hidden {
+  display: none;
+}
+
 .main__header {
   border-bottom: 1px solid #F0F1F2;
   height: 60px;
@@ -205,11 +209,11 @@ header {
 }
 
 .danger-btn {
-    background-color: #a94633;
+  background-color: #a94633;
 }
 
 .danger-btn:hover {
-    background-color: #df4325;;
+  background-color: #df4325;;
 }
 
 .account-settings-header {
@@ -219,9 +223,9 @@ header {
   outline: 1px solid #efe0e0;
 }
 
-.as-label {
+.as-label,
+.as-label-single {
   display: inline-block;
-  background: #fafafa;
   height: 100%;
   line-height: 60px;
   padding: 0px 15px;
@@ -230,26 +234,31 @@ header {
   font-size: 15px;
 }
 
+.as-label {
+  background-color: #fafafa;
+}
+
+.as-label-single,
+.main__header .username-settings {
+  background-color: #8ed081;
+}
+
 .main__content .password-settings, .main__content .delete-account {
   display: none;
 }
 
-.main__header .username-settings {
-  background: #8ed081;
-}
-
 .message {
-    margin-left: 22px;
-    color: #394c69;
-    font-weight: bold;
+  margin-left: 22px;
+  color: #394c69;
+  font-weight: bold;
 }
 
 .main-navigation {
-    background: none !important;
+  background: none !important;
 }
 
 footer {
-    position: fixed !important;
+  position: fixed !important;
 }
 
 @media (max-width: 764px) {
@@ -271,3 +280,37 @@ footer {
     text-align: center;
   }
 }
+
+
+/* INNLEGIN MÍN */
+
+a.delete-post {
+  padding: 0;
+  margin: 0;
+  
+  cursor: pointer;
+}
+
+table {
+  font-size: 1rem;
+  width: 100%;
+}
+
+table thead {
+  text-align: left;
+}
+
+table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-top: 10px;
+}
+
+table td:nth-child(2),
+table td:nth-child(3) {
+  padding: auto 15px;
+}
+
+
+
