@@ -44,6 +44,11 @@ To run the project locally, first clone this repository...
 ```sh
 $ git clone https://github.com/serpentisx/road-watch.git
 ```
+... navigate to the project directory 
+
+```sh
+$ cd road-watch\
+```
 ... compile and install the dependencies 
 
 ```sh
