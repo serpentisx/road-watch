@@ -85,17 +85,22 @@ var program = (function() {
     return roadFound;
   }
   
+  // Clears the displayed message on the screen
   function clearMessage() {
     error.removeChild(error.firstChild);
     success.removeChild(success.firstChild);
   }
   
+  // Shows messages on the screen
+  // @param successMessage: the success message to show
+  // @param errorMessage: the errorMessage to show 
   function showMessage(successMessage, errorMessage) {
     clearMessage();
     error.appendChild(document.createTextNode(errorMessage));
     success.appendChild(document.createTextNode(successMessage));
   }
   
+  // Fetch information for all input fields
   function init() {
     error = document.querySelector('.location-error-message');
     success = document.querySelector('.location-success-message');
@@ -167,6 +172,7 @@ var map = (function() {
   var infoWindow;
   var marker;
   
+  // Mark a position on map and get its coordinates
   function mapOnClick(e) {
     var coords = e.latLng;
     
@@ -179,14 +185,19 @@ var map = (function() {
     });
   }
   
+  // Set a marker's details
+  // @param info: the details to set to the marker
   function setMarkerInfo(info) {
     infoWindow.setContent(info);
   }
   
+  // Set a marker's position
+  // @param latLang: coordinates (latitude, longitude) of the marker
   function setMarkerPosition(latLng) {
     marker.setPosition(latLng);
   }
   
+  // Initializes the map
   function init() {
     var mapElement = document.getElementById('map');
     
@@ -225,6 +236,8 @@ var map = (function() {
 var geolocation = (function() {
   var geocoder;
   
+  // Add a position to gelocation
+  // @param position: the position to be added
   var addPosition = function (position) {
     var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
     geocoder.geocode({'location': latlng}, function(results, status) {
@@ -281,6 +294,7 @@ var geolocation = (function() {
   };
 })();
 
+// Fire everything off
 function initProgram() {
   program.init();
   map.init();

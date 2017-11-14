@@ -1,11 +1,17 @@
 /* global posts, Promise */
 
-document.addEventListener("DOMContentLoaded", function(){
+// Javascript file for all actions on main page
+
+(() => {
+    // Root element
     var $root = $('html, body');
     
+    // Initializing listeners
     initSupportPostListener();
     initScrollWatching();
+    initSeeMoreButton();
 
+    // Auto scroll to anchor link
     $('.index-navigation a').click(function(event) {
         event.preventDefault();
         var id = $(this).attr("href");
@@ -21,23 +27,30 @@ document.addEventListener("DOMContentLoaded", function(){
         }, 500);
     });
 
-    posts.splice(0, 6);
-    $('.p-see-more-btn').click(function () {
-        var next = posts.splice(0, 6);
-        for (var i = 0; i < next.length; i++) {
-           $('.posts-container').append(generatePostElement(next[i]));
-        }
-        if (posts.length === 0) {
-            $('.p-see-more-btn').remove();
-        }
-        initSupportPostListener();
-    });
+    // Event listener for see-more button
+    function initSeeMoreButton() {
+        posts.splice(0, 6);
+        $('.p-see-more-btn').click(function () {
+            var next = posts.splice(0, 6);
+            for (var i = 0; i < next.length; i++) {
+               $('.posts-container').append(generatePostElement(next[i]));
+            }
+            if (posts.length === 0) {
+                $('.p-see-more-btn').remove();
+            }
+            initSupportPostListener();
+        });
+    }
     
+    // Event listener for post support button
     function initSupportPostListener() {
         $('.rc-img').off();
         $('.rc-img').click(function () {
             var that = this;
-
+            
+            // Checks if a user is logged in or not.
+            // Performs a post request to initialize a support if a user is logged in
+            // or redirect to a log-in page if not.
             isLoggedIn().then(function (data) {
                 if (!data) {
                     window.location.href = "/innskraning";
@@ -57,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     }
     
+    // Toggle between liked and un-liked icon on a post
+    // @param post : the post the toggle like on
     function toggleSupport(post) {
         var support = parseInt($('span', post).text());
         if ($(post).hasClass('rc-img-active')) {
@@ -68,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function(){
         $(post).toggleClass('rc-img-active');
     }
     
+    // Checks if a user is logged in or not
     function isLoggedIn() {
         return Promise.resolve($.ajax({
             type: "POST",
@@ -78,6 +94,8 @@ document.addEventListener("DOMContentLoaded", function(){
         }));
     }
 
+    // Creates a post element
+    // @param post : the post create
     function generatePostElement(post) {
         var date = post.date ? post.date : "";
         var supportClass = post.isSupporting ? "rc-img-active" : "rc-img likes";
@@ -105,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function(){
         return post;
     }
     
+    // Event listener for navigation bar scroll
     function initScrollWatching() {
       var mn = $("nav.index-navigation");
       var mns = "index-navigation-scrolled";
@@ -120,5 +139,6 @@ document.addEventListener("DOMContentLoaded", function(){
         };
       })(mn, mns, headerHeight));
     }
-});
+})();
+
 
