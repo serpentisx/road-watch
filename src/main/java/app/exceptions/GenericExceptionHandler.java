@@ -66,23 +66,6 @@ public class GenericExceptionHandler {
         return "new_post";
     }
     
-    /**
-     * Exception handler for road-not-found exception
-     * 
-     * @param req   http-request
-     * @param e     the exception
-     * @param model model used for rendering
-     * @return 
-     */
-    @ExceptionHandler (HashException.class)
-    public String passwordHashingException(HttpServletRequest req,
-            HashException e, ModelMap model) {
-      
-        LOGGER.error("Path: " + req.getRequestURL());
-        LOGGER.error("Exception: " + e.getMessage() + " Caused by: " + e.getCause().toString());
-        return "";
-    }
-    
     @ExceptionHandler({SQLException.class, DataAccessException.class})
     public String databaseError(HttpServletRequest req, 
             Exception e, ModelMap model) {

@@ -98,7 +98,7 @@ header {
   height: 70px;
   background: #fff;
   position: relative;
-  
+  z-index: 3;
   box-shadow: none;
 }
 
