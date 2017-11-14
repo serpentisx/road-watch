@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+/* This css defines the look of the login page and new user page*/
+
 body, html {
     height: 100%;
     margin: 0;

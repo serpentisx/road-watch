@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url('../fonts/tw-cen-mt/tcm.TTF');
 
+/* This css defines the look of the index page*/ 
+
 body, html {
   margin: 0;
   height: 100%;
@@ -13,6 +15,7 @@ a {
   color: inherit;
 }
 
+/* Implementation of the look for the header of the index page*/
 /*********** SECTION HEADER - main ***********/
 
 main {
@@ -87,7 +90,7 @@ header {
   padding-top: 20px;
 }
 
-
+/* Implementation of the look for the navigation bar*/
 /*********** SECTION HEADER - navigation ***********/
 
 .main-navigation {
@@ -135,6 +138,8 @@ header {
   position: relative;
 }
 
+/* Implementation of the look for the main section that contains the posts 
+   submitted by the users*/
 /*********** Section 1 ***********/
 
 .section-1 {
@@ -176,6 +181,7 @@ header {
    background: #6daf78 !important;
 }
 
+/* Implementation of the look of the posts container and the look of the posts*/
 /*********** Section 1 Posts Container ***********/
 
 .posts-container {
@@ -214,7 +220,6 @@ header {
 }
 
 .post-img {
-  background-image: url('../img/road-desert.png');
   height: 44%;
   background-size: cover;
   position: relative;
@@ -332,6 +337,7 @@ header {
   margin:0 auto 14px auto;
 }
 
+/* Implementation of the look for the email service at the bottom of the page*/
 /*********** Section 2 - Contact ***********/
 
 .section-contact {

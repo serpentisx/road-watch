@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('../fonts/tw-cen-mt/tcm.TTF');
 
+/* This css defines the look of the the new post page*/
 
 html, body {
   overflow-x: visible;
@@ -116,6 +117,7 @@ div.location-info {
   font-size: 0.85rem;  
 }
 
+/* Defines the look of the map*/
 /*********** MAP ***********/
 
 .map {
