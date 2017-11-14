@@ -10,7 +10,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     </bean>
 
 
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="dispatcher" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${cf.host}" />
         <property name="port" value="${cf.port}" />
         <property name="username" value="${cf.username}" />
@@ -26,7 +26,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     </bean>
 
     <bean id="mailer" class="app.service.Mailer">
-        <property name="dispatcher" ref="mailSender" />
+        <property name="dispatcher" ref="dispatcher" />
     </bean>
 
 </beans>
+

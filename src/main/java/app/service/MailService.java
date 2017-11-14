@@ -1,6 +1,7 @@
 
 package app.service;
 
+import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailService {
     
-    private final Mailer mailer; // handles e-mailing
+    private Mailer mailer; // handles e-mailing
     
     public MailService() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-        this.mailer = (Mailer) context.getBean("mailer");
+        try {
+            ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+            this.mailer = (Mailer) context.getBean("mailer");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     /**
