@@ -38,6 +38,7 @@ public class AccountServiceImp implements AccountService {
     }
     
     @Override
+    @Transactional
     public void createNewAccount(String username, String password, String email)
       throws HashException {
         String hashedPassword = passwordService.createHash(password);

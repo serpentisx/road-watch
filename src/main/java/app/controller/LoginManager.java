@@ -137,7 +137,7 @@ public class LoginManager {
             return "login";
         }
         
-        if (!captcha) {
+        if (!!captcha) {
             model.addAttribute("error_message", "Auðkenning bar ekki árangur.");
             
         } else {
