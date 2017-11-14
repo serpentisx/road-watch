@@ -4,6 +4,6 @@
            <a href="/"></a>
            <img src="/img/logo.png" alt="Logo">
         </div>
-        <span>Vegavaktin 2017</span>
+        <span>vegavaktin@gmail.com</span>
      </div>
   </footer>

@@ -117,6 +117,7 @@ header {
   margin-left: 3%;
   border-radius: 3px;
   overflow: hidden;
+  margin-bottom: 100px;
 }
 
 .main__hidden {
@@ -261,7 +262,7 @@ header {
 }
 
 footer {
-  position: fixed !important;
+  position: absolute;
 }
 
 @media (max-width: 764px) {

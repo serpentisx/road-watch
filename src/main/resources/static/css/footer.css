@@ -1,5 +1,12 @@
 /* This css is used to define the look for the footer that appears at the 
    bottom on the website.*/
+
+body {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 5em;
+}
+
 .footer {
   background: #222;
   z-index: 1;
@@ -12,11 +19,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 90px;
 }
 
 .footer .logo {
-  width: 40px;
+  width: 35px;
   position: relative;
 }
 
@@ -29,6 +36,6 @@
 .footer span {
   margin-left: 34px;
   color: white;
-  font-size: 26px;
+  font-size: 20px;
   letter-spacing: 1px;
 }

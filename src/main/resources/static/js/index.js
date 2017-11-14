@@ -8,7 +8,7 @@
     
     // Initializing listeners
     initSupportPostListener();
-    initScrollWatching();
+    // initScrollWatching();
     initSeeMoreButton();
 
     // Auto scroll to anchor link
