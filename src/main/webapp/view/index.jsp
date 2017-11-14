@@ -30,7 +30,8 @@
               Með augun á veginum
             </div>
             <div class="btn header-btn">
-              <a href="/innlegg">Nýtt innlegg</a>
+              <span>Nýtt innlegg</span>
+              <a href="/innlegg"></a>
             </div>
           </div>
         </div>
