@@ -177,6 +177,7 @@ public class PostServiceImp implements PostService {
             post.put("description", p.getDescription());
             post.put("photo", p.getPhotoURL());
             post.put("author", p.getAccount().getUsername());
+            post.put("authored", p.getAccount().getEmail().equals(user));
             post.put("date", p.getDating());
             post.put("support", Integer.toString(p.getSupport()));
             post.put("isSupporting", p.getSupporters().contains(user));

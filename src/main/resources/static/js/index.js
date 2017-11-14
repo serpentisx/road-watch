@@ -99,6 +99,7 @@
     function generatePostElement(post) {
         var date = post.date ? post.date : "";
         var supportClass = post.isSupporting ? "rc-img-active" : "rc-img likes";
+        var authored = post.authored ? "pa-img-i-x " : "";
         var post =  `<div class="post-item-wrapper">
                         <div class="post-item">
                           <div class="post-img" style="background-image: url(${post.photo})"></div>
@@ -109,7 +110,7 @@
                             <p class="post-description">${post.description}</p>
                             <div class="par-wrapper">
                               <div class="post-author">
-                                <div class="pa-img"></div>
+                                <div class="pa-img"><i class="${authored}pa-img-i fa fa-user-circle-o" aria-hidden="true"></i></div>
                                 <span class="pa-name">${post.author}</span>
                               </div>
                               <div id="${post.id}" class="rc-img ${supportClass} likes">

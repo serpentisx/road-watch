@@ -286,10 +286,21 @@ header {
 }
 
 .pa-img {
-  background-image: url('../img/profile.png');
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 30px;
   width: 30px;
   background-size: cover;
+}
+
+.pa-img i {
+    font-size: 25px;
+    color: #4c4c4c;
+}
+
+.pa-img-i-x {
+    color: #4f976d !important;
 }
 
 .pa-name {

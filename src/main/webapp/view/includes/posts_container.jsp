@@ -20,7 +20,14 @@
               <p class="post-description">${post.getDescription()}</p>
               <div class="par-wrapper">
                 <div class="post-author">
-                  <div class="pa-img"></div>
+                  <c:choose>
+                    <c:when test='${post.getAccount().getEmail().equals(user)}'>
+                        <div class="pa-img"><i class="pa-img-i-x pa-img-i fa fa-user-circle-o" aria-hidden="true"></i></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="pa-img"><i class="pa-img-i fa fa-user-circle-o" aria-hidden="true"></i></div>
+                    </c:otherwise>
+                  </c:choose>
                   <span class="pa-name">${post.getAccount().getUsername()}</span>
                 </div>
                 <c:choose>
