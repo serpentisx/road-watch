@@ -148,6 +148,10 @@ main {
     font-size: 14px;
 }
 
+.g-recaptcha {
+    margin-bottom: 14px;
+}
+
 .form .submit-btn {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
