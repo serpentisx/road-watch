@@ -2,14 +2,12 @@ package app.controller;
 
 import app.service.MailService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -34,25 +32,25 @@ public class MailManager {
     /**
      * Handles message-requests
      *
-     * @param session : the user's current session
      * @param params  : the object data from post request
-     * @param model   : the object data used when rendering the view
-     * @return        : message-page to be rendered, displaying message indicating 
-     *                  if the message was successfully dispatched or not
+     * @return        : true of mail was successfully sent, else false
      */
     @RequestMapping(value = "/senda-post", method = RequestMethod.POST)
-    public String sendEmail(HttpSession session, @RequestParam Map<String, 
-      String> params, ModelMap model) {
-        
-        String name = params.get("contact-name");
-        String email = params.get("contact-email");
+    @ResponseBody
+    public boolean sendEmail(@RequestBody Map<String, String> params) {
+        try {
+            String email = (String) params.get("email");
+            String name = (String) params.get("name");
+            String content = (String) params.get("content");
+            String subject = name + " (" + email + ")";
+            
+            mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
+            return true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        String subject = name + " (" + email + ")";
-        String content = params.get("contact-message");
-
-        mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
-        model.addAttribute("message", SUCCESS_MESSAGE);
-        
-        return "message";
+        return false;
     }
 }

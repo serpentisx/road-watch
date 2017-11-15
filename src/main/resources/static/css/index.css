@@ -183,6 +183,17 @@ header {
    background: #6daf78 !important;
 }
 
+.btn-disabled {
+    background: #727f7e !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+    color: #fff;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    margin: 8px auto !important;
+
+}
+
 /* Implementation of the look of the posts container and the look of the posts*/
 /*********** Section 1 Posts Container ***********/
 

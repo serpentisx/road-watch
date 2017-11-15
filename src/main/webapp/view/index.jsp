@@ -64,15 +64,15 @@
         <div class="layer"></div>
         <div class="contact-container">
           <h2>hafa samband</h2>
-          <form class="contact-form" action="/senda-post" method="post">
+          <form id="contact-form" class="contact-form">
             <div class="f-wrapper">
-              <input type="email" name="contact-email" placeholder="Netfang" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+              <input id="e-email" type="email" name="contact-email" placeholder="Netfang" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
             </div>
             <div class="mf-wrapper">
-              <input type="text" name="contact-name" placeholder="Nafn" required>
-              <textarea name="contact-message" rows="8" cols="80" placeholder="Skilaboð" required></textarea>
+              <input id="e-name" type="text" name="contact-name" placeholder="Nafn" required>
+              <textarea id="e-content" name="contact-message" rows="8" cols="80" placeholder="Skilaboð" required></textarea>
             </div>
-            <input class="btn btn-form" type="submit" value="Senda">
+            <input id="e-send" class="btn btn-form" type="submit" value="Senda">
           </form>
         </div>
       </div>

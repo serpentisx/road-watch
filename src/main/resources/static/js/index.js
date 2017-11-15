@@ -8,8 +8,9 @@
     
     // Initializing listeners
     initSupportPostListener();
-    // initScrollWatching();
+    initScrollWatching();
     initSeeMoreButton();
+    initMailListener();
 
     // Auto scroll to anchor link
     $('.index-navigation a').click(function(event) {
@@ -67,6 +68,42 @@
                     data: JSON.stringify(id)
                 });
             });
+        });
+    }
+    
+    // A mail listener for sending mails
+    function initMailListener() {
+        $("#contact-form").submit(function(e) {
+            e.preventDefault();
+            
+            $("#e-send").prop('disabled', true);
+            $("#e-send").css({
+                'background': '#727f7e !important',
+                'width': '100% !important',
+                'transition': 'all 0.3s ease !important'
+            });
+            
+            var mail = {
+                'email'  : $('#e-email').val(),
+                'name'   : $('#e-name').val(),
+                'content': $('#e-content').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "/senda-post",
+                data: JSON.stringify(mail),
+                success: function (data) {
+                    if (data) $("#e-send").attr('value', 'Móttekið! Við munum hafa samband');
+                    else $("#e-send").attr('value', 'Úúúps, eitthvað fór úrskeiðis');
+                },
+                error: function(e) {
+                    $("#e-send").attr('value', 'Úúúps, eitthvað fór úrskeiðis');
+                }
+            });
+            return false;
         });
     }
     
