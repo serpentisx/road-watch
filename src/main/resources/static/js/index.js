@@ -78,9 +78,7 @@
             
             $("#e-send").prop('disabled', true);
             $("#e-send").css({
-                'background': '#727f7e !important',
-                'width': '100% !important',
-                'transition': 'all 0.3s ease !important'
+                'cssText': 'background: #727f7e !important; width: 100% !important; transition: all 0.4s ease !important'
             });
             
             var mail = {
@@ -96,7 +94,7 @@
                 url: "/senda-post",
                 data: JSON.stringify(mail),
                 success: function (data) {
-                    if (data) $("#e-send").attr('value', 'Móttekið! Við munum hafa samband');
+                    if (data) $("#e-send").attr('value', 'Takk! Við munum hafa samband');
                     else $("#e-send").attr('value', 'Úúúps, eitthvað fór úrskeiðis');
                 },
                 error: function(e) {
