@@ -24,6 +24,18 @@
         <td>${post.getDating()}</td>
         <td>${post.getRoad().getName()}</td>
         <td>
+          <a class="archive-post-btn" aria-label="Mark as archived">
+            <c:choose>
+                <c:when test='${post.isArchived()}'>
+                   <i class="${post.getId()} archived fa fa-check-circle-o" aria-hidden="true"></i>
+                </c:when>
+                <c:otherwise>
+                   <i class="${post.getId()} fa fa-circle" aria-hidden="true"></i>
+                </c:otherwise>
+            </c:choose>
+          </a>
+        </td>
+        <td>
           <a class="delete-post" aria-label="Delete">
             <i class="${post.getId()} fa fa-trash-o" aria-hidden="true"></i>
           </a>

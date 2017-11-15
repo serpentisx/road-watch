@@ -173,6 +173,7 @@ public class PostServiceImp implements PostService {
             HashMap<String, Object> post = new HashMap();
             
             post.put("id", p.getId());
+            post.put("archived", p.isArchived());
             post.put("title", p.getTitle());
             post.put("description", p.getDescription());
             post.put("photo", p.getPhotoURL());
@@ -230,5 +231,15 @@ public class PostServiceImp implements PostService {
           return true;
         }
         return false;
+    }
+    
+    @Override
+    @Transactional
+    public boolean toggleArchivePost(int postId) throws NullPointerException {
+        Post post = postRep.findByPostId(postId);
+        boolean isArchived = post.isArchived();
+        post.setArchived(!isArchived);
+  
+        return !isArchived;
     }
 }

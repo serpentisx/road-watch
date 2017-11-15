@@ -33,7 +33,39 @@
     for (var i = 0; i < deletePostButtons.length; i++) {
         deletePostButtons[i].addEventListener('click', deletePostHandler);
     }
-
+    
+     /**
+     * Adding event handlers to the archive-post anchors
+     *
+     * Handles archive post requests.
+     * Sends a request with the post id to server,
+     * and handles the response appropriately.
+     * 
+     * return true if the post has been archived,
+     *        false if the post has been un-archived
+     */
+    $('.archive-post-btn').click(function () {
+        var postID = parseInt($('i', this).attr('class').split(" ")[0]);
+        var that = this;
+        $.ajax({
+            type: "POST",
+            context: that,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: "/archivePost",
+            data: JSON.stringify(postID),
+            success: function(res) {
+                if (res) {
+                    $('i', that).addClass('archived fa-check-circle-o').removeClass('fa-circle');
+                }
+                else {
+                    $('i', that).addClass('fa-circle').removeClass('archived fa-check-circle-o');
+                }
+            }
+        });
+    });
+    
+    
     /**
      * Handles delete post requests.
      * Sends a request with the post id to server,

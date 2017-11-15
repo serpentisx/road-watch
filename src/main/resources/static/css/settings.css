@@ -288,11 +288,19 @@ footer {
 
 /* INNLEGIN MÍN */
 
-a.delete-post {
+a.delete-post, .archive-post-btn {
   padding: 0;
   margin: 0;
   
   cursor: pointer;
+}
+
+.archived {
+  color: #69b15b !important;
+}
+
+.archive-post-btn i {
+  color: #8b9097;
 }
 
 table {

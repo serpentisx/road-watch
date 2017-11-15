@@ -147,6 +147,19 @@ public class UserManager {
     }
     
     /**
+     * Responds to post archive user requests
+     * 
+     * @param postId    the id of the post to be archived
+     * @param session   maintains the user's session
+     * @return          true if postId matches some post
+     */
+    @RequestMapping(value = "/archivePost", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean archivePostHandler(@RequestBody String postId, HttpSession session) {
+        return postService.toggleArchivePost(Integer.parseInt(postId));
+    }
+    
+    /**
      * Password-processing exception handler
      * 
      * @param req     http-request

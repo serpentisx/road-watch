@@ -132,6 +132,10 @@
     // Creates a post element
     // @param post : the post create
     function generatePostElement(post) {
+        if (post.archived) {
+            return;
+        }
+        
         var date = post.date ? post.date : "";
         var supportClass = post.isSupporting ? "rc-img-active" : "rc-img likes";
         var authored = post.authored ? "pa-img-i-x " : "";

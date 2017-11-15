@@ -98,4 +98,12 @@ public interface PostService {
      * @return          true if postId matches some post
      */
     public boolean deletePost(int postId);
+    
+    /**
+     * Toggle post's archive status
+     * 
+     * @param postId    the post id of the post to toggle archive status
+     * @return          true if postId matches some post
+     */
+    public boolean toggleArchivePost(int postId);
 }
