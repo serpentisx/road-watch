@@ -95,16 +95,16 @@ public class UserManager {
         String oldPassword = params.get("old-password");
         String newPassword1 = params.get("new-password1");
         String newPassword2 = params.get("new-password2");
-
+        
         String loggedInUserEmail = (String) session.getAttribute("user");
         
         if (!newPassword1.equals(newPassword2)) {
             model.addAttribute("message", "Ný lykilorð eru ekki eins, reyndu aftur.");
         }
-        if (!accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
+        else if (!accountService.verifyPassword(loggedInUserEmail, oldPassword)) {
             model.addAttribute("message", "Lykilorð er ekki rétt, reyndu aftur.");
         }
-        if (accountService.changePassword(loggedInUserEmail, newPassword1)) {
+        else if (accountService.changePassword(loggedInUserEmail, newPassword1)) {
             model.addAttribute("message", "Lykilorði þínu hefur verið breytt.");
             
         } else {

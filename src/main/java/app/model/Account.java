@@ -11,8 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -31,7 +32,7 @@ public class Account {
  
     @Id
     @NotNull
-    // @Pattern(regexp="\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b")
+    @Email
     private String email;     // User's email address
     
     @Column (name="name")
@@ -40,7 +41,7 @@ public class Account {
     private String username;  // User's username
     
     @NotNull
-    @Size(min=7, max=100, message="Password must be between 7 to 100 characters long")
+    @Length(min=71, max=100, message="Password must be between 6 to 100 characters long")
     private String password;  // User's password
     
     // Collection of all posts referring to the user's account
