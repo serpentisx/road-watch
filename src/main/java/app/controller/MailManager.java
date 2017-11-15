@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,12 +46,10 @@ public class MailManager {
             String subject = name + " (" + email + ")";
             
             mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
-            return true;
             
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new MailSendException("E-mail dispatching failed");
         }
-
-        return false;
+        return true;
     }
 }

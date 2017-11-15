@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.dao.DataAccessException;
+import org.springframework.mail.MailSendException;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -74,6 +75,17 @@ public class GenericExceptionHandler {
         LOGGER.error("Database exception: " + e.toString());
         model.addAttribute("errorCode", "");
         model.addAttribute("errorMessage", "Gagnagrunnsþjónninn skilaði villu, reyndu aftur síðar");
+        return DEFAULT_ERROR_VIEW;
+    }
+    
+    @ExceptionHandler(MailSendException.class)
+    public String mailSendError(HttpServletRequest req, 
+            Exception e, ModelMap model) {
+      
+        LOGGER.error("Path: " + req.getRequestURL());
+        LOGGER.error("Mail exception: " + e.toString());
+        model.addAttribute("errorCode", "");
+        model.addAttribute("errorMessage", "Ekki tókst að senda skilaboðin, reyndu aftur síðar.");
         return DEFAULT_ERROR_VIEW;
     }
     

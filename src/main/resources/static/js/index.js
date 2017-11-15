@@ -77,9 +77,6 @@
             e.preventDefault();
             
             $("#e-send").prop('disabled', true);
-            $("#e-send").css({
-                'cssText': 'background: #727f7e !important; width: 100% !important; transition: all 0.4s ease !important'
-            });
             
             var mail = {
                 'email'  : $('#e-email').val(),
@@ -96,9 +93,15 @@
                 success: function (data) {
                     if (data) $("#e-send").attr('value', 'Takk! Við munum hafa samband');
                     else $("#e-send").attr('value', 'Úúúps, eitthvað fór úrskeiðis');
+                    $("#e-send").css({
+                      'cssText': 'background: #727f7e !important; width: 100% !important; transition: all 0.4s ease !important'
+                    });
                 },
                 error: function(e) {
                     $("#e-send").attr('value', 'Úúúps, eitthvað fór úrskeiðis');
+                    $("#e-send").css({
+                      'cssText': 'background: #727f7e !important; width: 100% !important; transition: all 0.4s ease !important'
+                    });
                 }
             });
             return false;
