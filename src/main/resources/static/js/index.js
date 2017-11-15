@@ -172,14 +172,28 @@
       var mns = "index-navigation-scrolled";
       var headerHeight = document.querySelector('header').clientHeight;
       
+      var lastScrollTop = 0;      
+
       window.addEventListener("scroll", (function(mn, mns, headerHeight) {
-        return function() {
-          if( $(this).scrollTop() > headerHeight ) {
-            mn.addClass(mns);
-          } else {
-            mn.removeClass(mns);
-          }
-        };
+            return function () {
+                var offZone = $(this).scrollTop() > headerHeight;
+                if (offZone) {
+                    mn.addClass(mns);
+                    $('.section-1').css('padding-top', '70px');
+                } else {
+                    mn.removeClass(mns);
+                    $('.section-1').css('padding-top', '0');
+                }
+
+                var st = $(this).scrollTop();
+                if (st > lastScrollTop && $(this).scrollTop() > headerHeight + 70) {
+                    mn.removeClass('top');
+                } 
+                else {
+                    mn.addClass('top');
+                }
+                lastScrollTop = st;
+            };
       })(mn, mns, headerHeight));
     }
 })();
