@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -70,22 +71,22 @@ public class PostsManager {
      */
     @RequestMapping(value = "/innlegg", method = RequestMethod.POST)
     public String newPost(
-      HttpSession session, @RequestParam  Map<String, String> params, 
-      ModelMap model, @RequestParam("file") MultipartFile file
+      HttpSession session, @RequestParam  Map<String, String> params,
+      RedirectAttributes model, @RequestParam("file") MultipartFile file
     ) throws RoadNotFoundException, FileUploadException {
       
         String email = (String) session.getAttribute("user");
         postService.createNewPost(params, file, email);
         
-        model.addAttribute("user", email);
+        model.addFlashAttribute("user", email);
         
         List<Post> posts = postService.getAllPosts();
         String postsJSON = postService.getAllPostsJSON(email);
         
-        model.addAttribute("posts", posts);
-        model.addAttribute("postsJSON", postsJSON);
+        model.addFlashAttribute("posts", posts);
+        model.addFlashAttribute("postsJSON", postsJSON);
         
-        return "index";
+        return "redirect:/";
     }
     
     /**

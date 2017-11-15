@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -90,7 +91,7 @@ public class LoginManager {
      */
     @RequestMapping(value = "/innskraning", method = RequestMethod.POST)
     public String login (
-      HttpSession session, @RequestParam Map<String,String> params, ModelMap model)
+      HttpSession session, @RequestParam Map<String,String> params, ModelMap model, RedirectAttributes attr)
       throws PasswordVerificationException {
         String email = params.get("login_email");
         String password = params.get("login_password");
@@ -98,13 +99,13 @@ public class LoginManager {
         if (accountService.verifyPassword(email, password)) {
             session.setAttribute("user", email);
             session.setAttribute("username", accountService.findUsernameByEmail(email));
-            
-            model.addAttribute("posts", postService.getAllPosts());
-            model.addAttribute("postsJSON", postService.getAllPostsJSON(email));
-            model.addAttribute("user", (String) session.getAttribute("user"));
+
+            attr.addFlashAttribute("posts", postService.getAllPosts());
+            attr.addFlashAttribute("postsJSON", postService.getAllPostsJSON(email));
+            attr.addFlashAttribute("user", (String) session.getAttribute("user"));
             
             loginEventService.createNewLoginEvent(email);
-            return "index";
+            return "redirect:/";
             
         } else {
             model.addAttribute("formType", "login");
@@ -191,17 +192,17 @@ public class LoginManager {
      * Handles log out requests. Renders home page.
      *
      * @param session maintains information regarding the currently logged in user
-     * @param model   an object with attributes which can be used when rendering
+     * @param attr   an object with attributes which can be used when rendering
      * @return        string representing page to be rendered
      */
     @RequestMapping(value = "/utskra", method = RequestMethod.GET)
-    public String logout (HttpSession session, ModelMap model) {
+    public String logout (HttpSession session, RedirectAttributes attr) {
         session.setAttribute("user", null);
-        model.addAttribute("username", null);
-        
-        model.addAttribute("posts", postService.getAllPosts());
-        model.addAttribute("postsJSON", postService.getAllPostsJSON(null));
-        return "index";
+        attr.addFlashAttribute("username", null);
+
+        attr.addFlashAttribute("posts", postService.getAllPosts());
+        attr.addFlashAttribute("postsJSON", postService.getAllPostsJSON(null));
+        return "redirect:/";
     }
     
     /**
