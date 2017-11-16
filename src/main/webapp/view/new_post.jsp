@@ -70,9 +70,9 @@
               <input name="locality" type="hidden" value="">
 
               <button class="submit" type="submit">Staðfesta</button>
+              <p class="post-error-message">${message}</p>
             </fieldset>
           </form>
-          <p class="post-error-message">${message}</p>
         </div>
       </section>
       
