@@ -15,11 +15,10 @@
     <link href="<c:url value="/css/footer.css" />" rel="stylesheet">
     <link href="<c:url value="/css/new_post.css" />" rel="stylesheet">
   </head>
-  <body>    
+  <body>
+    <jsp:include page="includes/nav.jsp" />    
     <main>
-      <jsp:include page="includes/nav.jsp" />
-      
-      <section>
+      <section class="np-container">
         <div class="new-post-container">
           <form action="/innlegg" method="POST" enctype="multipart/form-data">
             <fieldset>
@@ -37,16 +36,16 @@
 
               <div class="location">
 
+                <div class="autocomplete-container">
+                  <label for="pac-input"></label>
+                  <input id="pac-input" name="formatted_address" type="text" placeholder="Sláðu inn staðsetningu" required>
+                </div>
+
                 <div class="enter-coordinates">
                   <button class="generate-coordinates" type="button" data-toggle="tooltip" data-placement="top" title="Ef þú ert núna á staðnum geturðu notað staðsetningartækni til þess að gefa upp staðsetningu. Þú getur líka gert það með því að gefa upp kennileiti, t.d. heimilisfang eða nafn staðar. En reyndu þá að gefa upp eins nákvæma staðsetningu og þú getur.">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     Sækja hnit
                   </button>
-                </div>
-
-                <div class="autocomplete-container">
-                  <label for="pac-input"></label>
-                  <input id="pac-input" name="formatted_address" type="text" placeholder="Sláðu inn staðsetningu" required>
                 </div>
 
                 <div>
@@ -56,9 +55,9 @@
               </div>
 
               <div class="file-upload">
-                <i class="fa fa-file-image-o" aria-hidden="true"></i>
                 <label for="file"></label>
                 <input id="file" type="file" name="file" accept="image/*">
+                <i class="fa fa-file-image-o" aria-hidden="true"></i>
               </div>
 
               <!-- Hidden inputs -->
@@ -74,16 +73,13 @@
             </fieldset>
           </form>
         </div>
-      </section>
-      
-      <section class="map">
+        
         <div class="map-wrapper">
           <div id="map"></div>
         </div>
       </section>
-        
-      <jsp:include page="includes/footer.jsp" />
     </main>
+    <jsp:include page="includes/footer.jsp" />
     <script src="<c:url value="/js/new_post.js" />"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGz-droHcXcK93KzuCjzjrR7xr2QnQrjA&libraries=places&callback=initProgram" async defer></script>
   </body>

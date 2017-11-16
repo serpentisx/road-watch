@@ -9,6 +9,9 @@ body {
   background: #F0F1F2;
   margin: 0;
   font-family: Tw Cen MT;
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 5em;
 }
 
 a {
