@@ -8,11 +8,13 @@
     <a href="/"></a>
     <img class="logo-img" src="../img/logo.png" alt="">
   </div>
+  
   <div class="account-wrapper">
+    
     <div class="s-account">
       <i class="fa fa-home" aria-hidden="true"></i>
       <a href="/">Heim</a>
-    </div>
+    </div>    
     <c:choose>
       <c:when test="${user == null}">
         <div class="s-account">
@@ -43,5 +45,6 @@
         </c:otherwise>
       </c:choose>
     </div>
+    
   </div>
 </nav>

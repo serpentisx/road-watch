@@ -26,18 +26,38 @@
                     <img alt='' class='sidebar__avatar' src='/img/profile.png'>
                     <p>${username}</p>
                 </div>
-                <div class='sidebar__menu-item main__account sidebar__menu-item--active'>
-                    <i class="fa fa-user" aria-hidden="true"></i> Aðgangur
-                </div>
-                <div class='sidebar__menu-item main__posts'>
+                
+                <div class='sidebar__menu-item main__posts sidebar__menu-item--active'>
                     <i class="fa fa-sticky-note" aria-hidden="true"></i> Innleggin mín
                 </div>
                 <div class='sidebar__menu-item main__supported'>
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Líkað við
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Studd innlegg
+                </div>
+                <div class='sidebar__menu-item main__account'>
+                    <i class="fa fa-user" aria-hidden="true"></i> Aðgangsupplýsingar
                 </div>
             </div>
+                
             <div class='main'>
-                <div class="main__account__tab">
+                <div class="main__posts__tab">
+                    <div class='main__header'>
+                        <div class="as-label-single">Innleggin mín</div>
+                    </div>
+                    <div class='main__content'>
+                        <jsp:include page="includes/settings_my_posts.jsp" />
+                    </div>
+                </div>
+                
+                <div class="main__hidden main__supported__tab">
+                    <div class='main__header'>
+                        <div class="as-label-single">Studd innlegg</div>
+                    </div>
+                    <div class='main__content'>
+                        <jsp:include page="includes/settings_supported_posts.jsp" />
+                    </div>
+                </div>
+                    
+                <div class="main__hidden main__account__tab">
                     <div class='main__header'>
                         <div class="account-settings-header">
                            <div class="as-label username-settings">Breyta notandanafni</div>
@@ -46,50 +66,7 @@
                         </div>
                     </div>
                     <div class='main__content'>
-                        <div class='main__settings-form username-settings'>
-                            <form action='/reikningur/breyta-nafni' method='post'>
-                                <label class='main__input-label'>Þitt notandanafn</label>
-                                <input name="username" class='main__input' type='text' value="${username}">
-                                <button class='btn main__save-button' type="submit">Vista</button>
-                            </form>
-                        </div>
-                        <div class='main__settings-form password-settings'>
-                            <form action='/reikningur/breyta-lykilordi' method='post'>
-                                <label class='main__input-label'>Gamalt lykilorð</label>
-                                <input name="old-password" class='main__input' type='password'>
-                                <label class='main__input-label'>Nýtt lykilorð</label>
-                                <input name="new-password1" class='main__input' type='password'>
-                                <label class='main__input-label'>Nýtt lykilorð - endurtekið</label>
-                                <input name="new-password2" class='main__input' type='password'>
-                                <button class='btn main__save-button' type="submit">Staðfesta</button>
-                            </form>
-                        </div>
-                        <div class='main__settings-form delete-account'>
-                            <form action='/reikningur/eyda-reikningi' method='post'>
-                                <h3>Þú ert að fara að eyða reikningnum þínum. Aðgerðin er óafturkallanleg.</h3>
-                                <label class='main__input-label'>Lykilorð þitt</label>
-                                <input name="password" class='main__input' type='password'>
-                                <button class='btn main__save-button danger-btn' type="submit">Eyða reikningi</button>                      
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="main__hidden main__posts__tab">
-                    <div class='main__header'>
-                        <div class="as-label-single">Innleggin mín</div>
-                    </div>
-                    <div class='main__content'>
-                        <jsp:include page="includes/my_posts.jsp" />
-                    </div>
-                </div>
-                
-                <div class="main__hidden main__supported__tab">
-                    <div class='main__header'>
-                        <div class="as-label-single">Líkað við</div>
-                    </div>
-                    <div class='main__content'>
-                        <jsp:include page="includes/supported_posts.jsp" />
+                        <jsp:include page="includes/settings_account.jsp" />
                     </div>
                 </div>
                 

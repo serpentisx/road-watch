@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -169,7 +170,7 @@ public class UserManager {
      */
     @ExceptionHandler ({HashException.class, PasswordVerificationException.class})
     public String handleError(HttpServletRequest req,
-            Exception e, ModelMap model) {
+            Exception e, Model model) {
         
         model.addAttribute("message", "Einhver villa átti sér stað, reyndu aftur síðar.");
         LOGGER.error("Path: " + req.getRequestURL());

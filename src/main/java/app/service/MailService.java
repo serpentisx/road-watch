@@ -1,7 +1,7 @@
 
 package app.service;
 
-import com.sun.mail.util.MailSSLSocketFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -25,9 +25,11 @@ public class MailService {
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
             this.mailer = (Mailer) context.getBean("mailer");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        } catch (BeansException e) {
+            // Catches beancreation runtime exception when running locally
+            // because the bean for the mail service uses environment variables
+            // not set locally. This could be fixed later.
+            // In that case we do nothing
         }
     }
     

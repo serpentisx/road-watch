@@ -45,24 +45,27 @@
      *        false if the post has been un-archived
      */
     $('.archive-post-btn').click(function () {
-        var postID = parseInt($('i', this).attr('class').split(" ")[0]);
-        var that = this;
-        $.ajax({
-            type: "POST",
-            context: that,
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            url: "/archivePost",
-            data: JSON.stringify(postID),
-            success: function(res) {
-                if (res) {
-                    $('i', that).addClass('archived fa-check-circle-o').removeClass('fa-circle');
-                }
-                else {
-                    $('i', that).addClass('fa-circle').removeClass('archived fa-check-circle-o');
-                }
-            }
-        });
+        if (confirm('Ertu viss um að þú viljir merkja innleggið þitt sem afgreitt?\n\
+                      \nÞar með ertu að staðfesta að annmarkanum hafi verið komið í lag.')) {
+          var postID = parseInt($('i', this).attr('class').split(" ")[0]);
+          var that = this;
+          $.ajax({
+              type: "POST",
+              context: that,
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              url: "/archivePost",
+              data: JSON.stringify(postID),
+              success: function(res) {
+                  if (res) {
+                      $('i', that).addClass('archived fa-check-circle-o').removeClass('fa-circle');
+                  }
+                  else {
+                      $('i', that).addClass('fa-circle').removeClass('archived fa-check-circle-o');
+                  }
+              }
+          });
+        }
     });
     
     
@@ -75,7 +78,7 @@
      * @returns {undefined}
      */
     function deletePostHandler(e) {
-        if (confirm('Ertu viss um að þú viljir eyða innleginu þínu?')) {
+        if (confirm('Ertu viss um að þú viljir eyða innlegginu þínu fyrir fullt og allt?')) {
             var postId = e.target.classList[0];
             var url = '/delete-post';
 
@@ -98,7 +101,7 @@
                         showMessage('Eitthvað fór úrskeiðis og ekki tókst að eyða innlegginu þínu');
                     }
                 } else {
-                    showMessage('Vefþjónn skilaði villu, reyndu aftur síðar.');
+                    showMessage('Vefþjónninn framkallaði villu, reyndu aftur síðar.');
                 }
             };
 
