@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date   Last updated on 12 November 2017
+ * @date   Last updated on 15 November 2017
  *
  * MailManager handles all e-mail interactions
  */
@@ -45,12 +46,10 @@ public class MailManager {
             String subject = name + " (" + email + ")";
             
             mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
-            return true;
             
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new MailSendException("E-mail dispatching failed when user attempted to send message", e);
         }
-
-        return false;
+        return true;
     }
 }
