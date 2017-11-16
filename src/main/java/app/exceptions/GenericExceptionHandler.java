@@ -102,7 +102,6 @@ public class GenericExceptionHandler {
         LOGGER.error("Mail exception: " + e.toString());
         model.addAttribute("errorCode", "");
         model.addAttribute("errorMsg", "Ekki tókst að senda skilaboðin, reyndu aftur síðar.");
-        System.out.println("ERROR HANDLER");
         return DEFAULT_ERROR_VIEW;
     }
     
