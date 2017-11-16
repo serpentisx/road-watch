@@ -18,16 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailService {
     
-    private Mailer mailer; // handles e-mailing
+    private final Mailer mailer; // handles e-mailing
     
     public MailService() {
-        try {
-            ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-            this.mailer = (Mailer) context.getBean("mailer");
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+        this.mailer = (Mailer) context.getBean("mailer");
     }
     
     /**

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date   Last updated on 12 November 2017
+ * @date   Last updated on 15 November 2017
  *
  * MailManager handles all e-mail interactions
  */
@@ -48,7 +48,7 @@ public class MailManager {
             mailService.sendMail(BUSINESS_EMAIL, BUSINESS_EMAIL, subject, content);
             
         } catch (Exception e) {
-            throw new MailSendException("E-mail dispatching failed");
+            throw new MailSendException("E-mail dispatching failed when user attempted to send message", e);
         }
         return true;
     }

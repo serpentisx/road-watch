@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Hinrik Snær Guðmundsson (hsg30@hi.is)
  * @author Huy Van Nguyen (hvn1@hi.is)
  * @author Valentin Oliver Loftsson (vol1@hi.is)
- * @date Last updated on 12 November 2017
+ * @date Last updated on 15 November 2017
  *
  * Handles login, logout and registering
  */
@@ -175,16 +177,20 @@ public class LoginManager {
         model.addAttribute("formType", "login");
         
         String newPassword = UUID.randomUUID().toString().replace("-", "");
-        System.out.println(email);
-        accountService.changePassword(email, newPassword);
         
         String subject = "Nýtt lykilorð " + " (" + email + ")";
         String content = "Nýja lykilorðið þitt er: " + newPassword + " \nBreyttu lykilorðinu strax við næstu innskráningu. \n\nBestu kveðjur, \nVegavaktin";
         
-        mailService.sendMail(BUSINESS_EMAIL, email, subject, content);
-
-        model.addAttribute("success_message", "Þér hefur verið sent nýtt lykilorð í tölvupósti.");
+        try {
+            mailService.sendMail(BUSINESS_EMAIL, email, subject, content);
+        } catch (Exception e) {
+            throw new MailSendException("E-mail dispatching failed for password recovery", e);
+        }
         
+        // First try to send mail, then change the password in case the mailing fails.
+        accountService.changePassword(email, newPassword);
+        
+        model.addAttribute("success_message", "Þér hefur verið sent nýtt lykilorð í tölvupósti.");
         return "login";
     }
 
@@ -227,7 +233,7 @@ public class LoginManager {
      */
     @ExceptionHandler ({HashException.class, PasswordVerificationException.class})
     public String handleError(HttpServletRequest req,
-            Exception e, ModelMap model) {
+            Exception e, Model model) {
         
         model.addAttribute("error_message", "Einhver villa átti sér stað, reyndu aftur síðar.");
         LOGGER.error("Path: " + req.getRequestURL());

@@ -10,36 +10,50 @@
   </div>
   <div class="account-wrapper">
     <div class="s-account">
-      <i class="fa fa-home" aria-hidden="true"></i>
-      <a href="/">Heim</a>
+      
+      <a href="/">
+       <i class="fa fa-home" aria-hidden="true"></i> 
+       Heim
+      </a>
     </div>
     <c:choose>
       <c:when test="${user == null}">
         <div class="s-account">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          <a href="/innskraning">Innskrá</a>
+          
+          <a href="/innskraning">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Innskrá
+          </a>
         </div>
       </c:when>    
       <c:otherwise>
         <div class="s-account">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          <a href="/innlegg">Nýtt innlegg</a>
+          <a href="/innlegg">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Nýtt innlegg
+          </a>
         </div>
         <div class="s-account">
-          <i class="fa fa-user" aria-hidden="true"></i>
-          <a href="/minar-sidur">Mínar síður</a>
+          <a href="/minar-sidur">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Mínar síður
+          </a>
         </div>
       </c:otherwise>
     </c:choose>
     <div class="s-account">
       <c:choose>
         <c:when test="${user == null}">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-          <a href="/nyskraning">Nýskrá</a>
+          <a href="/nyskraning">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Nýskrá
+          </a>
         </c:when>    
         <c:otherwise>
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-          <a href="/utskra">Útskrá</a>
+          <a href="/utskra">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Útskrá
+          </a>
         </c:otherwise>
       </c:choose>
     </div>
