@@ -8,9 +8,9 @@
     
     // Initializing listeners
     initSupportPostListener();
-    initScrollWatching();
     initSeeMoreButton();
     initMailListener();
+    initMobileNavigation();
 
     // Auto scroll to anchor link
     $('.index-navigation a').click(function(event) {
@@ -27,6 +27,19 @@
             scrollTop: target
         }, 500);
     });
+    
+
+    // Mobile navigation
+    function initMobileNavigation() {
+        if (window.innerWidth < 630) {
+            $('.index-navigation a').css('display', 'none');
+            $('.map-label').text('Skoða kort');
+            $('.map-label').css('display', 'block');
+        }
+        else {
+            initScrollWatching();
+        }
+    }
 
     // Event listener for see-more button
     function initSeeMoreButton() {
