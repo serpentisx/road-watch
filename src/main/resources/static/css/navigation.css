@@ -60,3 +60,28 @@
 .s-account i {
   font-size: 0.8em;
 }
+
+/****** ----------- Media-Queries MAX-WIDTH  ----------- ******/
+
+@media screen and (max-width: 700px) {
+    nav .s-account:nth-child(1) {
+        display: none;
+    } 
+    
+    .header-bar .logo {
+        left: inherit;
+        margin-left: 20px;
+        width: 35px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    nav .s-account:nth-child(3) {
+        display: none;
+    } 
+    
+    .account-wrapper {
+        margin-right: 0;
+    }
+}
+

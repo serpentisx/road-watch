@@ -45,27 +45,24 @@
      *        false if the post has been un-archived
      */
     $('.archive-post-btn').click(function () {
-        if (confirm('Ertu viss um að þú viljir merkja innleggið þitt sem afgreitt?\n\
-                      \nÞar með ertu að staðfesta að annmarkanum hafi verið komið í lag.')) {
-          var postID = parseInt($('i', this).attr('class').split(" ")[0]);
-          var that = this;
-          $.ajax({
-              type: "POST",
-              context: that,
-              contentType: 'application/json; charset=utf-8',
-              dataType: 'json',
-              url: "/archivePost",
-              data: JSON.stringify(postID),
-              success: function(res) {
-                  if (res) {
-                      $('i', that).addClass('archived fa-check-circle-o').removeClass('fa-circle');
-                  }
-                  else {
-                      $('i', that).addClass('fa-circle').removeClass('archived fa-check-circle-o');
-                  }
-              }
-          });
-        }
+        var postID = parseInt($('i', this).attr('class').split(" ")[0]);
+        var that = this;
+        $.ajax({
+            type: "POST",
+            context: that,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: "/archivePost",
+            data: JSON.stringify(postID),
+            success: function(res) {
+                if (res) {
+                    $('i', that).addClass('archived fa-check-circle-o').removeClass('fa-circle');
+                }
+                else {
+                    $('i', that).addClass('fa-circle').removeClass('archived fa-check-circle-o');
+                }
+            }
+        });
     });
     
     

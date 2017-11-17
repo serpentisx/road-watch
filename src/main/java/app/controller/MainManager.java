@@ -2,6 +2,7 @@
 package app.controller;
 
 import app.model.Post;
+import app.service.LoginEventService;
 import app.service.PostService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainManager {
 
     @Autowired
-    PostService service;
+    PostService postService;
+    
+    @Autowired 
+    LoginEventService loginEventService;
     
     /**
      * Renders home page with posts.
@@ -41,8 +45,8 @@ public class MainManager {
         String userEmail = (String) session.getAttribute("user");
         model.addAttribute("user", userEmail);
         
-        List<Post> posts = service.getAllPosts();
-        String postsJSON = service.getAllPostsJSON(userEmail);
+        List<Post> posts = postService.getAllPosts();
+        String postsJSON = postService.getAllPostsJSON(userEmail);
         
         model.addAttribute("posts", posts);
         model.addAttribute("postsJSON", postsJSON);
@@ -60,16 +64,19 @@ public class MainManager {
      */
     @RequestMapping(value = "/minar-sidur", method = RequestMethod.GET)
     public String settings (HttpSession session, ModelMap model) {
-        String user = (String) session.getAttribute("user");
-        if (user == null || user.equals("")) {
+        String userEmail = (String) session.getAttribute("user");
+        if (userEmail == null || userEmail.equals("")) {
             model.addAttribute("formType", "login");
             return "login";
         }
-        model.addAttribute("user", (String) user);
+        model.addAttribute("user", userEmail);
         model.addAttribute("username", (String) session.getAttribute("username"));
         
-        model.addAttribute("supportedPosts", service.getAllSupportedPosts(user));
-        model.addAttribute("userPosts", service.getAllUserPosts(user));
+        String latestLogin = loginEventService.getLatestLoginDate(userEmail);
+        model.addAttribute("latestLogin", latestLogin);
+        
+        model.addAttribute("supportedPosts", postService.getAllSupportedPosts(userEmail));
+        model.addAttribute("userPosts", postService.getAllUserPosts(userEmail));
         
         return "settings";
     }

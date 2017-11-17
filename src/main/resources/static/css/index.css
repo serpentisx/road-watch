@@ -253,7 +253,7 @@ header {
   border-radius: 2px;
   background-color: #4f976d;
   color: #fff;
-  font-size: 10px;
+  font-size: 15px;
   line-height: 10px;
   font-weight: 400;
 }
@@ -455,3 +455,55 @@ header {
 .section-2 {
     position: fixed !important;
 }
+
+/****** ----------- Media-Queries MAX-WIDTH  ----------- ******/
+
+@media screen and (max-width: 700px) {
+    nav .s-account:nth-child(1) {
+        display: none;
+    } 
+}
+
+@media screen and (max-width: 630px) {
+    .m-title h1 {
+        font-size: 40px;
+        margin: 25px 0;
+    }
+    
+    .index-navigation {
+        background: #5a9f77;
+    }
+    
+    .index-navigation li {
+        margin: 0;
+    }
+    
+    .index-navigation a {
+        color: #ffffff;
+        font-size: 25px;
+        letter-spacing: 2px;
+        font-weight: bold;
+        font-variant: all-small-caps; 
+    }
+    
+    .index-navigation a:hover {
+        color: #ffffff;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header-container {
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .m-title h1 {
+        letter-spacing: 5px;
+    }
+    
+    .undertitle {
+        font-size: 20px;
+    }
+}
+
