@@ -26,8 +26,10 @@
                     <img alt='' class='sidebar__avatar' src='/img/profile.png'>
                     <p>${username}</p>
                     <c:if test="${latestLogin != null}">
-                      <p>Síðasta innskráning:</p>
-                      <p>${latestLogin}</p>
+                      <div>
+                        <p>Síðasta innskráning:</p>
+                        <p>${latestLogin}</p>
+                      </div>
                     </c:if>
                 </div>
                 

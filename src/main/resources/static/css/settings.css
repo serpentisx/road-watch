@@ -74,6 +74,10 @@ header {
   margin: 0;
 }
 
+.sidebar__header > div {
+  margin-top: 10px;
+}
+
 .sidebar__menu-item {
   background: #FFF;
   padding: 20px;

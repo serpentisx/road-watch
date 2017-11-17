@@ -72,6 +72,7 @@ main > section.map {
   padding: 30px;
   width: 71%;
   margin-top: 30px;
+  height: 100%;
 }
 
 fieldset {
@@ -163,7 +164,6 @@ legend {
     letter-spacing: 2px;
     font-size: 30px;
     border-bottom: solid 1px #bdb9b9;
-    width: 200px;
     padding-bottom: 18px;
 }
 
@@ -239,6 +239,10 @@ div.location-info {
 
 #pac-input:focus {
   border-color: #4d90fe;
+}
+
+.location > div.message {
+  padding-bottom: 20px;
 }
 
 .location-error-message,

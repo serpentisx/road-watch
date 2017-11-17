@@ -63,7 +63,7 @@
                   </div>
                 </div>
 
-                <div>
+                <div class="message">
                   <span class="location-success-message"></span>
                   <span class="location-error-message"></span>
                 </div>

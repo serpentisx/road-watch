@@ -4,12 +4,14 @@
 
 // Javascript file for the front-page map
 
+/*
 var ICONS = {
   main: {
-    icon: '/img/logo.png',
+    icon: '/img/marker-dark.png',
     size: 16
   }
 };
+*/
 
 var MAP_STYLES = [
     {
@@ -115,10 +117,6 @@ var program = (function() {
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(post.latitude, post.longitude),
         map: map
-      });
-      
-      marker.setIcon({
-        url: ICONS.main.icon
       });
       
       addMarkerListener(marker, getPostInfo(post));
