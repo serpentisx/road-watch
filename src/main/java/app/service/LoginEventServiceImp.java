@@ -45,8 +45,11 @@ public class LoginEventServiceImp implements LoginEventService {
     public String getLatestLoginDate(String user) {
         Instant latest = loginEventRep.latestLoginStamp(user);
         if (latest != null) {
-            LocalDateTime time = LocalDateTime.ofInstant(latest, ZoneOffset.UTC);
-            return FORMATTER.format(time);
+            LocalDateTime dateTime = LocalDateTime.ofInstant(latest, ZoneOffset.UTC);
+            String dateString = FORMATTER.format(dateTime);
+            String[] components = dateString.split(" ");
+            
+            return components[0] + ", kl. " + components[1];
         }
         return null;
     }

@@ -35,6 +35,19 @@
               </div>
 
               <div class="location">
+                
+                <p class="info">
+                  Þú hefur þrjár leiðir til þess að gefa upp staðsetningu á annmarkanum:
+                </p>
+                <ol>
+                  <li>Þú getur slegið inn nafn staðar eða heimilisfang og valið rétta niðurstöðu úr lista.</li>
+                  <li>Þú getur valið staðsetningu af korti.</li>
+                  <li>Einnig geturðu sótt hnit ef þú ert nú þegar á staðnum, en athugaðu að
+                      sú aðferð gæti skilað ónákvæmri staðsetningu.</li>
+                </ol>
+                <p class="info">
+                  Mundu bara að vera eins nákvæm(ur) og þú getur.
+                </p>
 
                 <div class="autocomplete-container">
                   <label for="pac-input"></label>
@@ -42,7 +55,7 @@
                 </div>
 
                 <div class="enter-coordinates">
-                  <button class="generate-coordinates" type="button" data-toggle="tooltip" data-placement="top" title="Ef þú ert núna á staðnum geturðu notað staðsetningartækni til þess að gefa upp staðsetningu. Þú getur líka gert það með því að gefa upp kennileiti, t.d. heimilisfang eða nafn staðar. En reyndu þá að gefa upp eins nákvæma staðsetningu og þú getur.">
+                  <button class="generate-coordinates" type="button" data-toggle="tooltip" data-placement="top">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     Sækja hnit
                   </button>

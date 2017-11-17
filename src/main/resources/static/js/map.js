@@ -2,7 +2,75 @@
 
 /* global posts, google  */
 
-// Javascript file for Map
+// Javascript file for the front-page map
+
+var ICONS = {
+  main: {
+    icon: '/img/logo.png',
+    size: 16
+  }
+};
+
+var MAP_STYLES = [
+    {
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "visibility": "on"
+              }
+          ]
+    },
+    {
+          "featureType": "road",
+          "elementType": "labels.text.fill",
+          "stylers": [
+              {
+                  "color": "#ffffff"
+              }
+          ]
+    },
+    {
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {}
+];
 
 var program = (function() {
   var map;
@@ -27,7 +95,9 @@ var program = (function() {
 
     var info = "<b>" + post.title + "</b><br>Dags. " + post.date;
     
-    if (!post.archived && road) {
+    console.log(post.archived);
+    
+    if (road) {
       info += ("<br>" + road.name);
       if (road.roadNumber)     info += (" (vegnr. " + road.roadNumber + ")");
       if (road.locality)      info += ("<br>" + road.locality);
@@ -39,12 +109,16 @@ var program = (function() {
   
   // Add markers to the map
   function addMarkers() {
+    console.log(posts);
     for (var i = 0; i < posts.length; i++) {
       var post = posts[i];
-      
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(post.latitude, post.longitude),
-        map
+        map: map
+      });
+      
+      marker.setIcon({
+        url: ICONS.main.icon
       });
       
       addMarkerListener(marker, getPostInfo(post));
@@ -72,8 +146,15 @@ var program = (function() {
   }
   
   // Initializes the map
-  function init() {    
-    map = new google.maps.Map(document.getElementById('map'), {zoom: 6, center: null});
+  function init() {
+    var options = {
+      zoom: 7, 
+      center: null,
+      styles: MAP_STYLES
+    };
+    console.log("init");
+    console.log(posts.length);
+    map = new google.maps.Map(document.getElementById('map'), options);
     infoWindow = new google.maps.InfoWindow;
     addMarkers();    
     specialListeners();
@@ -83,10 +164,12 @@ var program = (function() {
     init: init
   };
 })();
-
+console.log(posts[1]);
+console.log(posts);
 // Initializes the map
 function initMap() {
   program.init();
 }
+
 
 
