@@ -351,7 +351,7 @@ var MAP_STYLES = [
 /*****************/
 /* Shared Module */
 /*****************/
-
+  
 /* Functions for adding info to new post form and displaying messages to the user */
 var program = (function() {
   var error;
@@ -363,6 +363,13 @@ var program = (function() {
   var roadNumber;
   var locality;
   var zip;
+  
+  // Add event listener on change for file upload
+  function addFileSelectListener() {
+    document.getElementById('file').addEventListener('change', function (e) {
+       document.querySelector('.file-name').textContent = this.value;
+    });
+  }
   
   // Adds relevant location info to the new post form and displays message
   function addPlaceInfo(location) {
@@ -448,6 +455,8 @@ var program = (function() {
   
   // Fetch information for all input fields
   function init() {
+    addFileSelectListener();
+        
     error = document.querySelector('.location-error-message');
     success = document.querySelector('.location-success-message');
     error.appendChild(document.createTextNode(''));
@@ -460,13 +469,13 @@ var program = (function() {
     roadNumber = document.querySelector('input[name=road_number]');
     locality = document.querySelector('input[name=locality]');
     zip = document.querySelector('input[name=zip]');
-    
   }
   
   return {
     init: init,
     showMessage: showMessage,
-    addAllInfo: addAllInfo
+    addAllInfo: addAllInfo,
+    addFileSelectListener: addFileSelectListener
   };
 })();
 

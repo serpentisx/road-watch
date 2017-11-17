@@ -13,7 +13,7 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #000;
+    background: #f9fbfb;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 }
 
 .header-bar {
-    background: #bf625a;
+    background: #504a4a;
 }
 
 .s-account {
@@ -51,7 +51,7 @@ main > section.map {
 
 .np-container {
     display: flex;
-    background: #fafafa;
+    background: #f9fbfb;
     width: 100.3%;
     height: 99.5%;
     margin: 5px auto;
@@ -63,11 +63,12 @@ main > section.map {
   min-width: 700px;
   border: solid 1px;
   border-width: 0 1px 0 1px;
+  display: flex;
+  align-items: center;
 }
 
 .new-post-container form {
   padding: 30px;
-  margin-top: 30px;
   width: 71%;
 }
 
@@ -89,7 +90,7 @@ fieldset > div {
 .location > div {
   margin-bottom: 15px;
   display: inline-block;
-  width: 100%;
+  width: 103%;
 }
 
 .location ol {
@@ -99,6 +100,8 @@ fieldset > div {
 
 .location ol li {
   margin-bottom: 7px;
+  font-size: 16px;
+  color: #284352;
 }
 
 .location > p.info:last-of-type {
@@ -110,8 +113,20 @@ fieldset > div {
   margin-bottom: 4px;
 }
 
-input,
-textarea {
+.f-location {
+    
+display: flex !important;
+    
+position: relative;
+    
+height: 38px;
+}
+
+.location {
+  margin-bottom: -15px;
+}
+
+input, textarea, .custom-file-upload {
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 0.25rem;
     border: solid 1px #4e84c8;
@@ -124,7 +139,22 @@ input {
   height: 2.5rem;
   font-size: 1rem;
   text-overflow: ellipsis;
-  padding: 2px 0 0 15px;
+  padding: 3px 0 0px 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    color: #4e5354;
+    background: white;
+    height: 30px;
 }
 
 legend {
@@ -139,6 +169,19 @@ textarea {
   resize: vertical;
   overflow: hidden;
   width: 400px;
+}
+
+.generate-coordinates {
+  
+height: 113%;
+  
+margin: 0;
+  
+padding: 0;
+  
+border-radius: 0px;
+  
+min-width: 150px;
 }
 
 button {
@@ -181,12 +224,15 @@ div.location-info {
 .autocomplete-container {
   padding-bottom: 12px;
   margin-right: 12px;
+  height: 100%;
+  width: 100%;
 }
 
 #pac-input {
   font-size: 15px;
   font-weight: 300;
-  width: 400px;
+  width: 100% !important;
+  height: 100%;
 }
 
 #pac-input:focus {
@@ -202,6 +248,17 @@ div.location-info {
 .location-success-message {
   color: #008b00;
   font-size: 0.85rem;  
+}
+
+.info {
+  
+font-size: 18px;
+  
+color: #284352;
+}
+
+.submit {
+  margin-top: 30px;
 }
 
 /* Defines the look of the map*/
@@ -225,13 +282,12 @@ div.location-info {
 /*** footer ***/
 
 .footer {
-    background: #fafafa;
+    background: #3c3636;
 }
 
 .footer .logo {
-    filter: invert(100%); 
 }
 
 .footer span {
-    color: #000;
+    color: #efefef;
 }
