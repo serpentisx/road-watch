@@ -25,6 +25,10 @@
                 <div class='sidebar__header'>
                     <img alt='' class='sidebar__avatar' src='/img/profile.png'>
                     <p>${username}</p>
+                    <c:if test="${latestLogin != null}">
+                      <p>Síðasta innskráning:</p>
+                      <p>${latestLogin}</p>
+                    </c:if>
                 </div>
                 
                 <div class='sidebar__menu-item main__posts sidebar__menu-item--active'>

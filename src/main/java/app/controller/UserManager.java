@@ -65,9 +65,8 @@ public class UserManager {
         
         if (!accountService.verifyPassword(loggedInUserEmail, password)) {
             model.addAttribute("message", "Rangt lykilorð.");
-        }
-        
-        if (accountService.deleteAccount(loggedInUserEmail)) {
+            
+        } else if (accountService.deleteAccount(loggedInUserEmail)) {
             session.setAttribute("user", null);
             model.addAttribute("success_message", "Aðgangi þínum hefur verið eytt.");
             return "login";

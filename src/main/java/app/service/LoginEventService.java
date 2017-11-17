@@ -16,8 +16,14 @@ public interface LoginEventService {
     /**
      * Creates a login event
      * 
-     * @param user : the user to create a login event from
+     * @param user : the email of the user who has logged in
      */
     public void createNewLoginEvent(String user);
     
+    /**
+     * 
+     * @param user : the user's email
+     * @return       the latest login date for the user having the given email
+     */
+    public String getLatestLoginDate(String user);
 }

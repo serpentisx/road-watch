@@ -27,9 +27,12 @@
           <tr>
             <td>${post.getTitle()}</td>
             <td>${post.getDating()}</td>
-            <td>${post.getRoad().getName()}</td>
             <td>
-              <a class="archive-post-btn" aria-label="Mark as archived" title="Merkja afgreitt">
+              ${post.getRoad().getName()}
+              <i class="fa fa-info-circle" aria-hidden="true" title="${post.getRoad().toString()}"></i>
+            </td>
+            <td>
+              <a class="archive-post-btn" aria-label="Mark as archived" title="Merkja sem afgreitt">
                 <c:choose>
                     <c:when test='${post.isArchived()}'>
                        <i class="${post.getId()} archived fa fa-check-circle-o" aria-hidden="true"></i>

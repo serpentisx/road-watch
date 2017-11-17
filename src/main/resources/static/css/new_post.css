@@ -90,7 +90,24 @@ fieldset > div {
   margin-bottom: 15px;
   display: inline-block;
   width: 100%;
-  /* position: absolute; */
+}
+
+.location ol {
+  padding-left: 25px;
+  margin: 20px 0;
+}
+
+.location ol li {
+  margin-bottom: 7px;
+}
+
+.location > p.info:last-of-type {
+  margin-bottom: 25px;
+}
+
+.location > p.list-item {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 input,

@@ -2,8 +2,11 @@
 package app.repository;
 
 import app.model.LoginEvent;
+import java.time.Instant;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @author Team 20 HBV501G - Fall 2017
@@ -22,4 +25,9 @@ public interface LoginEventRepository extends JpaRepository<LoginEvent, Integer>
     
     @Override
     public LoginEvent save(LoginEvent loginEvent);
+    
+    @Query("SELECT timestamp FROM LoginEvent WHERE loginEventId = "
+            + "(SELECT MAX(loginEventId) FROM LoginEvent WHERE loginEventId < "
+            + "(SELECT MAX(loginEventId) FROM LoginEvent WHERE email = :email))")
+    public Instant latestLoginStamp(@Param("email") String email);
 }
