@@ -27,7 +27,10 @@
           <tr>
             <td>${post.getTitle()}</td>
             <td>${post.getDating()}</td>
-            <td>${post.getRoad().getName()}</td>
+            <td>
+              ${post.getRoad().getName()}
+              <i class="fa fa-info-circle" aria-hidden="true" title="${post.getRoad().toString()}"></i>
+            </td>
             <td>
               <a class="archive-post-btn" aria-label="Mark as archived" title="Merkja sem afgreitt">
                 <c:choose>
