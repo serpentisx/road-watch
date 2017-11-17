@@ -65,11 +65,13 @@ main > section.map {
   border-width: 0 1px 0 1px;
   display: flex;
   align-items: center;
+  overflow: scroll;
 }
 
 .new-post-container form {
   padding: 30px;
   width: 71%;
+  margin-top: 30px;
 }
 
 fieldset {
