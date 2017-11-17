@@ -82,10 +82,10 @@
       
     <jsp:include page="includes/map.jsp" />
         
-    <script src="<c:url value="/js/jquery-3.2.0.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery-3.2.0.min.js" />"></script>
     <script type="text/javascript">
       var posts = ${postsJSON};
-    </script>    
+    </script>
     <script src="<c:url value="/js/map.js" />"></script>
     <script src="<c:url value="/js/index.js" />"></script>
     <script src="<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFyymUYS6SvJz6AMFdZcspDvPrhA33C4&callback=initMap" />"></script>

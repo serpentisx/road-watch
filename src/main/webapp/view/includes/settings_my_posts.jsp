@@ -29,7 +29,7 @@
             <td>${post.getDating()}</td>
             <td>${post.getRoad().getName()}</td>
             <td>
-              <a class="archive-post-btn" aria-label="Mark as archived" title="Merkja afgreitt">
+              <a class="archive-post-btn" aria-label="Mark as archived" title="Merkja sem afgreitt">
                 <c:choose>
                     <c:when test='${post.isArchived()}'>
                        <i class="${post.getId()} archived fa fa-check-circle-o" aria-hidden="true"></i>

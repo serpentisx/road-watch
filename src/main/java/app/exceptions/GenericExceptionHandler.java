@@ -2,6 +2,7 @@
 package app.exceptions;
 
 import java.sql.SQLException;
+import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +82,8 @@ public class GenericExceptionHandler {
         
         LOGGER.error("Path: " + req.getRequestURL());
         LOGGER.error("Database exception: " + e.toString());
-        model.addAttribute("errorCode", "");
+        
+        model.addAttribute("errorCode", "ÚPS");
         model.addAttribute("errorMsg", "Gagnagrunnsþjónninn skilaði villu, reyndu aftur síðar");
         return DEFAULT_ERROR_VIEW;
     }
@@ -100,7 +102,7 @@ public class GenericExceptionHandler {
       
         LOGGER.error("Path: " + req.getRequestURL());
         LOGGER.error("Mail exception: " + e.toString());
-        model.addAttribute("errorCode", "");
+        model.addAttribute("errorCode", "ÚPS");
         model.addAttribute("errorMsg", "Ekki tókst að senda skilaboðin, reyndu aftur síðar.");
         return DEFAULT_ERROR_VIEW;
     }
@@ -134,6 +136,7 @@ public class GenericExceptionHandler {
         // Annars birtum við sjálfgefna villusíðu
         ModelAndView mav = new ModelAndView();
         
+        mav.addObject("errorCode", "ÚPS");
         mav.addObject("errorMsg", "Óþekkt villa");
 
         mav.setViewName(DEFAULT_ERROR_VIEW);

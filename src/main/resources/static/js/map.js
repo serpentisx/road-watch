@@ -25,8 +25,9 @@ var program = (function() {
   function getPostInfo(post) {
     var road = post.road;
 
-    var info = "<b>" + post.title + "</b>";
-    if (road) {
+    var info = "<b>" + post.title + "</b><br>Dags. " + post.date;
+    
+    if (!post.archived && road) {
       info += ("<br>" + road.name);
       if (road.roadNumber)     info += (" (vegnr. " + road.roadNumber + ")");
       if (road.locality)      info += ("<br>" + road.locality);
@@ -74,7 +75,6 @@ var program = (function() {
   function init() {    
     map = new google.maps.Map(document.getElementById('map'), {zoom: 6, center: null});
     infoWindow = new google.maps.InfoWindow;
-    
     addMarkers();    
     specialListeners();
   }

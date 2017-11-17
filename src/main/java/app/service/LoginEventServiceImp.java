@@ -5,6 +5,12 @@ import app.model.Account;
 import app.model.LoginEvent;
 import app.repository.AccountRepository;
 import app.repository.LoginEventRepository;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +32,22 @@ public class LoginEventServiceImp implements LoginEventService {
     @Autowired
     AccountRepository accountRep;
     
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("is"));
+    
     @Override
     public void createNewLoginEvent(String user){
         Account account = accountRep.findByEmail(user);
         LoginEvent loginEvent = new LoginEvent(account);
         loginEventRep.save(loginEvent);
+    }
+    
+    @Override 
+    public String getLatestLoginDate(String user) {
+        Instant latest = loginEventRep.latestLoginStamp(user);
+        if (latest != null) {
+            LocalDateTime time = LocalDateTime.ofInstant(latest, ZoneOffset.UTC);
+            return FORMATTER.format(time);
+        }
+        return null;
     }
 }

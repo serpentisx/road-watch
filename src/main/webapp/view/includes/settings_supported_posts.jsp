@@ -30,11 +30,9 @@
             <td>
               <c:choose>
                 <c:when test = "${!post.isArchived()}">
-                  <!--<i class="fa fa-square-o" aria-hidden="true"></i>-->
                   Nei
                 </c:when>
                 <c:otherwise>
-                  <!--<i class="fa fa-check-square-o" aria-hidden="true"></i>-->
                   Já
                 </c:otherwise>
               </c:choose>                
