@@ -6,6 +6,8 @@
 <html lang="is">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Vegavaktin</title>
     <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="<c:url value="/css/settings.css" />" rel="stylesheet">
@@ -22,16 +24,16 @@
     <main>
         <div class='container'>
             <div class='sidebar'>
-                <div class='sidebar__header'>
-                    <img alt='' class='sidebar__avatar' src='/img/profile.png'>
-                    <p>${username}</p>
-                    <c:if test="${latestLogin != null}">
-                      <div>
-                        <p>Síðasta innskráning:</p>
-                        <p>${latestLogin}</p>
-                      </div>
-                    </c:if>
+              <div class='sidebar__header'>
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <div class="user-info">
+                  <p class="ui-name">${username}</p>
+                  <c:if test="${latestLogin != null}">
+                      <p>Síðasta innskráning:</p>
+                      <p>${latestLogin}</p>
+                  </c:if>
                 </div>
+              </div>
                 
                 <div class='sidebar__menu-item main__posts sidebar__menu-item--active'>
                     <i class="fa fa-sticky-note" aria-hidden="true"></i> Innleggin mín

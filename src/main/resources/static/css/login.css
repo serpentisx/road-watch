@@ -4,45 +4,45 @@
 /* This css defines the look of the login page and new user page*/
 
 body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
 main {
-    height: 100%;
+  height: 100%;
 }
 
 .layer {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    margin: 20px 20px;
-    position: absolute;
-    background: rgba(44, 44, 44, 0.6);
-    z-index: 1;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  margin: 20px 20px;
+  position: absolute;
+  background: rgba(44, 44, 44, 0.6);
+  z-index: 1;
 }
 
 .bg {
-    background-image: url('../img/road-background.jpg');
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    color: white;
-    font-size: 25px;
+  background-image: url('../img/road-background.jpg');
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-size: 25px;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    color: #fffbf9;
-    z-index: 10;
-    position: relative;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  color: #fffbf9;
+  z-index: 10;
+  position: relative;
+  margin: 0 auto;
 }
 
 .container:before, .container:after {
@@ -79,138 +79,155 @@ main {
 }
 
 .c-title {
-    top: 100px;
-    position: relative;
-    font-size: 16px;
-    letter-spacing: 2px;
+  top: 100px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: 2px;
 }
 
 .c-title span {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
 }
 
 .m-title h1 {
-    letter-spacing: 10px;
+  letter-spacing: 10px;
 }
 
 .line {
-    width: 175px;
-    height: 3px;
-    background: #fffbf9;
-    margin: 0 auto;
-    border-radius: 2px;
+  width: 175px;
+  height: 3px;
+  background: #fffbf9;
+  margin: 0 auto;
+  border-radius: 2px;
 }
 
 .authors-container ul {
-    list-style: none;
-    text-align: center;
-    font-size: 16px;
-    padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: 16px;
+  padding: 0;
 }
 
 .authors-container {
-    bottom: 50px;
-    position: relative;
+  bottom: 50px;
+  position: relative;
 }
 
 .authors-container li {
-    margin: 3px 0;
+  margin: 3px 0;
 }
 
 .login-page {
-    width: 360px;
-    padding: 8% 0 0;
-    margin: auto;
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
 }
 
 .form {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 360px;
-    margin: 0 auto 30px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.51), 0 5px 5px 0 rgba(0, 0, 0, 0.47);
-    font-family: "Roboto", sans-serif;
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 30px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.51), 0 5px 5px 0 rgba(0, 0, 0, 0.47);
+  font-family: "Roboto", sans-serif;
 }
 
 .form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 .g-recaptcha {
-    margin-bottom: 14px;
+  margin-bottom: 14px;
 }
 
 .form .submit-btn {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #4CAF50;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 form div {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 
 i {
-    padding: 10px;
+  padding: 10px;
 }
 
-.form input:active,.form input:focus {
-    outline: 1px #97cc99 solid;
+.form input:active, .form input:focus {
+  outline: 1px #97cc99 solid;
 }
 
-.form .submit-btn:hover,.form .submit-btn:active,.form .submit-btn:focus {
-    background: #43A047;
+.form .submit-btn:hover, .form .submit-btn:active, .form .submit-btn:focus {
+  background: #43A047;
 }
 
 .form .message {
-    margin: 10px 0 0;
-    color: #b3b3b3;
-    font-size: 12px;
+  margin: 10px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
 }
 
 .form .message a {
-    color: #4CAF50;
-    text-decoration: none;
-    display: inline-block;
+  color: #4CAF50;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .form .register-form {
-    display: none;
+  display: none;
 }
 
 .invalid-input {
-    color: #b30909;
-    font-size: 12px;
-    font-weight: bold;
-    top: 10px;
-    position: relative;
+  color: #b30909;
+  font-size: 12px;
+  font-weight: bold;
+  top: 10px;
+  position: relative;
 }
 
 .success-message {
-    color: #008B00;
-    font-size: 12px;
-    font-weight: bold;
-    top: 10px;
-    position: relative;
+  color: #008B00;
+  font-size: 12px;
+  font-weight: bold;
+  top: 10px;
+  position: relative;
+}
+
+@media screen and (max-width: 600px) {
+  .m-title {
+    display: none;
+  }
+
+  .layer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  
+  .form {
+    min-width: 270px;
+    padding: 25px;
+  }
 }

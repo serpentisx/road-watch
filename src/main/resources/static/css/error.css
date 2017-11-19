@@ -1,5 +1,6 @@
 /* This css is used to define the look for the error page (errorPage.jsp) that
    is loaded when an error accurs.*/
+
 * {
   margin: 0;
   padding: 0;
@@ -74,10 +75,10 @@ body {
   z-index: 1;
 }
 
-.lg { 
-  background: linear-gradient(17deg, rgba(66, 33, 25, 0.69) -100%, rgba(71, 111, 151, 0.19) 100%); 
-  position: absolute; 
-  width: 100%; 
+.lg {
+  background: linear-gradient(17deg, rgba(66, 33, 25, 0.69) -100%, rgba(71, 111, 151, 0.19) 100%);
+  position: absolute;
+  width: 100%;
   height: 100%;
   z-index: 3;
 }

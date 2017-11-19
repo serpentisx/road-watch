@@ -9,6 +9,8 @@
 <html lang="is">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Vegavaktin</title>
     <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="<c:url value="/css/navigation.css" />" rel="stylesheet">

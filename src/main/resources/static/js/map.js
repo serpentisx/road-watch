@@ -96,9 +96,7 @@ var program = (function() {
     var road = post.road;
 
     var info = "<b>" + post.title + "</b><br>Dags. " + post.date;
-    
-    console.log(post.archived);
-    
+   
     if (road) {
       info += ("<br>" + road.name);
       if (road.roadNumber)     info += (" (vegnr. " + road.roadNumber + ")");
@@ -111,7 +109,6 @@ var program = (function() {
   
   // Add markers to the map
   function addMarkers() {
-    console.log(posts);
     for (var i = 0; i < posts.length; i++) {
       var post = posts[i];
       var marker = new google.maps.Marker({
@@ -150,8 +147,6 @@ var program = (function() {
       center: null,
       styles: MAP_STYLES
     };
-    console.log("init");
-    console.log(posts.length);
     map = new google.maps.Map(document.getElementById('map'), options);
     infoWindow = new google.maps.InfoWindow;
     addMarkers();    
@@ -162,8 +157,7 @@ var program = (function() {
     init: init
   };
 })();
-console.log(posts[1]);
-console.log(posts);
+
 // Initializes the map
 function initMap() {
   program.init();

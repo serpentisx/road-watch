@@ -611,7 +611,6 @@ var geolocation = (function() {
   
   // Geolocation error function
   var geoError = function (error) {
-    console.log('Geolocation error occurred. Error code: ' + error.code);
     switch(error.code) {
       case 1:
         program.showMessage("", "Aðgangur að staðsetningarþjónustu hindraður, ekki tókst að sækja staðsetningu.");

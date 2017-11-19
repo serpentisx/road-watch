@@ -3,6 +3,15 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %> 
 
+<input id="mobile-nav-check" type="checkbox">
+<label class="mobile-nav-label mn-pos" for="mobile-nav-check"></label>
+<div class="m-nav-container">
+  <div class="mobile-nav-icon mn-pos">
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+    <div class="line line-3"></div>
+  </div>
+</div>
 <nav class="main-navigation header-bar">
   <div class="logo">
     <a href="/"></a>

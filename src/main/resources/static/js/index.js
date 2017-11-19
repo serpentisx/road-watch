@@ -11,6 +11,19 @@
     initSeeMoreButton();
     initMailListener();
     initMobileNavigation();
+    
+    // Map toggling
+    window.addEventListener('resize', function() {
+        if (window.innerWidth < 630) {
+            $(window).unbind('scroll');
+            $('.index-navigation a').css('display', 'none');
+            $('.map-label').text('Skoða kort');
+            $('.map-label').css('display', 'block');
+        }
+        else {
+            initScrollWatching();
+        }
+    });
 
     // Auto scroll to anchor link
     $('.index-navigation a').click(function(event) {
@@ -43,6 +56,7 @@
 
     // Event listener for see-more button
     function initSeeMoreButton() {
+       // posts.forEach(w => console.log(w))
         posts.splice(0, 6);
         $('.p-see-more-btn').click(function () {
             var next = posts.splice(0, 6);

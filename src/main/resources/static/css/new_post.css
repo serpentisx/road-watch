@@ -5,29 +5,29 @@
 /* This css defines the look of the the new post page*/
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #f9fbfb;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #f9fbfb;
 }
 
 body {
-    height: calc(100% - 155px);
-    font-family: 'Tw Cen MT', 'Montserrat', sans-serif;
-    overflow-x: hidden;
+  height: calc(100% - 155px);
+  font-family: 'Tw Cen MT', 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
 .header-bar {
-    background: #504a4a;
+  background: #24282b;
 }
 
 .s-account {
-    color: #f1efe9;
+  color: #f1efe9;
 }
 
 a {
@@ -36,25 +36,25 @@ a {
 }
 
 .np-container {
-    display: flex;
+  display: flex;
 }
 
 main {
-    position: relative;
-    z-index: 2;
-    height: 100%;
+  position: relative;
+  z-index: 2;
+  height: 100%;
 }
 
-main > section.map {
+main>section.map {
   margin-top: 50px;
 }
 
 .np-container {
-    display: flex;
-    background: #f9fbfb;
-    width: 100.3%;
-    height: 99.5%;
-    margin: 5px auto;
+  display: flex;
+  background: #f9fbfb;
+  width: 100.3%;
+  height: 99.5%;
+  margin: 5px auto;
 }
 
 .new-post-container {
@@ -63,16 +63,14 @@ main > section.map {
   min-width: 700px;
   border: solid 1px;
   border-width: 0 1px 0 1px;
-  display: flex;
   align-items: center;
   overflow: scroll;
 }
 
 .new-post-container form {
   padding: 30px;
-  width: 71%;
+  width: 80%;
   margin-top: 30px;
-  height: 100%;
 }
 
 fieldset {
@@ -84,13 +82,13 @@ fieldset {
   width: 100%;
 }
 
-fieldset > div {
+fieldset>div {
   margin-bottom: 15px;
   width: 100%;
   position: relative;
 }
 
-.location > div {
+.location>div {
   margin-bottom: 15px;
   display: inline-block;
   width: 103%;
@@ -107,22 +105,19 @@ fieldset > div {
   color: #284352;
 }
 
-.location > p.info:last-of-type {
+.location>p.info:last-of-type {
   margin-bottom: 25px;
 }
 
-.location > p.list-item {
+.location>p.list-item {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
 .f-location {
-    
-display: flex !important;
-    
-position: relative;
-    
-height: 38px;
+  display: flex !important;
+  position: relative;
+  height: 38px;
 }
 
 .location {
@@ -130,12 +125,12 @@ height: 38px;
 }
 
 input, textarea, .custom-file-upload {
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 0.25rem;
-    border: solid 1px #4e84c8;
-    border-radius: 3px;
-    padding: 10px 0 0 15px;
-    width: 100% !important;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0.25rem;
+  border: solid 1px #4e84c8;
+  border-radius: 3px;
+  padding: 10px 0 0 15px;
+  width: 100% !important;
 }
 
 input {
@@ -146,25 +141,25 @@ input {
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .custom-file-upload {
-    display: inline-block;
-    cursor: pointer;
-    width: 100%;
-    font-size: 0.9rem;
-    text-overflow: ellipsis;
-    color: #4e5354;
-    background: white;
-    height: 30px;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  color: #4e5354;
+  background: white;
+  height: 30px;
 }
 
 legend {
-    letter-spacing: 2px;
-    font-size: 30px;
-    border-bottom: solid 1px #bdb9b9;
-    padding-bottom: 18px;
+  letter-spacing: 2px;
+  font-size: 30px;
+  border-bottom: solid 1px #bdb9b9;
+  padding-bottom: 18px;
 }
 
 textarea {
@@ -174,16 +169,11 @@ textarea {
 }
 
 .generate-coordinates {
-  
-height: 113%;
-  
-margin: 0;
-  
-padding: 0;
-  
-border-radius: 0px;
-  
-min-width: 150px;
+  height: 114%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0px;
+  min-width: 150px;
 }
 
 button {
@@ -208,13 +198,13 @@ button:hover {
 }
 
 button i {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .file-upload i {
-    position: absolute;
-    top: 12px;
-    right: 0;
+  position: absolute;
+  top: 12px;
+  right: 0;
 }
 
 div.location-info {
@@ -241,33 +231,33 @@ div.location-info {
   border-color: #4d90fe;
 }
 
-.location > div.message {
+.location>div.message {
   padding-bottom: 20px;
 }
 
-.location-error-message,
-.post-error-message {
+.location-error-message, .post-error-message {
   color: #b30909;
   font-size: 0.85rem;
 }
 
 .location-success-message {
   color: #008b00;
-  font-size: 0.85rem;  
+  font-size: 0.85rem;
 }
 
 .info {
-  
-font-size: 18px;
-  
-color: #284352;
+  font-size: 18px;
+  color: #284352;
 }
 
 .submit {
-  margin-top: 30px;
+  margin-top: 30px;
 }
 
+
 /* Defines the look of the map*/
+
+
 /*********** MAP ***********/
 
 .map {
@@ -288,12 +278,81 @@ color: #284352;
 /*** footer ***/
 
 .footer {
-    background: #3c3636;
+  background: #24282b;
 }
 
-.footer .logo {
-}
+.footer .logo {}
 
 .footer span {
-    color: #efefef;
+  color: #efefef;
+}
+
+@media screen and (max-width: 1250px) {
+  .new-post-container {
+    min-width: 570px;
+  }
+
+  .new-post-container form {
+    padding: 30px 0;
+    width: 92%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+    height: auto;
+  }
+
+  .np-container {
+    display: inherit !important;
+    margin: 2px auto;
+  }
+
+  .new-post-container {
+    overflow: inherit;
+    margin: 50px auto 40px auto;
+    border: none;
+    min-width: 700px;
+  }
+
+  .new-post-container form {
+    padding: 0;
+  }
+
+  .map-wrapper {
+    height: 600px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .np-container {}
+  .new-post-container {
+    margin: 50px 0;
+    width: 100%;
+    min-width: inherit;
+  }
+
+  .new-post-container form {
+    display: flex;
+    justify-content: center;
+    width: 97%;
+  }
+
+  .map-wrapper {
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .location>div {
+    width: 105%
+  }
+
+  .generate-coordinates {
+    min-width: 125px;
+  }
+  
+  fieldset {
+    margin-top: 40px;
+  }
 }

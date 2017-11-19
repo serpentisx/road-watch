@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 import java.io.IOException;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -34,9 +35,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class PostServiceImp implements PostService {
-  
-    public static final String CLOUDINARY_KEY = // 
-            "cloudinary://881482785141911:XQOJQQ11mhNgiQVMC1W5LDEwOlc@vegavaktin";
+    
+    @Value("${cloudinary.key}")
+    public String CLOUDINARY_KEY;
     
     @Autowired
     PostRepository postRep;
